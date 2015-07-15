@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<ruleset name="GildedRose Rules"
+         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
+
+    <description>
+        Ruleset for GildedRose
+    </description>
+
+    <rule ref='category/java/bestpractices.xml'>
+        <exclude name="AbstractClassWithoutAbstractMethod"/>
+        <exclude name="AccessorClassGeneration"/>
+        <exclude name="AccessorMethodGeneration"/>
+        <exclude name="ArrayIsStoredDirectly"/>
+        <exclude name="AvoidMessageDigestField"/>
+        <exclude name="AvoidReassigningParameters"/>
+        <exclude name="AvoidStringBufferField"/>
+        <exclude name="ConstantsInInterface"/>
+        <exclude name="JUnitAssertionsShouldIncludeMessage"/>
+        <exclude name="JUnitTestContainsTooManyAsserts"/>
+        <exclude name="JUnitTestsShouldIncludeAssert"/>
+        <exclude name="JUnitUseExpected"/>
+        <exclude name="LooseCoupling"/>
+        <exclude name="MethodReturnsInternalArray"/>
+        <exclude name="ReplaceHashtableWithMap"/>
+        <exclude name="ReplaceVectorWithList"/>
+        <exclude name="SystemPrintln"/>
+        <exclude name="UseVarargs"/>
+        <exclude name="WhileLoopWithLiteralBoolean"/>
+    </rule>
+
+    <!-- Best Practices overrides -->>
+
+    <rule ref="category/java/bestpractices.xml/AvoidReassigningLoopVariables">
+        <properties>
+            <property name="forReassign" value="skip"/>
+            <property name="foreachReassign" value="firstOnly"/>
+        </properties>
+    </rule>
+    <rule ref="category/java/bestpractices.xml/ForLoopVariableCount">
+        <properties>
+            <property name="maximumVariables" value="2"/>
+        </properties>
+    </rule>
+    <rule ref="category/java/bestpractices.xml/GuardLogStatement">
+        <properties>
+            <property name="logLevels" value="debug"/>
+            <property name="guardsMethods" value="isDebugEnabled"/>
+        </properties>
+    </rule>
+    <rule ref="category/java/bestpractices.xml/OneDeclarationPerLine">
+        <properties>
+            <property name="strictMode" value="true"/>
+        </properties>
+    </rule>
+
+    <!-- Code Style overrides -->
+
+    <rule ref="category/java/codestyle.xml/ClassNamingConventions">
+        <properties>
+            <property name="classPattern" value="[A-Z][a-zA-Z0-9]*"/>
+            <property name="abstractClassPattern" value="[A-Z][a-zA-Z0-9]*"/>
+            <property name="interfacePattern" value="[A-Z][a-zA-Z0-9]*"/>
+            <property name="enumPattern" value="[A-Z][a-zA-Z0-9]*"/>
+            <property name="annotationPattern" value="[A-Z][a-zA-Z0-9]*"/>
+            <property name="utilityClassPattern" value="[A-Z][a-zA-Z0-9]*"/>
+        </properties>
+    </rule>
+
+    <!-- Code style exclusions -->
+
+    <rule ref='category/java/codestyle.xml'>
+        <exclude name="AtLeastOneConstructor"/>
+        <exclude name="AvoidFinalLocalVariable"/>
+        <exclude name="CallSuperInConstructor"/>
+        <exclude name="CommentDefaultAccessModifier"/>
+        <exclude name="DefaultPackage"/>
+        <exclude name="LongVariable"/>
+        <exclude name="OnlyOneReturn"/>
+        <exclude name="ShortClassName"/>
+        <exclude name="UseUnderscoresInNumericLiterals"/>
+        <exclude name="TooManyStaticImports"/>
+    </rule>
+
+    <!-- Error Prone exclusions -->
+
+    <rule ref='category/java/errorprone.xml'>
+        <exclude name="AvoidFieldNameMatchingMethodName"/>
+        <exclude name="BeanMembersShouldSerialize"/>
+        <exclude name="DataflowAnomalyAnalysis"/>
+        <exclude name="UseLocaleWithCaseConversions"/>
+    </rule>
+
+    <!-- Error Prone overrides -->
+
+    <rule ref="category/java/errorprone.xml/EmptyCatchBlock">
+        <properties>
+            <property name="allowCommentedBlocks" value="true"/>
+        </properties>
+    </rule>
+
+    <!-- Design exclusions -->
+
+    <rule ref='category/java/design.xml'>
+        <exclude name="DataClass"/>
+        <exclude name="ExcessiveImports"/>
+        <exclude name="LawOfDemeter"/>
+        <exclude name="LoosePackageCoupling"/>
+        <exclude name="TooManyFields"/>
+        <exclude name="TooManyMethods"/>
+    </rule>
+
+    <!-- Design overrides -->
+
+    <rule ref="category/java/design.xml/SignatureDeclareThrowsException">
+        <properties>
+            <property name="IgnoreJUnitCompletely" value="true" />
+        </properties>
+    </rule>
+
+    <rule ref='category/java/performance.xml'/>
+
+    <rule ref='category/java/security.xml'/>
+</ruleset>

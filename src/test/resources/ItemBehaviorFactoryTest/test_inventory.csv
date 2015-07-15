@@ -1,0 +1,21 @@
+Name,Category,SellByDays,Quality,Expected Behavior Class
+Sword,Weapon,30,50,DefaultBehavior
+Axe,Weapon,40,50,DefaultBehavior
+Halberd,Weapon,60,40,DefaultBehavior
+Aged Brie,Food,50,10,AgingBehavior
+Aged Milk,Food,20,20,DefaultBehavior
+Mutton,Food,10,10,DefaultBehavior
+Hand of Ragnaros,Sulfuras,80,80,LegendaryBehavior
+I am Murloc,Backstage Passes,20,10,BackstageBehavior
+Raging Ogre,Backstage Passes,10,10,BackstageBehavior
+Giant Slayer,Conjured,15,50,ConjuredBehavior
+Storm Hammer,Conjured,20,50,ConjuredBehavior
+Belt of Giant Strength,Conjured,20,40,ConjuredBehavior
+Cheese,Food,5,5,DefaultBehavior
+Potion of Healing,Potion,10,10,DefaultBehavior
+Bag of Holding,Misc,10,50,DefaultBehavior
+TAFKAL80ETC Concert,Backstage Passes,15,20,BackstageBehavior
+Elixir of the Mongoose,Potion,5,7,DefaultBehavior
++5 Dexterity Vest,Armor,10,20,DefaultBehavior
+Full Plate Mail,Armor,50,50,DefaultBehavior
+Wooden Shield,Armor,10,30,DefaultBehavior

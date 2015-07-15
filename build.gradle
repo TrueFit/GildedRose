@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+    id 'info.solidsoft.pitest' version '1.7.0'
+    id 'pmd'
+}
+
+group 'com.moose'
+version '0.0.0'
+defaultTasks 'clean', 'build'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+        vendor = JvmVendorSpec.ADOPTOPENJDK
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.22'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+    implementation 'com.opencsv:opencsv:5.5.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation 'org.mockito:mockito-junit-jupiter:3.12.4'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+pmd {
+    toolVersion = '6.39.0'
+    consoleOutput = true
+    incrementalAnalysis = true
+    ruleSetFiles = files("$rootDir/resources/pmd-exclusions.xml")
+    ruleSets = [/* Must Clear This In Order To Only Run Our Own Ruleset */]
+}
+
+build.dependsOn 'pitest'
+pitest {
+    junit5PluginVersion = '0.15'
+    outputFormats.set(['HTML', 'XML'])
+    timestampedReports.set(false)
+    fullMutationMatrix.set(true)
+    enableDefaultIncrementalAnalysis.set(true)
+    targetClasses.set(['com.moose.gildedrose.inventory.*'])
+	// Using Gradle Toolchains we aren't guaranteed an appropriate JAVA_HOME variable, so manually specify the Java Instance.
+	jvmPath.set(javaToolchains.compilerFor({languageVersion = JavaLanguageVersion.of(11)}).get().metadata.installationPath.dir('bin').file('java.exe').asFile)
+}
