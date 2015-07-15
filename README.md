@@ -2,14 +2,16 @@ Gilded Rose
 ==========================
 The Problem
 -------------------------
-Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city run by a friendly innkeeper named Allison. We also buy and sell only the finest goods. Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We need you to write a system that allows us to manage our inventory, so that we are able to service all of the adventurers who frequent our store (we don't want to run out of product when an tiefling comes in, like last time - poor Leeroy).
+Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city run by a friendly innkeeper named Allison. We also buy and sell only the finest goods. Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We need you to write a system that allows us to manage our inventory, so that we are able to service all of the adventurers who frequent our store (we don't want to run out of healing potions when an tiefling comes in, like last time - poor Leeroy).
 
 Here are the basic rules for the system that we need:
+
 1. All items have a SellIn value which denotes the number of days we have to sell the item
 2. All items have a Quality value which denotes how valuable the item is
 3. At the end of each day our system lowers both values for every item
 
-Since this is the real world, there are some edge cases we need for you to account for as well.:
+Since this is the real world, there are some edge cases we need for you to account for as well:
+
 1. Once the sell by date has passed, Quality degrades twice as fast
 2. The Quality of an item is never negative
 3. "Aged Brie" actually increases in Quality the older it gets
@@ -20,6 +22,7 @@ Since this is the real world, there are some edge cases we need for you to accou
 8. An item can never have its Quality increase above 50, however "Sulfuras" is a legendary item and as such its Quality is 80 and it never alters.
 
 We currently keep our inventory in a hand written list. Since Allison's wants to get home at night, we keep the writing to a minimum. Each line has the following information, in order:
+
 1. Item Name
 2. Item Category
 3. Sell In
