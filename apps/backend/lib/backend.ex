@@ -1,18 +1,26 @@
 defmodule Backend do
-  @moduledoc """
-  Documentation for Backend.
-  """
+  @moduledoc false
 
-  @doc """
-  Hello world.
+  use Application
 
-  ## Examples
+  def start(_type, _args) do
+    Backend.Supervisor.start_link
+  end
+end
 
-      iex> Backend.hello
-      :world
+defmodule Backend.Supervisor do
+  @moduledoc false
+  use Supervisor
 
-  """
-  def hello do
-    :world
+  def start_link do
+    Supervisor.start_link(__MODULE__, :ok)
+  end
+
+  def init(:ok) do
+      children = [
+        worker(CommandProjection, [])
+      ]
+
+      supervise(children, strategy: :one_for_one)
   end
 end
