@@ -2,7 +2,13 @@ defmodule ItemValidation do
   @moduledoc """
   Collection of functions to validate random input matches requirements for an inventory item.
   """
-  @categories [:weapon, :armor, :food, :potion, :sulfuras, :conjured, :backstage_passes]
+  @categories [:weapon,
+               :armor,
+               :food,
+               :potion,
+               :sulfuras,
+               :conjured,
+               :backstage_passes]
 
   @doc """
   Test that the provided name is not blank and is a string.
