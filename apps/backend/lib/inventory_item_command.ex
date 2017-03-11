@@ -1,29 +1,25 @@
 defmodule InventoryItemCommand do
   @moduledoc """
   """
-  @state_store Application.get_env(:backend, :write_projector)
+  alias InventoryItemEventCreator, as: EventCreator
 
   @doc """
   Validate command and create an ItemAddedToInventory event.
   """
-  @spec add_item_to_inventory(String.t, atom, integer, integer)
-    :: {:ok, Event.Event.t} | {:error, :malformed}
+  @spec add_item_to_inventory(String.t, atom, integer, integer) :: :ok | {:error, atom}
   def add_item_to_inventory(name, category, sell_in, quality) do
-    with {:ok, n} <- ItemValidation.validate_name(name),
-      {:ok, c} <- ItemValidation.validate_category(category),
-      {:ok, s} <- ItemValidation.validate_sell_in(sell_in),
-      {:ok, q} <- ItemValidation.validate_quality(c, quality),
-      payload <- added_event(n, c, s, q),
-      domain_id <- @state_store.next_id,
-    do: {:ok, %Event.Event{
-      event_id: 0,
-      domain_id: domain_id,
-      source: "testing",
-      payload: payload}}
+    with {:ok, domain_event} <- EventCreator.item_added_to_inventory(name, category, sell_in, quality),
+         store_event <- create_event(domain_event, "TEST USER"),
+         :ok <- EventStore.append_to_stream("1", 0, [store_event]),
+    do: :ok
   end
 
-  defp added_event(n, c, s, q) do
-    %Event.ItemAddedToInventory{name: n, category: c, sell_in: s, quality: q}
+  @spec create_event(struct, String.t) :: %EventStore.EventData{}
+  defp create_event(inner_event, user) do
+    %EventStore.EventData{
+      event_type: Event.type(inner_event),
+      data: inner_event,
+      metadata: %{user: user}
+    }
   end
-
 end

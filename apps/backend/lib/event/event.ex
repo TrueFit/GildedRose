@@ -1,13 +1,10 @@
-defmodule Event.Event do
+defprotocol Event do
   @moduledoc false
 
-  @type t :: %Event.Event{
-    event_id: integer,
-    domain_id: integer,
-    source: String.t,
-    timestamp: DateTime.t,
-    payload: struct}
+  @spec type(struct) :: String.t
+  def type(event)
+end
 
-  defstruct event_id: -1, domain_id: -1, source: "", \
-            timestamp: DateTime.utc_now, payload: nil
+defimpl Event, for: Event.ItemAddedToInventory do
+    def type(_), do: "ItemAddedToInventory"
 end
