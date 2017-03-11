@@ -1,10 +1,6 @@
-defmodule CommandProjection do
+defmodule CommandStateStore do
   @moduledoc false
   use GenServer
-
-  @type t :: %CommandProjection{domain_objects: map, next_domain_id: integer}
-
-  defstruct domain_objects: %{}, next_domain_id: 0
 
   # CLIENT
 
@@ -13,22 +9,15 @@ defmodule CommandProjection do
     GenServer.start_link(__MODULE__, %{}, name: __MODULE__)
   end
 
-  @spec next_id() :: integer
+  @spec next_id() :: String.t
   def next_id do
-    GenServer.call(__MODULE__, :next_id)
+    UUID.uuid4()
   end
 
   # SERVER
 
-  @spec init(any) :: {:ok, CommandProjection.t}
+  @spec init(any) :: {:ok, map}
   def init(_) do
-    {:ok, %CommandProjection{}}
+    {:ok, %{}}
   end
-
-  @spec handle_call(:next_id, any, CommandProjection.t)
-    :: {:reply, integer, CommandProjection.t}
-  def handle_call(:next_id, _from, %CommandProjection{next_domain_id: n} = state) do
-    {:reply, n, %CommandProjection{state | next_domain_id: n + 1}}
-  end
-
 end
