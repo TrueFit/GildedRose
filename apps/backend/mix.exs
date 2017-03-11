@@ -38,6 +38,7 @@ defmodule Backend.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [{:eventstore, "~> 0.8.1"},
+     {:uuid, "~> 1.1"},
      {:credo, "~> 0.6.1", only: [:dev, :test]},
      {:earmark, "~> 0.1", only: :dev},
      {:ex_doc, "~> 0.11", only: :dev},
