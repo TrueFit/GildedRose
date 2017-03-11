@@ -16,6 +16,18 @@ defmodule InventoryItemCommand do
     do: :ok
   end
 
+  @doc """
+  Change the new of an item in inventory.
+  """
+  @spec change_name(String.t, integer, String.t) :: :ok | {:error, atom}
+  def change_name(stream_id, version, new_name) do
+    with {:ok, domain_event} <- EventCreator.item_name_changed(new_name),
+         store_event <- create_event(domain_event, "TEST USER"),
+         :ok <- EventStore.append_to_stream(stream_id, version, [store_event]),
+    do:
+      :ok
+  end
+
   @spec create_event(struct, String.t) :: %EventStore.EventData{}
   defp create_event(inner_event, user) do
     %EventStore.EventData{

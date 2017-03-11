@@ -2,6 +2,7 @@ defmodule InventoryItemEventCreator do
   @moduledoc false
   import ItemValidation
   alias Event.ItemAddedToInventory, as: Added
+  alias Event.ItemNameChanged, as: NameChanged
 
   @doc """
   Create an ItemAddedToInventory event if provided with valid input.
@@ -38,6 +39,22 @@ defmodule InventoryItemEventCreator do
          {:ok, s} <- validate_sell_in(sell_in),
          {:ok, q} <- validate_quality(c, quality),
      do: {:ok, %Added{name: n, category: c, sell_in: s, quality: q}}
+  end
+
+  @doc """
+  Create an ItemNameChanged event if provided with valid input.
+
+  ## Example
+      iex> InventoryItemEventCreator.item_name_changed("")
+      {:error, :invalid_name}
+
+      iex> InventoryItemEventCreator.item_name_changed("Spear")
+      {:ok, %Event.ItemNameChanged{name: "Spear"}}
+  """
+  @spec item_name_changed(String.t) :: {:ok, NameChanged.t} | {:error, atom}
+  def item_name_changed(new_name) do
+    with {:ok, n} <- validate_name(new_name),
+    do: {:ok, %NameChanged{name: n}}
   end
 
 end

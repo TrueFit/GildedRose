@@ -8,3 +8,7 @@ end
 defimpl Event, for: Event.ItemAddedToInventory do
     def type(_), do: "ItemAddedToInventory"
 end
+
+defimpl Event, for: Event.ItemNameChanged do
+    def type(_), do: "ItemNameChanged"
+end
