@@ -58,9 +58,18 @@ defmodule ItemValidation do
       {:error, :malformed}
   """
   @spec validate_category(atom) :: {:ok, atom} | {:error, :malformed}
-  def validate_category(cat) do
+  def validate_category(cat) when is_atom(cat)  do
     if Enum.member?(@categories, cat) do
       {:ok, cat}
+    else
+      {:error, :malformed}
+    end
+  end
+
+  def validate_category(cat) do
+    cat = cat |> String.downcase()
+    if @categories |> Enum.map(&Atom.to_string/1) |> Enum.member?(cat) do
+      {:ok, String.to_atom(cat)}
     else
       {:error, :malformed}
     end
