@@ -29,3 +29,10 @@ config :backend, :write_projector, CommandProjection
 # here (which is why it is important to import them last).
 #
 #     import_config "#{Mix.env}.exs"
+
+config :eventstore, EventStore.Storage,
+  username: "postgres",
+  password: "password",
+  database: "eventstore_dev",
+  hostname: "psql",
+  pool_size: 10
