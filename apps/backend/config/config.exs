@@ -31,6 +31,7 @@ config :backend, :command_store, CommandStateStore
 #     import_config "#{Mix.env}.exs"
 
 config :eventstore, EventStore.Storage,
+  serializer: JsonSerializer,
   username: "postgres",
   password: "password",
   database: "eventstore_dev",
