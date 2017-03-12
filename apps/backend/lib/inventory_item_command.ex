@@ -31,7 +31,7 @@ defmodule InventoryItemCommand do
   @spec create_event(struct, String.t) :: %EventStore.EventData{}
   defp create_event(inner_event, user) do
     %EventStore.EventData{
-      event_type: Event.type(inner_event),
+      event_type: Event.to_type_string(inner_event),
       data: inner_event,
       metadata: %{user: user}
     }
