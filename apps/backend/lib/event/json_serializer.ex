@@ -1,4 +1,4 @@
-defmodule JsonSerializer do
+defmodule Event.JsonSerializer do
   @moduledoc """
   A serializer that uses the JSON format.
   """

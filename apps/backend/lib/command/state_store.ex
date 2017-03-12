@@ -1,4 +1,4 @@
-defmodule CommandStateStore do
+defmodule Command.StateStore do
   @moduledoc false
   use GenServer
 
