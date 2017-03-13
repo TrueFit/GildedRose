@@ -22,9 +22,9 @@ defmodule Command.StateStore do
     GenServer.call(__MODULE__, {:get_item, item_id})
   end
 
-  # def get_item_ids() do
-  #   GenServer.call(__MODULE__, :get_item_ids)
-  # end
+  def get_items() do
+    GenServer.call(__MODULE__, :get_items)
+  end
 
   @spec next_id() :: String.t
   def next_id do
@@ -51,13 +51,13 @@ defmodule Command.StateStore do
     {:reply, Map.has_key?(state, stream_id), state}
   end
 
-  def handle_call({:get_item, _item_id}, _from, state) do
-    {:reply, state, state}
+  def handle_call({:get_item, item_id}, _from, state) do
+    {:reply, Map.get(state, item_id), state}
   end
 
-  # def handle_call(:get_item_ids, _from, state) do
-  #   {:reply, Map.keys(state), state}
-  # end
+  def handle_call(:get_items, _from, state) do
+    {:reply, Map.keys(state), state}
+  end
 
   def handle_info({:events, events, subscription}, state) do
     last_event = List.last(events)
@@ -97,5 +97,9 @@ defmodule Command.EventAggregate do
 
   defp agg(%Event.ItemAddedToInventory{name: n, category: c, sell_in: s, quality: q}, state) do
     %Command.Item{state | name: n, category: c, sell_in: s, quality: q}
+  end
+
+  defp agg(%Event.ItemNameChanged{name: n}, state) do
+    %Command.Item{state | name: n}
   end
 end
