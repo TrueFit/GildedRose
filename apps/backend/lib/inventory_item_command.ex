@@ -10,9 +10,9 @@ defmodule InventoryItemCommand do
   @spec add_item_to_inventory(String.t, atom, integer, integer) :: :ok | {:error, atom}
   def add_item_to_inventory(name, category, sell_in, quality) do
     with {:ok, domain_event} <- EventCreator.item_added_to_inventory(name, category, sell_in, quality),
-         store_event <- create_event(domain_event, "TEST USER"),
-         stream_id <- @state_store.next_id(),
-         :ok <- EventStore.append_to_stream(stream_id, 0, [store_event]),
+         item_id <- @state_store.next_id(),
+         store_event <- create_event(domain_event, item_id, "TEST USER"),
+         :ok <- EventStore.append_to_stream(item_id, 0, [store_event]),
     do: :ok
   end
 
@@ -20,20 +20,20 @@ defmodule InventoryItemCommand do
   Change the new of an item in inventory.
   """
   @spec change_name(String.t, integer, String.t) :: :ok | {:error, atom}
-  def change_name(stream_id, version, new_name) do
+  def change_name(item_id, version, new_name) do
     with {:ok, domain_event} <- EventCreator.item_name_changed(new_name),
-         store_event <- create_event(domain_event, "TEST USER"),
-         :ok <- EventStore.append_to_stream(stream_id, version, [store_event]),
+         store_event <- create_event(domain_event, item_id, "TEST USER"),
+         :ok <- EventStore.append_to_stream(item_id, version, [store_event]),
     do:
       :ok
   end
 
-  @spec create_event(struct, String.t) :: %EventStore.EventData{}
-  defp create_event(inner_event, user) do
+  @spec create_event(struct, String.t, String.t) :: %EventStore.EventData{}
+  defp create_event(inner_event, item_id, user) do
     %EventStore.EventData{
       event_type: Event.to_type_string(inner_event),
       data: inner_event,
-      metadata: %{user: user}
+      metadata: %{user: user, item_id: item_id}
     }
   end
 end
