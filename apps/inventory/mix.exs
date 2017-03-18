@@ -1,8 +1,8 @@
-defmodule Backend.Mixfile do
+defmodule Inventory.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :backend,
+    [app: :inventory,
      version: "0.1.0",
      build_path: "../../_build",
      config_path: "../../config/config.exs",
@@ -20,7 +20,7 @@ defmodule Backend.Mixfile do
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
     [extra_applications: [:logger]]#,
-    # mod: {Backend, []}]
+    # mod: {Inventory, []}]
   end
 
   # Dependencies can be Hex packages:

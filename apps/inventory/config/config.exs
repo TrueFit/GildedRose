@@ -10,17 +10,17 @@ use Mix.Config
 
 # You can configure for your application as:
 #
-#     config :backend, key: :value
+#     config :inventory, key: :value
 #
 # And access this configuration in your application as:
 #
-#     Application.get_env(:backend, :key)
+#     Application.get_env(:inventory, :key)
 #
 # Or configure a 3rd-party app:
 #
 #     config :logger, level: :info
 #
-config :backend, :command_store, Command.StateStore
+config :inventory, :command_store, Command.StateStore
 
 # It is also possible to import configuration files, relative to this
 # directory. For example, you can emulate configuration per environment
