@@ -1,5 +1,7 @@
 defmodule Inventory.EventStore.Reader do
   @moduledoc false
   
-  # Return projects from the underlying data store of events.
+  def stream_item(item_id), do: EventStore.stream_forward(item_id)
+
+  def stream_all_items(), do: EventStore.stream_all_forward()
 end
