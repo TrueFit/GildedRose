@@ -1,4 +1,5 @@
 defmodule Inventory.Projection.ItemDetails do
+  @moduledoc false
   @type t :: %Inventory.Projection.ItemDetails{}
 
   defstruct item_id: "", version: 0, name: "", category: "", sell_in: 0, quality: 0
