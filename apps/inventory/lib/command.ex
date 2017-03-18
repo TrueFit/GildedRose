@@ -22,4 +22,9 @@ defmodule Inventory.Command do
     with {:ok, domain_event} <- Event.item_name_changed(new_name),
     do: Inventory.EventStore.Writer.write(item_id, "TEST USER", version, [domain_event])
   end
+
+  @spec end_day :: :ok | {:error, atom}
+  def end_day do
+    Inventory.EventStore.Writer.write_to_all_streams("TEST USER", [%Inventory.Event.DayPassed{}])
+  end
 end

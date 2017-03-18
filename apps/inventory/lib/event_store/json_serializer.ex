@@ -30,6 +30,7 @@ defmodule Inventory.EventStore.JsonSerializer do
   @spec to_type_string(struct) :: String.t
   def to_type_string(%Inventory.Event.ItemAdded{}), do: "ItemAdded"
   def to_type_string(%Inventory.Event.ItemNameChanged{}), do: "ItemNameChanged"
+  def to_type_string(%Inventory.Event.DayPassed{}), do: "DayPassed"
 
   @doc """
   Map an event type string to its struct.
@@ -37,4 +38,5 @@ defmodule Inventory.EventStore.JsonSerializer do
   @spec to_struct(String.t) :: struct
   def to_struct("ItemAdded"), do: %Inventory.Event.ItemAdded{}
   def to_struct("ItemNameChanged"), do: %Inventory.Event.ItemNameChanged{}
+  def to_struct("DayPassed"), do: %Inventory.Event.DayPassed{}
 end

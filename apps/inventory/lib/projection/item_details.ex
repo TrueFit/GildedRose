@@ -18,5 +18,6 @@ defmodule Inventory.Projection.ItemDetails do
     defp set_event(p, %Inventory.Event.ItemNameChanged{name: n}) do
       %Inventory.Projection.ItemDetails{p | name: n}
     end
+    defp set_event(p, _), do: p
   end
 end
