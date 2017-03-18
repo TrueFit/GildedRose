@@ -31,7 +31,7 @@ config :inventory, :command_store, Inventory.Command.StateStore
 #     import_config "#{Mix.env}.exs"
 
 config :eventstore, EventStore.Storage,
-  serializer: Inventory.Event.JsonSerializer,
+  serializer: Inventory.EventStore.JsonSerializer,
   username: "postgres",
   password: "password",
   database: "eventstore_dev",
