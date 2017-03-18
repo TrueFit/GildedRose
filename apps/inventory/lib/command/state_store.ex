@@ -1,4 +1,4 @@
-defmodule Command.StateStore do
+defmodule Inventory.Command.StateStore do
   @moduledoc false
   use GenServer
   require Logger
@@ -74,32 +74,32 @@ defmodule Command.StateStore do
     item_id = Map.get(List.first(events).metadata, "item_id")
 
     initial_state = Map.get(state, item_id)
-    item = events |> Enum.reduce(initial_state, &Command.EventAggregate.aggregate/2)
+    item = events |> Enum.reduce(initial_state, &Inventory.Command.EventAggregate.aggregate/2)
 
     Map.put(state, item_id, item)
   end
 end
 
-defmodule Command.Item do
+defmodule Inventory.Command.Item do
   @moduledoc false
 
-  @type type_t :: %Command.Item{name: String.t, category: String.t, sell_in: integer, quality: integer, item_id: String.t}
+  @type type_t :: %Inventory.Command.Item{name: String.t, category: String.t, sell_in: integer, quality: integer, item_id: String.t}
 
   defstruct name: "", category: "", sell_in: 0, quality: 0, item_id: ""
 end
 
-defmodule Command.EventAggregate do
+defmodule Inventory.Command.EventAggregate do
   @moduledoc false
 
 
-  def aggregate(%EventStore.RecordedEvent{data: event, metadata: %{"item_id" => id}}, nil), do: agg(event, %Command.Item{item_id: id})
+  def aggregate(%EventStore.RecordedEvent{data: event, metadata: %{"item_id" => id}}, nil), do: agg(event, %Inventory.Command.Item{item_id: id})
   def aggregate(%EventStore.RecordedEvent{data: event}, state), do: agg(event, state)
 
-  defp agg(%Event.ItemAddedToInventory{name: n, category: c, sell_in: s, quality: q}, state) do
-    %Command.Item{state | name: n, category: c, sell_in: s, quality: q}
+  defp agg(%Inventory.Event.ItemAdded{name: n, category: c, sell_in: s, quality: q}, state) do
+    %Inventory.Command.Item{state | name: n, category: c, sell_in: s, quality: q}
   end
 
-  defp agg(%Event.ItemNameChanged{name: n}, state) do
-    %Command.Item{state | name: n}
+  defp agg(%Inventory.Event.ItemNameChanged{name: n}, state) do
+    %Inventory.Command.Item{state | name: n}
   end
 end

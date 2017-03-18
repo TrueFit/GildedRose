@@ -1,8 +1,8 @@
-defmodule InventoryItemCommand do
+defmodule Inventory.Command do
   @moduledoc """
   """
-  alias InventoryItemEventCreator, as: EventCreator
-  @state_store Application.get_env(:backend, :command_store)
+  alias Inventory.EventGenerator, as: EventCreator
+  @state_store Application.get_env(:inventory, :command_store)
 
   @doc """
   Add a new item to inventory.
@@ -31,7 +31,7 @@ defmodule InventoryItemCommand do
   @spec create_event(struct, String.t, String.t) :: %EventStore.EventData{}
   defp create_event(inner_event, item_id, user) do
     %EventStore.EventData{
-      event_type: Event.to_type_string(inner_event),
+      event_type: Inventory.Event.to_type_string(inner_event),
       data: inner_event,
       metadata: %{user: user, item_id: item_id}
     }

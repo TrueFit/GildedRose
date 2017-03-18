@@ -1,8 +1,7 @@
-defmodule Event.JsonSerializer do
+defmodule Inventory.Event.JsonSerializer do
   @moduledoc """
   A serializer that uses the JSON format.
   """
-  
   @behaviour EventStore.Serializer
   
   @doc """
@@ -18,7 +17,7 @@ defmodule Event.JsonSerializer do
   def deserialize(binary, config) do
     type = case Keyword.get(config, :type, nil) do
       nil -> []
-      type -> type |> Event.to_struct()
+      type -> type |> Inventory.Event.to_struct()
     end
     Poison.decode!(binary, as: type)
   end

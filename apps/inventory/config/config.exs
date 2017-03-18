@@ -20,7 +20,7 @@ use Mix.Config
 #
 #     config :logger, level: :info
 #
-config :inventory, :command_store, Command.StateStore
+config :inventory, :command_store, Inventory.Command.StateStore
 
 # It is also possible to import configuration files, relative to this
 # directory. For example, you can emulate configuration per environment
@@ -31,7 +31,7 @@ config :inventory, :command_store, Command.StateStore
 #     import_config "#{Mix.env}.exs"
 
 config :eventstore, EventStore.Storage,
-  serializer: Event.JsonSerializer,
+  serializer: Inventory.Event.JsonSerializer,
   username: "postgres",
   password: "password",
   database: "eventstore_dev",

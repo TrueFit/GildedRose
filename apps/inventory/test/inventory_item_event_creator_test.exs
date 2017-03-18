@@ -1,5 +1,5 @@
 defmodule InventoryItemEventCreatorTest do
   use ExUnit.Case
-  doctest InventoryItemEventCreator
+  doctest Inventory.EventGenerator
 
 end
