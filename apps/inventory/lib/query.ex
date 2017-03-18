@@ -16,8 +16,7 @@ defmodule Inventory.Query do
   @doc """
   Get every item in inventory.
   """
-  def inventory() do
-  end
 
+  @spec project(struct, struct) :: struct
   defp project(x, acc), do: Inventory.Projection.project(acc, x)
 end

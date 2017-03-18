@@ -3,17 +3,19 @@ defmodule Inventory.EventStore.JsonSerializer do
   A serializer that uses the JSON format.
   """
   @behaviour EventStore.Serializer
-  
+
   @doc """
   Serialize given term to JSON binary data.
   """
+  @spec serialize(any) :: String.t
   def serialize(term) do
     Poison.encode!(term)
   end
-  
+
   @doc """
   Deserialize given JSON binary data to the expected type.
   """
+  @spec deserialize(String.t, map) :: any
   def deserialize(binary, config) do
     type = case Keyword.get(config, :type, nil) do
       nil -> []
