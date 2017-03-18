@@ -6,11 +6,11 @@ defmodule Inventory.EventStore.Writer do
   @spec write(String.t, String.t, integer, [struct]) :: :ok | {:error, atom}
   def write(item_id, user, version, domain_events) do
     domain_events
-    |> Enum.map(fn e -> event(item_id, user, e) end)
+    |> Enum.map(fn e -> create_event(item_id, user, e) end)
     |> persist(item_id, version)
   end
 
-  defp event(item_id, user, domain_event) do
+  defp create_event(item_id, user, domain_event) do
     %EventStore.EventData{
       event_type: Inventory.EventStore.JsonSerializer.to_type_string(domain_event),
       metadata: %{
