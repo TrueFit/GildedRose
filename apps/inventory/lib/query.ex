@@ -13,10 +13,6 @@ defmodule Inventory.Query do
     |> Enum.reduce(%Inventory.Projection.ItemDetails{}, &project/2)
   end
 
-  @doc """
-  Get every item in inventory.
-  """
-
   @spec project(struct, struct) :: struct
   defp project(x, acc), do: Inventory.Projection.project(acc, x)
 end
