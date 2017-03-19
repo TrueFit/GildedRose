@@ -38,7 +38,4 @@ defmodule Inventory.EventStore.Writer do
   defp persist(events, item_id, version), do: EventStore.append_to_stream(item_id, version, events)
 
   defp project(x, acc), do: Inventory.Projection.project(acc, x)
-
-  defp all_items(streams, user, events) do
-  end
 end

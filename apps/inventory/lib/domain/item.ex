@@ -77,19 +77,19 @@ defmodule Inventory.Domain.Item do
       {"kermit", "backstage passes", 18, 50}
   """
   def age({n, "sulfuras", s, _}), do: {n, "sulfuras", s, 80}
-  def age({n, c, s, q}), do: {n, c, s - 1, quality(n, c, s, q)}
+  def age({n, c, s, _} = t), do: {n, c, s - 1, quality(t)}
 
-  defp quality(n, c, s, q), do: calc_quality(n, c, s, q) |> bracket()
+  defp quality(t), do: t |> calc_quality() |> bracket()
 
-  defp calc_quality(_, "backstage passes", s, q) when s > 10, do: q + 1
-  defp calc_quality(_, "backstage passes", s, q) when s > 5, do: q + 2
-  defp calc_quality(_, "backstage passes", s, q) when s > 0, do: q + 3
-  defp calc_quality(_, "backstage passes", _, _), do: 0
-  defp calc_quality(_, "conjured", s, q) when s <= 0, do: q - 4
-  defp calc_quality(_, "conjured", _, q), do: q - 2
-  defp calc_quality("aged brie", "food", _, q), do: q + 1
-  defp calc_quality(_, _, s, q) when s <= 0, do: q - 2
-  defp calc_quality(_, _, _, q), do: q - 1
+  defp calc_quality({_, "backstage passes", s, q}) when s > 10, do: q + 1
+  defp calc_quality({_, "backstage passes", s, q}) when s > 5, do: q + 2
+  defp calc_quality({_, "backstage passes", s, q}) when s > 0, do: q + 3
+  defp calc_quality({_, "backstage passes", _, _}), do: 0
+  defp calc_quality({_, "conjured", s, q}) when s <= 0, do: q - 4
+  defp calc_quality({_, "conjured", _, q}), do: q - 2
+  defp calc_quality({"aged brie", "food", _, q}), do: q + 1
+  defp calc_quality({_, _, s, q}) when s <= 0, do: q - 2
+  defp calc_quality({_, _, _, q}), do: q - 1
 
   defp bracket(q) when q > 50, do: 50
   defp bracket(q) when q < 0, do: 0
