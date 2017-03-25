@@ -13,8 +13,8 @@ defmodule Inventory.EventStore.Writer do
   @spec write_to_all_streams(String.t, [struct]) :: :ok | {:error, atom}
   def write_to_all_streams(user, domain_events) do
     Inventory.Query.inventory()
-      |> Enum.map(fn {id, o} -> {id, o.version, create_event(id, user, domain_events)} end)
-      |> Enum.map(fn {id, v, es} -> persist(es, id, v) end)
+      |> Enum.map(fn state -> {state, create_event(state.item_id, user, domain_events)} end)
+      |> Enum.map(fn {state, es} -> persist(es, state.item_id, state.version) end)
   end
 
   defp create_event(item_id, user, domain_events) when is_list(domain_events) do

@@ -21,5 +21,6 @@ defmodule Inventory.Query do
     stream_all_items()
     |> Enum.reduce(%AllStreams{}, &(project(&2, &1)))
     |> (fn x -> x.streams end).()
+    |> Map.values()
   end
 end

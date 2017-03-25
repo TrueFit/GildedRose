@@ -20,7 +20,9 @@ defmodule InventoryApi.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", InventoryApi do
-  #   pipe_through :api
-  # end
+  scope "/api", InventoryApi do
+    pipe_through :api
+
+    resources "/inventory", InventoryController, only: [:index]
+  end
 end
