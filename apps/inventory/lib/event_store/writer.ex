@@ -12,13 +12,9 @@ defmodule Inventory.EventStore.Writer do
 
   @spec write_to_all_streams(String.t, [struct]) :: :ok | {:error, atom}
   def write_to_all_streams(user, domain_events) do
-    with streams <- EventStore.stream_all_forward,
-    do: streams
-        |> Enum.reduce(%Inventory.Projection.AllStreams{}, &project/2)
-        |> (fn x -> x.streams end).()
-        |> Map.to_list()
-        |> Enum.map(fn {id, v} -> {id, v, create_event(id, user, domain_events)} end)
-        |> Enum.map(fn {id, v, es} -> persist(es, id, v) end)
+    Inventory.Query.inventory()
+      |> Enum.map(fn {id, o} -> {id, o.version, create_event(id, user, domain_events)} end)
+      |> Enum.map(fn {id, v, es} -> persist(es, id, v) end)
   end
 
   defp create_event(item_id, user, domain_events) when is_list(domain_events) do
@@ -36,6 +32,4 @@ defmodule Inventory.EventStore.Writer do
   end
 
   defp persist(events, item_id, version), do: EventStore.append_to_stream(item_id, version, events)
-
-  defp project(x, acc), do: Inventory.Projection.project(acc, x)
 end
