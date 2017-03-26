@@ -23,6 +23,6 @@ defmodule InventoryApi.Router do
   scope "/api", InventoryApi do
     pipe_through :api
 
-    resources "/inventory", InventoryController, only: [:index]
+    resources "/inventory", InventoryController, except: [:new, :delete, :update, :edit, :show]
   end
 end

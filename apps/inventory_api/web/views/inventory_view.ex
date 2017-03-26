@@ -13,4 +13,12 @@ defmodule InventoryApi.InventoryView do
       sell_in: i.sell_in,
       quality: i.quality}
   end
+
+  def render("error.json", %{message: msg}) do
+    %{error: msg}
+  end
+
+  def render("item_id.json", %{item_id: id}) do
+    %{item_id: id}
+  end
 end

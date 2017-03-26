@@ -38,6 +38,9 @@ defmodule Inventory.Event do
       iex> Inventory.Event.item_added("banana", "food", 10, 10)
       {:ok, %Inventory.Event.ItemAdded{category: "food", name: "banana", quality: 10, sell_in: 10}}
 
+      iex> Inventory.Event.item_added("banana", "food", "10", "10")
+      {:ok, %Inventory.Event.ItemAdded{category: "food", name: "banana", quality: 10, sell_in: 10}}
+
       iex> Inventory.Event.item_added("awesome", "sulfuras", 10, 80)
       {:ok, %Inventory.Event.ItemAdded{category: "sulfuras", name: "awesome", quality: 80, sell_in: 10}}
   """
@@ -83,11 +86,31 @@ defmodule Inventory.Event do
 
   @spec item_sell_in(integer) :: {:ok, integer} | {:error, :invalid_sell_in}
   defp item_sell_in(s) when is_integer(s), do: {:ok, s}
+  defp item_sell_in(s) when is_binary(s) do
+    case integer_from_string(s) do
+      :error -> {:error, :invalid_sell_in}
+      i -> {:ok, i}
+    end
+  end
   defp item_sell_in(_), do: {:error, :invalid_sell_in}
 
   @spec item_quality(String.t, integer) :: {:ok, integer} | {:error, :invalid_quality}
+  defp item_quality(c, q) when is_binary(q) do
+    case integer_from_string(q) do
+      :error -> {:error, :invalid_quality}
+      q_prime -> item_quality(c, q_prime)
+    end
+  end
   defp item_quality("sulfuras", 80), do: {:ok, 80}
   defp item_quality("sulfuras", _), do: {:error, :invalid_quality}
   defp item_quality(_, q) when q <= 50 and q >= 0, do: {:ok, q}
   defp item_quality(_, _), do: {:error, :invalid_quality}
+
+  defp integer_from_string(s) when is_binary(s) do
+    try do
+      String.to_integer(s)
+    rescue
+      ArgumentError -> :error
+    end
+  end
 end
