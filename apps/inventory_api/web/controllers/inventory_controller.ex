@@ -1,8 +1,11 @@
 defmodule InventoryApi.InventoryController do
   use InventoryApi.Web, :controller
 
-  def index(conn, _params) do
-    render(conn, "inventory.json", inventory: Inventory.Query.inventory)
+  def index(conn, params) do
+    name_filter = Map.get(params, "name", "*")
+    status_filter = Map.get(params, "status", "*")
+  
+    render(conn, "inventory.json", inventory: Inventory.Query.inventory(name_filter, status_filter))
   end
 
   def create(conn, params) do

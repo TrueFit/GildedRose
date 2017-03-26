@@ -17,10 +17,15 @@ defmodule Inventory.Query do
     |> Enum.reduce(%ItemDetails{}, &(project(&2, &1)))
   end
 
-  def inventory do
+  def inventory(name \\ "*", status \\ "*") do
+    name = String.downcase(name)
+    status = String.downcase(status)
+
     stream_all_items()
     |> Enum.reduce(%AllStreams{}, &(project(&2, &1)))
     |> (fn x -> x.streams end).()
     |> Map.values()
+    |> Enum.filter(fn i -> name == "*" or i.name == name end)
+    |> Enum.filter(fn i -> status != "trash" or i.quality == 0 end)
   end
 end
