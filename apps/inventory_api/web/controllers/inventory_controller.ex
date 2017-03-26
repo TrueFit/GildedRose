@@ -22,4 +22,11 @@ defmodule InventoryApi.InventoryController do
 
     render(conn, "item.json", inventory: item)
   end
+
+  def end_day(conn, _params) do
+    case Inventory.Command.end_day() do
+      :ok -> render(conn, "success.json")
+      {:error, error} -> conn |> put_status(500) |> render("error.json", message: error)
+    end
+  end
 end

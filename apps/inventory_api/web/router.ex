@@ -24,5 +24,6 @@ defmodule InventoryApi.Router do
     pipe_through :api
 
     resources "/inventory", InventoryController, except: [:new, :delete, :update, :edit]
+    post "/inventory/endday", InventoryController, :end_day
   end
 end

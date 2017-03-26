@@ -21,4 +21,8 @@ defmodule InventoryApi.InventoryView do
   def render("item_id.json", %{item_id: id}) do
     %{item_id: id}
   end
+
+  def render("success.json", _) do
+    %{success: true}
+  end
 end

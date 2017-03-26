@@ -15,6 +15,7 @@ defmodule Inventory.EventStore.Writer do
     Inventory.Query.inventory()
       |> Enum.map(fn state -> {state, create_event(state.item_id, user, domain_events)} end)
       |> Enum.map(fn {state, es} -> persist(es, state.item_id, state.version) end)
+    :ok
   end
 
   defp create_event(item_id, user, domain_events) when is_list(domain_events) do
