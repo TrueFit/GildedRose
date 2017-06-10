@@ -22,9 +22,7 @@ defmodule Inventory.Query do
     status = String.downcase(status)
 
     stream_all_items()
-    |> Enum.reduce(%AllStreams{}, &(project(&2, &1)))
-    |> (fn x -> x.streams end).()
-    |> Map.values()
+    |> AllStreams.projection()
     |> Enum.filter(fn i -> name == "*" or i.name == name end)
     |> Enum.filter(fn i -> status != "trash" or i.quality == 0 end)
   end
