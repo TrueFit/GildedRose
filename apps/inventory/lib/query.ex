@@ -4,7 +4,7 @@ defmodule Inventory.Query do
   """
   import Inventory.Projection
   import Inventory.EventStore.Reader
-  alias Inventory.Projection.AllStreams
+  alias Inventory.Projection.Inventory
   alias Inventory.Projection.ItemDetails
 
   @doc """
@@ -22,7 +22,7 @@ defmodule Inventory.Query do
     status = String.downcase(status)
 
     stream_all_items()
-    |> AllStreams.projection()
+    |> Inventory.projection()
     |> Enum.filter(fn i -> name == "*" or i.name == name end)
     |> Enum.filter(fn i -> status != "trash" or i.quality == 0 end)
   end

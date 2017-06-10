@@ -1,4 +1,4 @@
-defmodule Inventory.Projection.AllStreams do
+defmodule Inventory.Projection.Inventory do
   @moduledoc false
 
   @type t :: %__MODULE__{streams: [{String.t, struct}]}
@@ -6,11 +6,15 @@ defmodule Inventory.Projection.AllStreams do
   defstruct streams: %{}
 
   @doc """
+  Convert a stream of events into an inventory.
   """
   def projection(stream) do
     projection(stream, %__MODULE__{})
   end
 
+  @doc """
+  Convert a stream of events into an inventory using a specified starting state.
+  """
   def projection(stream, initial) do
     stream
     |> Enum.reduce(initial, &(project(&2, &1)))
