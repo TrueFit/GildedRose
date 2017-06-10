@@ -13,7 +13,7 @@ defmodule Inventory.Query do
   def item_details(item_id) do
     item_id
     |> stream_item()
-    |> Enum.reduce(%Projection.ItemDetails{}, &(project(&2, &1)))
+    |> Projection.ItemDetails.projection()
   end
 
   def inventory(name \\ "*", status \\ "*") do
