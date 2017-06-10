@@ -1,15 +1,14 @@
 defmodule Inventory.Projection.AllStreams do
   @moduledoc false
 
-  @type t :: %Inventory.Projection.AllStreams{streams: [{String.t, struct}]}
-  alias Inventory.Projection.AllStreams, as: AllStreams
+  @type t :: %__MODULE__{streams: [{String.t, struct}]}
 
   defstruct streams: %{}
 
   @doc """
   """
   def projection(stream) do
-    projection(stream, %AllStreams{})
+    projection(stream, %__MODULE__{})
   end
 
   def projection(stream, initial) do
@@ -24,7 +23,7 @@ defmodule Inventory.Projection.AllStreams do
     item = p.streams
            |> Map.get(id, %Inventory.Projection.ItemDetails{})
            |> Inventory.Projection.project(e)
-    %Inventory.Projection.AllStreams{p | streams: Map.put(p.streams, id, item)}
+    %__MODULE__{p | streams: Map.put(p.streams, id, item)}
   end
 end
 
