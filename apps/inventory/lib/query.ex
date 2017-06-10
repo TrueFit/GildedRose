@@ -2,7 +2,6 @@ defmodule Inventory.Query do
   @moduledoc """
   Read the inventory.
   """
-  import Inventory.Projection
   import Inventory.EventStore.Reader
   alias Inventory.Projection
 

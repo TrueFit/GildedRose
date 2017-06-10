@@ -13,24 +13,22 @@ defmodule Inventory.Projection.ItemDetails do
   def projection(stream), do: projection(stream, %__MODULE__{})
   def projection(stream, initial) do
     stream
-    |> Enum.reduce(initial, &(project(&2, &1)))
+    |> Enum.reduce(initial, &project/2)
   end
 
-  @spec project(__MODULE__.t, %EventStore.EventData{}) :: __MODULE__.t
-  defp project(p, %EventStore.RecordedEvent{data: event, metadata: %{"item_id" => id}, stream_version: v}) do
-    %__MODULE__{p | item_id: id, version: v}
-    |> set_event(event)
+  @spec project(%EventStore.EventData{}, __MODULE__.t) :: __MODULE__.t
+  defp project(%EventStore.RecordedEvent{data: event, metadata: %{"item_id" => id}, stream_version: v}, p) do
+    set_event(event, %__MODULE__{p | item_id: id, version: v})
   end
 
-  @spec set_event(__MODULE__.t, struct) :: __MODULE__.t
-  defp set_event(p, %Event.ItemAdded{name: n, category: c, sell_in: s, quality: q}) do
+  @spec set_event(struct, __MODULE__.t) :: __MODULE__.t
+  defp set_event(%Event.ItemAdded{name: n, category: c, sell_in: s, quality: q}, p) do
     %__MODULE__{p | name: n, category: c, sell_in: s, quality: q}
   end
-  defp set_event(%__MODULE__{name: n, category: c, sell_in: s, quality: q} = p, %Event.DayPassed{}) do
-    {_, _, s!, q!} = Item.age({n, c, s, q})
+  defp set_event(%Event.DayPassed{}, p) do
+    {_, _, s!, q!} = Item.age({p.name, p.category, p.sell_in, p.quality})
 
     %__MODULE__{p | sell_in: s!, quality: q!}
   end
-  defp set_event(p, %Event.ItemNameChanged{name: n}), do: %__MODULE__{p | name: n}
-  defp set_event(p, _), do: p
+  defp set_event(%Event.ItemNameChanged{name: n}, p), do: %__MODULE__{p | name: n}
 end

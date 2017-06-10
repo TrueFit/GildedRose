@@ -79,6 +79,11 @@ defmodule Inventory.Domain.Item do
   def age({n, "sulfuras", s, _}), do: {n, "sulfuras", s, 80}
   def age({n, c, s, _} = t), do: {n, c, s - 1, quality(t)}
 
+  def change_name({_, c, s, q}, new_name), do: {new_name, c, s, q}
+  def change_category({n, _, s, q}, new_cat), do: {n, new_cat, s, q}
+  def change_sell_in({n, c, _, q}, new_sell_in), do: {n, c, new_sell_in, q}
+  def change_quality({n, c, s, _}, new_quality), do: {n, c, s, new_quality}
+
   defp quality(t), do: t |> calc_quality() |> bracket()
 
   defp calc_quality({_, "backstage passes", s, q}) when s > 10, do: q + 1
