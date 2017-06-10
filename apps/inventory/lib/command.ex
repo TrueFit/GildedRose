@@ -14,6 +14,17 @@ defmodule Inventory.Command do
     do: {:ok, item_id}
   end
 
+  def initialize_item_to_inventory(name, category, sell_in, quality) do
+    event = case Event.item_added(name, category, sell_in, quality) do
+      {:ok, domain_event} -> domain_event
+      {:error, _} -> Event.invalid_item_added(name, category, sell_in, quality)
+    end
+
+    item_id = UUID.uuid4()
+
+    with :ok <- Inventory.EventStore.Writer.write(item_id, "TEST USER", 0, [event]), do: {:ok, item_id}
+  end
+
   @doc """
   Change the new of an item in inventory.
   """

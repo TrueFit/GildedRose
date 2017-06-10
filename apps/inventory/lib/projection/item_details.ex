@@ -5,7 +5,7 @@ defmodule Inventory.Projection.ItemDetails do
   alias Inventory.Domain.Item
   alias Inventory.Event
 
-  defstruct item_id: "", version: 0, name: "", category: "", sell_in: 0, quality: 0
+  defstruct item_id: "", version: 0, name: "", category: "", sell_in: 0, quality: 0, valid: true
 
   @doc """
   Convert a stream of events into details on an item in inventory.
@@ -25,6 +25,10 @@ defmodule Inventory.Projection.ItemDetails do
   defp set_event(%Event.ItemAdded{name: n, category: c, sell_in: s, quality: q}, p) do
     %__MODULE__{p | name: n, category: c, sell_in: s, quality: q}
   end
+  defp set_event(%Event.InvalidItemAdded{name: n, category: c, sell_in: s, quality: q}, p) do
+    %__MODULE__{p | name: n, category: c, sell_in: s, quality: q, valid: false}
+  end
+  defp set_event(_event, %__MODULE__{valid: false} = item), do: item
   defp set_event(%Event.DayPassed{}, p) do
     {_, _, s!, q!} = Item.age({p.name, p.category, p.sell_in, p.quality})
 

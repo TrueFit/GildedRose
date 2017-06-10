@@ -2,6 +2,7 @@ defmodule Inventory.Event do
   @moduledoc false
 
   alias Inventory.Event.ItemAdded, as: Added
+  alias Inventory.Event.InvalidItemAdded, as: InvalidAdded
   alias Inventory.Event.ItemNameChanged, as: NameChanged
 
   @categories [
@@ -51,6 +52,10 @@ defmodule Inventory.Event do
          {:ok, s} <- item_sell_in(sell_in),
          {:ok, q} <- item_quality(c, quality),
      do: {:ok, %Added{name: n, category: c, sell_in: s, quality: q}}
+  end
+
+  def invalid_item_added(name, category, sell_in, quality) do
+    %InvalidAdded{name: name, category: category, sell_in: sell_in, quality: quality}
   end
 
   @doc """

@@ -26,7 +26,7 @@ defmodule Inventory.Projection.Inventory do
   end
 
   defp project(_item, %Inventory.Event.ItemAdded{} = e, id, ver) do
-    %Inventory.Projection.ItemDetails{
+    proj = %Inventory.Projection.ItemDetails{
       item_id: id,
       version: ver,
       name: e.name,
@@ -34,6 +34,26 @@ defmodule Inventory.Projection.Inventory do
       sell_in: e.sell_in,
       quality: e.quality
     }
+
+    IO.inspect(proj)
+    proj
+  end
+
+  defp project(_item, %Inventory.Event.InvalidItemAdded{} = e, id, ver) do
+    %Inventory.Projection.ItemDetails{
+      item_id: id,
+      version: ver,
+      name: e.name,
+      category: e.category,
+      sell_in: e.sell_in,
+      quality: e.quality,
+      valid: false
+    }
+  end
+
+  # Never update invalid items. It will just cause further issues.
+  defp project(%Inventory.Projection.ItemDetails{valid: false} = item, _event, _id, ver) do
+    %Inventory.Projection.ItemDetails{item | version: ver}
   end
 
   defp project(item, %Inventory.Event.DayPassed{}, _id, ver) do
