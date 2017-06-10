@@ -1,5 +1,5 @@
-defmodule Inventory.InvetoryParserTest do
+defmodule Inventory.ParserTest do
   use ExUnit.Case
-  doctest Inventory.InventoryParser
+  doctest Inventory.Parser
 
 end
