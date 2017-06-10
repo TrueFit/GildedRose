@@ -26,7 +26,7 @@ defmodule Inventory.Projection.Inventory do
   end
 
   defp project(_item, %Inventory.Event.ItemAdded{} = e, id, ver) do
-    proj = %Inventory.Projection.ItemDetails{
+    %Inventory.Projection.ItemDetails{
       item_id: id,
       version: ver,
       name: e.name,
@@ -34,9 +34,6 @@ defmodule Inventory.Projection.Inventory do
       sell_in: e.sell_in,
       quality: e.quality
     }
-
-    IO.inspect(proj)
-    proj
   end
 
   defp project(_item, %Inventory.Event.InvalidItemAdded{} = e, id, ver) do
