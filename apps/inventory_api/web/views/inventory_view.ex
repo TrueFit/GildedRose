@@ -11,7 +11,9 @@ defmodule InventoryApi.InventoryView do
       name: i.name,
       category: i.category,
       sell_in: i.sell_in,
-      quality: i.quality}
+      quality: i.quality,
+      valid: i.valid
+    }
   end
 
   def render("error.json", %{message: msg}) do
