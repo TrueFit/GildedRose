@@ -21,7 +21,16 @@ defmodule Inventory.Query do
 
     stream_all_items()
     |> Projection.Inventory.projection()
-    |> Enum.filter(fn i -> name == "*" or i.name == name end)
-    |> Enum.filter(fn i -> status != "trash" or i.quality == 0 end)
+    |> Enum.filter(build_name_filter(name))
+    |> Enum.filter(build_status_filter(status))
   end
+
+  defp build_name_filter("*"), do: fn _ -> true end
+  defp build_name_filter(f), do: fn x -> x.name |> String.downcase() |> String.contains?(f) end
+
+  defp build_status_filter("*"), do: fn _ -> true end
+  defp build_status_filter("valid"), do: fn x -> x.valid end
+  defp build_status_filter("trash"), do: fn x -> x.valid and x.quality == 0 end
+  defp build_status_filter("invalid"), do: fn x -> not x.valid end
+  defp build_status_filter(_), do: fn _ -> false end
 end
