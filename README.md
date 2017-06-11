@@ -45,3 +45,20 @@ Please use whatever technology and techniques you feel are applicable to solve t
 Please fork this repository, then when you have completed your solution, issue a pull request to notify us that you are ready for us to review your submission.
 
 Have fun.
+
+
+Implementation
+-------------------------
+This is a mostly RESTful API that provides support for managing inventory.
+
+| Route | Verb | Purpose |
+|-------|------|---------|
+| /api/inventory | GET | Retrieve all items in inventory. Can be filtered using query string parameters by name and status. Supported statuses are trash, valid, or invalid |
+| /api/inventory/endday | POST | Mark a day as complete and update the inventory. |
+| /api/inventory/{id} | GET | Retrieve information on a single item in inventory. |
+| /api/inventory | POST | Add an item to inventory. |
+
+
+Execution
+-------------------------
+The application can be executed using docker-compose.
