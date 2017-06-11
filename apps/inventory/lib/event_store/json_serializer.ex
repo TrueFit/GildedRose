@@ -32,6 +32,7 @@ defmodule Inventory.EventStore.JsonSerializer do
   def to_type_string(%Inventory.Event.ItemNameChanged{}), do: "ItemNameChanged"
   def to_type_string(%Inventory.Event.DayPassed{}), do: "DayPassed"
   def to_type_string(%Inventory.Event.InvalidItemAdded{}), do: "InvalidItemAdded"
+  def to_type_string(%Inventory.Event.FailedAddingFromFile{}), do: "FailedAddingFromFile"
 
   @doc """
   Map an event type string to its struct.
@@ -41,4 +42,5 @@ defmodule Inventory.EventStore.JsonSerializer do
   def to_struct("ItemNameChanged"), do: %Inventory.Event.ItemNameChanged{}
   def to_struct("DayPassed"), do: %Inventory.Event.DayPassed{}
   def to_struct("InvalidItemAdded"), do: %Inventory.Event.InvalidItemAdded{}
+  def to_struct("FailedAddingFromFile"), do: %Inventory.Event.FailedAddingFromFile{}
 end
