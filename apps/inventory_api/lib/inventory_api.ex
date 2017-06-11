@@ -6,6 +6,8 @@ defmodule InventoryApi do
   def start(_type, _args) do
     import Supervisor.Spec
 
+    bootstrap_data()
+
     # Define workers and child supervisors to be supervised
     children = [
       # Start the endpoint when the application starts
@@ -25,5 +27,9 @@ defmodule InventoryApi do
   def config_change(changed, _new, removed) do
     InventoryApi.Endpoint.config_change(changed, removed)
     :ok
+  end
+
+  defp bootstrap_data() do
+    Inventory.Command.initialize_inventory_from_file("inventory.txt")
   end
 end
