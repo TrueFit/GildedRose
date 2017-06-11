@@ -19,7 +19,7 @@ defmodule Inventory.CommandTest do
   end
 
   test "valid item added through initialization process" do
-    {:ok, id} = Inventory.Command.initialize_item_to_inventory("test item", "food", 23, 43)
+    {:ok, id} = Inventory.Command.add_unsafe_item_to_inventory("test item", "food", 23, 43)
 
     result = EventStore.stream_forward(id) |> Enum.to_list()
 
@@ -36,7 +36,7 @@ defmodule Inventory.CommandTest do
   end
 
   test "invalid item added through initialization process" do
-    {:ok, id} = Inventory.Command.initialize_item_to_inventory("test item", "", 23, 43)
+    {:ok, id} = Inventory.Command.add_unsafe_item_to_inventory("test item", "", 23, 43)
 
     result = EventStore.stream_forward(id) |> Enum.to_list()
 
