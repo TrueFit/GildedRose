@@ -6,4 +6,7 @@ defmodule Inventory.EventStore.Reader do
 
   @spec stream_all_items() :: Enumerable.t
   def stream_all_items, do: EventStore.stream_all_forward()
+
+  @spec initialized?() :: boolean
+  def initialized?, do: EventStore.stream_all_forward() |> Enum.any?()
 end

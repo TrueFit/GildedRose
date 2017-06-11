@@ -3,6 +3,17 @@ defmodule Inventory.Command do
   """
   alias Inventory.Event, as: Event
 
+  def initialize_inventory_from_file(filepath) do
+    if File.exists?(filepath) and !Inventory.EventStore.Reader.initialized?() do
+      filepath
+      |> File.stream!()
+      |> Inventory.Parser.parse()
+      |> Enum.map(&add_unsafe_item_to_inventory/1)
+    else
+      {:ok, "already initialized"}
+    end
+  end
+
   @doc """
   Add a new item to inventory.
   """
@@ -25,8 +36,17 @@ defmodule Inventory.Command do
     with :ok <- Inventory.EventStore.Writer.write(item_id, "TEST USER", 0, [event]), do: {:ok, item_id}
   end
 
-  def add_unsafe_item_to_inventory(%Inventory.Parser.Error{error: e, line: l}) do
-    
+  def add_unsafe_item_to_inventory(%Inventory.Parser.Item{name: n, category: c, sell_in: s, quality: q}) do
+    add_unsafe_item_to_inventory(n, c, s, q)
+  end
+
+  def add_unsafe_item_to_inventory(%Inventory.Parser.Error{line: l}) do
+    item_id = UUID.uuid4()
+    event = %Event.FailedAddingFromFile{line: l}
+
+    Inventory.EventStore.Writer.write(item_id, "TEST USER", 0, [event])
+
+    {:ok, item_id}
   end
 
   @doc """
@@ -42,4 +62,5 @@ defmodule Inventory.Command do
   def end_day do
     Inventory.EventStore.Writer.write_to_all_streams("TEST USER", [%Inventory.Event.DayPassed{}])
   end
+
 end

@@ -74,6 +74,8 @@ defmodule Inventory.Event do
     do: {:ok, %NameChanged{name: n}}
   end
 
+
+
   @spec item_name(String.t) :: {:ok, String.t} | {:error, :invalid_name}
   defp item_name(""), do: {:error, :invalid_name}
   defp item_name(name) when is_binary(name), do: {:ok, name}
