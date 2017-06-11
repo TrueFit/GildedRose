@@ -59,5 +59,13 @@ defmodule Inventory.Projection.Inventory do
     %Inventory.Projection.ItemDetails{item | sell_in: s, quality: q, version: ver}
   end
 
+  defp project(_item, %Inventory.Event.FailedAddingFromFile{}, id, ver) do
+    %Inventory.Projection.ItemDetails{
+      item_id: id,
+      version: ver,
+      valid: false
+    }
+  end
+
 end
 

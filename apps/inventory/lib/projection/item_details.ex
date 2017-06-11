@@ -28,6 +28,7 @@ defmodule Inventory.Projection.ItemDetails do
   defp set_event(%Event.InvalidItemAdded{name: n, category: c, sell_in: s, quality: q}, p) do
     %__MODULE__{p | name: n, category: c, sell_in: s, quality: q, valid: false}
   end
+  defp set_event(%Event.FailedAddingFromFile{}, p), do: p
   defp set_event(_event, %__MODULE__{valid: false} = item), do: item
   defp set_event(%Event.DayPassed{}, p) do
     {_, _, s!, q!} = Item.age({p.name, p.category, p.sell_in, p.quality})
