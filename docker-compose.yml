@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  psql:
+    image: postgres
+  web:
+    build: .
+    ports:
+      - "4000:4000"
+    depends_on:
+      - psql
