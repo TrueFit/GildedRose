@@ -1,0 +1,5 @@
+All times are in the same time zone, whatever that might be (Azeroth Standard Time?).  There is only  one Gilded Rose location so we don't need to worry about the complications of data being entered from different time zones.
+
+The base decay rate of item quality is quality unit per day.
+
+Sell By Date is inclusive.  A Sell By Date of January 1st means the item must be sold by the end of the day, January 1st.
