@@ -1,5 +1,16 @@
-All times are in the same time zone, whatever that might be (Azeroth Standard Time?).  There is only  one Gilded Rose location so we don't need to worry about the complications of data being entered from different time zones.
+All times are in the same time zone, whatever that might be (Azeroth Standard Time?).  There is 
+only one Gilded Rose location so we don't need to worry about the complications of data being 
+entered from different time zones.
 
-The base decay rate of item quality is quality unit per day.
+The base decay rate of item quality is quality unit per day (can be configured per item type).
 
-Sell By Date is inclusive.  A Sell By Date of January 1st means the item must be sold by the end of the day, January 1st.
+If an item has an initial quality value outside the min and max range for quality of that item, the 
+initial quality will be clamped before calculating the current value.  This implies that for an 
+item using the Linear strategy, the current quality will degrade after the first day rather than 
+having to first burn through a quality buffer above the maximum threshold value before seeing any 
+effective change in the current value.  E.g., an item with a max quality of 50 and an initial 
+quality of 100 will have a current quality of 50 on the inventory date and a quality of 49 the next 
+day.
+
+Sell By Date is inclusive.  A Sell By Date of January 1st means the item must be sold by the end of 
+the day, January 1st.

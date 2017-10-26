@@ -40,8 +40,8 @@ namespace GR.Logic
             //For the purpose of this calculation, we only care about the day (time doesn't matter).
             var today = (now_ ?? DateTime.Now).Date;
 
-            if (invoiceDate > today)
-                return Math.Max(initialQuality, 0.0);
+            //Clamp the intitial quality to within the min and max range.
+            initialQuality = Math.Max(Math.Min(initialQuality, maxQuality), minQuality);
 
             switch(strategy)
             {
@@ -111,9 +111,9 @@ namespace GR.Logic
             if (today > sellByDate)
                 return 0.0;
 
-            var tripleIncrease = Math.Max((int)(DateTimeUtility.Min(sellByDate             , today) - DateTimeUtility.Max(sellByDate.AddDays(-5) , invoiceDate)).TotalHours, 0) * baseDelta * 3;
-            var doubleIncrease = Math.Max((int)(DateTimeUtility.Min(sellByDate.AddDays(-5) , today) - DateTimeUtility.Max(sellByDate.AddDays(-10), invoiceDate)).TotalHours, 0) * baseDelta * 2;
-            var singleIncrease = Math.Max((int)(DateTimeUtility.Min(sellByDate.AddDays(-10), today) - DateTimeUtility.Max(sellByDate.AddDays(-10), invoiceDate)).TotalHours, 0) * baseDelta;
+            var tripleIncrease = Math.Max((int)(DateTimeUtility.Min(sellByDate             , today) - DateTimeUtility.Max(sellByDate.AddDays(-5 ).Date, invoiceDate)).TotalDays, 0) * baseDelta * 3;
+            var doubleIncrease = Math.Max((int)(DateTimeUtility.Min(sellByDate.AddDays(-5 ), today) - DateTimeUtility.Max(sellByDate.AddDays(-10).Date, invoiceDate)).TotalDays, 0) * baseDelta * 2;
+            var singleIncrease = Math.Max((int)(DateTimeUtility.Min(sellByDate.AddDays(-10), today) - invoiceDate                                                   ).TotalDays, 0) * baseDelta;
 
             return Math.Max(Math.Min(initialQuality + tripleIncrease + doubleIncrease + singleIncrease, maxQuality), minQuality);
         }
