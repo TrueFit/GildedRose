@@ -14,10 +14,10 @@ VALUES
 ,	(@Dev_InventoryItemType_Conjured     , 'Belt of Giant Strenth' , 40, 40, @Now, DATEADD(DAY, 20, @EndOfToday), GETUTCDATE(), 'Do you event lift bro?')
 ,	(@Dev_InventoryItemType_Food         , 'Cheese'                ,  5,  5, @Now, DATEADD(DAY,  5, @EndOfToday), GETUTCDATE(), 'Just the regular kind.')
 ,	(@Dev_InventoryItemType_Food         , 'Potion of Healing'     , 10, 10, @Now, DATEADD(DAY, 10, @EndOfToday), GETUTCDATE(), 'Now 96% crack free!')
---,	(@Dev_InventoryItemType_             , 'Bag of Holding'        , 50, 50, @Now, DATEADD(DAY, 10, @EndOfToday), GETUTCDATE(), 'Don't get caught with it.')
+,	(@Dev_InventoryItemType_Miscellania  , 'Bag of Holding'        , 50, 50, @Now, DATEADD(DAY, 10, @EndOfToday), GETUTCDATE(), 'Don''t get caught with it.')
 ,	(@Dev_InventoryItemType_BackstagePass, 'TAFKAL80ETC Concert'   , 20, 20, @Now, DATEADD(DAY, 15, @EndOfToday), GETUTCDATE(), 'Pretty much as bad as you would expect.')
---,	(@Dev_InventoryItemType_             , 'Elixir of the Mongoose',  7,  7, @Now, DATEADD(DAY,  5, @EndOfToday), GETUTCDATE(), 'The mongoose did not enjoy this.')
+,	(@Dev_InventoryItemType_Potion       , 'Elixir of the Mongoose',  7,  7, @Now, DATEADD(DAY,  5, @EndOfToday), GETUTCDATE(), 'The mongoose did not enjoy this.')
 ,	(@Dev_InventoryItemType_Armor        , '+5 Dexterity Vest'     , 20, 20, @Now, DATEADD(DAY, 10, @EndOfToday), GETUTCDATE(), 'Sleeves are for losers.')
 ,	(@Dev_InventoryItemType_Armor        , 'Full Plate Mail'       , 50, 50, @Now, DATEADD(DAY, 50, @EndOfToday), GETUTCDATE(), 'Don''t fall down or you''ll probaby die there.  Eventually.')
-,	(@Dev_InventoryItemType_Armor        , 'Wooden Shield'         , 30, 30, @Now, DATEADD(DAY, 10, @EndOfToday), GETUTCDATE(), 'Round.')
+,	(@Dev_InventoryItemType_Armor        , 'Wooden Shield'         , 30, 30, @Now, DATEADD(DAY, 10, @EndOfToday), GETUTCDATE(), 'It''s round.')
 	

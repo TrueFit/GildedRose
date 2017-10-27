@@ -9,5 +9,8 @@ VALUES
 ,	(@Dev_InventoryItemType_Sulfuras     , 'Sulfuras'      , @QualityDeltaStrategy_Static       , 1.0, 80.0,   80.0, @Now, 'It''s big! It''s heavy!  It''s sulfuron!.')
 ,	(@Dev_InventoryItemType_BackStagePass, 'Backstage Pass', @QualityDeltaStrategy_Event        , 1.0,  0.0,   50.0, @Now, 'VIP ONLY.')
 ,	(@Dev_InventoryItemType_Conjured     , 'Conjured'      , @QualityDeltaStrategy_Linear       , 2.0,  0.0,   50.0, @Now, 'Made from the finest crap available.')
+,	(@Dev_InventoryItemType_Miscellania  , 'Miscellania'   , @QualityDeltaStrategy_Linear       , 1.0,  0.0,   50.0, @Now, 'The finest crap available.')
 SET IDENTITY_INSERT dbo.InventoryItemType OFF
+
+
 

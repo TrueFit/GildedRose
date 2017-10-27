@@ -8,3 +8,4 @@ DECLARE @Dev_InventoryItemTYpe_Potion        smallint = 5
 DECLARE @Dev_InventoryItemType_Sulfuras      smallint = 6
 DECLARE @Dev_InventoryItemType_BackStagePass smallint = 7
 DECLARE @Dev_InventoryItemType_Conjured      smallint = 8
+DECLARE @Dev_InventoryItemType_Miscellania   smallint = 9
