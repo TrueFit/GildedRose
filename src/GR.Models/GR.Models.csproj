@@ -46,7 +46,8 @@
   <ItemGroup>
     <Compile Include="Models\InventoryItem.cs" />
     <Compile Include="Models\InventoryItemQualityDeltaStrategy.cs" />
-    <Compile Include="Models\InventoryItemStatus.cs" />
+    <Compile Include="Models\InventoryItemQualityDeltaStrategyId.cs" />
+    <Compile Include="Models\InventoryItemStatusId.cs" />
     <Compile Include="Models\InventoryItemType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IInventoryRepository.cs" />

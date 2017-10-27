@@ -11,5 +11,8 @@ namespace GR.Models
         public short InventoryItemTypeId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public double MinQuality { get; set; }
+        public double MaxQuality { get; set; }
+        public InventoryItemQualityDeltaStrategyId QualityDeltaStrategy { get; set; }
     }
 }

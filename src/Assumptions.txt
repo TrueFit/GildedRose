@@ -2,7 +2,7 @@ All times are in the same time zone, whatever that might be (Azeroth Standard Ti
 only one Gilded Rose location so we don't need to worry about the complications of data being 
 entered from different time zones.
 
-The base decay rate of item quality is quality unit per day (can be configured per item type).
+The base rate of item quality delta is 1 quality unit per day (can be configured per item type).
 
 If an item has an initial quality value outside the min and max range for quality of that item, the 
 initial quality will be clamped before calculating the current value.  This implies that for an 
@@ -14,3 +14,8 @@ day.
 
 Sell By Date is inclusive.  A Sell By Date of January 1st means the item must be sold by the end of 
 the day, January 1st.
+
+User managment (login/audit/permissions) is outside the scope of this exercise but would be a 
+fundamental part of a production system.  Ideally this would be handled by some type of shared 
+identity management system and this system would only track pointers to records in the identity
+management system.

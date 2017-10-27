@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GR.Models
 {
-    public enum InventoryItemStatus
+    public enum InventoryItemStatusId
     {
         Available,
         Sold,

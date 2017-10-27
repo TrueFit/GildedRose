@@ -16,31 +16,31 @@ namespace NUnit.InventoryTests
             var logic = new GR.Logic.InventoryItemLogic();
             var someDate = new DateTime(2000, 1, 1);
 
-            Assert.AreEqual(GR.Models.InventoryItemStatus.Available, logic.DetermineItemStatus(soldDate: null    , discardedDate: null    , itemQuality: 1.0));
-            Assert.AreEqual(GR.Models.InventoryItemStatus.Available, logic.DetermineItemStatus(soldDate: null    , discardedDate: null    , itemQuality: 0.1));
-            Assert.AreEqual(GR.Models.InventoryItemStatus.Expired  , logic.DetermineItemStatus(soldDate: null    , discardedDate: null    , itemQuality: 0.0));
-            Assert.AreEqual(GR.Models.InventoryItemStatus.Expired  , logic.DetermineItemStatus(soldDate: null    , discardedDate: null    , itemQuality: -1.0));
+            Assert.AreEqual(GR.Models.InventoryItemStatusId.Available, logic.DetermineItemStatus(soldDate: null    , discardedDate: null    , itemQuality: 1.0));
+            Assert.AreEqual(GR.Models.InventoryItemStatusId.Available, logic.DetermineItemStatus(soldDate: null    , discardedDate: null    , itemQuality: 0.1));
+            Assert.AreEqual(GR.Models.InventoryItemStatusId.Expired  , logic.DetermineItemStatus(soldDate: null    , discardedDate: null    , itemQuality: 0.0));
+            Assert.AreEqual(GR.Models.InventoryItemStatusId.Expired  , logic.DetermineItemStatus(soldDate: null    , discardedDate: null    , itemQuality: -1.0));
 
-            Assert.AreEqual(GR.Models.InventoryItemStatus.Sold     , logic.DetermineItemStatus(soldDate: someDate, discardedDate: null    , itemQuality: 1.0));
-            Assert.AreEqual(GR.Models.InventoryItemStatus.Sold     , logic.DetermineItemStatus(soldDate: someDate, discardedDate: null    , itemQuality: 0.1));
-            Assert.AreEqual(GR.Models.InventoryItemStatus.Sold     , logic.DetermineItemStatus(soldDate: someDate, discardedDate: null    , itemQuality: 0.0));
-            Assert.AreEqual(GR.Models.InventoryItemStatus.Sold     , logic.DetermineItemStatus(soldDate: someDate, discardedDate: null    , itemQuality: -1.0));
+            Assert.AreEqual(GR.Models.InventoryItemStatusId.Sold     , logic.DetermineItemStatus(soldDate: someDate, discardedDate: null    , itemQuality: 1.0));
+            Assert.AreEqual(GR.Models.InventoryItemStatusId.Sold     , logic.DetermineItemStatus(soldDate: someDate, discardedDate: null    , itemQuality: 0.1));
+            Assert.AreEqual(GR.Models.InventoryItemStatusId.Sold     , logic.DetermineItemStatus(soldDate: someDate, discardedDate: null    , itemQuality: 0.0));
+            Assert.AreEqual(GR.Models.InventoryItemStatusId.Sold     , logic.DetermineItemStatus(soldDate: someDate, discardedDate: null    , itemQuality: -1.0));
 
-            Assert.AreEqual(GR.Models.InventoryItemStatus.Sold     , logic.DetermineItemStatus(soldDate: someDate, discardedDate: someDate, itemQuality: 1.0));
-            Assert.AreEqual(GR.Models.InventoryItemStatus.Sold     , logic.DetermineItemStatus(soldDate: someDate, discardedDate: someDate, itemQuality: 0.1));
-            Assert.AreEqual(GR.Models.InventoryItemStatus.Sold     , logic.DetermineItemStatus(soldDate: someDate, discardedDate: someDate, itemQuality: 0.0));
-            Assert.AreEqual(GR.Models.InventoryItemStatus.Sold     , logic.DetermineItemStatus(soldDate: someDate, discardedDate: someDate, itemQuality: -1.0));
+            Assert.AreEqual(GR.Models.InventoryItemStatusId.Sold     , logic.DetermineItemStatus(soldDate: someDate, discardedDate: someDate, itemQuality: 1.0));
+            Assert.AreEqual(GR.Models.InventoryItemStatusId.Sold     , logic.DetermineItemStatus(soldDate: someDate, discardedDate: someDate, itemQuality: 0.1));
+            Assert.AreEqual(GR.Models.InventoryItemStatusId.Sold     , logic.DetermineItemStatus(soldDate: someDate, discardedDate: someDate, itemQuality: 0.0));
+            Assert.AreEqual(GR.Models.InventoryItemStatusId.Sold     , logic.DetermineItemStatus(soldDate: someDate, discardedDate: someDate, itemQuality: -1.0));
 
-            Assert.AreEqual(GR.Models.InventoryItemStatus.Discarded, logic.DetermineItemStatus(soldDate: null    , discardedDate: someDate, itemQuality: 1.0));
-            Assert.AreEqual(GR.Models.InventoryItemStatus.Discarded, logic.DetermineItemStatus(soldDate: null    , discardedDate: someDate, itemQuality: 0.1));
-            Assert.AreEqual(GR.Models.InventoryItemStatus.Discarded, logic.DetermineItemStatus(soldDate: null    , discardedDate: someDate, itemQuality: 0.0));
-            Assert.AreEqual(GR.Models.InventoryItemStatus.Discarded, logic.DetermineItemStatus(soldDate: null    , discardedDate: someDate, itemQuality: -1.0));
+            Assert.AreEqual(GR.Models.InventoryItemStatusId.Discarded, logic.DetermineItemStatus(soldDate: null    , discardedDate: someDate, itemQuality: 1.0));
+            Assert.AreEqual(GR.Models.InventoryItemStatusId.Discarded, logic.DetermineItemStatus(soldDate: null    , discardedDate: someDate, itemQuality: 0.1));
+            Assert.AreEqual(GR.Models.InventoryItemStatusId.Discarded, logic.DetermineItemStatus(soldDate: null    , discardedDate: someDate, itemQuality: 0.0));
+            Assert.AreEqual(GR.Models.InventoryItemStatusId.Discarded, logic.DetermineItemStatus(soldDate: null    , discardedDate: someDate, itemQuality: -1.0));
         }
 
         [Test]
         public void DetermineCurrentAvailableItemQuality_Linear()
         {
-            GR.Models.InventoryItemQualityDeltaStrategy strategy = GR.Models.InventoryItemQualityDeltaStrategy.Linear;
+            GR.Models.InventoryItemQualityDeltaStrategyId strategy = GR.Models.InventoryItemQualityDeltaStrategyId.Linear;
             DateTime invoiceDate;
             double initialQuality;
             DateTime? sellByDate;
@@ -144,7 +144,7 @@ namespace NUnit.InventoryTests
         [Test]
         public void DetermineCurrentAvailableItemQuality_InverseLinear()
         {
-            GR.Models.InventoryItemQualityDeltaStrategy strategy = GR.Models.InventoryItemQualityDeltaStrategy.InverseLinear;
+            GR.Models.InventoryItemQualityDeltaStrategyId strategy = GR.Models.InventoryItemQualityDeltaStrategyId.InverseLinear;
             DateTime invoiceDate;
             double initialQuality;
             DateTime? sellByDate;
@@ -297,7 +297,7 @@ namespace NUnit.InventoryTests
         [Test]
         public void DetermineCurrentAvailableItemQuality_Static()
         {
-            GR.Models.InventoryItemQualityDeltaStrategy strategy = GR.Models.InventoryItemQualityDeltaStrategy.Static;
+            GR.Models.InventoryItemQualityDeltaStrategyId strategy = GR.Models.InventoryItemQualityDeltaStrategyId.Static;
             DateTime invoiceDate;
             double initialQuality;
             DateTime? sellByDate;
@@ -346,7 +346,7 @@ namespace NUnit.InventoryTests
         [Test]
         public void DetermineCurrentAvailableItemQuality_Event()
         {
-            GR.Models.InventoryItemQualityDeltaStrategy strategy = GR.Models.InventoryItemQualityDeltaStrategy.Event;
+            GR.Models.InventoryItemQualityDeltaStrategyId strategy = GR.Models.InventoryItemQualityDeltaStrategyId.Event;
             DateTime invoiceDate;
             double initialQuality;
             DateTime? sellByDate;

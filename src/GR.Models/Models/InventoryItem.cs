@@ -13,7 +13,7 @@ namespace GR.Models
         public InventoryItemType ItemType { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public InventoryItemStatus ItemStatus { get; set; }
+        public InventoryItemStatusId ItemStatusId { get; set; }
 
         public DateTime InventoryDate { get; set; }
         public DateTime? SellByDate { get; set; }

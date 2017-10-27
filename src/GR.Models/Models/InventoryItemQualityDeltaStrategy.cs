@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace GR.Models
 {
-    public enum InventoryItemQualityDeltaStrategy
+    public class InventoryItemQualityDeltaStrategy
     {
-        Linear,
-        InverseLinear,
-        Static,
-        Event,
+        public InventoryItemQualityDeltaStrategyId StrategyId { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }

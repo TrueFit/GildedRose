@@ -8,20 +8,20 @@ namespace GR.Logic
 {
     public class InventoryItemLogic
     {
-        public Models.InventoryItemStatus DetermineItemStatus(DateTime? soldDate, DateTime? discardedDate, double itemQuality)
+        public Models.InventoryItemStatusId DetermineItemStatus(DateTime? soldDate, DateTime? discardedDate, double itemQuality)
         {
             if (soldDate != null)
-                return Models.InventoryItemStatus.Sold;
+                return Models.InventoryItemStatusId.Sold;
             if (discardedDate != null)
-                return Models.InventoryItemStatus.Discarded;
+                return Models.InventoryItemStatusId.Discarded;
             if (itemQuality <= 0.0)
-                return Models.InventoryItemStatus.Expired;
+                return Models.InventoryItemStatusId.Expired;
 
-            return Models.InventoryItemStatus.Available;
+            return Models.InventoryItemStatusId.Available;
         }
 
         public double DetermineCurrentAvailableItemQuality(
-            Models.InventoryItemQualityDeltaStrategy strategy,
+            Models.InventoryItemQualityDeltaStrategyId strategy,
             DateTime invoiceDate,
             double initialQuality,
             DateTime? sellByDate,
@@ -45,27 +45,27 @@ namespace GR.Logic
 
             switch(strategy)
             {
-                case Models.InventoryItemQualityDeltaStrategy.Linear:
+                case Models.InventoryItemQualityDeltaStrategyId.Linear:
                     if(sellByDate == null)
-                        throw new ArgumentException($"sellByDate is required when strategy is {nameof(Models.InventoryItemQualityDeltaStrategy.Linear)}.", nameof(strategy));
+                        throw new ArgumentException($"sellByDate is required when strategy is {nameof(Models.InventoryItemQualityDeltaStrategyId.Linear)}.", nameof(strategy));
                     return DetermineCurrentAvailableItemQuality_Linear(
                         invoiceDate, initialQuality, sellByDate.Value, baseDelta, minQuality, maxQuality, today);
 
-                case Models.InventoryItemQualityDeltaStrategy.InverseLinear:
+                case Models.InventoryItemQualityDeltaStrategyId.InverseLinear:
                     return DetermineCurrentAvailableItemQuality_InverseLinear(
                         invoiceDate, initialQuality, baseDelta, minQuality, maxQuality, today);
 
-                case Models.InventoryItemQualityDeltaStrategy.Static:
+                case Models.InventoryItemQualityDeltaStrategyId.Static:
                     return DetermineCurrentAvailableItemQuality_Static(initialQuality, minQuality, maxQuality);
 
-                case Models.InventoryItemQualityDeltaStrategy.Event:
+                case Models.InventoryItemQualityDeltaStrategyId.Event:
                     if (sellByDate == null)
-                        throw new ArgumentException($"sellByDate is required when strategy is {nameof(Models.InventoryItemQualityDeltaStrategy.Event)}.", nameof(strategy));
+                        throw new ArgumentException($"sellByDate is required when strategy is {nameof(Models.InventoryItemQualityDeltaStrategyId.Event)}.", nameof(strategy));
                     return DetermineCurrentAvailableItemQuality_Event(
                         invoiceDate, initialQuality, sellByDate.Value, baseDelta, minQuality, maxQuality, today);
 
                 default:
-                    throw new ArgumentException($"Unknown {nameof(Models.InventoryItemQualityDeltaStrategy)} value: {strategy}.", nameof(strategy));
+                    throw new ArgumentException($"Unknown {nameof(Models.InventoryItemQualityDeltaStrategyId)} value: {strategy}.", nameof(strategy));
             }
         }
 
