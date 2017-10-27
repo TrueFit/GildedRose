@@ -12,9 +12,9 @@ Storm Hammer,Conjured,20,50
 Belt of Giant Strength,Conjured,20,40
 Cheese,Food,5,5
 Potion of Healing,Potion,10,10
-Bag of Holding,10,50
+Bag of Holding,Misc,10,50
 TAFKAL80ETC Concert,Backstage Passes,15,20
-Elixir of the Mongoose,5,7
+Elixir of the Mongoose,Potion,5,7
 +5 Dexterity Vest,Armor,10,20
 Full Plate Mail,Armor,50,50
 Wooden Shield,Armor,10,30
