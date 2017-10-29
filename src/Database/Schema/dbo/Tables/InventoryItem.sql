@@ -5,8 +5,8 @@
 ,	Name						varchar(100)	NOT NULL
 ,	Description					varchar(1000)
 
-,	InitialQuality				real			NOT NULL
-,	CurrentQuality				real			NOT NULL
+,	InitialQuality				float			NOT NULL
+,	CurrentQuality				float			NOT NULL
 
 ,	InventoryDate				datetime		NOT NULL
 ,	SellByDate					datetime
