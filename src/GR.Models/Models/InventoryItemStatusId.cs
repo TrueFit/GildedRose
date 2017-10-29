@@ -8,6 +8,7 @@ namespace GR.Models
 {
     public enum InventoryItemStatusId
     {
+        Unknown = 0,
         Available,
         Sold,
         Expired,

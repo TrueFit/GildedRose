@@ -8,7 +8,7 @@ namespace GR.Models
 {
     public class InventoryItem
     {
-        public int InventoryItemTypeId { get; set; }
+        public int InventoryItemId { get; set; }
 
         public InventoryItemType ItemType { get; set; }
         public string Name { get; set; }
