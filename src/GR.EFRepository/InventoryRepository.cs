@@ -9,6 +9,7 @@ namespace GR.Repositories.EF
 {
     public class InventoryRepository
     {
+        #region  IInventoryRepository Methods
         public async Task<List<Models.InventoryItemType>> GetItemTypesAsync()
         {
             using (var db = new Entities.InventoryDb())
@@ -37,7 +38,7 @@ namespace GR.Repositories.EF
             }
         }
 
-        public async Task<Models.InventoryItem> AddNewItemAsync(
+        public async Task<Models.InventoryItem> StoreNewItemAsync(
             short itemTypeId, string name, string description, double quality, DateTime? sellByDate,
             DateTime? now = null, DateTime? inventoryDate = null)
         {
@@ -70,15 +71,49 @@ namespace GR.Repositories.EF
             }
         }
 
-        public Task<(int TotalItems, List<Models.InventoryItem> Items)> GetAvailableItemsAsync(int skip = 0, int take = 100)
-            => QueryItems(db => db.InventoryItems.Where(ii => ii.SaleDate == null && ii.DiscardDate == null), skip, take);
-
-        public Task<(int TotalItems, List<Models.InventoryItem> Items)> GetExpiredItemsAsync(int skip = 0, int take = 100, DateTime? now = null)
+        public async Task<(int TotalItems, List<Models.InventoryItem> Items)> SearchItemsAsync(
+            bool includeAvailable = true,
+            bool includeExpired = true,
+            bool includeSold = false,
+            bool includeDiscarded = false,
+            IEnumerable<Models.InventoryItemSortOrder> sortOrder = null,
+            int skip = 0, int take = 100,
+            DateTime? now = null)
         {
-            now = now ?? DateTime.Now;
-            return QueryItems(
-                db => db.InventoryItems.Where(ii => ii.SaleDate == null && ii.DiscardDate == null && ii.SellByDate < now),
-                skip, take);
+            var orderByClause = string.Join(", ",
+                sortOrder
+                    ?.Select(
+                        iiso =>
+                        {
+                            switch (iiso)
+                            {
+                                case Models.InventoryItemSortOrder.Name: return "Name";
+                                case Models.InventoryItemSortOrder.NameDescending: return "Name DESC";
+                                case Models.InventoryItemSortOrder.InventoryDate: return "InventoryDate";
+                                case Models.InventoryItemSortOrder.InventoryDateDescending: return "InventoryDate DESC";
+                                case Models.InventoryItemSortOrder.SellByDate: return "SellByDate";
+                                case Models.InventoryItemSortOrder.SellByDateDescending: return "SellByDate DESC";
+                                case Models.InventoryItemSortOrder.Quality: return "Quality";
+                                case Models.InventoryItemSortOrder.QualityDescending: return "Quality DESC";
+                                default: return "ERROR";
+                            }
+                        }));
+
+            var itemTypes = (await GetItemTypesAsync()).ToDictionary(iit => iit.InventoryItemTypeId);
+            var iiLogic = new Logic.InventoryItemLogic();
+
+            using (var db = new Entities.InventoryDb())
+            {
+                var items = 
+                    //This calls the stored proc dbo.InventoryItems_Search and returns a List of InventoryItem entities.
+                    db.InventoryItemSearch(
+                        includeAvailable, includeExpired, includeSold, includeDiscarded,
+                        orderByClause, skip, take, now ?? DateTime.Now, 
+                        out int? totalRows)
+                    .Select(ii => ToModel(ii, itemTypes, iiLogic))
+                    .ToList();
+                return (TotalItems: totalRows.Value, Items: items);
+            }
         }
 
         public async Task<Models.InventoryItem> MarkItemDiscardedAsync(int itemId, DateTime? now = null)
@@ -122,28 +157,9 @@ namespace GR.Repositories.EF
                 return ToModel(item, new Logic.InventoryItemLogic());
             }
         }
+        #endregion
 
-        private async Task<(int TotalItems, List<Models.InventoryItem> Items)> QueryItems(
-            Func<Entities.InventoryDb, IQueryable<Entities.InventoryItem>> query, 
-            int skip = 0, int take = 100)
-        {
-            var itemTypes = (await GetItemTypesAsync()).ToDictionary(iit => iit.InventoryItemTypeId);
-            using (var db = new Entities.InventoryDb())
-            {
-                var iiLogic = new Logic.InventoryItemLogic();
-                var q = query(db);
-                return
-                (
-                    TotalItems: q.Count(),
-                    Items: (await q.OrderBy(ii => ii.Name)
-                        .Skip(skip).Take(take)
-                        .ToListAsync().ConfigureAwait(false))
-                        .Select(ii => ToModel(ii, itemTypes, iiLogic))
-                        .ToList()
-                );
-            }
-        }
-
+        #region ToModel Methods
         private Models.InventoryItemType ToModel(Entities.InventoryItemType iit)
             => new Models.InventoryItemType
             {
@@ -173,5 +189,6 @@ namespace GR.Repositories.EF
                 InitialQuality = ii.InitialQuality,
                 CurrentQuality = ii.CurrentQuality,
             };
+        #endregion
     }
 }

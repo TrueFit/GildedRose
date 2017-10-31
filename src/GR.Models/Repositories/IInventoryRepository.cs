@@ -15,10 +15,16 @@ namespace GR.Repositories
             short itemTypeId, string name, string description, double quality, DateTime? sellByDate,
             DateTime? now = null, DateTime? inventoryDate = null);
 
-        Task<(int TotalItems, List<Models.InventoryItem> Items)> GetAvailableItemsAsync(int skip = 0, int take = 100);
-        Task<(int TotalItems, List<Models.InventoryItem> Items)> GetExpiredItemsAsync(int skip = 0, int take = 100, DateTime? now = null);
-
-        Task<Models.InventoryItem> MarkItemDiscardedAsync(int itemId, DateTime? now = null);
+        Task<(int TotalItems, List<Models.InventoryItem> Items)> SearchItemsAsync(
+                    bool includeAvailable = true,
+                    bool includeExpired = true,
+                    bool includeSold = false,
+                    bool includeDiscarded = false,
+                    IEnumerable<Models.InventoryItemSortOrder> sortOrder = null,
+                    int skip = 0, int take = 100,
+                    DateTime? now = null);
+        
+            Task<Models.InventoryItem> MarkItemDiscardedAsync(int itemId, DateTime? now = null);
         Task<Models.InventoryItem> MarkItemSoldAsync(int itemId, DateTime? now = null);
     }
 }

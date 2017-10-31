@@ -16,14 +16,14 @@ namespace GR.Repositories.EF.Entities
 {
 
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
-    internal partial class InventoryItemConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<InventoryItem>
+    internal partial class InventoryItem_EntityConfig : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<InventoryItem>
     {
-        public InventoryItemConfiguration()
+        public InventoryItem_EntityConfig()
             : this("dbo")
         {
         }
 
-        public InventoryItemConfiguration(string schema)
+        public InventoryItem_EntityConfig(string schema)
         {
             ToTable("InventoryItem", schema);
             HasKey(x => x.InventoryItemId);

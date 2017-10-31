@@ -51,12 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\FakeDbSet.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\FakeInventoryDb.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entities\IInventoryDb.cs">
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
@@ -68,25 +62,22 @@
     <Compile Include="Entities\InventoryDb.cs">
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\InventoryDbFactory.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entities\InventoryItem.cs">
-      <DependentUpon>Inventory.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\InventoryItemConfiguration.cs">
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\InventoryItemType.cs">
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\InventoryItemTypeConfiguration.cs">
+    <Compile Include="Entities\InventoryItemType_EntityConfig.cs">
+      <DependentUpon>Inventory.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\InventoryItem_EntityConfig.cs">
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\QualityDeltaStrategy.cs">
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\QualityDeltaStrategyConfiguration.cs">
+    <Compile Include="Entities\QualityDeltaStrategy_EntityConfig.cs">
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
     <Compile Include="InventoryRepository.cs" />

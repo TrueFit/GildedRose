@@ -33,6 +33,12 @@ namespace GR.Repositories.EF.Entities
         System.Data.Entity.DbSet Set(System.Type entityType);
         System.Data.Entity.DbSet<TEntity> Set<TEntity>() where TEntity : class;
         string ToString();
+
+        // Stored Procedures
+        System.Collections.Generic.List<InventoryItem> InventoryItemSearch(bool? includeAvailable, bool? includeExpired, bool? includeSold, bool? includeDiscarded, string orderByClause, int? skip, int? take, System.DateTime? now, out int? totalRows);
+        System.Collections.Generic.List<InventoryItem> InventoryItemSearch(bool? includeAvailable, bool? includeExpired, bool? includeSold, bool? includeDiscarded, string orderByClause, int? skip, int? take, System.DateTime? now, out int? totalRows, out int procResult);
+        // InventoryItemSearchAsync cannot be created due to having out parameters, or is relying on the procedure result (System.Collections.Generic.List<InventoryItem>)
+
     }
 
 }

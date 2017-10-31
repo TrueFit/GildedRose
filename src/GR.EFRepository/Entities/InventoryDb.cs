@@ -77,23 +77,77 @@ namespace GR.Repositories.EF.Entities
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Configurations.Add(new InventoryItemConfiguration());
-            modelBuilder.Configurations.Add(new InventoryItemTypeConfiguration());
-            modelBuilder.Configurations.Add(new QualityDeltaStrategyConfiguration());
+            modelBuilder.Configurations.Add(new InventoryItem_EntityConfig());
+            modelBuilder.Configurations.Add(new InventoryItemType_EntityConfig());
+            modelBuilder.Configurations.Add(new QualityDeltaStrategy_EntityConfig());
 
             OnModelCreatingPartial(modelBuilder);
         }
 
         public static System.Data.Entity.DbModelBuilder CreateModel(System.Data.Entity.DbModelBuilder modelBuilder, string schema)
         {
-            modelBuilder.Configurations.Add(new InventoryItemConfiguration(schema));
-            modelBuilder.Configurations.Add(new InventoryItemTypeConfiguration(schema));
-            modelBuilder.Configurations.Add(new QualityDeltaStrategyConfiguration(schema));
+            modelBuilder.Configurations.Add(new InventoryItem_EntityConfig(schema));
+            modelBuilder.Configurations.Add(new InventoryItemType_EntityConfig(schema));
+            modelBuilder.Configurations.Add(new QualityDeltaStrategy_EntityConfig(schema));
             return modelBuilder;
         }
 
         partial void InitializePartial();
         partial void OnModelCreatingPartial(System.Data.Entity.DbModelBuilder modelBuilder);
+
+        // Stored Procedures
+        public System.Collections.Generic.List<InventoryItem> InventoryItemSearch(bool? includeAvailable, bool? includeExpired, bool? includeSold, bool? includeDiscarded, string orderByClause, int? skip, int? take, System.DateTime? now, out int? totalRows)
+        {
+            int procResult;
+            return InventoryItemSearch(includeAvailable, includeExpired, includeSold, includeDiscarded, orderByClause, skip, take, now, out totalRows, out procResult);
+        }
+
+        public System.Collections.Generic.List<InventoryItem> InventoryItemSearch(bool? includeAvailable, bool? includeExpired, bool? includeSold, bool? includeDiscarded, string orderByClause, int? skip, int? take, System.DateTime? now, out int? totalRows, out int procResult)
+        {
+            var includeAvailableParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@IncludeAvailable", SqlDbType = System.Data.SqlDbType.Bit, Direction = System.Data.ParameterDirection.Input, Value = includeAvailable.GetValueOrDefault() };
+            if (!includeAvailable.HasValue)
+                includeAvailableParam.Value = System.DBNull.Value;
+
+            var includeExpiredParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@IncludeExpired", SqlDbType = System.Data.SqlDbType.Bit, Direction = System.Data.ParameterDirection.Input, Value = includeExpired.GetValueOrDefault() };
+            if (!includeExpired.HasValue)
+                includeExpiredParam.Value = System.DBNull.Value;
+
+            var includeSoldParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@IncludeSold", SqlDbType = System.Data.SqlDbType.Bit, Direction = System.Data.ParameterDirection.Input, Value = includeSold.GetValueOrDefault() };
+            if (!includeSold.HasValue)
+                includeSoldParam.Value = System.DBNull.Value;
+
+            var includeDiscardedParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@IncludeDiscarded", SqlDbType = System.Data.SqlDbType.Bit, Direction = System.Data.ParameterDirection.Input, Value = includeDiscarded.GetValueOrDefault() };
+            if (!includeDiscarded.HasValue)
+                includeDiscardedParam.Value = System.DBNull.Value;
+
+            var orderByClauseParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@OrderByClause", SqlDbType = System.Data.SqlDbType.VarChar, Direction = System.Data.ParameterDirection.Input, Value = orderByClause, Size = -1 };
+            if (orderByClauseParam.Value == null)
+                orderByClauseParam.Value = System.DBNull.Value;
+
+            var skipParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@Skip", SqlDbType = System.Data.SqlDbType.Int, Direction = System.Data.ParameterDirection.Input, Value = skip.GetValueOrDefault(), Precision = 10, Scale = 0 };
+            if (!skip.HasValue)
+                skipParam.Value = System.DBNull.Value;
+
+            var takeParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@Take", SqlDbType = System.Data.SqlDbType.Int, Direction = System.Data.ParameterDirection.Input, Value = take.GetValueOrDefault(), Precision = 10, Scale = 0 };
+            if (!take.HasValue)
+                takeParam.Value = System.DBNull.Value;
+
+            var nowParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@Now", SqlDbType = System.Data.SqlDbType.DateTime, Direction = System.Data.ParameterDirection.Input, Value = now.GetValueOrDefault() };
+            if (!now.HasValue)
+                nowParam.Value = System.DBNull.Value;
+
+            var totalRowsParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@TotalRows", SqlDbType = System.Data.SqlDbType.Int, Direction = System.Data.ParameterDirection.Output, Precision = 10, Scale = 0 };
+            var procResultParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@procResult", SqlDbType = System.Data.SqlDbType.Int, Direction = System.Data.ParameterDirection.Output };
+            var procResultData = Database.SqlQuery<InventoryItem>("EXEC @procResult = [dbo].[InventoryItem_Search] @IncludeAvailable, @IncludeExpired, @IncludeSold, @IncludeDiscarded, @OrderByClause, @Skip, @Take, @Now, @TotalRows OUTPUT", includeAvailableParam, includeExpiredParam, includeSoldParam, includeDiscardedParam, orderByClauseParam, skipParam, takeParam, nowParam, totalRowsParam, procResultParam).ToList();
+            if (IsSqlParameterNull(totalRowsParam))
+                totalRows = null;
+            else
+                totalRows = (int) totalRowsParam.Value;
+
+            procResult = (int) procResultParam.Value;
+            return procResultData;
+        }
+
     }
 }
 // </auto-generated>

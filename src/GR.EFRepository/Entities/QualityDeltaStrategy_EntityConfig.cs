@@ -16,14 +16,14 @@ namespace GR.Repositories.EF.Entities
 {
 
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.33.0.0")]
-    internal partial class QualityDeltaStrategyConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<QualityDeltaStrategy>
+    internal partial class QualityDeltaStrategy_EntityConfig : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<QualityDeltaStrategy>
     {
-        public QualityDeltaStrategyConfiguration()
+        public QualityDeltaStrategy_EntityConfig()
             : this("dbo")
         {
         }
 
-        public QualityDeltaStrategyConfiguration(string schema)
+        public QualityDeltaStrategy_EntityConfig(string schema)
         {
             ToTable("QualityDeltaStrategy", schema);
             HasKey(x => x.QualityDeltaStrategyId);

@@ -66,6 +66,7 @@
     <Folder Include="Data\SeedData\Dev" />
     <Folder Include="Data\SeedData\QA" />
     <Folder Include="Data\SeedData\Prod" />
+    <Folder Include="Schema\dbo\Procedures" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Data\PostDeploymentData.sql" />
@@ -95,8 +96,16 @@
     <Build Include="Schema\dbo\Tables\InventoryItem.sql" />
     <Build Include="Schema\dbo\Tables\InventoryItemType.sql" />
     <Build Include="Schema\dbo\Tables\QualityDeltaStrategy.sql" />
+    <Build Include="Schema\dbo\Procedures\InventoryItem_Search.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Database.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <ArtifactReference Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\Extensions\Microsoft\SQLDB\Extensions\SqlServer\130\SqlSchemas\master.dacpac">
+      <HintPath>$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\130\SqlSchemas\master.dacpac</HintPath>
+      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
+      <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
+    </ArtifactReference>
   </ItemGroup>
 </Project>
