@@ -261,7 +261,7 @@ namespace NUnit.InventoryTests
             today = new DateTime(2000, 3, 1);
             Assert.AreEqual(25.0, logic.DetermineCurrentAvailableItemQuality(strategy, invoiceDate, initialQuality, sellByDate, baseDelta, minQuality, maxQuality, today));
 
-            initialQuality = 1.0;
+            initialQuality = 10.0;
             sellByDate = null;
             minQuality = 0.0;
             maxQuality = 50.0;
@@ -439,7 +439,44 @@ namespace NUnit.InventoryTests
 
             sellByDate = null;
             Assert.Catch<ArgumentException>(() => logic.DetermineCurrentAvailableItemQuality(strategy, invoiceDate, initialQuality, sellByDate, baseDelta, minQuality, maxQuality, today));
+        }
 
+        [Test]
+        public void DetermineIsSellByDateRequired()
+        {
+            var iiLogic = new GR.Logic.InventoryItemLogic();
+
+            Assert.AreEqual(true , iiLogic.DetermineIsSellByDateRequired(GR.Models.InventoryItemQualityDeltaStrategyId.Linear));
+            Assert.AreEqual(false, iiLogic.DetermineIsSellByDateRequired(GR.Models.InventoryItemQualityDeltaStrategyId.InverseLinear));
+            Assert.AreEqual(false, iiLogic.DetermineIsSellByDateRequired(GR.Models.InventoryItemQualityDeltaStrategyId.Static));
+            Assert.AreEqual(true , iiLogic.DetermineIsSellByDateRequired(GR.Models.InventoryItemQualityDeltaStrategyId.Event));
+
+        }
+
+        [Test]
+        public void DetermineCanItemBeDiscarded()
+        {
+            var iiLogic = new GR.Logic.InventoryItemLogic();
+            DateTime now = DateTime.Now;
+
+            Assert.AreEqual(true , iiLogic.DetermineCanItemBeDiscarded(GR.Models.InventoryItemStatusId.Available));
+            Assert.AreEqual(true , iiLogic.DetermineCanItemBeDiscarded(GR.Models.InventoryItemStatusId.Expired));
+            Assert.AreEqual(false, iiLogic.DetermineCanItemBeDiscarded(GR.Models.InventoryItemStatusId.Discarded));
+            Assert.AreEqual(false, iiLogic.DetermineCanItemBeDiscarded(GR.Models.InventoryItemStatusId.Sold));
+            Assert.Catch<ArgumentOutOfRangeException>(() => iiLogic.DetermineCanItemBeDiscarded(GR.Models.InventoryItemStatusId.Unknown));
+        }
+
+        [Test]
+        public void DetermineCanItemBeSold()
+        {
+            var iiLogic = new GR.Logic.InventoryItemLogic();
+            DateTime now = DateTime.Now;
+
+            Assert.AreEqual(true , iiLogic.DetermineCanItemBeSold(GR.Models.InventoryItemStatusId.Available));
+            Assert.AreEqual(false, iiLogic.DetermineCanItemBeSold(GR.Models.InventoryItemStatusId.Expired));
+            Assert.AreEqual(false, iiLogic.DetermineCanItemBeSold(GR.Models.InventoryItemStatusId.Discarded));
+            Assert.AreEqual(false, iiLogic.DetermineCanItemBeSold(GR.Models.InventoryItemStatusId.Sold));
+            Assert.Catch<ArgumentOutOfRangeException>(() => iiLogic.DetermineCanItemBeSold(GR.Models.InventoryItemStatusId.Unknown));
         }
     }
 }

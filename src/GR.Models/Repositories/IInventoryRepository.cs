@@ -9,22 +9,25 @@ namespace GR.Repositories
     public interface IInventoryRepository
     {
         Task<List<Models.InventoryItemType>> GetItemTypesAsync();
+        Task<Models.InventoryItemType> GetItemTypeAsync(short inventoryItemTypeId);
         Task<List<Models.InventoryItemQualityDeltaStrategy>> GetQualityDeltaStrategiesAsync();
 
-        Task<Models.InventoryItem> AddNewItemAsync(
-            short itemTypeId, string name, string description, double quality, DateTime? sellByDate,
-            DateTime? now = null, DateTime? inventoryDate = null);
+        Task<Models.InventoryItem> StoreNewItemAsync(
+            short itemTypeId, string name, string description, double initialQuality, double currentQuality,
+            DateTime? sellByDate, DateTime now, DateTime inventoryDate);
+
+        Task<Models.InventoryItem> GetItem(int itemId, DateTime now);
 
         Task<(int TotalItems, List<Models.InventoryItem> Items)> SearchItemsAsync(
-                    bool includeAvailable = true,
-                    bool includeExpired = true,
-                    bool includeSold = false,
-                    bool includeDiscarded = false,
-                    IEnumerable<Models.InventoryItemSortOrder> sortOrder = null,
-                    int skip = 0, int take = 100,
-                    DateTime? now = null);
+                    bool includeAvailable,
+                    bool includeExpired,
+                    bool includeSold,
+                    bool includeDiscarded,
+                    IEnumerable<Models.InventoryItemSortOrder> sortOrder,
+                    int skip, int take,
+                    DateTime now);
         
-            Task<Models.InventoryItem> MarkItemDiscardedAsync(int itemId, DateTime? now = null);
-        Task<Models.InventoryItem> MarkItemSoldAsync(int itemId, DateTime? now = null);
+        Task<Models.InventoryItem> MarkItemDiscardedAsync(int itemId, DateTime now);
+        Task<Models.InventoryItem> MarkItemSoldAsync(int itemId, DateTime now);
     }
 }

@@ -69,6 +69,7 @@ namespace GR.Logic
             }
         }
 
+        #region DetermineCurrentAvailableItemQuality_* Methods
         private double DetermineCurrentAvailableItemQuality_Linear(
             DateTime invoiceDate,
             double initialQuality,
@@ -116,6 +117,50 @@ namespace GR.Logic
             var singleIncrease = Math.Max((int)(DateTimeUtility.Min(sellByDate.AddDays(-10), today) - invoiceDate                                                   ).TotalDays, 0) * baseDelta;
 
             return Math.Max(Math.Min(initialQuality + tripleIncrease + doubleIncrease + singleIncrease, maxQuality), minQuality);
+        }
+        #endregion
+
+        public bool DetermineIsSellByDateRequired(Models.InventoryItemQualityDeltaStrategyId strategyId)
+        {
+            switch (strategyId)
+            {
+                case Models.InventoryItemQualityDeltaStrategyId.Linear: return true;
+                case Models.InventoryItemQualityDeltaStrategyId.InverseLinear: return false;
+                case Models.InventoryItemQualityDeltaStrategyId.Static: return false;
+                case Models.InventoryItemQualityDeltaStrategyId.Event: return true;
+                default: throw new ArgumentOutOfRangeException(
+                    nameof(strategyId), 
+                    $"Unknown {nameof(Models.InventoryItemQualityDeltaStrategyId)} value ({strategyId.ToString()}).");
+            }
+        }
+
+        public bool DetermineCanItemBeDiscarded(Models.InventoryItemStatusId statusId)
+        {
+            switch (statusId)
+            {
+                case Models.InventoryItemStatusId.Available: return true;
+                case Models.InventoryItemStatusId.Expired: return true;
+                case Models.InventoryItemStatusId.Discarded: return false;
+                case Models.InventoryItemStatusId.Sold: return false;
+                default: throw new ArgumentOutOfRangeException(
+                    nameof(statusId),
+                    $"Unknown {nameof(Models.InventoryItemStatusId)} value ({statusId.ToString()}).");
+            }
+        }
+
+        public bool DetermineCanItemBeSold(Models.InventoryItemStatusId statusId)
+        {
+            switch (statusId)
+            {
+                case Models.InventoryItemStatusId.Available: return true;
+                case Models.InventoryItemStatusId.Expired: return false;
+                case Models.InventoryItemStatusId.Discarded: return false;
+                case Models.InventoryItemStatusId.Sold: return false;
+                default:
+                    throw new ArgumentOutOfRangeException(
+               nameof(statusId),
+               $"Unknown {nameof(Models.InventoryItemStatusId)} value ({statusId.ToString()}).");
+            }
         }
     }
 }

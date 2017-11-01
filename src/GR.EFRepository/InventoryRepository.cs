@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GR.Repositories.EF
 {
-    public class InventoryRepository
+    public class InventoryRepository : IInventoryRepository
     {
         #region  IInventoryRepository Methods
         public async Task<List<Models.InventoryItemType>> GetItemTypesAsync()
@@ -18,6 +18,17 @@ namespace GR.Repositories.EF
                     .ToListAsync().ConfigureAwait(false))
                     .Select(iit => ToModel(iit))
                     .ToList();
+            }
+        }
+
+        public async Task<Models.InventoryItemType> GetItemTypeAsync(short inventoryItemTypeId)
+        {
+            using (var db = new Entities.InventoryDb())
+            {
+                var entitiy = await db.InventoryItemTypes
+                    .FindAsync(inventoryItemTypeId).ConfigureAwait(false);
+
+                return entitiy == null ? null : ToModel(entitiy);
             }
         }
 
@@ -39,46 +50,52 @@ namespace GR.Repositories.EF
         }
 
         public async Task<Models.InventoryItem> StoreNewItemAsync(
-            short itemTypeId, string name, string description, double quality, DateTime? sellByDate,
-            DateTime? now = null, DateTime? inventoryDate = null)
+            short itemTypeId, string name, string description, double initialQuality, double currentQuality,
+            DateTime? sellByDate, DateTime now, DateTime inventoryDate)
         {
-            now = now ?? DateTime.Now;
-            inventoryDate = inventoryDate ?? now;
-            var iiLogic = new Logic.InventoryItemLogic();
-
             using (var db = new Entities.InventoryDb())
             {
-                var itemType = await db.InventoryItemTypes.FindAsync(itemTypeId).ConfigureAwait(false);
-                var deltaStrategyId = (Models.InventoryItemQualityDeltaStrategyId?)itemType?.QualityDeltaStrategyId ?? 0;
-
                 var newItem = db.InventoryItems.Add(
                     new Entities.InventoryItem
                     {
                         InventoryItemTypeId = itemTypeId,
                         Name = name,
                         Description = description,
-                        InitialQuality = quality,
-                        CurrentQuality = iiLogic.DetermineCurrentAvailableItemQuality(
-                            deltaStrategyId, inventoryDate.Value, quality, sellByDate),
-                        InventoryDate = inventoryDate.Value,
+                        InitialQuality = initialQuality,
+                        CurrentQuality = currentQuality,
+                        InventoryDate = inventoryDate,
                         SellByDate = sellByDate,
-                        CreatedDate = now.Value,
+                        CreatedDate = now,
                     });
 
                 await db.SaveChangesAsync().ConfigureAwait(false);
-                newItem.InventoryItemType = itemType;
-                return ToModel(newItem, iiLogic);
+
+                newItem.InventoryItemType = await db.InventoryItemTypes.FindAsync(itemTypeId).ConfigureAwait(false);
+                return ToModel(newItem, new Logic.InventoryItemLogic());
+            }
+        }
+
+        public async Task<Models.InventoryItem> GetItem(int itemId, DateTime now)
+        {
+            using (var db = new Entities.InventoryDb())
+            {
+                var entity = await db.InventoryItems
+                    .Include(ii => ii.InventoryItemType)
+                    .Where(ii => ii.InventoryItemId == itemId)
+                    .SingleOrDefaultAsync().ConfigureAwait(false);
+                return entity == null ? null :
+                    ToModel(entity, new Logic.InventoryItemLogic());
             }
         }
 
         public async Task<(int TotalItems, List<Models.InventoryItem> Items)> SearchItemsAsync(
-            bool includeAvailable = true,
-            bool includeExpired = true,
-            bool includeSold = false,
-            bool includeDiscarded = false,
-            IEnumerable<Models.InventoryItemSortOrder> sortOrder = null,
-            int skip = 0, int take = 100,
-            DateTime? now = null)
+            bool includeAvailable,
+            bool includeExpired,
+            bool includeSold,
+            bool includeDiscarded,
+            IEnumerable<Models.InventoryItemSortOrder> sortOrder,
+            int skip, int take,
+            DateTime now)
         {
             var orderByClause = string.Join(", ",
                 sortOrder
@@ -93,14 +110,14 @@ namespace GR.Repositories.EF
                                 case Models.InventoryItemSortOrder.InventoryDateDescending: return "InventoryDate DESC";
                                 case Models.InventoryItemSortOrder.SellByDate: return "SellByDate";
                                 case Models.InventoryItemSortOrder.SellByDateDescending: return "SellByDate DESC";
-                                case Models.InventoryItemSortOrder.Quality: return "Quality";
-                                case Models.InventoryItemSortOrder.QualityDescending: return "Quality DESC";
+                                case Models.InventoryItemSortOrder.Quality: return "CurrentQuality";
+                                case Models.InventoryItemSortOrder.QualityDescending: return "CurrentQuality DESC";
                                 default: return "ERROR";
                             }
                         }));
 
-            var itemTypes = (await GetItemTypesAsync()).ToDictionary(iit => iit.InventoryItemTypeId);
-            var iiLogic = new Logic.InventoryItemLogic();
+            var itemTypes = (await GetItemTypesAsync().ConfigureAwait(false))
+                .ToDictionary(iit => iit.InventoryItemTypeId);
 
             using (var db = new Entities.InventoryDb())
             {
@@ -108,18 +125,16 @@ namespace GR.Repositories.EF
                     //This calls the stored proc dbo.InventoryItems_Search and returns a List of InventoryItem entities.
                     db.InventoryItemSearch(
                         includeAvailable, includeExpired, includeSold, includeDiscarded,
-                        orderByClause, skip, take, now ?? DateTime.Now, 
+                        orderByClause, skip, take, now, 
                         out int? totalRows)
-                    .Select(ii => ToModel(ii, itemTypes, iiLogic))
+                    .Select(ii => ToModel(ii, itemTypes, new Logic.InventoryItemLogic()))
                     .ToList();
                 return (TotalItems: totalRows.Value, Items: items);
             }
         }
 
-        public async Task<Models.InventoryItem> MarkItemDiscardedAsync(int itemId, DateTime? now = null)
+        public async Task<Models.InventoryItem> MarkItemDiscardedAsync(int itemId, DateTime now)
         {
-            now = now ?? DateTime.Now;
-
             using (var db = new Entities.InventoryDb())
             {
                 var item = await db.InventoryItems
@@ -137,10 +152,8 @@ namespace GR.Repositories.EF
             }
         }
 
-        public async Task<Models.InventoryItem> MarkItemSoldAsync(int itemId, DateTime? now = null)
+        public async Task<Models.InventoryItem> MarkItemSoldAsync(int itemId, DateTime now)
         {
-            now = now ?? DateTime.Now;
-
             using (var db = new Entities.InventoryDb())
             {
                 var item = await db.InventoryItems
@@ -166,9 +179,10 @@ namespace GR.Repositories.EF
                 InventoryItemTypeId = iit.InventoryItemTypeId,
                 Name = iit.Name,
                 Description = iit.Description,
+                QualityDeltaStrategyId = (Models.InventoryItemQualityDeltaStrategyId)iit.QualityDeltaStrategyId,
+                BaseDelta = iit.BaseDelta,
                 MinQuality = iit.MinQuality,
                 MaxQuality = iit.MaxQuality,
-                QualityDeltaStrategy = (Models.InventoryItemQualityDeltaStrategyId)iit.QualityDeltaStrategyId,
             };
 
         private Models.InventoryItem ToModel(Entities.InventoryItem ii, Logic.InventoryItemLogic iiLogic)
