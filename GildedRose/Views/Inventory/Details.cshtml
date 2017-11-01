@@ -1,0 +1,48 @@
+@model GildedRose.Inventory.Product
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Product Details</h2>
+
+<div>
+  
+    <hr />
+    <dl class="dl-horizontal">
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>*@
+        <dt>
+            @Html.DisplayNameFor(model => model.name).ToUpper():
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.category).ToUpper():
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.category)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.sellin).ToUpper():
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.sellin)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.quality).ToUpper():
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.quality)
+        </dd>
+    </dl>
+</div>
+<div>
+    @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ })|*@ 
+    <a asp-action="Index">Back to List</a>
+</div>

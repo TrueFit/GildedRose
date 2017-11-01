@@ -1,0 +1,4 @@
+﻿#Pull Inventory into Mongo
+mongoimport --db GildedRoseDB --collection inventory --columnsHaveTypes --fields "name.string(), category.string(), sellin.int32(), quality.double()" --file "D:\Projects\Learning\CodeTest\GildedRose\inventory.txt" --type CSV
+
+ 
