@@ -1,0 +1,85 @@
+﻿@model PTCViewModel
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h1 class="panel-title">
+      Product Information
+    </h1>
+  </div>
+  <div class="panel-body">
+    <!-- ** BEGIN MESSAGE AREA -->
+    <div class="row">
+      <div class="col-xs-12">
+        @if (!Model.IsValid) {
+          <div class="alert alert-danger
+                      alert-dismissable"
+               role="alert">
+            <button type="button" class="close"
+                    data-dismiss="alert">
+              <span aria-hidden="true">
+                &times;
+              </span>
+              <span class="sr-only">Close</span>
+            </button>
+            <!-- Model State Errors -->
+            @Html.ValidationSummary(false)            
+          </div>
+        }
+      </div>
+    </div>
+    <!-- ** END MESSAGE AREA -->
+    <!-- ** BEGIN INPUT AREA -->
+    @Html.HiddenFor(m => m.Entity.ProductId)
+
+    <div class="form-group">
+      @Html.LabelFor(m => m.Entity.Category.CategoryId, "Product Category")
+      @Html.DropDownListFor(m => m.Entity.Category.CategoryId, new SelectList(Model.Categories, "CategoryId", "CategoryName"), new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+      @Html.LabelFor(m => m.Entity.ProductName,
+                 "Product Name")
+      @Html.TextBoxFor(m => m.Entity.ProductName,
+           new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+      @Html.LabelFor(m =>
+       m.Entity.IntroductionDate,
+       "Introduction Date")
+      @Html.TextBoxFor(m =>
+       m.Entity.IntroductionDate,
+       new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+      @Html.LabelFor(m => m.Entity.Price, "Price")
+      @Html.TextBoxFor(m => m.Entity.Price,
+       new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+      @Html.LabelFor(m => m.Entity.Url, "Url")
+      @Html.TextBoxFor(m => m.Entity.Url,
+       new { @class = "form-control" })
+    </div>
+    <!-- ** END INPUT AREA -->
+  </div>
+  <div class="panel-footer">
+    <div class="row">
+      <div class="col-sm-12">
+        <button id="btnSave"
+                class="btn btn-sm btn-primary"
+                data-pdsa-action="save">
+          <i class="glyphicon
+           glyphicon-floppy-disk"></i>
+          &nbsp;Save
+        </button>
+        <button id="btnCancel"
+                class="btn btn-sm btn-primary"
+                formnovalidate="formnovalidate"
+                data-pdsa-action="cancel">
+          <i class="glyphicon
+           glyphicon-remove-circle"></i>
+          &nbsp;Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

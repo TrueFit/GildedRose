@@ -1,0 +1,107 @@
+﻿@model PTCViewModel
+
+<h2>Product List</h2>
+
+@if (Model.IsSearchAreaVisible) {
+  <!-- ** BEGIN SEARCH AREA ** -->
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h1 class="panel-title">Search for Products</h1>
+    </div>
+    <div class="panel-body">
+      <div class="form-group">
+        @Html.LabelFor(m => m.SearchEntity.CategoryId,
+                         "Select a Product Category")
+        @Html.DropDownListFor(m => m.SearchEntity.CategoryId,
+                                new SelectList(Model.SearchCategories,
+                                                "CategoryId",
+                                                "CategoryName"),
+                               new { @class = "form-control" })
+      </div>
+      <div class="form-group">
+        @Html.LabelFor(m => m.SearchEntity.ProductName, "Product Name")
+        @Html.TextBoxFor(m => m.SearchEntity.ProductName, new { @class = "form-control" })
+      </div>
+    </div>
+    <div class="panel-footer">
+      <button formnovalidate="formnovalidate"
+              class="btn btn-sm btn-primary"
+              data-pdsa-action="search">
+        <i class="glyphicon glyphicon-search"></i>
+        &nbsp;Search
+      </button>
+      <button formnovalidate="formnovalidate"
+              class="btn btn-sm btn-primary"
+              data-pdsa-action="resetsearch">
+        <i class="glyphicon glyphicon-share-alt"></i>
+        &nbsp;Reset
+      </button>
+      <button formnovalidate="formnovalidate"
+              class="btn btn-sm btn-success"
+              data-pdsa-action="add">
+        <i class="glyphicon glyphicon-plus"></i>
+        &nbsp;Add
+      </button>
+    </div>
+  </div>
+  <!-- ** END SEARCH AREA ** -->
+}
+
+@if (Model.Products.Count > 0) {
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="table-responsive">
+        <table id="productTable"
+               class="table table-condensed table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <td>Edit</td>
+              <td>Product Name</td>
+              <td>Introduction Date</td>
+              <td>URL</td>
+              <td class="text-right">Price</td>
+              <td>Delete</td>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach (var item in Model.Products) {
+              <tr>
+                <td>
+                  <a href="#"
+                     data-pdsa-action="edit"
+                     data-pdsa-arg="@item.ProductId"
+                     class="btn btn-default btn-sm">
+                    <i class="glyphicon glyphicon-edit"></i>
+                  </a>
+                </td>
+                <td>@item.ProductName</td>
+                <td>@item.IntroductionDate</td>
+                <td>@item.Url</td>
+                <td class="text-right">@item.Price.Value.ToString("c")</td>
+                <td>
+                  <a href="#"
+                     data-pdsa-action="delete"
+                     data-pdsa-arg="@item.ProductId"
+                     data-pdsa-deletelabel="Product"
+                     class="btn btn-default btn-sm">
+                    <i class="glyphicon glyphicon-trash"></i>
+                  </a>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+}
+
+@if (Model.Products.Count == 0) {
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="alert alert-warning">
+        <p>No Products Found</p>
+      </div>
+    </div>
+  </div>
+}
