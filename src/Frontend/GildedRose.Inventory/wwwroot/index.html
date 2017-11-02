@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    
+    <script src="/lib/angular/angular.min.js"></script>
+    <script src="/lib/angular-ui-grid/ui-grid.min.js"></script>
+    
+    <script src="js/app.js"></script>
+    <script src="js/services/inventoryService.js"></script>
+    <script src="js/services/simulationService.js"></script>
+    <script src="js/simulationController.js"></script>
+    <script src="js/itemsGridController.js"></script>
+    <script src="js/newItemController.js"></script>
+
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="styleSheet" href="/lib/angular-ui-grid/ui-grid.css" />
+</head>
+<body>
+    <div><h1>Gilded Rose Inventory</h1></div>
+    <div ng-controller="simulationController" ng-init="initController()" ng-cloak gr-simulation-time>
+        <div ng-if="!isLoaded"><h1>Loading...</h1></div>
+        <div ng-show="isLoaded">
+            <div><h2>The current date is {{currentDate|date:'medium'}}.</h2> <a href="#" ng-click="advanceDateByOneDay()">+1 Day</a></div>
+            <div ng-controller="itemsGridController">
+                <div><h3>Available Items</h3></div>
+                <div ui-grid="itemsGrid" ui-grid-pagination class="itemsGrid"></div>
+                <div ng-controller="newItemController" ng-init="initController()">
+                    <button type="button" ng-hide="isControlVisible" ng-click="showControlClick()">Add New Item</button>
+                    <div ng-show="isControlVisible">
+                        <div>
+                            <label>Item Type:<select ng-options="itemType as itemType.name for itemType in itemTypes" ng-model="selectedItemType"></select></label>
+                            {{selectedItemType.description}}
+                        </div>
+                        <div><label>Item Name:<input type="text" ng-model="itemName" /></label></div>
+                        <div><label>Item Description:<input type="text" ng-model="itemDescription" /></label></div>
+                        <div><label>Item Quality:<input type="number" ng-model="itemQuality" /></label></div>
+                        <div ng-show="selectedItemType.isSellByDateRequired"><label>Sell By Date:<input type="date" ng-model="itemSellByDate" /></label></div>
+                        <div><button type="button" ng-disabled="isSaving || !canSave()" ng-click="saveClick()">Save</button><button type="button" ng-disabled="isSaving" ng-click="cancelClick()">Cancel</button></div>
+                    </div>
+                </div>
+            </div>
+            <div ng-controller="itemsGridController">
+                <div><h3>Expired Items</h3></div>
+                <div ui-grid="itemsGrid" gr-expired-grid ui-grid-pagination class="itemsGrid"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

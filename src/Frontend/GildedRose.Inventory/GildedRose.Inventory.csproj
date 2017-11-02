@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+    <RootNamespace>GildedRose.Inventory</RootNamespace>
+    <AssemblyName>GildedRose.Inventory</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GildedRose.InventoryApi\GildedRose.InventoryApi.csproj" />
+    <ProjectReference Include="..\..\Backend\GR.Core\GR.Core.csproj" />
+    <ProjectReference Include="..\..\Backend\GR.EFRepository\GR.EFRepository.csproj" />
+    <ProjectReference Include="..\..\Backend\GR.Logic\GR.Logic.csproj" />
+    <ProjectReference Include="..\..\Backend\GR.Managers\GR.Managers.csproj" />
+    <ProjectReference Include="..\..\GR.Models\GR.Models.csproj" />
+  </ItemGroup>
+
+</Project>

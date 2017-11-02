@@ -41,7 +41,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\GR.Logic\GR.Logic.csproj">
+    <ProjectReference Include="..\..\Backend\GR.Logic\GR.Logic.csproj">
       <Project>{e35e29c8-bd5c-4ca1-9dcb-84171501c9a8}</Project>
       <Name>GR.Logic</Name>
     </ProjectReference>

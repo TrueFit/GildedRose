@@ -14,9 +14,9 @@ namespace GR.Repositories
 
         Task<Models.InventoryItem> StoreNewItemAsync(
             short itemTypeId, string name, string description, double initialQuality, double currentQuality,
-            DateTime? sellByDate, DateTime now, DateTime inventoryDate);
+            DateTime? sellByDate, DateTime inventoryDate);
 
-        Task<Models.InventoryItem> GetItem(int itemId, DateTime now);
+        Task<Models.InventoryItem> GetItemAsync(int itemId);
 
         Task<(int TotalItems, List<Models.InventoryItem> Items)> SearchItemsAsync(
                     bool includeAvailable,
@@ -29,5 +29,7 @@ namespace GR.Repositories
         
         Task<Models.InventoryItem> MarkItemDiscardedAsync(int itemId, DateTime now);
         Task<Models.InventoryItem> MarkItemSoldAsync(int itemId, DateTime now);
+
+        Task UpdateItemCurrentQuality(int itemId, double currentQuality);
     }
 }

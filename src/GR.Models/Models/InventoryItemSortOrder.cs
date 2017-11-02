@@ -10,6 +10,8 @@ namespace GR.Models
     {
         Name,
         NameDescending,
+        ItemType,
+        ItemTypeDescending,
         InventoryDate,
         InventoryDateDescending,
         SellByDate,

@@ -15,5 +15,6 @@ namespace GR.Models
         public double BaseDelta { get; set; }
         public double MinQuality { get; set; }
         public double MaxQuality { get; set; }
+        public bool IsSellByDateRequired { get; set; }
     }
 }
