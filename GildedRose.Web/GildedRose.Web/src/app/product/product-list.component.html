@@ -1,0 +1,85 @@
+﻿<h2>Inventory List</h2>
+
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table class="table table-bordered table-condensed table-striped">
+                <thead>
+                    <tr>
+                        <td>Name</td>
+                        <td>Category</td>
+                        <td>Sell In</td>
+                        <td class="text-right">Quality</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of products">
+                        <td>{{product.name}}</td>
+                        <td>{{product.category }}</td>
+                        <td>{{product.sellin}}</td>
+                        <td class="text-right">{{product.quality }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="messages && messages.length">
+    <div class="col-xs-12">
+        <div class="alert alert-warning">
+            <ul>
+                <li *ngFor="let msg of messages">{{msg}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- area for controls -->
+<div class-="row">
+    <div class="col-xs-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="panel-title">Inventory Controls</h1>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="searchProductName">Name</label>
+                    <input type="text" id="searchProductName"
+                           name="searchProductName"
+                           [(ngModel)]="searchEntity"
+                           class="form-control" />
+                    <button formnovalidate="formnovalidate"
+                            class="btn btn-sm btn-primary"
+                            (click)="search()">
+                        <span class="glyphicon glyphicon-search">&nbsp;Search Name</span>
+                    </button>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button formnovalidate="formnovalidate"
+                        class="btn btn-sm btn-primary"
+                        (click)="getAll()">
+                    <span class="glyphicon glyphicon-share-alt">&nbsp;Get All Items</span>
+                </button>
+                <button formnovalidate="formnovalidate"
+                        class="btn btn-sm btn-primary"
+                        (click)="endDay()">
+                    <span class="glyphicon glyphicon-wrench">&nbsp;End Day</span>
+                </button>
+                <button formnovalidate="formnovalidate"
+                        class="btn btn-sm btn-primary"
+                        (click)="getZeroItems()">
+                    <span class="glyphicon glyphicon-trash">&nbsp;Show Zero Quality Items</span>
+                </button>
+                <button formnovalidate="formnovalidate"
+                        class="btn btn-sm btn-danger"
+                        (click)="resetInventory()">
+                    <span class="glyphicon glyphicon-remove">&nbsp;Reset to Initial Values</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
