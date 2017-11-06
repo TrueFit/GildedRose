@@ -1,0 +1,22 @@
+This is a Python 3 application.
+
+Requirements:
+Python3
+Dill serialization package. "pip3 install dill"
+
+Instructions:
+python3 ./GildedRoseSvc.py
+When run with no arguments, the program loads any previously saved inventory.
+
+python3 ./GildedRoseSvc.py -f FILE
+When run with -f, FILE should point to a csv inventory file. Any previously saved inventory will be deleted.
+
+python3 ./GildedRoseSvc.py --help
+Show help
+
+Next Steps:
+The system is designed in a modular way that can be scaled up as necessary.  Some potential next steps are:
+- Use a database for persistent storage. Could be local or remote.
+- Convert GildedRoseSvc to a microservice independent of the database and UI. The UI would communicate via a REST web call rather than the direct function call to the DataPresenter. Bascially,
+  the DataPresenter method calls would be replaced with something that goes to the GildedRoseSvc remote service to retrieve/update the data.
+- Graphical UI / web interface
