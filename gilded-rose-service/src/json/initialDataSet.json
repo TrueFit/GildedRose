@@ -1,0 +1,122 @@
+[
+    {
+        "label": "Sword",
+        "category": "Weapon",
+        "sellIn": 30,
+        "quality": 50
+    },
+    {
+        "label": "Axe",
+        "category": "Weapon",
+        "sellIn": 40,
+        "quality": 50
+    },
+    {
+        "label": "Halberd",
+        "category": "Weapon",
+        "sellIn": 60,
+        "quality": 40
+    },
+    {
+        "label": "Aged Brie",
+        "category": "Food",
+        "sellIn": 50,
+        "quality": 10
+    },
+    {
+        "label": "Aged Milk",
+        "category": "Food",
+        "sellIn": 20,
+        "quality": 20
+    },
+    {
+        "label": "Mutton",
+        "category": "Food",
+        "sellIn": 10,
+        "quality": 10
+    },
+    {
+        "label": "Hand of Ragnaros",
+        "category": "Sulfuras",
+        "sellIn": 80,
+        "quality": 80
+    },
+    {
+        "label": "I am Murloc",
+        "category": "Backstage Passes",
+        "sellIn": 20,
+        "quality": 10
+    },
+    {
+        "label": "Raging Ogre",
+        "category": "Backstage Pasess",
+        "sellIn": 10,
+        "quality": 10
+    },
+    {
+        "label": "Giant Slayer",
+        "category": "Conjured",
+        "sellIn": 15,
+        "quality": 50
+    },
+    {
+        "label": "Storm Hammer",
+        "category": "Conjured",
+        "sellIn": 20,
+        "quality": 50
+    },
+    {
+        "label": "Belt of Giant Strength",
+        "category": "Conjured",
+        "sellIn": 20,
+        "quality": 40
+    },
+    {
+        "label": "Cheese",
+        "category": "Food",
+        "sellIn": 5,
+        "quality": 5
+    },
+    {
+        "label": "Potion of Healing",
+        "category": "Potion",
+        "sellIn": 10,
+        "quality": 10
+    },
+    {
+        "label": "Bag of Holding",
+        "category": "Misc",
+        "sellIn": 10,
+        "quality": 50
+    },
+    {
+        "label": "TAFKAL80ETC Concert",
+        "category": "Backstage Passes",
+        "sellIn": 15,
+        "quality": 20
+    },
+    {
+        "label": "Elixir of the Mongoose",
+        "category": "Potion",
+        "sellIn": 5,
+        "quality": 7
+    },
+    {
+        "label": "+5 Dexterity Vest",
+        "category": "Armor",
+        "sellIn": 10,
+        "quality": 20
+    },
+    {
+        "label": "Full Plate Mail",
+        "category": "Armor",
+        "sellIn": 50,
+        "quality": 50
+    },
+    {
+        "label": "Wooden Shield",
+        "category": "Armor",
+        "sellIn": 10,
+        "quality": 30
+    }
+]

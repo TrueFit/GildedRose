@@ -3,8 +3,8 @@
  * This will delegate handling of requests to the Express 4 Middleware.
  */
 
-const awsServerlessExpress = require('aws-serverless-express')
-const app = require('../service/app')
-const server = awsServerlessExpress.createServer(app)
+import awsServerlessExpress from 'aws-serverless-express';
+import router from '../service/router';
+const server = awsServerlessExpress.createServer(router);
 
 exports.handler = (event, context) => awsServerlessExpress.proxy(server, event, context)

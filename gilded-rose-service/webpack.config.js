@@ -4,6 +4,7 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 const outputPath = path.resolve(__dirname,"./dist")
 
+
 module.exports = {
     entry: "./src/js/lambda/handler.js",
     target: 'node',
@@ -17,8 +18,8 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
                 loader: 'babel-loader',
+                exclude: /(node_modules|bower_components)/,
                 query: {
                     presets: ['es2015']
                 }
@@ -27,7 +28,6 @@ module.exports = {
     },
     plugins: [
         new LodashModuleReplacementPlugin,
-        new webpack.optimize.OccurrenceOrderPlugin,
-        new webpack.optimize.UglifyJsPlugin()
+        new webpack.optimize.OccurrenceOrderPlugin
     ]
 };
