@@ -1,0 +1,38 @@
+{
+  "name": "gilded-rose-service",
+  "version": "1.0.0",
+  "description": "The service implementation for the Gilded Rose Inventory API",
+  "main": "./dist/app.js",
+  "dependencies": {
+    "aws-serverless-express": "^3.0.2",
+    "lodash-webpack-plugin": "^0.11.4"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "webpack": "^3.8.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hscheckenbacher/GildedRose.git"
+  },
+  "keywords": [
+    "inventory",
+    "management",
+    "gilded",
+    "rose",
+    "inn",
+    "quality",
+    "solutions"
+  ],
+  "author": "Harald Scheckenbacher",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hscheckenbacher/GildedRose/issues"
+  },
+  "homepage": "https://github.com/hscheckenbacher/GildedRose#readme"
+}
