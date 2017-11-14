@@ -3,120 +3,140 @@
         "label": "Sword",
         "category": "Weapon",
         "sellIn": 30,
-        "quality": 50
+        "quality": 50,
+        "id": "183fad48-f393-4b70-97ce-daa262ae65c1"
     },
     {
         "label": "Axe",
         "category": "Weapon",
         "sellIn": 40,
-        "quality": 50
+        "quality": 50,
+        "id": "b1f319be-068a-41c6-bec5-c6539d7ce6d4"
     },
     {
         "label": "Halberd",
         "category": "Weapon",
         "sellIn": 60,
-        "quality": 40
+        "quality": 40,
+        "id": "718be220-021f-49c1-be8d-dea2f61a93ba"
     },
     {
         "label": "Aged Brie",
         "category": "Food",
         "sellIn": 50,
-        "quality": 10
+        "quality": 10,
+        "id": "2ad5ae80-6078-4d24-be6f-e28c85e44a22"
     },
     {
         "label": "Aged Milk",
         "category": "Food",
         "sellIn": 20,
-        "quality": 20
+        "quality": 20,
+        "id": "39507f04-d3b7-4fa0-98c6-10758a87a5d5"
     },
     {
         "label": "Mutton",
         "category": "Food",
         "sellIn": 10,
-        "quality": 10
+        "quality": 10,
+        "id": "b169ca2c-66b3-4343-abc6-42cf698878fe"
     },
     {
         "label": "Hand of Ragnaros",
         "category": "Sulfuras",
         "sellIn": 80,
-        "quality": 80
+        "quality": 80,
+        "id": "0dc33d34-0229-4376-bf70-c9ff326db0b3"
     },
     {
         "label": "I am Murloc",
         "category": "Backstage Passes",
         "sellIn": 20,
-        "quality": 10
+        "quality": 10,
+        "id": "cf3c2d58-1cf1-47b1-b5cc-57edf0ed54a3"
     },
     {
         "label": "Raging Ogre",
-        "category": "Backstage Pasess",
+        "category": "Backstage Passes",
         "sellIn": 10,
-        "quality": 10
+        "quality": 10,
+        "id": "fe575169-9fdc-4957-8378-4285f3eb394f"
     },
     {
         "label": "Giant Slayer",
         "category": "Conjured",
         "sellIn": 15,
-        "quality": 50
+        "quality": 50,
+        "id": "e1ecf087-f093-4549-b184-6a4e7cd73261"
     },
     {
         "label": "Storm Hammer",
         "category": "Conjured",
         "sellIn": 20,
-        "quality": 50
+        "quality": 50,
+        "id": "3384eb22-aa61-4627-827c-64e97162cd12"
     },
     {
         "label": "Belt of Giant Strength",
         "category": "Conjured",
         "sellIn": 20,
-        "quality": 40
+        "quality": 40,
+        "id": "51c3e926-8cba-4e1d-9e1c-e329120281a1"
     },
     {
         "label": "Cheese",
         "category": "Food",
         "sellIn": 5,
-        "quality": 5
+        "quality": 5,
+        "id": "e2e3bd13-2909-4b53-8505-8cabf9f6bd1a"
     },
     {
         "label": "Potion of Healing",
         "category": "Potion",
         "sellIn": 10,
-        "quality": 10
+        "quality": 10,
+        "id": "5a189cd0-642a-4b5d-bedb-103837013886"
     },
     {
         "label": "Bag of Holding",
         "category": "Misc",
         "sellIn": 10,
-        "quality": 50
+        "quality": 50,
+        "id": "b3577b48-1ede-4326-85c0-3b7c7a4dbf37"
     },
     {
         "label": "TAFKAL80ETC Concert",
         "category": "Backstage Passes",
         "sellIn": 15,
-        "quality": 20
+        "quality": 20,
+        "id": "6ce91b82-a65d-4485-86a1-c9b0813553b8"
     },
     {
         "label": "Elixir of the Mongoose",
         "category": "Potion",
         "sellIn": 5,
-        "quality": 7
+        "quality": 7,
+        "id": "efd4d7ba-9d6f-460b-b2ed-017203dcc44b"
     },
     {
         "label": "+5 Dexterity Vest",
         "category": "Armor",
         "sellIn": 10,
-        "quality": 20
+        "quality": 20,
+        "id": "e769054f-6b93-4435-a565-b13a185f1ecf"
     },
     {
         "label": "Full Plate Mail",
         "category": "Armor",
         "sellIn": 50,
-        "quality": 50
+        "quality": 50,
+        "id": "69e1d868-7ca0-468f-99de-38757346dc5e"
     },
     {
         "label": "Wooden Shield",
         "category": "Armor",
         "sellIn": 10,
-        "quality": 30
+        "quality": 30,
+        "id": "dea7ba40-16ff-4421-80bb-33031601b383"
     }
 ]

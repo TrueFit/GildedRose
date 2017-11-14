@@ -1,6 +1,8 @@
 import S3 from 'aws-sdk/clients/s3';
 import uuid from 'uuid/v4';
+import _ from 'lodash';
 
+// Constants
 const s3Client = new S3({
     signatureVersion: 'v4',
     accessKeyId: process.env.ak,
@@ -9,7 +11,100 @@ const s3Client = new S3({
 
 const INVENTORY_BUCKET = "gilded-rose-inventry";
 const INVENTORY_KEY = "inventory.json";
-const INITIAL_STATE_INVENTORY_KEY = "initialStateIventory.json"
+const INITIAL_STATE_INVENTORY_KEY = "initialStateInventory.json";
+
+const ITEM_CATEGORY_SULFURAS = "Sulfuras";
+const ITEM_CATEGORY_CONJURED = "Conjured";
+const ITEM_CATEGORY_BACKSTAGE_PASSES = "Backstage passes";
+const ITEM_CATEGORY_FOOD = "Food";
+const ITEM_CATEGORY_WEAPON = "Weapon";
+const ITEM_CATEGORY_ARMOR = "Armor";
+const ITEM_CATEGORY_POTION = "Potion";
+const ITEM_CATEGORY_MISC = "Misc";
+
+const ITEM_CATEGORIES = {
+    ITEM_CATEGORY_CONJURED,
+    ITEM_CATEGORY_SULFURAS,
+    ITEM_CATEGORY_BACKSTAGE_PASSES,
+    ITEM_CATEGORY_FOOD,
+    ITEM_CATEGORY_WEAPON,
+    ITEM_CATEGORY_ARMOR,
+    ITEM_CATEGORY_POTION,
+    ITEM_CATEGORY_MISC
+}
+
+const VALID_ITEM_CATEGORIES = [
+    ITEM_CATEGORY_CONJURED,
+    ITEM_CATEGORY_SULFURAS,
+    ITEM_CATEGORY_BACKSTAGE_PASSES,
+    ITEM_CATEGORY_FOOD,
+    ITEM_CATEGORY_WEAPON,
+    ITEM_CATEGORY_ARMOR,
+    ITEM_CATEGORY_POTION,
+    ITEM_CATEGORY_MISC
+];
+
+const ITEM_PROP_CATEGORY = "category";
+const ITEM_PROP_LABEL = "label";
+const ITEM_PROP_SELLIN = "sellIn";
+const ITEM_PROP_QUALITY = "quality";
+
+const ITEM_PROPS = {
+    ITEM_PROP_CATEGORY,
+    ITEM_PROP_LABEL,
+    ITEM_PROP_SELLIN,
+    ITEM_PROP_QUALITY
+}
+
+const ITEM_PROP_TYPES = {
+    ITEM_PROP_CATEGORY: { validateFunc: _.isString, typeLabel: "String" },
+    ITEM_PROP_LABEL: { validateFunc: _.isString, typeLabel: "String" },
+    ITEM_PROP_SELLIN: { validateFunc: _.isNumber, typeLabel: "Number" },
+    ITEM_PROP_QUALITY: { validateFunc: _.isNumber, typeLabel: "Number" }
+}
+
+
+const EX_ITEM_VAL_001 = "EX_ITEM_VAL_001";
+const EX_ITEM_VAL_002 = "EX_ITEM_VAL_002";
+const EX_ITEM_VAL_003 = "EX_ITEM_VAL_003";
+const EX_INV_001 = "EX_INV_001";
+const EX_INV_002 = "EX_INV_002";
+const EX_INV_003 = "EX_INV_003";
+const EX_INV_004 = "EX_INV_004";
+const EX_INV_005 = "EX_INV_005";
+const EX_INV_006 = "EX_INV_006";
+const EX_ITEM_ADD_001 = "EX_ITEM_ADD_001";
+const EX_ITEM_ADD_002 = "EX_ITEM_ADD_002";
+const EX_ITEM_ADD_003 = "EX_ITEM_ADD_003";
+const EX_ITEM_GET_001 = "EX_ITEM_GET_001";
+const EX_ITEM_DELETE_001 = "EX_ITEM_DELETE_001";
+const EX_ITEM_DELETE_002 = "EX_ITEM_DELETE_002";
+
+const EXCEPTION_CODES = {
+    EX_ITEM_VAL_001,
+    EX_ITEM_VAL_002,
+    EX_ITEM_VAL_003,
+    EX_INV_001,
+    EX_INV_002,
+    EX_INV_003,
+    EX_INV_004,
+    EX_INV_005,
+    EX_INV_006,
+    EX_ITEM_ADD_001,
+    EX_ITEM_ADD_002,
+    EX_ITEM_ADD_003,
+    EX_ITEM_GET_001,
+    EX_ITEM_DELETE_001,
+    EX_ITEM_DELETE_002
+}
+
+export function getItemCategories() {
+    return ITEM_CATEGORIES;
+}
+
+export function getExceptionCodes() {
+    return EXCEPTION_CODES;
+}
 
 function getInventory() {
     return new Promise((resolve, reject) => {
@@ -22,7 +117,7 @@ function getInventory() {
                 console.error(err);
                 reject({
                     message: "Unable to retrieve current inventory",
-                    code: "EX_INV_001",
+                    code: EX_INV_001,
                     err
                 });
             } else {
@@ -37,7 +132,7 @@ function getInventory() {
                     console.error(err);
                     reject({
                         message: "Unable to retrieve current inventory, inventory returned couldn't be parsed",
-                        code: "EX_INV_006",
+                        code: EX_INV_006,
                         err
                     })
                 }
@@ -57,16 +152,11 @@ function saveInventory(inventory) {
                 console.error(err);
                 reject({
                     message: "Unable to save new inventory",
-                    code: "EX_INV_002",
+                    code: EX_INV_002,
                     err
                 });
             } else {
-                let _data = data.Body;
-                if (Buffer.isBuffer(_data)) {
-                    _data = _data.toString('utf-8')
-                }
-
-                resolve(_data);
+                resolve(inventory);
             }
         })
     });
@@ -84,7 +174,7 @@ export function resetInventory() {
             if (err) {
                 reject({
                     message: "An error occurred while attempting to reset the inventory",
-                    code: "EX_INV_003",
+                    code: EX_INV_003,
                     err
                 });
             } else {
@@ -95,12 +185,12 @@ export function resetInventory() {
 
                 // Another promise here so going to resolve, reject based on what is
                 // happening while saving
-                saveInventory(_data).then(() => {
-                    resolve();
+                saveInventory(JSON.parse(_data)).then((inventory) => {
+                    resolve(inventory);
                 }).catch((err) => {
                     reject({
                         message: "An error occurred while attempting to reset the inventory",
-                        code: "EX_INV_004",
+                        code: EX_INV_004,
                         err
                     });
                 })
@@ -109,7 +199,11 @@ export function resetInventory() {
     });
 }
 
-function updateItem(item) {
+/**
+ * Will handle 
+ * @param {*} item 
+ */
+export function updateItem(item) {
     /**
      * Here are the basic rules for the system that we need:
 
@@ -127,43 +221,53 @@ function updateItem(item) {
         "Conjured" items degrade in Quality twice as fast as normal items
         An item can never have its Quality increase above 50, however "Sulfuras" is a legendary item and as such its Quality is 80 and it never alters.
      */
-    if (item.category !== 'Sulfuras') {
+
+    // Skip Sulfuras since their quality and sellIn never changes, as they are truly legendary
+    if (item.category !== ITEM_CATEGORY_SULFURAS) {
+        // Decrease sellIn by one
         item.sellIn -= 1;
-        const degradeMultiplier = (item.sellIn < 0) ? 2:1;
+        // Quality degrades double as fast when 
+        const degradeMultiplier = (item.sellIn < 0) ? 2 : 1;
         switch (item.category) {
-            case 'Conjured': {
-                item.quality-=2*degradeMultiplier;
+            case ITEM_CATEGORY_CONJURED: {
+                item.quality -= 2 * degradeMultiplier;
                 break;
             }
-            case 'Backstage passes': {
-                if (sellIn > 10) {
+            case ITEM_CATEGORY_BACKSTAGE_PASSES: {
+                if (item.sellIn > 10) {
                     item.quality += 1;
                 } else if (item.sellIn <= 10 && item.sellIn > 5) {
                     item.quality += 2;
                 } else if (item.sellIn <= 5 && item.sellIn > 0) {
                     item.quality += 3;
-                } else if (item.sellIn === 0) {
+                } else if (item.sellIn <= 0) {
                     item.quality = 0;
                 }
                 break;
             }
             default: {
                 if (item.label !== 'Aged Brie') {
-                item.quality-=1*degradeMultiplier;
+                    item.quality -= 1 * degradeMultiplier;
                 } else {
-                    item.quality+=1;
+                    // Making an assumption here, since Brie actually increases in quality over time
+                    // I assume it increases double as fast once the sellIn date has passed.
+                    item.quality += 1 * degradeMultiplier;
                 }
             }
         }
         // Ensure boundaries
-        if (iten.quality > 50) {
+        if (item.quality > 50) {
             item.quality = 50;
         }
         if (item.quality < 0) {
             item.quality = 0;
         }
+
+        if (item.sellIn <= 0) {
+            item.trash=true;
+        }
     }
-    
+
 }
 
 /**
@@ -172,11 +276,8 @@ function updateItem(item) {
 export function nextDay() {
     return new Promise((resolve, reject) => {
         getInventory().then((inventory) => {
-            items.forEach(item => {
-                // Assign the item id
-                item.id = uuid();
-                // Add the item
-                inventory.push(item);
+            inventory.forEach(item => {
+                updateItem(item);
             });
 
             saveInventory(inventory).then(() => {
@@ -185,7 +286,7 @@ export function nextDay() {
             }).catch((err) => {
                 console.error(err);
                 reject({
-                    code: "EX_ITEM_ADD_001",
+                    code: EX_ITEM_ADD_001,
                     message: "Unable to add new item, failed to save new inventory.",
                     err
                 });
@@ -193,7 +294,7 @@ export function nextDay() {
         }).catch((err) => {
             console.error(err);
             reject({
-                code: "EX_ITEM_ADD_002",
+                code: EX_ITEM_ADD_002,
                 message: "Unable to add new item, failed to get existing inventory.",
                 err
             });
@@ -218,7 +319,7 @@ export function getItem(itemId) {
         }).catch((err) => {
             console.error(err);
             reject({
-                code: "EX_ITEM_GET_001",
+                code: EX_ITEM_GET_001,
                 message: `Unable to get item (${itemId}), failed to get existing inventory.`,
                 err
             });
@@ -259,7 +360,7 @@ export function deleteItems(itemIds) {
             }).catch((err) => {
                 console.error(err);
                 reject({
-                    code: "EX_ITEM_DELETE_001",
+                    code: EX_ITEM_DELETE_001,
                     message: `Unable to delete item(s) (${itemIds}), failed to save new inventory.`,
                     err
                 });
@@ -267,7 +368,7 @@ export function deleteItems(itemIds) {
         }).catch((err) => {
             console.error(err);
             reject({
-                code: "EX_ITEM_DELETE_002",
+                code: EX_ITEM_DELETE_002,
                 message: `Unable to delete item(s) (${itemIds}), failed to get existing inventory.`,
                 err
             });
@@ -280,6 +381,47 @@ export function deleteItems(itemIds) {
  */
 export function listItems() {
     return getInventory();
+}
+
+/**
+ * Ensure the item adheres to a simple base schema, could use JSON Schema here but
+ * it's simple enough we'll just do it manually :)
+ * @param {*} item 
+ */
+export function validateItem(item) {
+
+    const errors = [];
+
+    // If this is missing an
+    _.keys(ITEM_PROPS).forEach(propKey => {
+        const prop = ITEM_PROPS[propKey];
+        if (!item.hasOwnProperty(prop)) {
+            errors.push({
+                code: EX_ITEM_VAL_001,
+                message: `Missing required property ${prop}`
+            });
+        } else {
+            // Do some basic type validation
+            if (!ITEM_PROP_TYPES[propKey].validateFunc(item[prop])) {
+                errors.push({
+                    code: EX_ITEM_VAL_002,
+                    message: `Expected item property ${prop} to be of type ${ITEM_PROP_TYPES[propKey].typeLabel} but got ${item[prop]}`
+                })
+            }
+        }
+    });
+
+    if (item.hasOwnProperty(ITEM_PROP_CATEGORY)) {
+        // Might be missing which we should've captured earlier, determine if it is one of the categories we expect
+        if (_.indexOf(VALID_ITEM_CATEGORIES, item[ITEM_PROP_CATEGORY]) === -1) {
+            errors.push({
+                code: EX_ITEM_VAL_003,
+                message: `An item must be in one of the following categories: ${VALID_ITEM_CATEGORIES.join(', ')} but got '${item[ITEM_PROP_CATEGORY]}'`
+            })
+        }
+    }
+
+    return errors;
 }
 
 /**
@@ -297,28 +439,45 @@ export function addItem(item) {
 export function addItems(items) {
     return new Promise((resolve, reject) => {
         getInventory().then((inventory) => {
+            const validationErrors = [];
             items.forEach(item => {
-                // Assign the item id
-                item.id = uuid();
-                // Add the item
-                inventory.push(item);
+                let validationResult = validateItem(item);
+                if (_.isEmpty(validationResult)) {
+                    // Assign the item id
+                    item.id = uuid();
+                    // Add the item
+                    inventory.push(item);
+                } else {
+                    validationErrors.push({
+                        item,
+                        validationResult
+                    })
+                }
             });
-
-            saveInventory(inventory).then(() => {
-                // Once saved communicate the new inventory
-                resolve(inventory);
-            }).catch((err) => {
-                console.error(err);
-                reject({
-                    code: "EX_ITEM_ADD_001",
-                    message: "Unable to add new item, failed to save new inventory.",
-                    err
-                });
-            })
+            if (!_.isEmpty(validationErrors)) {
+                let errorDetails = {
+                    code: EX_ITEM_ADD_003,
+                    message: "Unable to add items to inventory, some validation errors were detected.",
+                    err: validationErrors
+                }
+                reject(errorDetails);
+            } else {
+                saveInventory(inventory).then((newInventory) => {
+                    // Once saved communicate the new inventory
+                    resolve(newInventory);
+                }).catch((err) => {
+                    console.error(err);
+                    reject({
+                        code: EX_ITEM_ADD_001,
+                        message: "Unable to add new item, failed to save new inventory.",
+                        err
+                    });
+                })
+            }
         }).catch((err) => {
             console.error(err);
             reject({
-                code: "EX_ITEM_ADD_002",
+                code: EX_ITEM_ADD_002,
                 message: "Unable to add new item, failed to get existing inventory.",
                 err
             });

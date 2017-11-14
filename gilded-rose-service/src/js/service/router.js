@@ -26,41 +26,58 @@ app.use(awsServerlessExpressMiddleware.eventContext());
 
 // Get all items (current inventory)
 app.get('/items', (req, res) => {
-  console.log("Handling request to list all items in inventory");
   service.listItems().then((itemList) => {
-    console.log("Got item list", itemList, _.isArray(itemList));
     res.json(itemList);
   }).catch((err) => {
     res.status(500).json(err);
   });
-  console.log("Exit function");
 });
 
-app.get('/items/nextDay', (req, res) => {
-  console.log("Handling simple GET request", req);
-  res.json({op:'xyz'});
+app.get('/inventory/reset', (req, res) => {
+  service.resetInventory().then((itemList) => {
+    res.json(itemList);
+  }).catch((err) => {
+    res.status(500).json(err);
+  });
 });
 
-// Post on or more additional items to add to the inventory
-// app.post('/items?', (req, res) => {
-//   console.log("Handling simple GET request", req);
-//   res.json(req.params);
-// });
+// Get the inventory for the next day, move time forward
+app.get('/inventory/nextDay', (req, res) => {
+  service.nextDay().then((result)=>{
+    res.json(result);
+  }).catch((err)=>{
+    res.status(500).json(err);
+  });
+});
+
+// Post one or more additional items to add to the inventory
+app.post('/items?', (req, res) => {
+
+  const func = (_.isArray(req.body)) ? service.addItems : service.addItem;
+
+  func(req.body).then((result)=>{
+    res.json(result);
+  }).catch((err)=>{
+    res.status(500).json(err);
+  });
+});
 
 // Get a specific item by id
 app.get('/item/:itemId', (req, res) => {
-  console.log("Handling simple GET request", req);
-  res.json(req.params);
+  service.deleteItem(req.params.itemId).then((result)=>{
+    res.json(result);
+  }).catch((err)=>{
+    res.status(500).json(err);
+  });
 });
 
 // Delete a specific item by id
 app.delete('/item/:itemId', (req, res) => {
-  console.log("Handling simple GET request", req);
-  res.json(req.params);
+  service.deleteItem(req.params.itemId).then((result)=>{
+    res.json(result);
+  }).catch((err)=>{
+    res.status(500).json(err);
+  });
 });
-
-
-
-
 
 export default app;
