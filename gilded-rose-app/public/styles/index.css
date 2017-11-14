@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Almendra Regular';
+    src: local('Almendra Regular'), url(../assets/fonts/Almendra-Regular.woff) format('woff');
+  }
+  
+  body {
+    background-image: url('assets/images/redRose.jpg')
+  }

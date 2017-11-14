@@ -1,21 +1,35 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
+import { root } from 'baobab-react/higher-order';
+
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Button, Image } from 'react-bootstrap';
+import { IndexLinkContainer } from 'react-router-bootstrap';
+import FontAwesome from 'react-fontawesome';
+
+
+import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import './App.css';
 
-class App extends Component {
+import state from './state/state';
+
+import BaseComponent from './components/baseComponent';
+import Spinner from './components/spinner/spinner';
+import NavBar from './components/nav/navBar';
+
+class App extends BaseComponent {
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <Spinner />
+        <NavBar/>
+        <div className="container-fluid">
+          {this.props.children}
+        </div>
       </div>
     );
   }
 }
 
-export default App;
+const RootedApp = root(state, App);
+
+export default RootedApp;
