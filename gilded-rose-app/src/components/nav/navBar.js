@@ -13,7 +13,7 @@ class NavBar extends BaseComponent {
 
     constructor(props) {
         super(props);
-        this._bind('endDay', 'reset');
+        this._bind('endDay', 'reset', 'showProfile');
     }
 
     endDay() {
@@ -21,7 +21,13 @@ class NavBar extends BaseComponent {
     }
 
     reset() {
+        if (window.confirm("Warning! This will move us back to day one, time travel has certain side effects you should seriously consider. Just let me know if you are ok with it and the journey will begin.")) {
         resetInventories();
+        }
+    }
+
+    showProfile() {
+        alert("Allisons Profile was not completed by the lazy gnomes!");
     }
 
     render() {
@@ -48,8 +54,8 @@ class NavBar extends BaseComponent {
                         <IndexLinkContainer key="currentInventory" to="/currentInventory"><NavItem eventKey={1} href="#"><FontAwesome name="list" /> Current Inventory</NavItem></IndexLinkContainer>
                         <IndexLinkContainer key="expiredInventory" to="/expiredInventory"><NavItem eventKey={2} href="#"><FontAwesome name="trash-o" /> Expired Invetory {badBadge}</NavItem></IndexLinkContainer>
                         <Button bsStyle="warning" style={{ float: "left", marginTop: "8px" }} onClick={this.endDay}><FontAwesome name="sun-o" /> End Day</Button>
-                        <Button bsStyle="danger" style={{ float: "left", marginTop: "8px", marginLeft: "5px" }} onClick={this.reset}><FontAwesome name="reset" /> Reset</Button>
-                        <NavItem eventKey={3} href="#" className="profile-link"><Image style={{ width: '40px', height: '40px' }} src="assets/images/allison.png" circle /></NavItem>
+                        <Button bsStyle="danger" style={{ float: "left", marginTop: "8px", marginLeft: "5px" }} onClick={this.reset}><FontAwesome name="undo" /> Reset</Button>
+                        <NavItem eventKey={3} href="#" className="profile-link" onClick={this.showProfile}><Image style={{ width: '40px', height: '40px' }} src="assets/images/allison.png" circle /></NavItem>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

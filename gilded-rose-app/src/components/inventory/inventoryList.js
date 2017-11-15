@@ -7,7 +7,9 @@ import { PageHeader } from 'react-bootstrap';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import { Row, Col, Button } from 'react-bootstrap';
 
-import { deleteItems } from '../../actions/appActions';
+import { deleteItems, showModal } from '../../actions/appActions';
+
+import FontAwesome from 'react-fontawesome';
 
 class InventoryList extends BaseComponent {
 
@@ -56,7 +58,7 @@ class InventoryList extends BaseComponent {
                 width: "100"
             }
         ]
-        this._bind('deleteSelected', 'onRowSelect', 'onSelectAll');
+        this._bind('deleteSelected', 'onRowSelect', 'onSelectAll','showAddItemModal');
     }
 
     onRowSelect(row, isSelected) {
@@ -79,6 +81,10 @@ class InventoryList extends BaseComponent {
         if ((this.props.deleteWarning && window.confirm("These items are still good, are you sure you want to vanish them?")) || !this.props.deleteWarning) {
             deleteItems(this.state.selectedRows);
         }
+    }
+
+    showAddItemModal() {
+        showModal();
     }
 
     render() {
@@ -107,11 +113,17 @@ class InventoryList extends BaseComponent {
 
         const deleteDisabled = (_.indexOf(_.values(this.state.selectedRows),true)===-1);
         console.log("VALUES:",_.values(this.state.selectedRows));
+
+        let addButton = <span/>
+        if (this.props.addButton) {
+           addButton = <Button bsStyle="success" onClick={this.showAddItemModal}><FontAwesome name='magic'/> Manifest Item</Button>
+        }
+
         return (
             <div>
                 <Row>
                     <Col lg={12} style={{marginBottom:'10px'}}>
-                        <Button bsStyle="danger" onClick={this.deleteSelected} disabled={deleteDisabled}>Vanish Selected Inventory</Button>
+                        {addButton}&nbsp;<Button bsStyle="danger" onClick={this.deleteSelected} disabled={deleteDisabled}><FontAwesome name='fire'/> Vanish Selected Inventory</Button>
                     </Col>
                     <Col lg={12}>
                         <BootstrapTable data={this.props.inventory} striped hover condensed pagination selectRow={this.selectRowProp}>

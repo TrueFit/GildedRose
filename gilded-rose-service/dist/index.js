@@ -32401,7 +32401,7 @@ app.use(_middleware2.default.eventContext());
 // Define routing
 
 // Get all items (current inventory)
-app.get('/items', function (req, res) {
+app.get('/inventory', function (req, res) {
   service.listItems().then(function (itemList) {
     res.json(itemList);
   }).catch(function (err) {
@@ -43686,6 +43686,8 @@ var ITEM_PROP_TYPES = {
 var EX_ITEM_VAL_001 = "EX_ITEM_VAL_001";
 var EX_ITEM_VAL_002 = "EX_ITEM_VAL_002";
 var EX_ITEM_VAL_003 = "EX_ITEM_VAL_003";
+var EX_ITEM_VAL_004 = "EX_ITEM_VAL_004";
+var EX_ITEM_VAL_005 = "EX_ITEM_VAL_005";
 var EX_INV_001 = "EX_INV_001";
 var EX_INV_002 = "EX_INV_002";
 var EX_INV_003 = "EX_INV_003";
@@ -44040,6 +44042,28 @@ function validateItem(item) {
         }
     }
 
+    if (item.hasOwnProperty(ITEM_PROP_QUALITY)) {
+
+        if (item[ITEM_PROP_CATEGORY] !== ITEM_CATEGORY_SULFURAS) {
+
+            // Quality must be at most 50!
+            if (item[ITEM_PROP_QUALITY] > 50) {
+                errors.push({
+                    code: EX_ITEM_VAL_004,
+                    message: 'An item can\'t have a higher quality than 50, unless it is a ' + ITEM_CATEGORY_SULFURAS + '.'
+                });
+            }
+
+            // Not specified, but adding an item with less than quality 1 doesn't make much sense, we shouldn't add this!
+            if (item[ITEM_PROP_QUALITY] < 1) {
+                errors.push({
+                    code: EX_ITEM_VAL_005,
+                    message: 'An item must have at least a quality of 1 ... why would we add an item with 0 or less???'
+                });
+            }
+        }
+    }
+
     return errors;
 }
 
@@ -44081,9 +44105,9 @@ function addItems(items) {
                 };
                 reject(errorDetails);
             } else {
-                saveInventory(inventory).then(function () {
+                saveInventory(inventory).then(function (newInventory) {
                     // Once saved communicate the new inventory
-                    resolve(inventory);
+                    resolve(newInventory);
                 }).catch(function (err) {
                     console.error(err);
                     reject({

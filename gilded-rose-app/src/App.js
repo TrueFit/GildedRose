@@ -13,6 +13,7 @@ import state from './state/state';
 
 import BaseComponent from './components/baseComponent';
 import Spinner from './components/spinner/spinner';
+import AddItemModal from './components/modal/addItemModal';
 import NavBar from './components/nav/navBar';
 
 class App extends BaseComponent {
@@ -21,6 +22,7 @@ class App extends BaseComponent {
     return (
       <div>
         <Spinner />
+        <AddItemModal/>
         <NavBar/>
         <div className="container-fluid">
           {this.props.children}

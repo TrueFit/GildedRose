@@ -10,8 +10,31 @@ const STATE_PROP_GOOD_INVENTORY = "good";
 const STATE_PROP_BAD_INVENTORY = "bad";
 const STATE_PROP_INVENTORY = "inventory";
 
-export function addItem(label, category, sellIn, quality) {
-
+export function addItem(item) {
+    return new Promise((resolve, reject)=>{
+        showSpinner("Creating item and adding to inventory...");
+        delay(500).then(() => {
+            request
+            .post(`${SERVICE_ENDPOINT_PREFIX}/item`)
+            .send(item)
+            .set('Accept', 'application/json')
+            .end((err, res) => {
+                // Do something
+                if (err) {
+                    // Show error alert
+                    console.error(err);
+                    alert("Failed to create new item, please check console for details, most likely some validation errors!");
+                    reject();
+                    hideSpinner();
+                } else {
+                    sortInventory(res.body);
+                    resolve();
+                    hideSpinner();
+                }
+            });
+        });
+    })
+    
 }
 
 function showSpinner(spinnerText = "") {
@@ -84,7 +107,7 @@ function sortInventory(inventory) {
 export function getInventory() {
     return new Promise((resolve, reject) => {
         request
-            .get(`${SERVICE_ENDPOINT_PREFIX}/items`)
+            .get(`${SERVICE_ENDPOINT_PREFIX}/inventory`)
             .end((err, res) => {
                 // Do something
                 if (err) {
@@ -138,4 +161,14 @@ export function resetInventories() {
                 }
             });
     });
+}
+
+export function showModal() {
+    const spinnerCursor = state.select(['ui', 'modal']);
+    spinnerCursor.set('show', true);
+}
+
+export function hideModal() {
+    const spinnerCursor = state.select(['ui', 'modal']);
+    spinnerCursor.set('show', false);
 }

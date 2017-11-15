@@ -5,6 +5,9 @@ export default new Baobab({
         spinner: {
             show:false,
             text:""
+        },
+        modal: {
+            show:false
         }
     },
     inventory: {

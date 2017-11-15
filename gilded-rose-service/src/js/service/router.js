@@ -25,7 +25,7 @@ app.use(awsServerlessExpressMiddleware.eventContext());
 // Define routing
 
 // Get all items (current inventory)
-app.get('/items', (req, res) => {
+app.get('/inventory', (req, res) => {
   service.listItems().then((itemList) => {
     res.json(itemList);
   }).catch((err) => {

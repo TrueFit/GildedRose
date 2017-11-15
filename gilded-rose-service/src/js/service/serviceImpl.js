@@ -67,6 +67,8 @@ const ITEM_PROP_TYPES = {
 const EX_ITEM_VAL_001 = "EX_ITEM_VAL_001";
 const EX_ITEM_VAL_002 = "EX_ITEM_VAL_002";
 const EX_ITEM_VAL_003 = "EX_ITEM_VAL_003";
+const EX_ITEM_VAL_004 = "EX_ITEM_VAL_004";
+const EX_ITEM_VAL_005 = "EX_ITEM_VAL_005";
 const EX_INV_001 = "EX_INV_001";
 const EX_INV_002 = "EX_INV_002";
 const EX_INV_003 = "EX_INV_003";
@@ -264,7 +266,7 @@ export function updateItem(item) {
         }
 
         if (item.sellIn <= 0) {
-            item.trash=true;
+            item.trash = true;
         }
     }
 
@@ -418,6 +420,28 @@ export function validateItem(item) {
                 code: EX_ITEM_VAL_003,
                 message: `An item must be in one of the following categories: ${VALID_ITEM_CATEGORIES.join(', ')} but got '${item[ITEM_PROP_CATEGORY]}'`
             })
+        }
+    }
+
+    if (item.hasOwnProperty(ITEM_PROP_QUALITY)) {
+        
+        if (item[ITEM_PROP_CATEGORY] !== ITEM_CATEGORY_SULFURAS) {
+
+            // Quality must be at most 50!
+            if (item[ITEM_PROP_QUALITY] > 50) {
+                errors.push({
+                    code: EX_ITEM_VAL_004,
+                    message: `An item can't have a higher quality than 50, unless it is a ${ITEM_CATEGORY_SULFURAS}.`
+                });
+            }
+
+            // Not specified, but adding an item with less than quality 1 doesn't make much sense, we shouldn't add this!
+            if (item[ITEM_PROP_QUALITY] < 1) {
+                errors.push({
+                    code: EX_ITEM_VAL_005,
+                    message: `An item must have at least a quality of 1 ... why would we add an item with 0 or less???`
+                });
+            }
         }
     }
 

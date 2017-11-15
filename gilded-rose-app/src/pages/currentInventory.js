@@ -13,7 +13,7 @@ class CurrentInventory extends BaseComponent {
         return (
             <div>
                 <PageHeader>Current Inventory <small>All items that can be safely sold by the Inn</small></PageHeader>
-                <InventoryList inventory={this.props.inventory} deleteWarning/>
+                <InventoryList inventory={this.props.inventory} deleteWarning addButton/>
             </div>
 
         )
