@@ -1,47 +1,82 @@
 Gilded Rose
 ==========================
-The Problem
+Deployed App
 -------------------------
-Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city run by a friendly innkeeper named Allison. We also buy and sell only the finest goods. Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We need you to write a system that allows us to manage our inventory, so that we are able to service all of the adventurers who frequent our store (we don't want to run out of healing potions when an tiefling comes in unlike last time - poor Leeroy).
 
-Here are the basic rules for the system that we need:
+To see it in action please go to: https://www.beentinking.com
 
-1. All items have a SellIn value which denotes the number of days we have to sell the item
-2. All items have a Quality value which denotes how valuable the item is
-3. At the end of each day our system lowers both values for every item
-
-Since this is the real world, there are some edge cases we need for you to account for as well:
-
-1. Once the sell by date has passed, Quality degrades twice as fast
-2. The Quality of an item is never negative
-3. "Aged Brie" actually increases in Quality the older it gets
-4. The Quality of an item is never more than 50
-5. "Sulfuras", being a legendary item, never has to be sold or decreases in Quality
-6. "Backstage passes", like aged brie, increases in Quality as it's SellIn value approaches; Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less but Quality drops to 0 after the concert
-7. "Conjured" items degrade in Quality twice as fast as normal items
-8. An item can never have its Quality increase above 50, however "Sulfuras" is a legendary item and as such its Quality is 80 and it never alters.
-
-We currently keep our inventory in a hand written list. Since Allison's wants to get home at night, we keep the writing to a minimum. Each line has the following information, in order:
-
-1. Item Name
-2. Item Category
-3. Sell In
-4. Quality
-
-Additional Requirements:
+Solution Documentation
 -------------------------
-1. There is no requirement for what you choose as your interface into the system, however whatever interface you choose should, at a minimum, provide for the following commands:
-	1. Ask for the entire list of inventory
-	2. Ask for the details of a single item by name
-	3. End the day
-	4. List of trash we should throw away (Quality = 0)
-2. In this repo, you will find an inventory.txt file. This is the initial inventory your solution should load. After that, you may store the data however you wish.
+Our Innkeeper needed some desperate help to provide only the highest quality of goods at the right price to wary travelers and adventurers. What we have made manifest from spells untold is a magical orb loaded with tricks to help her along the way.
 
+### Service Layer
 
-The Fine Print
--------------------------
-Please use whatever technology and techniques you feel are applicable to solve the problem. We suggest that you approach this exercise as if this code was part of a larger system. The end result should be representative of your abilities and style.
+The Service Layer is hosted in API Gateway, a simple proxy to a Lambda function (gilded-rose-service). The function utilizes Express 4 middleware to handle proxied requests.
 
-Please fork this repository, then when you have completed your solution, issue a pull request to notify us that you are ready for us to review your submission.
+As we entrusted our Innkeeper with this magical orb **we did not add additional security** against rouge wizards, thieves and other unlikeable characters. Therefore, make sure to hide under bed when turning in for the night!
 
-Have fun.
+#### Features & Omissions
+
+The honest truth, here are the features and omissions.
+
+Features:
+* Serverless and auto scaling
+* Get the current inventory
+* Delete and item
+* Create a new item
+* Validation when an item is created
+* Move forward a day
+* Reset to the initial data set
+
+Omissions:
+* No bulk operations - create and delete are one by one
+* Uses S3 for persistence and therefore lacks adherance to the ACID conditions and has no transaction concept
+* No security layer
+* No CI system integration (built/deployed manually)
+
+### Data Layer
+
+This is merely a JSON file kept in S3 for the time being. To scale this and ensure we adhere to ACID this could be loaded into DynamoDB or a relational database in RDS (Relational Database Service). If the desire is to show that level of capability I'd be MORE than happy to add it!
+
+### Web App
+
+Built using create-react-app, utilizing Baobab.js (+baobab-react) for state management and React-Bootstrap. Icons are freely available ones from Font Awesome 4. Also takes advantage of React-Router for navigation and building of the overall hierarchy.
+
+Baobab React is very much like Redux in that it allows certain parts of the UI to be connected to a part of the state, sine Baobab inccludes immutability and we're taking advantage of React PureComponent this means that only certain parts of the UI update when a change occurs and only if it is truly a change. React will disqualify any references (Objects) that have the same address as prior to the update.
+
+#### Features & Omissions
+
+The honest truth, here are the features and omissions.
+
+Features:
+* See a list of items that have a quality > 0, which we deem as good items
+* See a separate list of items with a quality of 0 or below
+* Remove items from either list
+* Add new items (to the current inventory)
+* End the day - this will take us to The World Of Tomorrooooow!
+* Reset it all - taking us back to day 1
+
+Omissions:
+* Didn't add authentication
+* Didn't add validation for inputs when creating a new item, the service will validate and block creation of invalid items, however there is no visual feedback
+* Didn't enable to filter down search capability for the table component
+* Didn't add the sort capabilities for the table
+* No CI system integration (built/deployed manually)
+
+#### Running It
+
+In order to run the app locally there are certain dependencies:
+
+* node.js (6+) + npm 3+ (Comes bundled)
+
+Then navigate to the root folder of the app (gilded-rose-app) and run:
+
+```npm i```
+
+This will install all dependent modules.
+
+Next to launch the app:
+
+```npm start```
+
+This should now launch it on localhost:3000 and it will connect to the Remote Service on AWS.
