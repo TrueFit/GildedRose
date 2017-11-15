@@ -1,6 +1,11 @@
 Gilded Rose
 ==========================
-The Solution
+Deployed App
+-------------------------
+
+To see it in action please go to: https://www.beentinking.com
+
+Solution Documentation
 -------------------------
 Our Innkeeper needed some desperate help to provide only the highest quality of goods at the right price to wary travelers and adventurers. What we have made manifest from spells untold is a magical orb loaded with tricks to help her along the way.
 
