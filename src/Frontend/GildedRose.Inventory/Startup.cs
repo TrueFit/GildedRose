@@ -30,9 +30,6 @@ namespace GildedRose.Inventory
             services.AddTransient<GR.Managers.InventoryManager>();
             services.AddSingleton<GR.Managers.SimulationInventoryManager>();
             services.AddSingleton<GR.Managers.IInventoryManager, GR.Managers.SimulationInventoryManager>();
-                //new GR.Managers.SimulationInventoryManager(
-                //    sp.GetRequiredService<GR.Managers.InventoryManager>(),
-                //    sp.GetRequiredService<GR.Repositories.IConfigRepository>()));
 
             services.AddTransient<InventoryApi.InventoryController>();
             services.AddTransient<InventoryApi.SimulationController>();

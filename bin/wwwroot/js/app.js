@@ -1,0 +1,1 @@
+﻿angular.module('app', ['ui.grid', 'ui.grid.pagination']);
