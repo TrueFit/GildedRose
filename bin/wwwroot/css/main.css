@@ -1,0 +1,8 @@
+﻿.itemsGrid {
+    width: 600px;
+    height:385px;   
+}
+
+h1, h2 {
+    display: inline-block;
+}

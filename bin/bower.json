@@ -1,0 +1,11 @@
+{
+  "name": "asp.net",
+  "private": true,
+  "dependencies": {
+    "angular": "^1.6.6",
+    "angular-ui-grid": "v4.0.10"
+  },
+  "resolutions": {
+    "angular": "^1.6.6"
+  }
+}
