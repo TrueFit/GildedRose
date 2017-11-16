@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Gilded Rose - About</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+</head>
+<body>
+    <div style="max-width: 800px;">
+        <h1>About</h1>
+        
+        <p>Hello and welcome to my implementation of the Gilded Rose project.  Firstly, I'm sorry about your eyeballs.
+        I tried using a fancy bootstrap template to make it look nice but somehow that turned out even worse.  I freely
+        admit that I am not a designer.  Now let me tell you about what I've built.</p>
+        
+        <h2>The User Interface</h2>
+        
+        <p>At the top we've got the currently simulated time.  Behind the scenes I'm tracking this as an offset from the 
+        current local time.  For the sake of simplicity, I'm pretending timezones don't exist.  Next to the current time
+        is a link that will add a day to the offset.  This will also trigger the end of day calculation for current item 
+        quality.</p>
+
+        <p>Next we have a grid that displays all currently available items.  That is all items that have not been sold or
+        discarded that have a current quality &gt; 0.  The grid is paginated and sorted server side.  You can click the
+        column headers to change the sorting and there are pagination controls at the bottom of the grid.  Each Available
+        Item row has a Sell button that will flag that item as sold and remove it from the grid results.</p>
+
+        <p>Below the Available Items grid is a button to add a new item.  Clicking this button enables the controls for
+        adding new items.  There isn't any propper validation but the Save button will be disabled if the parameters are
+        not valid.  Some item types require a Sell By Date while others do not.  The quality input is automatically clamped
+        to the valid range for the selected item type.  When you click the Save button, the new item will be created and
+        the Available Items grid will automatically refresh.</p>
+
+        <p>Finally we have the Expired Items grid.  It's the same control as the Available Items grid but it shows only
+        items that have not been sold or discarded that have a current quality of 0.  Each row has an X button that will
+        flag the item as discarded and remove it from the grid.</p>
+
+        <h2>The Code</h2>
+
+        <h3>Front End</h3>
+
+        <h4>GildedRose.Inventory</h4>
+
+        <p>This is the web site project.  It references all the other projects and handles all the application setup. I 
+        decided to use the new dotnet core 2.0 stuff mostly as an excuse to try it out.  I've played around with the core 
+        1.0 a bit ago and it felt more like a 0.x version.  2.0 is a big improvement and is probably ready for certain 
+        types of production applications.  It's still missing some important things, like WPF, that I would I like to have 
+        before I started using it for important things.</p>
+
+        <p>This project takes care of setting up the app, configuring dependency injection and hosting static content.
+        I went with the built in dependency injection (I'm not sure if it's a part of MVC core or vanilla dotnet core).
+        I usually favor Autofac but the built in container is pretty good and I didn't find myself missing anything I 
+        needed.</p>
+
+        <p>The web client uses Angular 1.6.  The only other js package I used was ui-grid for the grids.</p>
+
+        <h4>GildedRose.InventoryApi</h4>
+
+        <p>This project is mostly just an http wrapper for the InventoryManager and SimulationManager classes.  It contains
+        two MVC controllers, InventoryController and SimulationController.  These do little more than translate between
+        parameters passed in on http requests and the Manager classes they wrap.  Results are wrapped in a RequestResponse
+        model that contains a success flag, any result data and arrays of error, warning and/or info messages. This way
+        the client can observe and (ideally) handle any server side errors in a standard way, though my UI mostly just 
+        ignores them.</p>
+
+        <p>Normally I would do this project using WCF because of the endpoint flexibility it provides, but that's not a
+        feature currently available to ASP.NET core.  Hopefully that comes soon.</p>
+
+        <h3>Back End</h3>
+
+        <h4>GR.Models</h4>
+        
+        <p>This project contains the domain models and stradles the line between front and back end.  The models are
+        dumb, mutable DTOs that don't do anything but carry data around.  I also throw the interface declarations for
+        the data repositories in this project as a matter of convenience.</p>
+
+        <h4>GR.Core</h4>
+
+        <p>This is a where I dump general purpose utility classes.  Typically this stuff would be it's own repository and
+        you'd add a reference to the binary.  I like to put these things on an internal Nuget server so they can easily be
+        added to new projects.  This package would not reference any other packages.  The idea is that it's lightweight and  
+        becomes a standard part of all our projects.  If I have utilities that need references to additional packages
+        they get put into their own assembly.  E.g. if I had set of Entity Framework utilities that required a reference
+        to EF, I would put those in an assembly called GR.Core.EntityFramework.  I keep these assemblies narrowly focused
+        so they can be added to only the projects that need them.</p>
+
+        <h4>GR.Managers</h4>
+
+        <p>Manager classes are the ring masters of the back end.  They take dependencies and pipe data between those 
+        dependencies.  Typically they will have a repository dependency at least.  As the complexity of a system grows,
+        the functionality can be broken down into multiple managers.  Some managers will depend on other managers.  It's
+        not uncommon to run into circular dependencies with this approach.  This can be resolved with lazy loading the
+        dependencies from a scoped IoC container.</p>
+
+        <p>Testing the manager classes can require mocking the dependencies.  I don't have any tests for the managers 
+        because I didn't invest the time in mocking the repository (which in itself should be tested).</p>
+
+        <p>There are two managers in this project, InventoryManager and SimulationManager.  InventoryManager is a clean
+        implementation of the business logic.  SimulationManager is a wrapper for InventoryManager that provides a
+        simulated current date to the underlying InventoryManager.</p>
+
+        <h4>GR.Logic</h4>
+
+        <p>Logic classes contain related, unit testable methods that encapsulate all business logic.  These classes
+        never take any dependencies.  They could be static classes but you'd lose the ability to abstract them to an
+        interface for IoC (something I don't usually bother doing for these classes).  The logic class methods 
+        deterministically map a set of input parameters to an output.  E.g. determining the status of an item from it's 
+        current quality, sold date and discarded date.  I have 100% test coverage on these classes.</p>
+
+        <h4>GR.EFRepository</h4>
+
+        <p>This class contains an Entity Framework 6 implementation of IInventoryRepository and IConfigRepository. I
+        used a tool called EF Reverse POCO Generator to build a code first DbContext from an existing database. With
+        this tool, you configure a T4 template and every time you save it, it reads the database schema and generates
+        a DbContext and all the entities. This approach is much easier to manage at merge time than the standard EDMX
+        based database first approach.</p>
+
+        <p>The entities are not exposed outside of this assembly.  The repository interface only references the domain
+        models.  In this implementation, I do the mapping from entities to model inside the repository because the 
+        domain doesn't have a bunch of complicated interconnections between models.  There's a class I've built a
+        few times now that I call TranslationContext that deals with mapping one interconnected object graph to another.
+        I'm not a big fan of convention based tools for this stuff like Automapper because I find the configuration
+        more tedious and error prone than simply writing the translation myself.  This becomes especially true when
+        there is a high impedence between your domain models and repository models.</p>
+
+        <p>The repository really should have integration tests.  They take a long time to write though and I wanted to
+        focus more on the overall structure of the project for this exercise.</p>
+
+        <h4>Database</h4>
+
+        <p>This is the database definition for the project db.  It's pretty basic.  I like to add data scripts to the 
+        project so I can have a source controlled set of standard data to work with. I've written a lot of SQL and I've 
+        developed something of a unique style that I feel maximizes readability.</p>
+
+        <p>The only thing of particular interest in this project is probbably the InventoryItem_Search stored procedure.
+        This is what produces the data for the grids.  I build a dynamic query based on the parameters.  I've found this
+        is generally the most performant way to do these kind of structured queries.</p>
+
+        <h4>Thanks!</h4>
+
+        <p>So there's my project.  I hope you like what you see (other than the ugly UI) and that you're going to want to 
+        talk to me more.  If you have any concerns or there's anything you'd like to see expanded on, I will gladly make
+        changes.</p>
+        
+        <p>Thanks for looking.</p>
+
+    </div>
+
+</body>
+</html>
