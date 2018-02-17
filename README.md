@@ -33,7 +33,7 @@ data migrations
    create the database tables and then a second Django migration script to read the `inventory.txt` file
    and insert the rows into the database.
 
-   See `/api/gildedroseapi/inventory/migrations/load_data.py` for the
+   See `/gildedroseapi/gildedroseapi/inventory/migrations/load_data.py` for the
    migration script.
 4. more...
 
