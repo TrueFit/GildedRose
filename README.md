@@ -15,11 +15,16 @@ To run the project, first make sure that you have the docker host installed loca
 Then, follow the steps outlined below to build the docker images, bring up the containers, and run initial
 data migrations
 
-1. From the root project directory run `docker-compose build`
-2. Bring up the containers with command `docker-compose up -d`
+1. From the root project directory run
+
+   `docker-compose build`
+2. Bring up the containers with command
+
+   `docker-compose up -d`
 3. Next we run the django migrations to create the DB tables and load the inital data from `inventory.txt`
 
    We use the following docker command to run the migrate script within our API container
+
    `docker-compose run gildedroseapi python manage.py migrate`
 
    Notes about DB and migration: For the purpose of this test we are using a SQLITE database to keep things
