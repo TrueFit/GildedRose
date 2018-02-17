@@ -16,11 +16,19 @@ Then, follow the steps outlined below to build the docker images, bring up the c
 data migrations
 
 1. From the root project directory run `docker-compose build`
-2. Bring up the containers with command `docker-compose up`
+2. Bring up the containers with command `docker-compose up -d`
 3. Next we run the django migrations to create the DB tables and load the inital data from `inventory.txt`
 
    We use the following docker command to run the migrate script within our API container
    `docker-compose run gildedroseapi python manage.py migrate`
+
+   Notes about DB and migration: For the purpose of this test we are using a SQLITE database to keep things
+   simple. I have copied the `inventory.txt` file from the root of the repo into my `/api` directory to me
+   accessing the file from the Django project easier. We are using Django's built in migrations system to
+   created the database tables and then a second Django migration script to read the `inventory.txt1 file
+   and insert the rows into the database. See `/api/gildedroseapi/inventory/migrations/load_data.py` for the
+   migration script.
+4. more...
 
 
 
