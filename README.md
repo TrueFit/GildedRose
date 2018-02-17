@@ -28,10 +28,12 @@ data migrations
    `docker-compose run gildedroseapi python manage.py migrate`
 
    Notes about DB and migration: For the purpose of this test we are using a SQLITE database to keep things
-   simple. I have copied the `inventory.txt` file from the root of the repo into my `/api` directory to me
+   simple. I have copied the `inventory.txt` file from the root of the repo into my `/api` directory to make
    accessing the file from the Django project easier. We are using Django's built in migrations system to
-   created the database tables and then a second Django migration script to read the `inventory.txt1 file
-   and insert the rows into the database. See `/api/gildedroseapi/inventory/migrations/load_data.py` for the
+   create the database tables and then a second Django migration script to read the `inventory.txt` file
+   and insert the rows into the database.
+
+   See `/api/gildedroseapi/inventory/migrations/load_data.py` for the
    migration script.
 4. more...
 
