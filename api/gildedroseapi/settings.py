@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Third Party Dependencies
+    'rest_framework',
     # Project App
     'gildedroseapi.inventory'
 ]
