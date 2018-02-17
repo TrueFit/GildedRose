@@ -24,6 +24,8 @@ SECRET_KEY = 'v%pd&ne&3go1yjt*$gdf$o$45gq8#($=k&532o!n84b)=&__x&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+DJANGO_LOG_LEVEL = 'ERROR'
+DB_LOG_LEVEL = 'ERROR'
 
 ALLOWED_HOSTS = []
 
@@ -37,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Project App
+    'gildedroseapi.inventory'
 ]
 
 MIDDLEWARE = [
@@ -66,6 +70,47 @@ TEMPLATES = [
         },
     },
 ]
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': ('%(asctime)s [%(process)d] [%(levelname)s] ' +
+                       'pathname=%(pathname)s lineno=%(lineno)s ' +
+                       'funcname=%(funcName)s %(message)s'),
+            'datefmt': '%Y-%m-%d %H:%M:%S'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': DJANGO_LOG_LEVEL,
+        },
+        'testlogger': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+        'django.db.backends': {
+            'level': DB_LOG_LEVEL,
+            'handlers': ['console'],
+        }
+    },
+}
 
 WSGI_APPLICATION = 'gildedroseapi.wsgi.application'
 
