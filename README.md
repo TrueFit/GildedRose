@@ -1,6 +1,30 @@
-Gilded Rose
+Gilded Rose Solution - Steve Jacobs
 ==========================
-The Problem
+
+Running the Solution
+------------------------
+This solution contains two components.
+1. Web API written with Django
+2. Single Page Web App written with Angular 5
+
+The above components are containerized using Docker to make setup of local environment easy for developer and reviewer
+
+To run the project, first make sure that you have the docker host installed locally on your machine.
+[Install Docker](https://docs.docker.com/get-started/)
+
+Then, follow the steps outlined below to build the docker images, bring up the containers, and run initial
+data migrations
+
+1. From the root project directory run `docker-compose build`
+2. Bring up the containers with command `docker-compose up`
+3. Next we run the django migrations to create the DB tables and load the inital data from `inventory.txt`
+
+   We use the following docker command to run the migrate script within our API container
+   `docker-compose run gildedroseapi python manage.py migrate`
+
+
+
+Oirignal Instructions - The Problem
 -------------------------
 Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city run by a friendly innkeeper named Allison. We also buy and sell only the finest goods. Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We need you to write a system that allows us to manage our inventory, so that we are able to service all of the adventurers who frequent our store (we don't want to run out of healing potions when an tiefling comes in unlike last time - poor Leeroy).
 
