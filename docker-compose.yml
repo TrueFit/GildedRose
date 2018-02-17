@@ -2,17 +2,17 @@ version: '3'
 
 services:
   gildedroseapi:
-    build: ./api
+    build: ./gildedroseapi
     command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./api:/code
+      - ./gildedroseapi:/code
     ports:
       - "8000:8000"
   gildedroseweb:
-    build: ./web/gildedroseweb
+    build: ./gildedroseweb
     command: "npm start -- --host=0.0.0.0"
     ports:
       - 4200:4200
     volumes:
-      - ./web/gildedroseweb:/home/app/gildedroseweb
+      - ./gildedroseweb:/home/app/gildedroseweb
       - /home/app/gildedroseweb/node_modules
