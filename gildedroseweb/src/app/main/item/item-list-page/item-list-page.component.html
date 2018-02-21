@@ -1,3 +1,34 @@
-<p>
-  item-list-page works!
-</p>
+<div>
+  <mat-table #table [dataSource]="items">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="category">
+      <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.category}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="sellin">
+      <mat-header-cell *matHeaderCellDef> Sell In </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.sell_in}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="quality">
+      <mat-header-cell *matHeaderCellDef> Quality </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.quality}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['name', 'category', 'sellin', 'quality']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['name', 'category', 'sellin', 'quality'];"></mat-row>
+  </mat-table>
+</div>
