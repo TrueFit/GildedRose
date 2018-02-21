@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # Third Party Dependencies
     'rest_framework',
     'django_filters',
+    'corsheaders',
     # Project App
     'gildedroseapi.inventory'
 ]
@@ -54,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'gildedroseapi.urls'
@@ -127,6 +130,22 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# CORS Headers
+CORS_ALLOW_CREDENTIALS = True
+CORS_EXPOSE_HEADERS = ('Link', 'X-Total-Count')
+CORS_ALLOW_HEADERS = (
+    'x-requested-with',
+    'content-type',
+    'content-disposition',
+    'accept',
+    'origin',
+    'authorization',
+    'x-csrftoken',
+    'user-agent',
+    'accept-encoding'
+)
+CORS_ORIGIN_WHITELIST = ['localhost:4200']
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
