@@ -1,0 +1,148 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+  height: 100vh;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+:host {
+  flex: 1;
+}
+
+.fill-space {
+  // This fills the remaining space, by using flexbox.
+  // Every toolbar row uses a flexbox row layout.
+  flex: 1 1 auto;
+}
+
+.gr-center-text {
+  text-align: center;
+}
+
+.gr-color-logo {
+  max-width:380px;
+}
+
+.gr-full-width {
+  width: 100% !important;
+}
+
+// Padding
+
+.gr-pad-top-xs {
+  padding-top: 5px;
+}
+
+.gr-pad-top-sm {
+  padding-top: 10px;
+}
+
+.gr-pad-top-md {
+  padding-top: 15px;
+}
+
+.gr-pad-top-lg {
+  padding-top: 20px;
+}
+
+.gr-pad-top-xl {
+  padding-top: 25px;
+}
+
+.gr-pad-right-xs {
+  padding-right: 5px;
+}
+
+.gr-pad-right-sm {
+  padding-right: 10px;
+}
+
+.gr-pad-right-md {
+  padding-right: 15px;
+}
+
+.gr-pad-right-lg {
+  padding-right: 20px;
+}
+
+.gr-pad-right-xl {
+  padding-right: 25px;
+}
+
+.gr-pad-bottom-xs {
+  padding-bottom: 5px;
+}
+
+.gr-pad-bottom-sm {
+  padding-bottom: 10px;
+}
+
+.gr-pad-bottom-md {
+  padding-bottom: 15px;
+}
+
+.gr-pad-bottom-lg {
+  padding-bottom: 20px;
+}
+
+.gr-pad-bottom-xl {
+  padding-bottom: 25px;
+}
+
+.gr-pad-left-xs {
+  padding-left: 5px;
+}
+
+.gr-pad-left-sm {
+  padding-left: 10px;
+}
+
+.gr-pad-left-md {
+  padding-left: 15px;
+}
+
+.gr-pad-left-lg {
+  padding-left: 20px;
+}
+
+.gr-pad-left-xl {
+  padding-left: 25px;
+}
+
+// Page Generics
+
+.gr-page-container {
+  padding: 10px;
+
+  .gr-page-title {
+    font-weight: bold;
+    font-size: 2em;
+  }
+}
+
+// MISC
+
+.gr-image-label {
+  border-radius: 3px;
+  padding: 10px;
+  background-color: lightgray;
+
+  &:hover {
+    cursor: hand;
+  }
+}
+
+// Description text
+$info-color: #8BC34A;
+
+.gr-info-text {
+  border-left: 3px solid $info-color;
+  padding: 5px 0 5px 5px;
+}
+
+.gr-error-text {
+    color: red;
+}
