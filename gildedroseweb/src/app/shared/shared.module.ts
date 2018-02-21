@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { GrMaterialModule } from './gr-material-module';
-import { DataProviderService } from './data-provider-service';
 
 @NgModule({
   imports: [
@@ -14,9 +13,6 @@ import { DataProviderService } from './data-provider-service';
   exports: [
       CommonModule,
       GrMaterialModule,
-  ],
-  providers: [
-    DataProviderService
-  ],
+  ]
 })
 export class SharedModule { }

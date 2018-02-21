@@ -4,9 +4,7 @@ import { SharedModule } from '../../shared/shared.module';
 
 import { ItemRoutingModule } from './item-routing.module';
 import { ItemDataProvider } from './item-data-provider.service';
-import { ItemListPageComponent } from './item-list-page/item-list-page.component';
-// import { ItemDetailComponent } from './item-detail/item-detail.component';
-
+import { ItemListPageComponent } from './item-list-page/item-list-page.component'
 
 @NgModule({
     imports: [
@@ -15,7 +13,7 @@ import { ItemListPageComponent } from './item-list-page/item-list-page.component
     ],
     declarations: [
       ItemListPageComponent,
-      ItemDetailComponent,
+      //ItemDetailComponent,
     ],
     providers: [ItemDataProvider]
 })
