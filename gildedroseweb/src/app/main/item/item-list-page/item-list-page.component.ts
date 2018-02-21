@@ -9,7 +9,8 @@ import { ItemDataProvider } from '../item-data-provider.service';
   styleUrls: ['./item-list-page.component.scss']
 })
 export class ItemListPageComponent implements OnInit {
-  item: Item[];
+  items: Item[];
+  filter: string = 'all';
 
   constructor(private itemDataProvider: ItemDataProvider) { }
 
@@ -18,7 +19,18 @@ export class ItemListPageComponent implements OnInit {
   }
 
   getItems(): void {
-    this.itemDataProvider.list()
+    let params = {};
+
+    if(this.filter === 'trash') {
+      params['quality'] = 0;
+    }
+
+    this.itemDataProvider.list(params)
       .subscribe(items => this.items =items);
+  }
+
+  filterChanged(event) {
+    this.filter = event.value;
+    this.getItems();
   }
 }

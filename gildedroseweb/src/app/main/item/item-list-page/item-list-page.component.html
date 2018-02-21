@@ -1,28 +1,36 @@
 <div>
-  <mat-table #table [dataSource]="items">
-
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
-    <!-- Position Column -->
+  <mat-button-toggle-group #group="matButtonToggleGroup"
+    (change)="filterChanged($event)" [value]="filter">
+    <mat-button-toggle value="all">
+      All Items
+    </mat-button-toggle>
+    <mat-button-toggle value="trash">
+      Trash
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+  <button mat-raised-button color="warn">End Day</button>
+</div>
+<div class="gr-pad-top-md">
+    <mat-table #table [dataSource]="items">
+    <!-- Name Column -->
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
     </ng-container>
 
-    <!-- Name Column -->
+    <!-- Category Column -->
     <ng-container matColumnDef="category">
       <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.category_name}} </mat-cell>
     </ng-container>
 
-    <!-- Weight Column -->
+    <!-- Sell In Column -->
     <ng-container matColumnDef="sellin">
       <mat-header-cell *matHeaderCellDef> Sell In </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.sell_in}} </mat-cell>
     </ng-container>
 
-    <!-- Symbol Column -->
+    <!-- Quality Column -->
     <ng-container matColumnDef="quality">
       <mat-header-cell *matHeaderCellDef> Quality </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.quality}} </mat-cell>

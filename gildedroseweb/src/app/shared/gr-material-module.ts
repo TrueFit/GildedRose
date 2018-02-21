@@ -18,7 +18,8 @@ import {
     MatAutocompleteModule,
     MatSnackBarModule,
     MatSlideToggleModule,
-    MatSelectModule
+    MatSelectModule,
+    MatButtonToggleModule
 } from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
@@ -43,7 +44,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
       MatAutocompleteModule,
       MatSnackBarModule,
       MatSlideToggleModule,
-      MatSelectModule
+      MatSelectModule,
+      MatButtonToggleModule
     ]
 })
 export class GrMaterialModule {
