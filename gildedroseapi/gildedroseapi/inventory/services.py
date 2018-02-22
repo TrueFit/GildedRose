@@ -13,5 +13,6 @@ class InventoryService:
         the inventory
         """
 
+        # DONT FORGET TO REMOVE LOGGNG AFTER TESTING
         import logging
         logging.error('UPDATING INVENTORY!!!')

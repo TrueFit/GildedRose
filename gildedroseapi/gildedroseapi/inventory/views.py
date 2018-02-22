@@ -20,6 +20,14 @@ class ItemViewSet(viewsets.ModelViewSet):
         """
         Post to this endpoint will manually end the current day
         and perform the updates to the inventory
+
+        NOTE: This is kept simple by calling the service
+        method synchronously for the purpose of this sample.
+
+        Real world, it would likely be a better idea to run this
+        as an async task. We'd also probably make this a scheduled
+        job to run nightly instead of making an API endpoint
+        that needs to be called manually.
         """
 
         InventoryService.end_day()
