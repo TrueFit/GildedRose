@@ -41,7 +41,7 @@ data migrations:
 
    You can tail the logs for the webapp container to be sure by running:
 
-   'docker-compose logs -f gildedroseweb'
+   `docker-compose logs -f gildedroseweb`
 
 
 Orignal Instructions - The Problem
