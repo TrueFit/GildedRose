@@ -12,7 +12,7 @@ class InventoryService:
         """
         This method closes out the current day and updates
         the sell_in and quality fields for all items in
-        the inventory
+        the inventory according to the business rules.
         """
 
         # get all the items except for "sulfuras" types which never change

@@ -26,5 +26,5 @@ class Item(models.Model):
     quality = models.PositiveIntegerField()
 
     def __str__(self):
-        return 'Item: {0} Category: {1} Sell In: {2} Quality: {3}' \
+        return "Item: {0} Category: {1} Sell In: {2} Quality: {3}" \
             .format(self.name, self.category.name, self.sell_in, self.quality)
