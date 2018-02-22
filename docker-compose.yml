@@ -16,3 +16,5 @@ services:
     volumes:
       - ./gildedroseweb:/home/app/gildedroseweb
       - /home/app/gildedroseweb/node_modules
+    depends_on:
+      - gildedroseapi
