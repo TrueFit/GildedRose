@@ -32,4 +32,4 @@ class ItemViewSet(viewsets.ModelViewSet):
 
         InventoryService.end_day()
 
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(True, status=status.HTTP_200_OK)
