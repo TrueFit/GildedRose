@@ -1,0 +1,10 @@
+<div *ngIf="item">
+  <h2>{{ item.name | uppercase }} Details</h2>
+  <div><span>Category: </span>{{item.category_name}}</div>
+  <div><span>Sell In: </span>{{item.sell_in}}</div>
+  <div><span>Quality: </span>{{item.quality}}</div>
+
+  <div class="gr-pad-top-md">
+      <a [routerLink]="['/gr/items']">Back to list</a>
+  </div>
+</div>

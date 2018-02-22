@@ -1,0 +1,27 @@
+@import 'src/gr-app-palette';
+
+// Side Nav
+
+.gr-sidenav {
+    background-color: mat-color($gr-app-primary);
+    color: $white-87-opacity;
+    padding-top: 10px;
+    width: 250px;
+
+    .gr-sidenav-link {
+      color: $white-87-opacity;
+    }
+}
+.gr-nav-logo,
+.gr-nav-logo-only {
+  padding-bottom: 10px;
+  padding-left: 10px;
+  img{
+      width:100%;
+  }
+}
+
+#main-layout-container {
+    padding: 20px 20px 0 20px;
+}
+

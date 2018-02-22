@@ -1,6 +1,50 @@
-Gilded Rose
+Gilded Rose Solution - Steve Jacobs
 ==========================
-The Problem
+
+Running the Solution
+------------------------
+This solution contains two components.
+1. Web API written with Django and Django Rest Framework
+2. Single Page Web App written with Angular 5
+
+The above components are containerized using Docker to make setup of local environment easy for developer and reviewer.
+
+To run the project, first make sure that you have the docker host installed locally on your machine.
+[Install Docker](https://docs.docker.com/get-started/)
+
+Then, follow the steps outlined below to build the docker images, bring up the containers, and run initial
+data migrations:
+
+1. From the root project directory run:
+
+   `docker-compose build`
+2. Bring up the containers with command:
+
+   `docker-compose up -d`
+3. Next we run the django migrations to create the DB tables and load the inital data from `inventory.txt`
+
+   We use the following docker command to run the migrate script within our API container:
+
+   `docker-compose run gildedroseapi python manage.py migrate`
+
+   Notes about DB and migration: For the purpose of this test we are using a SQLITE database to keep things
+   simple. I have copied the `inventory.txt` file from the root of the repo into my `/api` directory to make
+   accessing the file from the Django project easier. We are using Django's built in migrations system to
+   create the database tables and then a second Django migration script to read the `inventory.txt` file
+   and insert the rows into the database.
+
+   See `/gildedroseapi/gildedroseapi/inventory/migrations/load_data.py` for the
+   migration script.
+4. Both the API and Web app containers should now be running. Browse to http://localhost:4200
+
+   If the webapp does not load initally, webpack may still be compiling. Wait a few seconds and try again.
+
+   You can tail the logs for the webapp container to be sure by running:
+
+   `docker-compose logs -f gildedroseweb`
+
+
+Orignal Instructions - The Problem
 -------------------------
 Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city run by a friendly innkeeper named Allison. We also buy and sell only the finest goods. Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We need you to write a system that allows us to manage our inventory, so that we are able to service all of the adventurers who frequent our store (we don't want to run out of healing potions when an tiefling comes in unlike last time - poor Leeroy).
 

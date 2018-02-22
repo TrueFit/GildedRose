@@ -1,0 +1,45 @@
+<div>
+  <mat-button-toggle-group #group="matButtonToggleGroup"
+    (change)="filterChanged($event)" [value]="filter">
+    <mat-button-toggle value="all">
+      All Items
+    </mat-button-toggle>
+    <mat-button-toggle value="trash">
+      Trash
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+  <button mat-raised-button color="warn" (click)="endDay()">End Day</button>
+</div>
+<div class="gr-pad-top-md">
+  <mat-table #table [dataSource]="items" *ngIf="!isLoading">
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          <a [routerLink]="['./', element.id, 'detail']">{{element.name}}</a>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Category Column -->
+    <ng-container matColumnDef="category">
+      <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.category_name}} </mat-cell>
+    </ng-container>
+
+    <!-- Sell In Column -->
+    <ng-container matColumnDef="sellin">
+      <mat-header-cell *matHeaderCellDef> Sell In </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.sell_in}} </mat-cell>
+    </ng-container>
+
+    <!-- Quality Column -->
+    <ng-container matColumnDef="quality">
+      <mat-header-cell *matHeaderCellDef> Quality </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.quality}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['name', 'category', 'sellin', 'quality']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['name', 'category', 'sellin', 'quality'];"></mat-row>
+  </mat-table>
+  <mat-spinner *ngIf="isLoading" [color]="'accent'" fxFlexAlign="center"></mat-spinner>
+</div>
