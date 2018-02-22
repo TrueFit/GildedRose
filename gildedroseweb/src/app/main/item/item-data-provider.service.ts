@@ -15,6 +15,6 @@ export class ItemDataProvider extends DataProviderService<Item> {
     }
 
     endDay(): Observable {
-      return this.makeRequest('POST', null, {}, "/api/items/endday");
+      return this.makeRequest('POST', null, {}, "/api/items/end-day/");
     }
 }

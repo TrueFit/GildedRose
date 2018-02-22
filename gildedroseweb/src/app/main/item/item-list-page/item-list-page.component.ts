@@ -11,6 +11,7 @@ import { ItemDataProvider } from '../item-data-provider.service';
 export class ItemListPageComponent implements OnInit {
   items: Item[];
   filter: string = 'all';
+  isLoading: boolean;
 
   constructor(private itemDataProvider: ItemDataProvider) { }
 
@@ -20,6 +21,7 @@ export class ItemListPageComponent implements OnInit {
 
   getItems(): void {
     //get list of all items OR filter to show the "trash"
+    this.isLoading = true;
     let params = {};
 
     if(this.filter === 'trash') {
@@ -27,7 +29,10 @@ export class ItemListPageComponent implements OnInit {
     }
 
     this.itemDataProvider.list(params)
-      .subscribe(items => this.items =items);
+      .subscribe(items => {
+        this.items = items;
+        this.isLoading = false;
+      });
   }
 
   filterChanged(event) {
@@ -37,6 +42,8 @@ export class ItemListPageComponent implements OnInit {
 
   endDay(): void {
     //mmake a POST to api to end the day. Then, refresh the items list.
+    this.isLoading = true;
+
     this.itemDataProvider.endDay()
       .subscribe(response => {
         if(!!response) {
