@@ -22,7 +22,7 @@ class Item(models.Model):
 
     name = models.CharField(max_length=255, db_index=True)
     category = models.ForeignKey(ItemCategory, on_delete=models.CASCADE)
-    sell_in = models.PositiveIntegerField(null=True) # null value represents no time limit.
+    sell_in = models.IntegerField() # null value represents no time limit.
     quality = models.PositiveIntegerField()
 
     def __str__(self):

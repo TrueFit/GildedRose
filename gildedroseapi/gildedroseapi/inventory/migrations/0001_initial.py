@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(db_index=True, max_length=255)),
-                ('sell_in', models.PositiveIntegerField(null=True)),
+                ('sell_in', models.IntegerField()),
                 ('quality', models.PositiveIntegerField()),
             ],
         ),

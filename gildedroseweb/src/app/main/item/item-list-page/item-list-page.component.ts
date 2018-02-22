@@ -36,6 +36,7 @@ export class ItemListPageComponent implements OnInit {
   }
 
   filterChanged(event) {
+    // all/trash filter changed, reload proper items
     this.filter = event.value;
     this.getItems();
   }

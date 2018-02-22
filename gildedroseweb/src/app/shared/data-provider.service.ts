@@ -59,27 +59,22 @@ export abstract class DataProviderService<T> {
     );
   }
 
-  protected makeRequest(method: string, data?: object, params?: object, targetUrl?: string): Observable {
+  protected makeRequest(method: string, data?: object, params?: object, targetUrl?: string) {
     const url = this.buildUrl(params, targetUrl);
     const headers = new HttpHeaders();  // Not setting anything for now.
 
-    return this.httpClient.request(method, url, {
-        headers: headers,
-        body: data
-      }).pipe(
-        catchError(this.handleError<T>('HTTP Request Error!'))
-      );
+    return this.httpClient.request(method, url, httpOptions);
   }
 
   mapErrorsToFormControls(errorResponse: HttpErrorResponse, form: FormGroup) {
-      for (const error of errorResponse.error.errors) {
-          const attribute = error.source.pointer.substr(error.source.pointer.lastIndexOf('/') + 1);
-          const control = form.controls[attribute];
+    for (const error of errorResponse.error.errors) {
+      const attribute = error.source.pointer.substr(error.source.pointer.lastIndexOf('/') + 1);
+      const control = form.controls[attribute];
 
-          if (control) {
-              control.setErrors({'serverError': error.detail});
-          }
+      if (control) {
+        control.setErrors({'serverError': error.detail});
       }
+    }
   }
 
   private buildUrl(params?: object, targetUrl?: string): string {
@@ -90,36 +85,36 @@ export abstract class DataProviderService<T> {
 
     // find and replace all url arguments
     while (start >= 0) {
-        const end = url.indexOf('/', start);
-        let replace = url.substring(start, end >= 0 ? end : url.length);
-        const param = params[replace.substring(1)];
+      const end = url.indexOf('/', start);
+      let replace = url.substring(start, end >= 0 ? end : url.length);
+      const param = params[replace.substring(1)];
 
-        if (param) {
-            delete params[replace.substr(1)];
-        } else if (end >= 0) {
-            replace += '/';
-        }
+      if (param) {
+        delete params[replace.substr(1)];
+      } else if (end >= 0) {
+        replace += '/';
+      }
 
-        url = url.replace(replace, param ? param : '');
-        start = url.indexOf(':', start);
+      url = url.replace(replace, param ? param : '');
+      start = url.indexOf(':', start);
     }
 
     // add query string params
     let first = true;
 
     for (const key in params) {
-        if (!params.hasOwnProperty(key)) {
-            continue;
-        }
+      if (!params.hasOwnProperty(key)) {
+          continue;
+      }
 
-        let prepend = '&';
+      let prepend = '&';
 
-        if (first) {
-            first = false;
-            prepend = '?';
-        }
+      if (first) {
+        first = false;
+        prepend = '?';
+      }
 
-        url += (prepend + key + '=' + params[key]);
+      url += (prepend + key + '=' + params[key]);
     }
 
     return url;
