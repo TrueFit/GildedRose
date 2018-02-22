@@ -8,7 +8,7 @@
       Trash
     </mat-button-toggle>
   </mat-button-toggle-group>
-  <button mat-raised-button color="warn">End Day</button>
+  <button mat-raised-button color="warn" (click)="endDay()">End Day</button>
 </div>
 <div class="gr-pad-top-md">
     <mat-table #table [dataSource]="items">

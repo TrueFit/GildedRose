@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
 
 import { DataProviderService } from '../../shared/data-provider.service';
 
@@ -11,5 +12,9 @@ export class ItemDataProvider extends DataProviderService<Item> {
 
     constructor(httpClient: HttpClient) {
         super(httpClient);
+    }
+
+    endDay(): Observable {
+      return this.makeRequest('POST', null, {}, "/api/items/endday");
     }
 }

@@ -59,6 +59,18 @@ export abstract class DataProviderService<T> {
     );
   }
 
+  protected makeRequest(method: string, data?: object, params?: object, targetUrl?: string): Observable {
+    const url = this.buildUrl(params, targetUrl);
+    const headers = new HttpHeaders();  // Not setting anything for now.
+
+    return this.httpClient.request(method, url, {
+        headers: headers,
+        body: data
+      }).pipe(
+        catchError(this.handleError<T>('HTTP Request Error!'))
+      );
+  }
+
   mapErrorsToFormControls(errorResponse: HttpErrorResponse, form: FormGroup) {
       for (const error of errorResponse.error.errors) {
           const attribute = error.source.pointer.substr(error.source.pointer.lastIndexOf('/') + 1);
@@ -70,10 +82,10 @@ export abstract class DataProviderService<T> {
       }
   }
 
-  private buildUrl(params?: object): string {
+  private buildUrl(params?: object, targetUrl?: string): string {
     params = params ? Object.assign({}, params) : {};
 
-    let url = environment.apiRootURL + this.resourceRoot;
+    let url = environment.apiRootURL + (targetUrl ? targetUrl : this.resourceRoot);
     let start = url.indexOf(':', this.nthIndex('/', url, 3)); // could make this smarter.
 
     // find and replace all url arguments
@@ -112,6 +124,7 @@ export abstract class DataProviderService<T> {
 
     return url;
   }
+
 
   private nthIndex(needle: string, haystack: string, occurence: number) {
     // TODO: put this someplace else someday.

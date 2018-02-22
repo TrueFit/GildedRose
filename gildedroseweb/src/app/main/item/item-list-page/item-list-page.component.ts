@@ -19,6 +19,7 @@ export class ItemListPageComponent implements OnInit {
   }
 
   getItems(): void {
+    //get list of all items OR filter to show the "trash"
     let params = {};
 
     if(this.filter === 'trash') {
@@ -32,5 +33,15 @@ export class ItemListPageComponent implements OnInit {
   filterChanged(event) {
     this.filter = event.value;
     this.getItems();
+  }
+
+  endDay(): void {
+    //mmake a POST to api to end the day. Then, refresh the items list.
+    this.itemDataProvider.endDay()
+      .subscribe(response => {
+        if(!!response) {
+          this.getItems();
+        }
+      });
   }
 }
