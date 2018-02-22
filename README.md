@@ -4,26 +4,26 @@ Gilded Rose Solution - Steve Jacobs
 Running the Solution
 ------------------------
 This solution contains two components.
-1. Web API written with Django
+1. Web API written with Django and Django Rest Framework
 2. Single Page Web App written with Angular 5
 
-The above components are containerized using Docker to make setup of local environment easy for developer and reviewer
+The above components are containerized using Docker to make setup of local environment easy for developer and reviewer.
 
 To run the project, first make sure that you have the docker host installed locally on your machine.
 [Install Docker](https://docs.docker.com/get-started/)
 
 Then, follow the steps outlined below to build the docker images, bring up the containers, and run initial
-data migrations
+data migrations:
 
-1. From the root project directory run
+1. From the root project directory run:
 
    `docker-compose build`
-2. Bring up the containers with command
+2. Bring up the containers with command:
 
    `docker-compose up -d`
 3. Next we run the django migrations to create the DB tables and load the inital data from `inventory.txt`
 
-   We use the following docker command to run the migrate script within our API container
+   We use the following docker command to run the migrate script within our API container:
 
    `docker-compose run gildedroseapi python manage.py migrate`
 
@@ -35,8 +35,13 @@ data migrations
 
    See `/gildedroseapi/gildedroseapi/inventory/migrations/load_data.py` for the
    migration script.
-4. more...
+4. Both the API and Web app containers should now be running. Browse to http://localhost:4200
 
+   If the webapp does not load initally, webpack may still be compiling. Wait a few seconds and try again.
+
+   You can tail the logs for the webapp container to be sure by running:
+
+   'docker-compose logs -f gildedroseweb'
 
 
 Orignal Instructions - The Problem
