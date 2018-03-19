@@ -94,9 +94,11 @@ namespace GR.BusinessLogic{
                     item.Quality = maxQualtity;
                 }
                
-                // save the results to the database
+                // Update the database context
                 databaseContext.Update(item);
             }
+
+            // Save the results to the database
             databaseContext.SaveChanges();
         }
 
