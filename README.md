@@ -1,3 +1,18 @@
+Approach:
+
+
+
+This solution has multiple pieces.
+1. GRBusinessLogic - This project handled the Business Logic and Database connection of the the solution
+2. GRConsoleApp - A Command line interface to the application
+3. GRApi - Web API for this solution
+4. GRWeb - The Web Page front end for this solution 
+
+-- Future Considerations (Phase 2):
+1. Allow for restock of Inventory and deal with the same item that stoked a different times. (Handle the same Item with a different SellIn and Quality).
+2.  Allow for the addition of more categories by storing them in the database.
+
+----- Inital Requirements --------
 Gilded Rose
 ==========================
 The Problem

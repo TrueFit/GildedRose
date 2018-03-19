@@ -1,60 +1,125 @@
 using System;
 using System.Linq;
 using System.Collections;
-using GR.BusinessLogic;
+using System.Collections.Generic;
+using GR.BusinessLogic.Models;
 
 namespace GR.BusinessLogic{
     public class Inventory{
         Hashtable inventoryListHashTable = new Hashtable();
+        DatabaseContext databaseContext ;
         public Inventory(){
+            databaseContext = new DatabaseContext();
         }
 
-        public void LoadAllInventoy(){
-            // Load the entire inventory list
-
-            // Mock for now...
-            for (int i = 1; i<= 5; i++){
-                Item item = new Item();
-                item.Name = string.Format("Item {0}", i);
-                item.Quality = 5*i;
-                item.SellIn = 12*i;
-                inventoryListHashTable.Add(item.Name, item);
-            }
+        private void LoadAllInventory(){
+            // Refresh the Inventory List
+            databaseContext = new DatabaseContext();    
         }
 
         public void EndTheDay(){
-            // set the sell in and quality for the end of the data
+            LoadAllInventory();
 
-            // save the results to the database
+            int qualityDegradation = 1;
+            int sellInDegradation = 1;
+           
+            
+            List<Item> itemList = databaseContext.Items.ToList();
+            foreach (Item item in itemList){
+                int qualtityMultiplier = 1;
+                int sellInMultipler = 1;
+                int maxQualtity = 50;
+                
+                 // set the sell in and quality multipliers based on the category
+                switch (item.Category){
+                    case "Aged Brie":
+                        // Increases in qiality as it get older
+                        qualtityMultiplier = -1;
+                        break;
+                    
+                    case "Sulfuras":
+                        // Legendary item - never decreases quality of sellin
+                        //                - Qualtity can be higher than normal max quality
+                        maxQualtity = item.Quality;
+                        qualtityMultiplier = 0;
+                        sellInMultipler = 0;
+                        break;
+                     
+                    case "Backstage passes":
+                        // Increases in qiality as it get older
+                        qualtityMultiplier = -1;
+                        
+                        if (item.SellIn <= 9){
+                            qualtityMultiplier = -2;
+                        }
+                        if (item.SellIn <= 5){
+                            qualtityMultiplier = -3;
+                        }
 
-            // reload the Item list
+                        // Once the Concert has passed, qualtiy drops to 0;
+                        if (item.SellIn == 0){
+                            item.Quality = 0;
+                            qualtityMultiplier = 1;
+                        }
+                        break;
+                    
+                    case "Conjured":
+                        // Decreases twice as fast as normal items
+                        qualtityMultiplier = 2;
+                        break;
 
-        }
+                    default:
+                        break;
+                }
 
-        public Item GetItemInfo(string itemName){
-            Item item = new Item();
-            if (inventoryListHashTable.Contains(itemName)){
-                item = (Item)inventoryListHashTable[itemName];
-                return item;
+                // if SellIn has passed Item degrades twice as fast
+                if (item.SellIn == 0){
+                    qualtityMultiplier = 2;
+                }
+
+                item.Quality = item.Quality - qualityDegradation * qualtityMultiplier;
+                item.SellIn = item.SellIn - sellInDegradation * sellInMultipler;
+
+                // An Items Sell In and Qualtity can never be less than 0;
+                if (item.Quality < 0){
+                    item.Quality = 0;
+                }
+
+                if (item.SellIn < 0){
+                    item.SellIn = 0;
+                }
+
+                // An Items Qualtity can never be more that the max qualtity
+                if (item.Quality > maxQualtity){
+                    item.Quality = maxQualtity;
+                }
+               
+                // save the results to the database
+                databaseContext.Update(item);
             }
-            return null;
-
+            databaseContext.SaveChanges();
         }
 
-        public Item[] GetAllItems(){
-            Item[] items = new Item[inventoryListHashTable.Count];
-
-            int itemCount = 0;
-            foreach (Item item in inventoryListHashTable.Values){
-                items[itemCount++] = item;
-            }  
-            return items;
+        public Item GetItem(string itemName){
+            LoadAllInventory();
+            Item item = databaseContext.Items.Find(itemName);
+            return item;
         }
 
-        public Item[] GetTrashList(){
-            Item[] items = GetAllItems();
-            Item[] trashItems = items.Select(i => i.Quality == 0)
-            return (Item[])trashItems;
+        public List<Item> GetAllItems(){
+            LoadAllInventory();
+            List<Item> itemList = databaseContext.Items.ToList();
+            return itemList;
+        }
+
+        public List<Item> GetTrashList(){
+            LoadAllInventory();
+            List<Item> trashList = databaseContext.Items.Where(i => i.Quality == 0).ToList();
+            return trashList;           
+        }
+
+        public void ImportInventory(){
+            // Import Inventory form the Inventory.txt file
         }
     }
 }
