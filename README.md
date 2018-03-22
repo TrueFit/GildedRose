@@ -12,15 +12,45 @@ This solution has multiple pieces:
 2. GRWeb - The API and Web Page front end for this solution 
 
 Requirements:
-1. dotnet core version 2
-2. docker
+1. node js (and npm)
+2. dotnet core version 2
+3. docker
 
 -- Build and Run the Application
 1. Run the following command to build the docker image:
-2. Build the dotnet core components
-3. Use the console app to import the text file in the the database
-4. Run GRWeb to launch the Web Interface
-5. Have Fun ;)
+	docker run --name GildedRose-mysql -e "MYSQL_ROOT_PASSWORD=mypassword" -p 6606:3306 -d mysql
+	 
+	This create a mysql docker image named GildedRose-mysql with port 3306 mapped to localhost:6606 so
+	that we can connect externally to the image
+
+2. Intall node packages in GRWeb
+	run npm install in ../GRWeb
+
+3. Build the dotnet core components 
+	run dotnet build in the following directories in this order
+	../GRBusinessLogic
+	../GRConsoleApp
+	../GRWeb
+
+4. Run the following in the ../GRBusinessLogic to create the database tables on the mysql dstabase
+	dotnet ef database update
+	 
+5. Use the console app to import the text file in the the database
+   	from ../GRConsoleApp
+   	dotnet run - to bring up the command line interface
+   	from promp: Giled Rose CLI>
+	import 
+
+	you can type inventory to get a list of inventory from the CLI.
+
+	type exist to exit the CLI
+
+6. Run GRWeb to launch the Web Interface
+	from ../GRWeb
+	dotnet run - start the web site.
+	in a browser go to localhost:5000 
+	
+7. Have Fun ;)
 
 
 -- Future Considerations (Phase 2):
