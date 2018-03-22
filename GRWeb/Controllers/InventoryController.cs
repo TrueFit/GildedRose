@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,20 +6,19 @@ using GR.BusinessLogic;
 using GR.BusinessLogic.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GRApi.Controllers {
-    [Route("[controller]")]
-    public class InventoryController : Controller {
-        // GET inventory
+namespace GRWeb.Controllers {
+    [Route("api/[controller]")]
+    public class Inventory : Controller {
         [HttpGet]
         public IEnumerable<Item> Get() {
-            Inventory invenotry = new Inventory();
+            GR.BusinessLogic.Inventory invenotry = new GR.BusinessLogic.Inventory();
             return invenotry.GetAllItems().ToList();
         }
 
         // GET inventory/Item Name
-        [HttpGet("/inventory/name/{itemName}")]
+        [HttpGet("item/{itemName}")]
         public IActionResult Get(string itemName) {
-            Inventory invenotry = new Inventory();
+            GR.BusinessLogic.Inventory invenotry = new GR.BusinessLogic.Inventory();
 
             var item = invenotry.GetItem(itemName);
             if (item == null) {
@@ -32,18 +31,18 @@ namespace GRApi.Controllers {
         [HttpGet]
         [Route("trash")]
         public IEnumerable<Item> Trash() {
-            Inventory invenotry = new Inventory();
+            GR.BusinessLogic.Inventory invenotry = new GR.BusinessLogic.Inventory();
             return invenotry.GetTrashList().ToList();
         }
 
         [HttpPost()]
         [Route("end-of-day")]
         public IActionResult EndOfDay() {
-            Inventory inventory = new Inventory();
+            GR.BusinessLogic.Inventory inventory = new GR.BusinessLogic.Inventory();
             inventory.EndTheDay();
 
-            return CreatedAtRoute("inventory", null);
-        
+            return Ok();
+
         }
     }
 }

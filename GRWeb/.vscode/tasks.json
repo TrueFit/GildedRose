@@ -7,9 +7,16 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/GRApi.csproj"
+                "${workspaceFolder}/GRWeb.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "dotnet-build-arch",
+            "type": "shell",
+            "command": "TERM=xterm dotnet build",
+            "problemMatcher": "$msCompile",
+            "group": "build"
         }
     ]
 }

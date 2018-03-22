@@ -1,16 +1,26 @@
 Approach:
 
+This solution is build using dotnet core.  It contains a Web and Console interface.
+The inventory information is stored in a MySql database that is held in a docker container 
+(this simulates a distrubuted architecture)
+The Web interface is build with ASP.Net core and react.
 
 
 This solution has multiple pieces.
 1. GRBusinessLogic - This project handled the Business Logic and Database connection of the the solution
 2. GRConsoleApp - A Command line interface to the application
-3. GRApi - Web API for this solution
-4. GRWeb - The Web Page front end for this solution 
+2. GRWeb - The API and Web Page front end for this solution 
+
+-- Build and Run the Application
+
 
 -- Future Considerations (Phase 2):
 1. Allow for restock of Inventory and deal with the same item that stoked a different times. (Handle the same Item with a different SellIn and Quality).
-2.  Allow for the addition of more categories by storing them in the database.
+2. Allow for the addition of more categories by storing them in the database.
+3. Enhange End or Day Process to check if has already been done for the day
+
+
+
 
 ----- Inital Requirements --------
 Gilded Rose
