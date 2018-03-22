@@ -75,6 +75,15 @@ namespace GRConsoleApp {
                             });
                         });
 
+                        clApp.Command ("import", (command) => {
+                            command.Description = "Preform Inventory Import from the text file inventory.txt.";
+                            command.HelpOption (helpString);
+                            command.OnExecute (() => {
+                                ImportInventory();
+                                return 0;
+                            });
+                        });
+
                         clApp.Command ("exit", (command) => {
                             command.Description = "Closes the CLI";
                             command.HelpOption (helpString);
@@ -165,6 +174,15 @@ namespace GRConsoleApp {
             if (items.Count == 0) {
                 Console.WriteLine ("There are no items for the trash today..");
             }
+        }
+
+        public static void ImportInventory(){
+            Inventory inventory = new Inventory();
+            Console.WriteLine("Importing Inventory from inventory.txt");
+
+            inventory.ImportInventory();
+
+            Console.WriteLine("Inventory Load Complete...");
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -45,7 +46,7 @@ namespace GR.BusinessLogic{
                         sellInMultipler = 0;
                         break;
                      
-                    case "Backstage passes":
+                    case "Backstage Passes":
                         // Increases in qiality as it get older
                         qualtityMultiplier = -1;
                         
@@ -122,6 +123,38 @@ namespace GR.BusinessLogic{
 
         public void ImportInventory(){
             // Import Inventory form the Inventory.txt file
+            string inventoryFile = "inventory.txt";
+            StreamReader sr = null;
+            LoadAllInventory();
+            try{
+                 sr = new StreamReader(inventoryFile);
+            
+	            // Read the stream to a string, and write the string to the console.
+                String line = sr.ReadLine();
+                while(line != null){
+                    Console.WriteLine(line);
+                    string[] itemInfo = line.Split(',');
+                    Item item = new Item();
+                    item.Name = itemInfo[0];
+                    item.Category= itemInfo[1];
+                    item.SellIn =Convert.ToInt32( itemInfo[2]);
+                    item.Quality = Convert.ToInt32(itemInfo[3]);
+
+                    this.databaseContext.Items.Add(item);
+
+                    line = sr.ReadLine();
+
+                }
+
+                databaseContext.SaveChanges();
+            }
+            catch(Exception ex){
+                throw ex;
+            }
+            finally{
+                if (sr != null)
+                    sr.Dispose();
+            }
         }
     }
 }

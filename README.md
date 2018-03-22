@@ -6,12 +6,21 @@ The inventory information is stored in a MySql database that is held in a docker
 The Web interface is build with ASP.Net core and react.
 
 
-This solution has multiple pieces.
+This solution has multiple pieces:
 1. GRBusinessLogic - This project handled the Business Logic and Database connection of the the solution
 2. GRConsoleApp - A Command line interface to the application
 2. GRWeb - The API and Web Page front end for this solution 
 
+Requirements:
+1. dotnet core version 2
+2. docker
+
 -- Build and Run the Application
+1. Run the following command to build the docker image:
+2. Build the dotnet core components
+3. Use the console app to import the text file in the the database
+4. Run GRWeb to launch the Web Interface
+5. Have Fun ;)
 
 
 -- Future Considerations (Phase 2):
