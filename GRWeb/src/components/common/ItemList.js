@@ -1,7 +1,8 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import {PropTypes} from "prop-types";
 import ItemListRow from './ItemListRow';
 
-const ItemList = ({items}) => {
+const ItemList = ({items, showTrash}) => {
     return(
         <table className="table">
             <thead>
@@ -14,7 +15,7 @@ const ItemList = ({items}) => {
             </thead>
             <tbody>
                 {items.map(item => 
-                    <ItemListRow key={item.name} item={item} />
+                    <ItemListRow key={item.name} item={item} showTrash={showTrash} />
                 )}
             </tbody>
         </table>
@@ -22,7 +23,12 @@ const ItemList = ({items}) => {
 };
 
 ItemList.propTypes ={
-    items: PropTypes.array.isRequired
+    items: PropTypes.array.isRequired,
+    showTrash: PropTypes.bool
 };
+
+ItemList.defaultProps = {
+    showTrash: false
+}
 
 export default ItemList;

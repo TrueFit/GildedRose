@@ -51,7 +51,7 @@ export default class TrashPage extends React.Component{
         return(
             <div>
             <h2>Items for Trash</h2>
-                <ItemList items={items} />
+                <ItemList items={items} showTrash={true} />
             </div>
         );
     }

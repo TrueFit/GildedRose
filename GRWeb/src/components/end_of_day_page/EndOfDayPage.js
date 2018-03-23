@@ -3,11 +3,19 @@ import React from 'react';
 export default class EndOfDayPage extends React.Component{
     constructor(){
         super();
+        state:{
+            saving: false
+        }
 
         this.preformProcess = this.preformProcess.bind(this);
     }
 
+    componentWillMount(){
+        this.setState({saving: false});
+    }
+
     preformProcess(){
+        this.setState({saving:true});
         let postUrl = "http://localhost:5000/api/Inventory/end-of-day";
         // call Post to end of day
         //$.post(postUrl).done(this.redirectToTrash);
@@ -19,6 +27,7 @@ export default class EndOfDayPage extends React.Component{
 
     redirectToTrash(){
         window.location = "http://localhost:5000/trash";
+        this.setState({saving:false});
     }
 
 
@@ -27,9 +36,11 @@ export default class EndOfDayPage extends React.Component{
             <div>
                 <h2>End Of Day Processing</h2>
                 <p>This will preform the End of Day Process.</p>
+                <p>Once the End Of Day process completes, you will be redirected to the Trash Page</p>
                 <p>Click to Proceed.</p>
                 <input type="submit" 
-                    value="Process End Of Day"
+                    value={this.state.saving ? "Processing..." : "Process End Of Day"}
+                    disabled={this.state.saving}
                     className="btn btn-primary"
                     onClick={this.preformProcess}
                 />

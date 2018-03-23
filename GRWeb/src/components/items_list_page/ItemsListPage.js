@@ -1,5 +1,6 @@
 import React from 'react';
 import ItemList from '../common/ItemList';
+import ShowTrashCheckBox from '../common/ShowTrashCheckBox';
 import {ApiCall} from '../../apiCalls';
 
 export default class ItemsListPage extends React.Component {
@@ -7,6 +8,7 @@ export default class ItemsListPage extends React.Component {
         super();
         this.state = { 
             loading: true,
+            showTrash: false,
             messsage: "",
             listOfItems: [
             ]
@@ -14,6 +16,7 @@ export default class ItemsListPage extends React.Component {
 
         this.handleError = this.handleError.bind(this);
         this.handleResponse = this.handleResponse.bind(this);
+        this.setShowTrashState = this.setShowTrashState.bind(this);
     }
 
     // API Call
@@ -41,6 +44,10 @@ export default class ItemsListPage extends React.Component {
         console.log(error);
     }
 
+    setShowTrashState(){
+        this.setState({showTrash: !this.state.showTrash});
+    }
+
     componentDidMount(){
         this.getInventory();
     }
@@ -49,8 +56,9 @@ export default class ItemsListPage extends React.Component {
         const items = this.state.listOfItems;
         return(
             <div>
-            <h2>Inventory Items</h2>
-                <ItemList items={items} />
+                <h2>Inventory Items</h2>
+                <ShowTrashCheckBox onClick={this.setShowTrashState}/>
+                <ItemList items={items} showTrash={this.state.showTrash}/>
             </div>
         );
     }

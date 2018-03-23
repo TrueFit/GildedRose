@@ -33,13 +33,15 @@ namespace GR.BusinessLogic{
                 
                  // set the sell in and quality multipliers based on the category
                 switch (item.Category){
-                    case "Aged Brie":
-                        // Increases in qiality as it get older
-                        qualtityMultiplier = -1;
+                    case "Food":
+                        if (item.Name == "Aged Brie"){
+                            // Increases in qiality as it get older
+                            qualtityMultiplier = -1;    
+                        }
                         break;
                     
                     case "Sulfuras":
-                        // Legendary item - never decreases quality of sellin
+                        // Legendary item - never decreases quality or sellin
                         //                - Qualtity can be higher than normal max quality
                         maxQualtity = item.Quality;
                         qualtityMultiplier = 0;
@@ -50,7 +52,7 @@ namespace GR.BusinessLogic{
                         // Increases in qiality as it get older
                         qualtityMultiplier = -1;
                         
-                        if (item.SellIn <= 9){
+                        if (item.SellIn <= 10){
                             qualtityMultiplier = -2;
                         }
                         if (item.SellIn <= 5){
@@ -128,11 +130,13 @@ namespace GR.BusinessLogic{
             LoadAllInventory();
             try{
                  sr = new StreamReader(inventoryFile);
+                 int itemsImported = 0;
             
-	            // Read the stream to a string, and write the string to the console.
+	            // Read the stream to a string, and write the string to the database.
                 String line = sr.ReadLine();
                 while(line != null){
-                    Console.WriteLine(line);
+                    itemsImported++;
+                    Console.WriteLine(string.Format("Importing: {0}", line));
                     string[] itemInfo = line.Split(',');
                     Item item = new Item();
                     item.Name = itemInfo[0];
@@ -146,10 +150,14 @@ namespace GR.BusinessLogic{
 
                 }
 
+                Console.WriteLine(string.Format("Imported {0} items from file", itemsImported));
+
                 databaseContext.SaveChanges();
+
+                Console.WriteLine("Changes saved to database");
             }
             catch(Exception ex){
-                throw ex;
+                Console.WriteLine("Error Importing Inventory: {0}", ex.Message);
             }
             finally{
                 if (sr != null)
