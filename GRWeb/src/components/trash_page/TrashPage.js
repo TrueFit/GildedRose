@@ -1,6 +1,6 @@
 import React from 'react';
 import ItemList from '../common/ItemList';
-import {ApiCall} from '../../apiCalls';
+import * as ApiCall from '../../apiCalls';
 
 
 export default class TrashPage extends React.Component{
@@ -19,7 +19,7 @@ export default class TrashPage extends React.Component{
     // API Call
     getTrash(){
         let apiUrl= "http://localhost:5000/api/Inventory/trash";
-        ApiCall(apiUrl, this.handleResponse, this.handleError);
+        ApiCall.CallInventoryApi(apiUrl, this.handleResponse, this.handleError);
         /*
         fetch("http://localhost:5000/api/Inventory/trash")
         .then(respone => respone.json())

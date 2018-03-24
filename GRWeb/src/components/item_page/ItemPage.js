@@ -2,7 +2,7 @@ import React from 'react';
 import SelectInput from '../common/SelectInput';
 import DisplayField from '../common/DisplayField';
 
-import {ApiCall} from '../../apiCalls';
+import * as ApiCall from '../../apiCalls';
 
 const ItemsPage = ({ match: { params: {itemName}} }) =>{
     return <ItemPageComponent itemName={itemName} />
@@ -38,12 +38,12 @@ class ItemPageComponent extends React.Component {
     // API Calls
     getItem(){
         let apiUrl = "http://localhost:5000/api/Inventory/item/"+ this.state.currentItem;
-        ApiCall(apiUrl, this.handleItemResponse, this.handleError);
+        ApiCall.CallInventoryApi(apiUrl, this.handleItemResponse, this.handleError);
     }
 
     getInventory(){
         let apiUrl = "http://localhost:5000/api/Inventory";
-        ApiCall(apiUrl, this.handleResponse, this.handleError);
+        ApiCall.CallInventoryApi(apiUrl, this.handleResponse, this.handleError);
     }
 
 

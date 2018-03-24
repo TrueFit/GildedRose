@@ -1,7 +1,7 @@
 import React from 'react';
 import ItemList from '../common/ItemList';
 import ShowTrashCheckBox from '../common/ShowTrashCheckBox';
-import {ApiCall} from '../../apiCalls';
+import * as ApiCall from '../../apiCalls';
 
 export default class ItemsListPage extends React.Component {
     constructor() {
@@ -22,7 +22,7 @@ export default class ItemsListPage extends React.Component {
     // API Call
     getInventory(){
         let apiUrl= "http://localhost:5000/api/Inventory";
-        ApiCall(apiUrl, this.handleResponse, this.handleError);
+        ApiCall.CallInventoryApi(apiUrl, this.handleResponse, this.handleError);
         /*
         fetch(apiUrl)
         .then(respone => respone.json())

@@ -1,4 +1,5 @@
 import React from 'react';
+import * as ApiCall from '../../apiCalls';
 
 export default class EndOfDayPage extends React.Component{
     constructor(){
@@ -8,6 +9,8 @@ export default class EndOfDayPage extends React.Component{
         }
 
         this.preformProcess = this.preformProcess.bind(this);
+        this.redirectToTrash = this.redirectToTrash.bind(this);
+        this.handleError = this.handleError.bind(this);
     }
 
     componentWillMount(){
@@ -17,12 +20,19 @@ export default class EndOfDayPage extends React.Component{
     preformProcess(){
         this.setState({saving:true});
         let postUrl = "http://localhost:5000/api/Inventory/end-of-day";
+        ApiCall.PostToInventoryApi(postUrl, this.redirectToTrash, this.handleError);
         // call Post to end of day
         //$.post(postUrl).done(this.redirectToTrash);
+        /*
         fetch(postUrl,{
             method: "POST"           
         }).then(response => this.redirectToTrash())
         .catch(error => console.log(error));
+        */
+    }
+
+    handleError(error){
+        console.log(error);
     }
 
     redirectToTrash(){
