@@ -1,8 +1,14 @@
 import React from 'react';
 
+
+// Need to refactor these to return promises...
+
+
+/*
 export function CallInventoryApi(apiUrl, reponseFunction, errorFunction){
     fetch(apiUrl)
-        .then(function(response) {
+        .then(
+            function(response) {
             if (response.status === 204){
                 console.log("No info Returned");
                 return [];
@@ -11,10 +17,25 @@ export function CallInventoryApi(apiUrl, reponseFunction, errorFunction){
                 let data = response.json();
                 return data;
             }
+
         })
         .then(data => reponseFunction(data))
         .catch(error => errorFunction(error));
+};
+*/
 
+export function CallInventoryApi(apiUrl){
+    return fetch(apiUrl)
+        .then(
+            function(response) {
+            if (response.status === 204){
+                return [];
+            }
+            else{
+                let data = response.json();
+                return data;
+            }
+        });
 };
 
 export function PostToInventoryApi(apiUrl, responseFunction, errorFunction){

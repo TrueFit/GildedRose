@@ -5,6 +5,8 @@ using System.Collections;
 using System.Collections.Generic;
 using GR.BusinessLogic.Models;
 
+using System.Threading.Tasks;
+
 namespace GR.BusinessLogic{
     public class Inventory{
         Hashtable inventoryListHashTable = new Hashtable();
@@ -15,12 +17,12 @@ namespace GR.BusinessLogic{
 
         private void LoadAllInventory(){
             // Refresh the Inventory List
+            //Task.Delay(9000).Wait();
             databaseContext = new DatabaseContext();    
         }
 
         public void EndTheDay(){
             LoadAllInventory();
-
             int qualityDegradation = 1;
             int sellInDegradation = 1;
            

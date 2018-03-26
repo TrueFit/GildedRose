@@ -1,59 +1,36 @@
 import React from 'react';
+import {PropTypes} from 'prop-types';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+
 import ItemList from '../common/ItemList';
 import ShowTrashCheckBox from '../common/ShowTrashCheckBox';
 import * as ApiCall from '../../apiCalls';
+import * as itemActions from '../../actions/itemsActions';
 
-export default class ItemsListPage extends React.Component {
-    constructor() {
-        super();
-        this.state = { 
-            loading: true,
-            showTrash: false,
-            messsage: "",
-            listOfItems: [
-            ]
-        };
+class ItemsListPage extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state ={ // setup mutable state to allow for show trash checkboc click
+            itemsList: Object.assign([], this.props.itemsList),
+            showTrash: false
+        }
 
-        this.handleError = this.handleError.bind(this);
-        this.handleResponse = this.handleResponse.bind(this);
         this.setShowTrashState = this.setShowTrashState.bind(this);
     }
-
-    // API Call
-    getInventory(){
-        let apiUrl= "http://localhost:5000/api/Inventory";
-        ApiCall.CallInventoryApi(apiUrl, this.handleResponse, this.handleError);
-        /*
-        fetch(apiUrl)
-        .then(respone => respone.json())
-        .then(items => this.handleResponse(items))
-        .catch(error => handleError(error));
-        */
-    }
-
-   handleResponse(items){
-        if (items.length >0){
-            this.setState({listOfItems: items});
-        }
-        else{
-            console.log("No Items Returned");
-        }
-    }
-
-    handleError(error){
-        console.log(error);
-    }
-
+    
     setShowTrashState(){
         this.setState({showTrash: !this.state.showTrash});
     }
 
-    componentDidMount(){
-        this.getInventory();
+    componentWillReceiveProps(nextProps){
+        // Thill will update the form when the api call returns
+        this.setState({itemsList: Object.assign([], nextProps.itemsList)});
     }
 
     render(){
-        const items = this.state.listOfItems;
+        // get the items list from the local state
+        const items = this.state.itemsList;
         return(
             <div>
                 <h2>Inventory Items</h2>
@@ -63,3 +40,27 @@ export default class ItemsListPage extends React.Component {
         );
     }
 }
+
+ItemsListPage.propTypes ={
+    itemsList: PropTypes.array.isRequired
+}
+
+// set the props from the store state that is passed into the form
+function mapStateToProps(state, ownProps){
+    return{
+        itemsList: state.itemsList
+    };
+}
+
+// connect the form to a dispatch
+function mapDisptachToProps(dispatch){
+    return{
+        actions: bindActionCreators(itemActions, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDisptachToProps)(ItemsListPage)
+
+
+
+
