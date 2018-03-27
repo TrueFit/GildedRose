@@ -1,7 +1,7 @@
 import * as types from '../actions/actionTypes';
 import initialState from './initialState';
 
-export default function itemsReducer(state = initialState.itemsList, action){
+export default function itemsReducer(state = initialState.trashList, action){
     switch(action.type){
         /*
         case types.CREATE_COURSE:
@@ -9,10 +9,8 @@ export default function itemsReducer(state = initialState.itemsList, action){
                 Object.assign({}, action.course)
             ];
         */
-        case types.LOAD_ALL_ITEMS_SUCCESS:
-            return action.itemsList;
         case types.LOAD_TRASH_ITEMS_SUCCESS:
-            return action.itemsList;
+            return action.trashList;
         default:
             return state;
     }

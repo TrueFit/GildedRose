@@ -1,53 +1,26 @@
 import React from 'react';
+import {PropTypes} from 'prop-types';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+
 import ItemList from '../common/ItemList';
-import * as ApiCall from '../../apiCalls';
+import * as trashActions from '../../actions/trashActions';
 
-
-export default class TrashPage extends React.Component{
-    constructor() {
-        super();
+class TrashPage extends React.Component{
+    constructor(props, context) {
+        super(props, context);
         this.state = { 
             loading: true,
-            messsage: "",
-            listOfItems: [
-            ]
+            trashList: Object.assign([], this.props.trashList)
         };
-       this.handleError = this.handleError.bind(this);
-       this.handleResponse = this.handleResponse.bind(this);
     }
 
-    // API Call
-    getTrash(){
-        let apiUrl= "http://localhost:5000/api/Inventory/trash";
-        ApiCall.CallInventoryApi(apiUrl, this.handleResponse, this.handleError);
-        /*
-        fetch("http://localhost:5000/api/Inventory/trash")
-        .then(respone => respone.json())
-        .then(items => this.handleResponse(items))
-        .catch(error => console.error(error));
-        */
-    }
-
-    handleResponse(items){
-        if (items.length >0){
-            this.setState({listOfItems: items});
-        }
-        else{
-            console.log("No Items Returned");
-        }
-    }
-
-    handleError(error){
-        console.log(error);
-    }
-
-
-    componentDidMount(){
-        this.getTrash();
+    componentWillReceiveProps(props, ownProps){
+        this.setState({trashList: Object.assign([], props.trashList)});
     }
 
     render(){
-        const items = this.state.listOfItems;
+        const items = this.state.trashList;
         return(
             <div>
             <h2>Items for Trash</h2>
@@ -56,3 +29,21 @@ export default class TrashPage extends React.Component{
         );
     }
 }
+
+TrashPage.propTypes = {
+    trashList: PropTypes.array.isRequired
+}
+
+function mapStateToProps(state, ownProps){
+    return{
+        trashList: state.trashList
+    };
+}
+
+function mapDispatchToProps(dispatch){
+    return{
+        actions: bindActionCreators(dispatch, trashActions)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TrashPage);

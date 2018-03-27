@@ -5,8 +5,7 @@ import {connect} from 'react-redux';
 
 import ItemList from '../common/ItemList';
 import ShowTrashCheckBox from '../common/ShowTrashCheckBox';
-import * as ApiCall from '../../apiCalls';
-import * as itemActions from '../../actions/itemsActions';
+//import * as itemsListActions from '../../actions/itemsListActions';
 
 class ItemsListPage extends React.Component {
     constructor(props, context) {
@@ -52,14 +51,17 @@ function mapStateToProps(state, ownProps){
     };
 }
 
+/*
 // connect the form to a dispatch
 function mapDisptachToProps(dispatch){
     return{
-        actions: bindActionCreators(itemActions, dispatch)
+        actions: bindActionCreators(itemsListActions, dispatch)
     };
 }
 
 export default connect(mapStateToProps, mapDisptachToProps)(ItemsListPage)
+*/
+export default connect(mapStateToProps)(ItemsListPage)
 
 
 

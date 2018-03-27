@@ -1,8 +1,14 @@
 // Handles the Templage used by every page.
 import React from 'react';
+import {connect} from 'react-redux';
+
 import Header from './Header';
 
-export default class AppPage extends React.Component{
+class AppPage extends React.Component{
+    constructor(props){
+        super(props);
+    }
+    
     render(){
         return(
             <div id>
@@ -14,3 +20,5 @@ export default class AppPage extends React.Component{
         );
     }
 }
+
+export default connect()(AppPage);

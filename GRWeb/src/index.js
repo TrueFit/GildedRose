@@ -9,11 +9,15 @@ import {Provider} from 'react-redux'
 // js files
 import routes from './routes';
 import configureStore from './store/configureStore';
-import {loadAllItems} from './actions/itemsActions';
+import {loadAllItems} from './actions/itemsListActions';
+import {loadTrashItems} from './actions/trashActions';
+import {loadItem} from './actions/itemActions';
 import initialState from './reducers/initialState';
 
 const store = configureStore(initialState);
 store.dispatch(loadAllItems());
+store.dispatch(loadTrashItems());
+
 
 render(
     <Provider store ={store}>

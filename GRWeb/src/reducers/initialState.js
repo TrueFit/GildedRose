@@ -1,5 +1,7 @@
 export default{
-    itemsList:[]
+    itemsList:[],
+    trashList:[],
+    item: {name: "", category: "", sellIn: "", quality: ""}
 }
 
 /*

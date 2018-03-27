@@ -1,8 +1,9 @@
 import React from 'react';
-import {Link, IndexLink} from 'react-router-dom';
+import {connect} from 'react-redux';
+
 import {Navbar, Nav, NavItem, MenuItem, NavDropdown} from 'react-bootstrap';
 
-export default class Header extends React.Component{
+class Header extends React.Component{
     render(){
         return(
             <Navbar inverse collapseOnSelect>
@@ -14,16 +15,16 @@ export default class Header extends React.Component{
                 </Navbar.Header>
                 <Navbar.Collapse>
                     <Nav pullRight>
-                    <NavItem eventKey={1} href="item">
+                    <NavItem eventKey={1} href="/item">
                         Select Item
                     </NavItem>
                     <NavItem eventKey={2} href="/itemslist">
                         List Items
                     </NavItem>
-                    <NavItem eventKey={3} href="trash">
+                    <NavItem eventKey={3} href="/trash">
                         Trash
                     </NavItem>
-                    <NavItem eventKey={4} href="endofday">
+                    <NavItem eventKey={4} href="/endofday">
                         End Of Day
                     </NavItem>
                     </Nav>
@@ -32,3 +33,5 @@ export default class Header extends React.Component{
         );
     }
 }
+
+export default connect()(Header);

@@ -1,9 +1,13 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
 import {Jumbotron} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
 
 
-export default class HomePage extends React.Component{
+class HomePage extends React.Component{
+    constructor(props){
+        super(props);
+    }
     render(){
         return(
             <div>
@@ -14,19 +18,19 @@ export default class HomePage extends React.Component{
                     
                     <ul>
                         <li>
-                           <span><Link to={"/item"}>Select Item</Link> 
+                           <span><a href="/item">Select Item</a> 
                            - Get Information about a particular Item.</span>                        
                         </li>  
                         <li>
-                            <span><Link to={"/itemslist"}>List Items</Link> 
+                            <span><a href="/itemslist">List Items</a> 
                             - List all Items in Inventory.</span>
                         </li> 
                         <li>
-                            <span><Link to={"/trash"}>Trash List</Link> 
+                            <span><a href="/trash">Trash List</a> 
                             - List all Items in Inventory.</span>
                          </li>
                          <li>   
-                            <span><Link to={"/endofday"}>End Of Day</Link>
+                            <span><a href="/endofday">End Of Day</a>
                             - Get Information about a particular Item.</span>
                         </li>
                     </ul>
@@ -36,3 +40,5 @@ export default class HomePage extends React.Component{
         );
     }
 }
+
+export default connect()(HomePage);

@@ -2,8 +2,6 @@ import React from 'react';
 
 
 // Need to refactor these to return promises...
-
-
 /*
 export function CallInventoryApi(apiUrl, reponseFunction, errorFunction){
     fetch(apiUrl)

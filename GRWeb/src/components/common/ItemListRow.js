@@ -1,6 +1,5 @@
 import React from 'react';
 import {PropTypes} from "prop-types";
-import {Link} from 'react-router-dom';
 
 const ItemListRow = ({item, showTrash}) => {
     if (!showTrash && item.quality == 0){
@@ -9,7 +8,7 @@ const ItemListRow = ({item, showTrash}) => {
     else{
         return(
             <tr>
-                <td><Link to={"/item/" + item.name}>{item.name}</Link></td>
+                <td><a href={"/item/" + item.name}>{item.name}</a></td>
                 <td>{item.category}</td>
                 <td>{item.quality}</td>
                 <td>{item.sellIn}</td>
