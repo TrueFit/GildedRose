@@ -15,6 +15,10 @@ class TrashPage extends React.Component{
         };
     }
 
+    componentDidMount(){
+        this.props.actions.loadTrashItems();
+    }
+
     componentWillReceiveProps(props, ownProps){
         this.setState({trashList: Object.assign([], props.trashList)});
     }
@@ -42,7 +46,7 @@ function mapStateToProps(state, ownProps){
 
 function mapDispatchToProps(dispatch){
     return{
-        actions: bindActionCreators(dispatch, trashActions)
+        actions: bindActionCreators(trashActions, dispatch)
     };
 }
 

@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 import ItemList from '../common/ItemList';
 import ShowTrashCheckBox from '../common/ShowTrashCheckBox';
-//import * as itemsListActions from '../../actions/itemsListActions';
+import * as itemsListActions from '../../actions/itemsListActions';
 
 class ItemsListPage extends React.Component {
     constructor(props, context) {
@@ -20,6 +20,10 @@ class ItemsListPage extends React.Component {
     
     setShowTrashState(){
         this.setState({showTrash: !this.state.showTrash});
+    }
+
+    componentDidMount(){
+        this.props.actions.loadAllItems();
     }
 
     componentWillReceiveProps(nextProps){
@@ -51,7 +55,6 @@ function mapStateToProps(state, ownProps){
     };
 }
 
-/*
 // connect the form to a dispatch
 function mapDisptachToProps(dispatch){
     return{
@@ -60,8 +63,6 @@ function mapDisptachToProps(dispatch){
 }
 
 export default connect(mapStateToProps, mapDisptachToProps)(ItemsListPage)
-*/
-export default connect(mapStateToProps)(ItemsListPage)
 
 
 

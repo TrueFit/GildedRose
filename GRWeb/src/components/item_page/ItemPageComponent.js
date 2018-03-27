@@ -28,6 +28,7 @@ class ItemPageComponent extends React.Component {
 
     componentDidMount(){
         this.loadItemInformation(this.props.itemName);
+        this.props.itemsListActions.loadAllItems();
     }
 
     componentWillReceiveProps(nextProps){
@@ -41,6 +42,8 @@ class ItemPageComponent extends React.Component {
     render(){
         const listOfItems = this.props.itemsList;
         const item = this.state.item;
+        console.log("item Name: " + item.name);
+        console.log("item Quality: " + item.quality);
         return(
             <div>
                 <SelectInput 
@@ -87,7 +90,8 @@ function mapStateToProps(state, ownProps){
 // connect the form to a dispatch
 function mapDisptachToProps(dispatch){
     return{
-        itemActions: bindActionCreators(itemActions, dispatch)
+        itemActions: bindActionCreators(itemActions, dispatch),
+        itemsListActions: bindActionCreators(itemsListActions, dispatch)
     };
 }
 

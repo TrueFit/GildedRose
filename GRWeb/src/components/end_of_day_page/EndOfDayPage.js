@@ -1,7 +1,9 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
 import * as ApiCall from '../../apiCalls';
 
-export default class EndOfDayPage extends React.Component{
+class EndOfDayPage extends React.Component{
     constructor(){
         super();
         state:{
@@ -21,14 +23,6 @@ export default class EndOfDayPage extends React.Component{
         this.setState({saving:true});
         let postUrl = "http://localhost:5000/api/Inventory/end-of-day";
         ApiCall.PostToInventoryApi(postUrl, this.redirectToTrash, this.handleError);
-        // call Post to end of day
-        //$.post(postUrl).done(this.redirectToTrash);
-        /*
-        fetch(postUrl,{
-            method: "POST"           
-        }).then(response => this.redirectToTrash())
-        .catch(error => console.log(error));
-        */
     }
 
     handleError(error){
@@ -59,3 +53,5 @@ export default class EndOfDayPage extends React.Component{
 
     }
 }
+
+export default connect()(EndOfDayPage);

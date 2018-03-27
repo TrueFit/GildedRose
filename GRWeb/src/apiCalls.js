@@ -36,6 +36,15 @@ export function CallInventoryApi(apiUrl){
         });
 };
 
+export function PostEndOfDay(){
+    let apiUrl = "http://localhost:5000/api/Inventory/end-of-day";
+    return fetch(apiUrl,{
+        method: "POST"           
+    }).then(response => {
+        return response;
+    });
+};
+
 export function PostToInventoryApi(apiUrl, responseFunction, errorFunction){
     fetch(apiUrl,{
         method: "POST"           

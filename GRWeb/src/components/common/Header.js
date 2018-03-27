@@ -1,9 +1,8 @@
 import React from 'react';
-import {connect} from 'react-redux';
 
 import {Navbar, Nav, NavItem, MenuItem, NavDropdown} from 'react-bootstrap';
 
-class Header extends React.Component{
+export default class Header extends React.Component{
     render(){
         return(
             <Navbar inverse collapseOnSelect>
@@ -33,5 +32,3 @@ class Header extends React.Component{
         );
     }
 }
-
-export default connect()(Header);

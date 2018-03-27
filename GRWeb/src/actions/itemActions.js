@@ -1,5 +1,6 @@
 import * as types from "./actionTypes";
 import * as ApiCalls from "../apiCalls";
+import {beginApiCall}from './apiCallStatusActions';
 
 
 export function loadItemSuccess(item){
@@ -10,13 +11,16 @@ export function loadItemSuccess(item){
 
 //Thunks
 export function loadItem(itemName){
-    if (itemName==""){
+    console.log("ACtion Item Name " + itemName);
+    if (itemName=="" || itemName == null){
         return function(dispatch) {
+            dispatch(beginApiCall());
             dispatch(loadItemSuccess(null));
         }
     }
     let apiUrl = "http://localhost:5000/api/Inventory/item/" + itemName;
     return function(dispatch){
+        dispatch(beginApiCall());
         return ApiCalls.CallInventoryApi(apiUrl)
         .then(item => { 
             dispatch(loadItemSuccess(item));
