@@ -3,7 +3,7 @@ Approach:
 This solution is build using dotnet core.  It contains a Web and Console interface.
 The inventory information is stored in a MySql database that is held in a docker container 
 (this simulates a distrubuted architecture)
-The Web interface is build with ASP.Net core and react.
+The Web interface is build with ASP.Net core and react with redux.
 
 
 This solution has multiple pieces:
@@ -24,15 +24,19 @@ Requirements:
 	that we can connect externally to the image
 
 2. Intall node packages in GRWeb
-	run npm install in ../GRWeb
+	from ../GRWeb run:
+	 npm install 
 
 3. Build the dotnet core components 
-	run dotnet build in the following directories in this order
+	run:
+	 dotnet build 
+	 
+	 in the following directories in this order
 	../GRBusinessLogic
 	../GRConsoleApp
 	../GRWeb
 
-4. Run the following in the ../GRBusinessLogic to create the database tables on the mysql dstabase
+4. Run the following in the ../GRBusinessLogic to create the database tables on the mysql dstabase:
 	dotnet ef database update
 	 
 5. Use the console app to import the text file in the the database
@@ -41,23 +45,27 @@ Requirements:
    	from promp: Giled Rose CLI>
 	import 
 
-	you can type inventory to get a list of inventory from the CLI.
+	you can type: 
+	inventory 
+	to get a list of inventory from the CLI.
 
-	type exist to exit the CLI
+	type: 
+	exit 
+	to exit the CLI
 
 6. Run GRWeb to launch the Web Interface
 	from ../GRWeb
 	dotnet run - start the web site.
-	in a browser go to localhost:5000 
+	in a browser go to localhost:5000 to bring up the web interface 
 	
 7. Have Fun ;)
 
 
 -- Future Considerations (Phase 2):
-1. Allow for restock of Inventory and deal with the same item that stoked a different times. (Handle the same Item with a different SellIn and Quality).
+1. Allow for restock of Inventory and deal with the same item that is stocked at different times. (i.e. the same Item with a different SellIn and Quality).
 2. Allow for the addition of more categories by storing them in the database.
-3. Enhange End or Day Process to check if has already been done for the day
-
+  - Create fields on the categories that can store End Of Day Process properties. 
+3. Enhance End OfDay Process to to keep log of when / if it happened and notify user if it has already been done for the day.
 
 
 

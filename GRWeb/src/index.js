@@ -15,9 +15,6 @@ import {loadItem} from './actions/itemActions';
 import initialState from './reducers/initialState';
 
 const store = configureStore(initialState);
-//store.dispatch(loadAllItems());
-//store.dispatch(loadTrashItems());
-
 
 render(
     <Provider store ={store}>

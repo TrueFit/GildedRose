@@ -40,7 +40,7 @@ class EndOfDayPage extends React.Component{
             <div>
                 <h2>End Of Day Processing</h2>
                 <p>This will preform the End of Day Process.</p>
-                <p>Once the End Of Day process completes, you will be redirected to the Trash Page</p>
+                <p>Once the End Of Day process completes, you will be redirected to the Trash Page.</p>
                 <p>Click to Proceed.</p>
                 <input type="submit" 
                     value={this.state.saving ? "Processing..." : "Process End Of Day"}

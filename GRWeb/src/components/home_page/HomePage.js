@@ -27,11 +27,11 @@ class HomePage extends React.Component{
                         </li> 
                         <li>
                             <span><a href="/trash">Trash List</a> 
-                            - List all Items in Inventory.</span>
+                            - List all Trash Items in Inventory.</span>
                          </li>
                          <li>   
                             <span><a href="/endofday">End Of Day</a>
-                            - Get Information about a particular Item.</span>
+                            - Preform the End Of Day Process.</span>
                         </li>
                     </ul>
                     </div>

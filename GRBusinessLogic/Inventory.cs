@@ -17,7 +17,6 @@ namespace GR.BusinessLogic{
 
         private void LoadAllInventory(){
             // Refresh the Inventory List
-            //Task.Delay(9000).Wait();
             databaseContext = new DatabaseContext();    
         }
 
