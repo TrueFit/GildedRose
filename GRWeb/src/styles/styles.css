@@ -1,0 +1,31 @@
+.jumbotron{
+   background-color: white;
+}
+
+.vertical-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.display-field {
+    display: flex;
+}
+
+.display-field .field {
+    padding-left: 10px;
+}
+
+.select-item{
+    display: flex;
+}
+
+.select-item .field {
+    padding-left: 10px;
+    min-width: 200px;
+}
+
+#showTrashItemsLabel {
+    padding-left: 10px;
+}
