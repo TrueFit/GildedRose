@@ -45,5 +45,5 @@ Have fun.
 ## Things To Consider
 Here are a couple of thoughts about the domain that could influence your response:
 
-* The world is a magical place - you never know when the next "special requirement" might popup - how can you make this painless?
-* Keep in mind that accurate inventory is a must for the shop, how might you ensure that the future programmer who takes your code over while you are off adventuring doesn't mistakenly mess things up?
+* The world is a magical place - you never know when the next "special requirement" might pop up - how can you make this painless?
+* Keep in mind that accurate inventory is a must for the shop, how might you ensure that the future programmer who takes over the code while you are off adventuring doesn't mistakenly mess things up?
