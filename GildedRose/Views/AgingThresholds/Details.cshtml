@@ -1,0 +1,67 @@
+﻿@model GildedRose.Models.AgingThreshold
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>AgingThreshold</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.AgingScheme.SchemeName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AgingScheme.SchemeName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ThresholdName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ThresholdName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DaysPrior)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DaysPrior)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.IncrementRate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.IncrementRate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.LastUpdated)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.LastUpdated)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.AgingThresholdId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>
