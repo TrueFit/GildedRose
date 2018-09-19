@@ -1,0 +1,73 @@
+﻿@model GildedRose.Models.AgingThreshold
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>AgingThreshold</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.AgingScheme.SchemeName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AgingScheme.SchemeName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ThresholdName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ThresholdName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DaysPrior)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DaysPrior)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.IncrementRate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.IncrementRate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.LastUpdated)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.LastUpdated)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

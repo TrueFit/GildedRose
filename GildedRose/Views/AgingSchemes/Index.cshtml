@@ -1,0 +1,58 @@
+﻿@model IEnumerable<GildedRose.Models.AgingScheme>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SchemeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DefaultIncrement)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxQuality)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScrapOnExpiration)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SchemeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DefaultIncrement)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxQuality)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScrapOnExpiration)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AgingSchemeId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AgingSchemeId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AgingSchemeId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Gilded Rose CRB</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/Site.css")
+    @Styles.Render("~/Content/bootstrap.min.css")
+</head>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Gilded Rose Products", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#prodSubmenu" data-toggle="collapse" aria-expanded="false">
+                            <i class="glyphicon glyphicon-tasks"></i>
+                            Manage Products
+                        </a>
+                        <ul class="collapse list-unstyled" id="prodSubmenu">
+                            <li><a href="@Url.Action("Index", "Products")">Products</a></li>
+                            <li><a href="@Url.Action("Index", "Categories")">Categories</a></li>
+                            <li><a href="@Url.Action("Index", "AgingSchemes")">Aging Schemes</a></li>
+                            <li><a href="@Url.Action("Index", "AgingThresholds")">Aging Thresholds</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                    <a href="#contSubmenu" data-toggle="collapse" aria-expanded="false">
+                        <i class="glyphicon glyphicon-envelope"></i>
+                        Contact
+                    </a>
+                    <ul class="collapse list-unstyled" id="contSubmenu">
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Gilded Rose Aging by CRB</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
