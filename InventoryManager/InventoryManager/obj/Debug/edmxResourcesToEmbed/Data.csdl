@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InvMgrModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="InventoryManagerEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbl_DailyUpdateLog" EntityType="InvMgrModel.tbl_DailyUpdateLog" />
+    <EntitySet Name="tbl_Items" EntityType="InvMgrModel.tbl_Items" />
+    <EntitySet Name="tbl_Stores" EntityType="InvMgrModel.tbl_Stores" />
+    <AssociationSet Name="FK_ItemsStore" Association="InvMgrModel.FK_ItemsStore">
+      <End Role="tbl_Stores" EntitySet="tbl_Stores" />
+      <End Role="tbl_Items" EntitySet="tbl_Items" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="tbl_DailyUpdateLog">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="Guid" Nullable="false" />
+    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Type" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_Items">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="Guid" Nullable="false" />
+    <Property Name="StoreGuid" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Category" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SellIn" Type="Int32" Nullable="false" />
+    <Property Name="Quality" Type="Int32" Nullable="false" />
+    <Property Name="Legendary" Type="Boolean" Nullable="false" />
+    <Property Name="BetterWithAge" Type="Boolean" Nullable="false" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ImageName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateTrashed" Type="DateTime" Precision="3" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="tbl_Stores" Relationship="InvMgrModel.FK_ItemsStore" FromRole="tbl_Items" ToRole="tbl_Stores" />
+    <Property Name="DateSold" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_Stores">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Zipcode" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="EmailAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Logo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="LogoName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="tbl_Items" Relationship="InvMgrModel.FK_ItemsStore" FromRole="tbl_Stores" ToRole="tbl_Items" />
+  </EntityType>
+  <Association Name="FK_ItemsStore">
+    <End Type="InvMgrModel.tbl_Stores" Role="tbl_Stores" Multiplicity="1" />
+    <End Type="InvMgrModel.tbl_Items" Role="tbl_Items" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Stores">
+        <PropertyRef Name="Guid" />
+      </Principal>
+      <Dependent Role="tbl_Items">
+        <PropertyRef Name="StoreGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

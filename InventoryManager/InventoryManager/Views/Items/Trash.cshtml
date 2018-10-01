@@ -1,0 +1,75 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<InventoryManager.tbl_Items>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = ViewBag.Store.Name + "'s Trash";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New Item", "Create") | @Html.ActionLink("Upload Inventory", "Upload") | @Html.ActionLink("Trash", "Trash", new { guid = ViewBag.Store.Guid })
+</p>
+
+<p>@Html.ActionLink("Clear All Trash", "TrashAll", new { guid = ViewBag.Store.Guid }, new { @class ="btn btn-default"  })</p>
+
+<div style="overflow-x:auto;">
+    <table class="table">
+        <tr>
+        <tr>
+            <th>
+                @Html.ActionLink("Name", "Trash", new { sortOrder = ViewBag.NameSortParm, guid = ViewBag.Store.Guid })
+            </th>
+            <th>
+                @Html.ActionLink("Category", "Trash", new { sortOrder = ViewBag.CategorySortParm, guid = ViewBag.Store.Guid })
+            </th>
+            <th>
+                @Html.ActionLink("Sell In", "Trash", new { sortOrder = ViewBag.SellInSortParm, guid = ViewBag.Store.Guid })
+            </th>
+            <th>
+                @Html.ActionLink("Quality", "Trash", new { sortOrder = ViewBag.QualitySortParm, guid = ViewBag.Store.Guid })
+            </th>
+            <th>
+                @Html.ActionLink("Legendary", "Trash", new { sortOrder = ViewBag.LegendarySortParm, guid = ViewBag.Store.Guid })
+            </th>
+            <th>
+                @Html.ActionLink("Better With Age", "Trash", new { sortOrder = ViewBag.BetterWithAgeSortParm, guid = ViewBag.Store.Guid })
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SellIn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quality)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Legendary)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BetterWithAge)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, guid = ViewBag.Store.Guid }))
+
+<div>
+    @Html.ActionLink("Back to Inventory", "Index", new { guid = ViewBag.Store.Guid })
+</div>

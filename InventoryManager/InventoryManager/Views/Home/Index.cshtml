@@ -1,0 +1,33 @@
+﻿@model IEnumerable<InventoryManager.tbl_Stores>
+
+@{
+	ViewBag.Title = "Inventory Manager";
+}
+
+<div class="jumbotron">
+
+	<h1>@ViewBag.Title</h1>
+
+	<p class="lead">Select a store to begin managing inventory.</p>
+
+    <hr />
+
+	@foreach (var item in Model)
+	{
+		<p><a href="/items/index?guid=@item.Guid" class="btn btn-primary btn-lg">@item.Name</a></p>
+        if (item.Address != null)
+        {
+        <p>
+            @item.Address<br />
+            @item.City, @item.State @item.Zipcode<br />
+            <a href="tel:@item.PhoneNumber">@item.PhoneNumber</a><br />
+            <a href="mailto:@item.EmailAddress">@item.EmailAddress</a>
+        </p>
+        }
+        
+        <hr />
+	}
+
+</div>
+
+<p><a href="/stores/create" class="btn btn-default">Create New Store</a></p>

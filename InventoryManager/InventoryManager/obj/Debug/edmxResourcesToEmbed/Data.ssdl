@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InvMgrModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbl_DailyUpdateLog">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DateTime" Type="datetime" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="tbl_Items">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="StoreGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Category" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="SellIn" Type="int" Nullable="false" />
+    <Property Name="Quality" Type="int" Nullable="false" />
+    <Property Name="Legendary" Type="bit" Nullable="false" />
+    <Property Name="BetterWithAge" Type="bit" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="ImageName" Type="nvarchar" MaxLength="255" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateSold" Type="datetime" />
+    <Property Name="DateTrashed" Type="datetime" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_Stores">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Address" Type="nvarchar" MaxLength="255" />
+    <Property Name="City" Type="nvarchar" MaxLength="255" />
+    <Property Name="State" Type="nvarchar" MaxLength="255" />
+    <Property Name="Zipcode" Type="nvarchar" MaxLength="15" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="15" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="255" />
+    <Property Name="Logo" Type="varbinary(max)" />
+    <Property Name="LogoName" Type="nvarchar" MaxLength="255" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ItemsStore">
+    <End Role="tbl_Stores" Type="Self.tbl_Stores" Multiplicity="1" />
+    <End Role="tbl_Items" Type="Self.tbl_Items" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Stores">
+        <PropertyRef Name="Guid" />
+      </Principal>
+      <Dependent Role="tbl_Items">
+        <PropertyRef Name="StoreGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="InvMgrModelStoreContainer">
+    <EntitySet Name="tbl_DailyUpdateLog" EntityType="Self.tbl_DailyUpdateLog" Schema="InvMgr" store:Type="Tables" />
+    <EntitySet Name="tbl_Items" EntityType="Self.tbl_Items" Schema="InvMgr" store:Type="Tables" />
+    <EntitySet Name="tbl_Stores" EntityType="Self.tbl_Stores" Schema="InvMgr" store:Type="Tables" />
+    <AssociationSet Name="FK_ItemsStore" Association="Self.FK_ItemsStore">
+      <End Role="tbl_Stores" EntitySet="tbl_Stores" />
+      <End Role="tbl_Items" EntitySet="tbl_Items" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
