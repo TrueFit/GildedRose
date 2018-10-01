@@ -1,0 +1,401 @@
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\ApplicationInsights.config
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\InventoryManager.dll.config
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\InventoryManager.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\InventoryManager.pdb
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\csc.exe
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\csc.exe.config
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\csc.rsp
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\csi.exe
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\csi.exe.config
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\csi.rsp
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\System.AppContext.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\System.Console.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\System.IO.Compression.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\System.IO.Pipes.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\System.Security.Claims.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\System.ValueTuple.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\System.Xml.XPath.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\vbc.exe
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\vbc.exe.config
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\vbc.rsp
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\VBCSCompiler.exe
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\Antlr3.Runtime.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\EntityFramework.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\EntityFramework.SqlServer.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\Microsoft.AI.Web.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\Microsoft.ApplicationInsights.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\Newtonsoft.Json.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\System.Web.Helpers.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\System.Web.Mvc.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\System.Web.Optimization.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\System.Web.Razor.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\System.Web.WebPages.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\System.Web.WebPages.Razor.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\WebGrease.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\EntityFramework.xml
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\EntityFramework.SqlServer.xml
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\System.Web.Helpers.xml
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\System.Web.Mvc.xml
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\System.Web.Optimization.xml
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\System.Web.Razor.xml
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\System.Web.WebPages.xml
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\System.Web.WebPages.Razor.xml
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\Newtonsoft.Json.xml
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\Antlr3.Runtime.pdb
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\System.Diagnostics.DiagnosticSource.xml
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\Microsoft.AI.Web.xml
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\obj\Debug\InventoryManager.csprojAssemblyReference.cache
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\obj\Debug\InventoryManager.csproj.CoreCompileInputs.cache
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\obj\Debug\InventoryManager.csproj.CopyComplete
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\obj\Debug\InventoryManager.dll
+C:\Users\Andrew\source\repos\InventoryManager\InventoryManager\obj\Debug\InventoryManager.pdb
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\ApplicationInsights.config
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\InventoryManager.dll.config
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\InventoryManager.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\InventoryManager.pdb
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\csc.exe
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\csc.exe.config
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\csc.rsp
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\csi.exe
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\csi.exe.config
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\csi.rsp
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\System.AppContext.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\System.Console.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\System.IO.Compression.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\System.IO.Pipes.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\System.Security.Claims.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\System.ValueTuple.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\System.Xml.XPath.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\vbc.exe
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\vbc.exe.config
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\vbc.rsp
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\VBCSCompiler.exe
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\Antlr3.Runtime.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\EntityFramework.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\EntityFramework.SqlServer.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\Microsoft.AI.Web.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\Microsoft.ApplicationInsights.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\Newtonsoft.Json.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\System.Web.Helpers.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\System.Web.Mvc.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\System.Web.Optimization.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\System.Web.Razor.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\System.Web.WebPages.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\System.Web.WebPages.Razor.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\WebGrease.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\EntityFramework.xml
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\EntityFramework.SqlServer.xml
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\System.Web.Helpers.xml
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\System.Web.Mvc.xml
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\System.Web.Optimization.xml
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\System.Web.Razor.xml
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\System.Web.WebPages.xml
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\System.Web.WebPages.Razor.xml
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\Newtonsoft.Json.xml
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\Antlr3.Runtime.pdb
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\System.Diagnostics.DiagnosticSource.xml
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\Microsoft.AI.Web.xml
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\obj\Debug\InventoryManager.csprojAssemblyReference.cache
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\obj\Debug\InventoryManager.csproj.CoreCompileInputs.cache
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\obj\Debug\InventoryManager.csproj.CopyComplete
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\obj\Debug\InventoryManager.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\obj\Debug\InventoryManager.pdb
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\PagedList.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\PagedList.Mvc.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\PagedList.xml
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\PagedList.Mvc.xml
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\Quartz.dll
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\Quartz.pdb
+C:\Users\Andrew\Desktop\Gilded Rose - Inventory Manager\InventoryManager\InventoryManager\bin\Quartz.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\ApplicationInsights.config
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\InventoryManager.dll.config
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\InventoryManager.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\InventoryManager.pdb
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\csc.exe
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\csc.exe.config
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\csc.rsp
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\csi.exe
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\csi.exe.config
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\csi.rsp
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\System.AppContext.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\System.Console.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\System.IO.Compression.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\System.IO.Pipes.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\System.Security.Claims.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\System.ValueTuple.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\System.Xml.XPath.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\vbc.exe
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\vbc.exe.config
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\vbc.rsp
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\VBCSCompiler.exe
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\Antlr3.Runtime.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\EntityFramework.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\EntityFramework.SqlServer.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\Microsoft.AI.Web.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\Microsoft.ApplicationInsights.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\Newtonsoft.Json.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\PagedList.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\PagedList.Mvc.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\Quartz.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\System.Web.Helpers.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\System.Web.Mvc.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\System.Web.Optimization.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\System.Web.Razor.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\System.Web.WebPages.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\System.Web.WebPages.Razor.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\WebGrease.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\EntityFramework.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\EntityFramework.SqlServer.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\PagedList.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\PagedList.Mvc.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\Quartz.pdb
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\Quartz.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\System.Web.Helpers.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\System.Web.Mvc.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\System.Web.Optimization.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\System.Web.Razor.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\System.Web.WebPages.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\System.Web.WebPages.Razor.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\Newtonsoft.Json.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\Antlr3.Runtime.pdb
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\System.Diagnostics.DiagnosticSource.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\Microsoft.AI.Web.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\obj\Debug\InventoryManager.csprojAssemblyReference.cache
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\obj\Debug\InventoryManager.csproj.CoreCompileInputs.cache
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\obj\Debug\InventoryManager.csproj.CopyComplete
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\obj\Debug\InventoryManager.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\InventoryManager\InventoryManager\obj\Debug\InventoryManager.pdb
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\ApplicationInsights.config
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\InventoryManager.dll.config
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\InventoryManager.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\InventoryManager.pdb
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\csc.exe
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\csc.exe.config
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\csc.rsp
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\csi.exe
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\csi.exe.config
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\csi.rsp
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\System.AppContext.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\System.Console.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\System.IO.Compression.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\System.IO.Pipes.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\System.Security.Claims.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\System.ValueTuple.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\System.Xml.XPath.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\vbc.exe
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\vbc.exe.config
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\vbc.rsp
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\VBCSCompiler.exe
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\Antlr3.Runtime.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\EntityFramework.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\EntityFramework.SqlServer.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\Microsoft.AI.Web.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\Microsoft.ApplicationInsights.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\Newtonsoft.Json.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\PagedList.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\PagedList.Mvc.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\Quartz.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\System.Web.Helpers.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\System.Web.Mvc.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\System.Web.Optimization.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\System.Web.Razor.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\System.Web.WebPages.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\System.Web.WebPages.Razor.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\WebGrease.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\EntityFramework.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\EntityFramework.SqlServer.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\PagedList.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\PagedList.Mvc.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\Quartz.pdb
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\Quartz.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\System.Web.Helpers.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\System.Web.Mvc.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\System.Web.Optimization.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\System.Web.Razor.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\System.Web.WebPages.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\System.Web.WebPages.Razor.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\Newtonsoft.Json.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\Antlr3.Runtime.pdb
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\System.Diagnostics.DiagnosticSource.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\Microsoft.AI.Web.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\obj\Debug\InventoryManager.csprojAssemblyReference.cache
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\obj\Debug\InventoryManager.csproj.CoreCompileInputs.cache
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\obj\Debug\InventoryManager.csproj.CopyComplete
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\obj\Debug\InventoryManager.dll
+C:\Users\Andrew\Documents\GitHub\GildedRose\TEST\InventoryManager\InventoryManager\obj\Debug\InventoryManager.pdb

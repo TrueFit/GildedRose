@@ -1,0 +1,60 @@
+﻿@model InventoryManager.tbl_Items
+
+@{
+    ViewBag.Title = "Upload Inventory";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New Item", "Create") | @Html.ActionLink("Upload Inventory", "Upload") | @Html.ActionLink("Trash", "Trash", new { guid = ViewBag.Store.Guid})
+</p>
+
+<div class="form-horizontal">
+    <hr />
+
+    <div>
+        <p><b>Instructions:</b> Copy and Paste your inventory list into the form below.<br/><br />
+            <b>Format:</b><br />
+            &nbsp;&nbsp;&nbsp;Name, Category, Sell In, Quality<br />
+            &nbsp;&nbsp;&nbsp;Name, Category, Sell In, Quality<br />
+            &nbsp;&nbsp;&nbsp;Name, Category, Sell In, Quality<br />
+            &nbsp;&nbsp;&nbsp;<b>...</b>
+        </p>
+    </div>
+
+    @using (Html.BeginForm("Upload", "Items", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+    <div>
+
+        <div class="form-group">
+            @Html.Label("Inventory List", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextArea("file", "", new { type = "text", @class = "form-control", @rows = "10" }) <br />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Upload" class="btn btn-default" />
+            </div>
+        </div>
+
+        <div>
+            <big><i><p>@ViewBag.Message</p></i></big>
+        </div>
+
+    </div>
+    }
+</div>
+
+<br/>
+
+<div>
+    @Html.ActionLink("Back to Inventory", "Index", null, new { guid = ViewBag.Store.Guid }, null)
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

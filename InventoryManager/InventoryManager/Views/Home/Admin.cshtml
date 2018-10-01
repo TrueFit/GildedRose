@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Administration";
+}
+<h2>@ViewBag.Title</h2>
+
+<p>@ViewBag.Message</p>
+
+<br/>
+
+<h4>Daily Inventory Update Job (Scheduled to run everyday at 1pm)</h4>
+
+<div>
+    @Html.ActionLink("Run Daily Inventory Update Job Manually", "DailyUpdate", "Items") 
+
+    <br/>@if (ViewBag.Log != null) { <b>Last Run: </b> @ViewBag.Log.DateTime <span>by</span> @ViewBag.Log.Type }
+</div>
