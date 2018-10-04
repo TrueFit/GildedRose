@@ -3,26 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.uniqueculture.gildedrose.impl.category;
+package org.uniqueculture.gildedrose.impl.calculator;
 
-import org.uniqueculture.gildedrose.spi.Category;
 import org.uniqueculture.gildedrose.spi.Item;
 import org.uniqueculture.gildedrose.spi.QualityConstraint;
+import org.uniqueculture.gildedrose.spi.QualityCalculator;
 
 /**
  *
  * @author me
  */
-public class DefaultCategory implements Category {
+public class DefaultQualityCalculator implements QualityCalculator {
     
     QualityConstraint constraints;
 
-    public DefaultCategory(QualityConstraint constraints) {
+    public DefaultQualityCalculator(QualityConstraint constraints) {
         this.constraints = constraints;
     }
 
     @Override
-    public int calculateQuality(Item item, int day) {
+    public int calculate(Item item, int day) {
         int quality;
 
         if (day > item.getSellIn()) {
@@ -35,5 +35,12 @@ public class DefaultCategory implements Category {
         
         return constraints.apply(quality);
     }
+
+    @Override
+    public boolean appliesTo(Item item) {
+        return true;
+    }
+    
+    
 
 }

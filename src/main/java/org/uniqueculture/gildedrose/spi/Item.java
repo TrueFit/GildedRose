@@ -13,14 +13,10 @@ public interface Item {
     
     String getName();
     
-    String getCategoryName();
-    
-    Category getCategory();
+    String getCategory();
     
     int getSellIn();
     
     int getInitialQuality();
-    
-    int getQuality(int day);
     
 }

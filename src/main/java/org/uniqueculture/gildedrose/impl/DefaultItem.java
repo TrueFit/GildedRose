@@ -5,7 +5,6 @@
  */
 package org.uniqueculture.gildedrose.impl;
 
-import org.uniqueculture.gildedrose.spi.Category;
 import org.uniqueculture.gildedrose.spi.Item;
 
 /**
@@ -16,14 +15,12 @@ public class DefaultItem implements Item {
     
     String name;
     String categoryName;
-    Category category;
     int sellInDay;
     int initialQuality;
 
-    public DefaultItem(String name, String categoryName, Category category, int sellInDay, int initialQuality) {
+    public DefaultItem(String name, String categoryName, int sellInDay, int initialQuality) {
         this.name = name;
         this.categoryName = categoryName;
-        this.category = category;
         this.sellInDay = sellInDay;
         this.initialQuality = initialQuality;
     }
@@ -34,13 +31,8 @@ public class DefaultItem implements Item {
     }
 
     @Override
-    public String getCategoryName() {
+    public String getCategory() {
         return categoryName;
-    }
-
-    @Override
-    public Category getCategory() {
-        return this.category;
     }
 
     @Override
@@ -52,10 +44,4 @@ public class DefaultItem implements Item {
     public int getInitialQuality() {
         return this.initialQuality;
     }
-
-    @Override
-    public int getQuality(int day) {
-        return this.category.calculateQuality(this, day);
-    }
-    
 }

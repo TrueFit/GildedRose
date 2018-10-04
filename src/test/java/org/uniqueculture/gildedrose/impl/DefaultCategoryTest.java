@@ -5,15 +5,15 @@
  */
 package org.uniqueculture.gildedrose.impl;
 
-import org.uniqueculture.gildedrose.impl.category.DefaultCategory;
+import org.uniqueculture.gildedrose.impl.calculator.DefaultQualityCalculator;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Matchers;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.when;
-import org.uniqueculture.gildedrose.spi.Category;
 import org.uniqueculture.gildedrose.spi.Item;
 import org.uniqueculture.gildedrose.spi.QualityConstraint;
+import org.uniqueculture.gildedrose.spi.QualityCalculator;
 
 /**
  *
@@ -36,26 +36,26 @@ public class DefaultCategoryTest {
             return q > 50 ? 50 : (q < 0 ? 0 : q);
         });
         
-        Category cat = new DefaultCategory(constraints);
-        int quality = cat.calculateQuality(mock, 0);
+        QualityCalculator cat = new DefaultQualityCalculator(constraints);
+        int quality = cat.calculate(mock, 0);
         Assert.assertEquals(30, quality);
         
-        quality = cat.calculateQuality(mock, 1);
+        quality = cat.calculate(mock, 1);
         Assert.assertEquals(29, quality);
         
-        quality = cat.calculateQuality(mock, 10);
+        quality = cat.calculate(mock, 10);
         Assert.assertEquals(20, quality);
         
-        quality = cat.calculateQuality(mock, 15);
+        quality = cat.calculate(mock, 15);
         Assert.assertEquals(10, quality);
         
-        quality = cat.calculateQuality(mock, 20);
+        quality = cat.calculate(mock, 20);
         Assert.assertEquals(0, quality);
         
-        quality = cat.calculateQuality(mock, 100);
+        quality = cat.calculate(mock, 100);
         Assert.assertEquals(0, quality);
         
-        quality = cat.calculateQuality(mock, -100);
+        quality = cat.calculate(mock, -100);
         Assert.assertEquals(50, quality);
     }
     

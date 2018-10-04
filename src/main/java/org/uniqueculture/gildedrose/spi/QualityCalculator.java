@@ -5,12 +5,16 @@
  */
 package org.uniqueculture.gildedrose.spi;
 
+import java.util.List;
+
 /**
  *
  * @author me
  */
-public interface Category {
+public interface QualityCalculator {
     
-    int calculateQuality(Item item, int day);
+    boolean appliesTo(Item item);
+    
+    int calculate(Item item, int day);
     
 }

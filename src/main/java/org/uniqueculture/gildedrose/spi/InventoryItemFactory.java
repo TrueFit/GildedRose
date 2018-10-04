@@ -5,16 +5,14 @@
  */
 package org.uniqueculture.gildedrose.spi;
 
-import java.util.List;
-
 /**
  *
  * @author me
  */
-public interface Inventory {
+public interface InventoryItemFactory {
     
-    List<InventoryItem> getItems();
+    InventoryItem getInventoryItem(String name, String category, int sellIn, int quality);
     
-    InventoryItem getInventoryItem(String name);
+    InventoryItem getInventoryItem(Item item);
     
 }

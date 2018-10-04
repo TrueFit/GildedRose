@@ -9,14 +9,12 @@ package org.uniqueculture.gildedrose.spi;
  *
  * @author me
  */
-public interface CategoryRegistry {
+public interface InventoryItem {
     
-    void setDefaultCategory(Category category);
+    Item getItem();
     
-    Category getDefaultCategory();
+    QualityCalculator getQualityCalculator();
     
-    Category addCategory(String name, Category impl);
-    
-    Category getCategory(String name);
+    int getQuality(int day);
     
 }
