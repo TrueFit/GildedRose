@@ -47,3 +47,14 @@ Here are a couple of thoughts about the domain that could influence your respons
 
 * The world is a magical place - you never know when the next "special requirement" might pop up - how can you make this painless?
 * Keep in mind that accurate inventory is a must for the shop, how might you ensure that the future programmer who takes over the code while you are off adventuring doesn't mistakenly mess things up?
+
+## Solution
+Built with Java and Maven. Usage:
+```
+Usage: java -jar GildedRose-1.0-SNAPSHOT.jar <inventory csv> <command> [<command parameter>]
+Commands:
+ list                   - list all inventory items
+ item <name>            - find an item by name
+ progress <day>         - list all inventory items with calculated quality on the given day. Day 0 is the first day.
+ trash <day>            - list inventory with quality of 0 on a given day. Day 0 is the first day.
+ ```
