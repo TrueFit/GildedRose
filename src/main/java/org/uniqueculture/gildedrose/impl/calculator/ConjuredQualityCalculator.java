@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.uniqueculture.gildedrose.impl.calculator;
 
 import org.uniqueculture.gildedrose.spi.Item;
@@ -10,8 +5,11 @@ import org.uniqueculture.gildedrose.spi.QualityConstraint;
 import org.uniqueculture.gildedrose.spi.QualityCalculator;
 
 /**
+ * Quality calculator for item category Conjured
+ * 
+ * 7. "Conjured" items degrade in Quality twice as fast as normal items
  *
- * @author me
+ * @author Sergei Izvorean
  */
 public class ConjuredQualityCalculator implements QualityCalculator {
     

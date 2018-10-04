@@ -19,11 +19,8 @@ import org.uniqueculture.gildedrose.spi.QualityCalculator;
  *
  * @author me
  */
-public class DefaultCategoryTest {
-    
-    /**
-     * Test of calculateQuality method, of class DefaultCategory.
-     */
+public class DefaultQualityCalculatorTest {
+
     @Test
     public void testCalculateQuality() {
         Item mock = Mockito.mock(Item.class);

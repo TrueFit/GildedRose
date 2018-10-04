@@ -1,18 +1,29 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.uniqueculture.gildedrose.spi;
 
 /**
+ * Factory for inventory items to instantiate an Item and quality calculator 
  *
- * @author me
+ * @author Sergei Izvorean
  */
 public interface InventoryItemFactory {
     
+    /**
+     * Create an inventory item
+     * 
+     * @param name
+     * @param category
+     * @param sellIn
+     * @param quality
+     * @return 
+     */
     InventoryItem getInventoryItem(String name, String category, int sellIn, int quality);
     
+    /**
+     * Create an inventory item wrapping an existing item
+     * 
+     * @param item
+     * @return 
+     */
     InventoryItem getInventoryItem(Item item);
     
 }

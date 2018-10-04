@@ -1,20 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.uniqueculture.gildedrose.spi;
 
 import java.util.List;
 
 /**
+ * Inventory of the store  
  *
- * @author me
+ * @author Sergei Izvorean
  */
 public interface Inventory {
     
+    /**
+     * Get all items within the inventory
+     * 
+     * @return List of inventory items
+     */
     List<InventoryItem> getItems();
     
+    /**
+     * Search for a single item in the inventory by item name
+     * 
+     * @param name Item name to match
+     * @return Inventory item or null
+     */
     InventoryItem getInventoryItem(String name);
     
 }

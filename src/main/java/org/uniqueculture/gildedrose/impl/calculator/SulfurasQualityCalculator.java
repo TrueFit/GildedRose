@@ -1,16 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.uniqueculture.gildedrose.impl.calculator;
 
 import org.uniqueculture.gildedrose.spi.Item;
 import org.uniqueculture.gildedrose.spi.QualityCalculator;
 
 /**
+ * Quality calculation for Sulfuras
  *
- * @author me
+ * 5. "Sulfuras", being a legendary item, never has to be sold or decreases in Quality
+ * 
+ * @author Sergei Izvorean
  */
 public class SulfurasQualityCalculator implements QualityCalculator {
 

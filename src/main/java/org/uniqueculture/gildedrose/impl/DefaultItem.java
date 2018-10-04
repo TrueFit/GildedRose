@@ -1,23 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.uniqueculture.gildedrose.impl;
 
 import org.uniqueculture.gildedrose.spi.Item;
 
 /**
+ * State-less item data model
  *
- * @author me
+ * @author Sergei Izvorean
  */
 public class DefaultItem implements Item {
     
-    String name;
-    String categoryName;
-    int sellInDay;
-    int initialQuality;
+    private final String name;
+    private final String categoryName;
+    private final int sellInDay;
+    private final int initialQuality;
 
+    /**
+     * Create new instance
+     * 
+     * @param name
+     * @param categoryName
+     * @param sellInDay
+     * @param initialQuality 
+     */
     public DefaultItem(String name, String categoryName, int sellInDay, int initialQuality) {
         this.name = name;
         this.categoryName = categoryName;

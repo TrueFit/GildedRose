@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.uniqueculture.gildedrose.impl;
 
 import java.io.IOException;
@@ -13,18 +8,24 @@ import java.util.stream.Collectors;
 import org.uniqueculture.gildedrose.spi.Inventory;
 import org.uniqueculture.gildedrose.spi.InventoryItem;
 import org.uniqueculture.gildedrose.spi.InventoryItemFactory;
-import org.uniqueculture.gildedrose.spi.Item;
-import org.uniqueculture.gildedrose.spi.QualityCalculator;
 
 /**
+ * Helper class to parse inventory saved in CSV file
  *
- * @author me
+ * @author Sergei Izvorean
  */
 public class CsvInventory implements Inventory {
 
     private final InventoryItemFactory itemFactory;
     private final List<InventoryItem> items;
 
+    /**
+     * Read the inventory file and create a list of items
+     * 
+     * @param filePath File path of the CSV
+     * @param itemFactory Item factory to instantiate items
+     * @throws IOException 
+     */
     public CsvInventory(Path filePath, InventoryItemFactory itemFactory) throws IOException {
         this.itemFactory = itemFactory;
 
@@ -33,6 +34,12 @@ public class CsvInventory implements Inventory {
         this.items = lines.stream().map(this::buildItem).collect(Collectors.toList());
     }
 
+    /**
+     * Create item instance
+     * 
+     * @param csvString Comma separated values for an item
+     * @return Inventory item instance
+     */
     protected InventoryItem buildItem(String csvString) {
         String[] cols = csvString.split(",");
         if (cols.length < 4) {
@@ -41,12 +48,22 @@ public class CsvInventory implements Inventory {
         
         return itemFactory.getInventoryItem(cols[0], cols[1], Integer.parseInt(cols[2]), Integer.parseInt(cols[3]));
     }
-
+    
+    /**
+     * @see Inventory::getItems()
+     * @return List of items in the inventory
+     */
     @Override
     public List<InventoryItem> getItems() {
         return this.items;
     }
 
+    /**
+     * Get the inventory item by name
+     * 
+     * @param name Name of them item
+     * @return Inventory item
+     */
     @Override
     public InventoryItem getInventoryItem(String name) {
         return items.stream().filter((item) -> item.getItem().getName().equals(name)).findFirst().orElse(null);
