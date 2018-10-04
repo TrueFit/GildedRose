@@ -1,6 +1,7 @@
 package org.uniqueculture.gildedrose.impl;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import org.uniqueculture.gildedrose.spi.InventoryItem;
 import org.uniqueculture.gildedrose.spi.QualityCalculator;
 import org.uniqueculture.gildedrose.spi.InventoryItemFactory;
@@ -11,14 +12,30 @@ import org.uniqueculture.gildedrose.spi.Item;
  *
  * @author Sergei Izvorean
  */
-public class DefaultItemFactory implements InventoryItemFactory {
+public class DefaultInventoryItemFactory implements InventoryItemFactory {
     
     private final QualityCalculator defaultCalculator;
-    private final List<QualityCalculator> calculators;
+    private final Set<QualityCalculator> calculators;
 
-    public DefaultItemFactory(QualityCalculator defaultCalculator, List<QualityCalculator> calculators) {
-        this.calculators = calculators;
+    public DefaultInventoryItemFactory(QualityCalculator defaultCalculator) {
+        assert(defaultCalculator != null);
+        
+        this.calculators = new HashSet<>();
         this.defaultCalculator = defaultCalculator;
+    }
+
+    @Override
+    public void addQualityCalculator(QualityCalculator qualityCalculator) {
+        assert(qualityCalculator != null);
+        
+        this.calculators.add(qualityCalculator);
+    }
+
+    @Override
+    public void removeQualityCalculator(QualityCalculator qualityCalculator) {
+        assert(qualityCalculator != null);
+        
+        this.calculators.remove(qualityCalculator);
     }
 
     /**

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.uniqueculture.gildedrose.impl;
+package org.uniqueculture.gildedrose.impl.calculator;
 
 import org.uniqueculture.gildedrose.impl.calculator.DefaultQualityCalculator;
 import org.junit.Assert;

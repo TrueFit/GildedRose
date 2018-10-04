@@ -8,6 +8,20 @@ package org.uniqueculture.gildedrose.spi;
 public interface InventoryItemFactory {
     
     /**
+     * Add quality calculator
+     * 
+     * @param qualityCalculator 
+     */
+    void addQualityCalculator(QualityCalculator qualityCalculator);
+    
+    /**
+     * Remove quality calculator
+     * 
+     * @param qualityCalculator 
+     */
+    void removeQualityCalculator(QualityCalculator qualityCalculator);
+    
+    /**
      * Create an inventory item
      * 
      * @param name

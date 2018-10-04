@@ -13,7 +13,7 @@ import java.util.Arrays;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import org.uniqueculture.gildedrose.impl.CsvInventory;
-import org.uniqueculture.gildedrose.impl.DefaultItemFactory;
+import org.uniqueculture.gildedrose.impl.DefaultInventoryItemFactory;
 import org.uniqueculture.gildedrose.impl.MaxMinQualityConstraint;
 import org.uniqueculture.gildedrose.impl.calculator.AgedBrieQualityCalculator;
 import org.uniqueculture.gildedrose.impl.calculator.BackstagePassQualityCalculator;
@@ -35,12 +35,11 @@ public class ApplicationTest {
         // Default quality constraints
         QualityConstraint constraints = new MaxMinQualityConstraint(50, 0);
 
-        InventoryItemFactory itemFactory = new DefaultItemFactory(new DefaultQualityCalculator(constraints), Arrays.asList(
-                new AgedBrieQualityCalculator(constraints),
-                new BackstagePassQualityCalculator(constraints),
-                new ConjuredQualityCalculator(constraints),
-                new SulfurasQualityCalculator()
-        ));
+        InventoryItemFactory itemFactory = new DefaultInventoryItemFactory(new DefaultQualityCalculator(constraints));
+        itemFactory.addQualityCalculator(new AgedBrieQualityCalculator(constraints));
+        itemFactory.addQualityCalculator(new BackstagePassQualityCalculator(constraints));
+        itemFactory.addQualityCalculator(new ConjuredQualityCalculator(constraints));
+        itemFactory.addQualityCalculator(new SulfurasQualityCalculator());
 
         // Load all the items
         URI inventoryUri = this.getClass().getClassLoader().getResource("inventory.txt").toURI();
