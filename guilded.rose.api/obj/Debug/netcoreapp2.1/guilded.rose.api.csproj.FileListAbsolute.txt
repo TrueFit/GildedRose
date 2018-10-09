@@ -1,0 +1,14 @@
+C:\GitHub\GuildedRoseV2\guilded.rose.api\bin\Debug\netcoreapp2.1\guilded.rose.api.deps.json
+C:\GitHub\GuildedRoseV2\guilded.rose.api\bin\Debug\netcoreapp2.1\guilded.rose.api.runtimeconfig.json
+C:\GitHub\GuildedRoseV2\guilded.rose.api\bin\Debug\netcoreapp2.1\guilded.rose.api.runtimeconfig.dev.json
+C:\GitHub\GuildedRoseV2\guilded.rose.api\bin\Debug\netcoreapp2.1\guilded.rose.api.dll
+C:\GitHub\GuildedRoseV2\guilded.rose.api\bin\Debug\netcoreapp2.1\guilded.rose.api.pdb
+C:\GitHub\GuildedRoseV2\guilded.rose.api\obj\Debug\netcoreapp2.1\guilded.rose.api.csprojAssemblyReference.cache
+C:\GitHub\GuildedRoseV2\guilded.rose.api\obj\Debug\netcoreapp2.1\guilded.rose.api.csproj.CoreCompileInputs.cache
+C:\GitHub\GuildedRoseV2\guilded.rose.api\obj\Debug\netcoreapp2.1\guilded.rose.api.RazorAssemblyInfo.cache
+C:\GitHub\GuildedRoseV2\guilded.rose.api\obj\Debug\netcoreapp2.1\guilded.rose.api.RazorAssemblyInfo.cs
+C:\GitHub\GuildedRoseV2\guilded.rose.api\obj\Debug\netcoreapp2.1\guilded.rose.api.AssemblyInfoInputs.cache
+C:\GitHub\GuildedRoseV2\guilded.rose.api\obj\Debug\netcoreapp2.1\guilded.rose.api.AssemblyInfo.cs
+C:\GitHub\GuildedRoseV2\guilded.rose.api\obj\Debug\netcoreapp2.1\guilded.rose.api.RazorTargetAssemblyInfo.cache
+C:\GitHub\GuildedRoseV2\guilded.rose.api\obj\Debug\netcoreapp2.1\guilded.rose.api.dll
+C:\GitHub\GuildedRoseV2\guilded.rose.api\obj\Debug\netcoreapp2.1\guilded.rose.api.pdb
