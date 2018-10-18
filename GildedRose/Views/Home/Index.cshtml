@@ -1,0 +1,52 @@
+﻿<div id="bodyContainer" ng-app="GildedRoseApp">
+    <section id="content">
+        <div class="container">
+            <div class="row">
+                <div class="text-center col-md-12" ng-controller="InventoryCtrl" ng-init="getInventory()">
+                    <div class="back col-md-12">
+                        <div class="pull-left col-md-6">
+                            <input ng-model="search.name" />
+                            <button class="btn btn-info btn-lg next option" ng-click="searchByName()" ng-disabled="working">Search By Name</button>
+                        </div>
+                        <div class="pull-right col-md-6">
+                            <button class="btn btn-info btn-lg next option" ng-click="getInventory()" ng-disabled="working">Show All Inventory</button>
+                        </div>
+                    </div>
+                    <div class="back col-md-12">
+                        <div class="pull-left col-md-6">
+                            <button class="btn btn-info btn-lg next option" ng-click="getTrash()" ng-disabled="working">Show Trash Items</button>
+                        </div>
+                        <div class="pull-right col-md-6">
+                            <button class="btn btn-info btn-lg next option" ng-click="endDay()" ng-disabled="working">End The Day!</button>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <table class="table">
+                            <thead class="bg-primary">
+                                <tr>
+                                    <th scope="col" class="text-center">Name</th>
+                                    <th scope="col" class="text-center">Category</th>
+                                    <th scope="col" class="text-center">Sell In</th>
+                                    <th scope="col" class="text-center">Quality</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in items">
+                                    <td scope="col">{{item.Name}}</td>
+                                    <td scope="col">{{item.Category}}</td>
+                                    <td scope="col">{{item.SellIn}}</td>
+                                    <td scope="col">{{item.Quality}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/Scripts/angular.js")
+    @Scripts.Render("~/Scripts/app/inventory-controller.js")
+}
