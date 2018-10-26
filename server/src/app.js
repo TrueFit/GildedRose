@@ -1,8 +1,16 @@
 const express = require('express');
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send('Gilded Rose');
+app.get('/items/:id', (req, res) => {
+  res.send('item details');
 });
 
-module.exports = app
+app.get('/items', (req, res) => {
+  res.send('item list');
+});
+
+app.patch('/items', (req, res) => {
+  res.send('progress to next day');
+});
+
+module.exports = app;
