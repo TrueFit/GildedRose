@@ -1,0 +1,21 @@
+{
+  "name": "gilded-rose-server",
+  "version": "1.0.0",
+  "description": "Server for Gilded Rose take-home task for TrueFit.",
+  "main": "index.js",
+  "repository": "https://github.com/ericsakmar/GildedRose",
+  "author": "Eric Sakmar",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha src/**.spec.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "mocha": "^5.2.0",
+    "supertest": "^3.3.0"
+  }
+}
