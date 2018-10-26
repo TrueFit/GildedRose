@@ -1,12 +1,23 @@
 const request = require('supertest');
-const expect = require('expect.js');
 const app = require('./app');
+const inventory = require('./inventory');
+
+jest.mock('./inventory');
 
 describe('server', () => {
-  it('returns the entire list of inventory', () =>
-    request(app)
+  beforeEach(() => {
+    inventory.find.mockReturnValue(Promise.resolve([]));
+    inventory.nextDay.mockReturnValue(Promise.resolve([]));
+  });
+
+  it('returns the entire list of inventory', () => {
+    return request(app)
       .get('/items')
-      .expect(200));
+      .expect(200)
+      .then(res => {
+        expect(inventory.find).toBeCalled();
+      });
+  });
 
   it('returns details of a single item', () =>
     request(app)
