@@ -5,32 +5,60 @@ const inventory = require('./inventory');
 jest.mock('./inventory');
 
 describe('server', () => {
+  let item;
+
   beforeEach(() => {
-    inventory.find.mockReturnValue(Promise.resolve([]));
-    inventory.nextDay.mockReturnValue(Promise.resolve([]));
+    item = {
+      name: 'test',
+      category: 'category',
+      sellIn: 5,
+      quality: 10,
+    };
   });
 
-  it('returns the entire list of inventory', () => {
-    return request(app)
+  it('returns the entire list of inventory', async () => {
+    inventory.find.mockReturnValue(Promise.resolve([item]));
+    await request(app)
       .get('/items')
       .expect(200)
-      .then(res => {
-        expect(inventory.find).toBeCalled();
-      });
+      .expect([item]);
+    expect(inventory.find).toBeCalled();
   });
 
-  it('returns details of a single item', () =>
-    request(app)
-      .get('/items/1')
-      .expect(200));
+  describe('details for an item by name', () => {
+    it('returns details of a single item', async () => {
+      inventory.find.mockReturnValue(Promise.resolve(item));
+      await request(app)
+        .get('/items/name')
+        .expect(200)
+        .expect(item);
+      expect(inventory.find).toBeCalledWith({name: 'name'});
+    });
 
-  it('progresses to the next day', () =>
-    request(app)
+    it('404s if item is not found', async () => {
+      inventory.find.mockReturnValue(Promise.resolve(undefined));
+      await request(app)
+        .get('/items/name')
+        .expect(404);
+      expect(inventory.find).toBeCalledWith({name: 'name'});
+    });
+  });
+
+  it('progresses to the next day', async () => {
+    inventory.nextDay.mockReturnValue(Promise.resolve([item]));
+    await request(app)
       .patch('/items')
-      .expect(200));
+      .expect(200)
+      .expect([item]);
+    expect(inventory.nextDay).toBeCalled();
+  });
 
-  it('returns trash', () =>
-    request(app)
+  it('returns trash', async () => {
+    inventory.find.mockReturnValue(Promise.resolve(item));
+    await request(app)
       .get('/items?quality=0')
-      .expect(200));
+      .expect(200)
+      .expect(item);
+    expect(inventory.find).toBeCalledWith({quality: 0});
+  });
 });
