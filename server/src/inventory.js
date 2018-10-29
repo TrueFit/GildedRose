@@ -5,6 +5,7 @@ const rules = require('./rules');
 // TODO note about storing changes in memory
 let items = undefined;
 
+// TODO refactor to async/await
 function init() {
   return new Promise((resolve, reject) => {
     fs.readFile('../inventory.txt', 'utf8', (err, raw) => {
@@ -28,12 +29,13 @@ function init() {
 }
 
 // TODO note that this is a very simple query inerface
-function find(query = {}) {
-  return Promise.resolve(items.filter(i => matches(i, query)));
+async function find(query = {}) {
+  return items.filter(i => matches(i, query));
 }
 
-function nextDay() {
-  return Promise.resolve(items.map(nextDayItem));
+async function nextDay() {
+  items = items.map(nextDayItem);
+  return items;
 }
 
 function matches(item, query) {
