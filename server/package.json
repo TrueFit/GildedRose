@@ -8,14 +8,14 @@
   "license": "MIT",
   "scripts": {
     "start": "node index.js",
-    "test": "jest src/**.spec.js",
-    "watchtest": "yarn test --watch"
+    "test:coverage": "yarn test --coverage",
+    "test:watch": "yarn test --watch",
+    "test": "jest src/**.spec.js"
   },
   "dependencies": {
     "express": "^4.16.4"
   },
   "devDependencies": {
-    "expect.js": "^0.3.1",
     "jest": "^23.6.0",
     "prettier": "^1.14.3",
     "supertest": "^3.3.0"

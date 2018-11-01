@@ -1,11 +1,32 @@
-// default
-const nextSellIn = i => ({...i, sellIn: i.sellIn - 1});
+// constants
+const dailyQualityChange = 1;
+const minQuality = 0;
+const maxQuality = 50;
 
+// helpers
+const nextSellIn = i => ({...i, sellIn: i.sellIn - 1});
+const clipQuality = quality =>
+  Math.max(minQuality, Math.min(maxQuality, quality));
+
+/**
+ * Rules are objects with the following functions:
+ *
+ *   `test` - checks if the rule applies to the item
+ *
+ *   `nextSellIn` - returns a copy of the item with the `sellIn` value updated
+ *      for the next day
+ *
+ *   `nextQuality` - returns a copy of the item with the `quality` value updated
+ *      for the next day
+ */
 const rules = [
   {
     test: i => i.name === 'Aged Brie',
     nextSellIn,
-    nextQuality: i => ({...i, quality: Math.min(50, i.quality + 1)}),
+    nextQuality: i => ({
+      ...i,
+      quality: clipQuality(i.quality + dailyQualityChange),
+    }),
   },
 
   {
@@ -23,11 +44,11 @@ const rules = [
         // concert, which means quality should not be 0 yet
         return {...i, quality: 0};
       } else if (i.sellIn <= 5) {
-        return {...i, quality: i.quality + 3};
+        return {...i, quality: clipQuality(i.quality + 3)};
       } else if (i.sellIn <= 10) {
-        return {...i, quality: i.quality + 2};
+        return {...i, quality: clipQuality(i.quality + 2)};
       } else {
-        return {...i, quality: i.quality + 1};
+        return {...i, quality: clipQuality(i.quality + 1)};
       }
     },
   },
@@ -35,17 +56,27 @@ const rules = [
   {
     test: i => i.category === 'Conjured',
     nextSellIn,
-    nextQuality: i => ({...i, quality: Math.max(0, i.quality - 2)}),
+    nextQuality: i => ({
+      ...i,
+      quality: clipQuality(i.quality - 2 * dailyQualityChange),
+    }),
   },
 
   {
     // default rule. this works because find() returns the first match
     test: i => true,
     nextSellIn,
-    nextQuality: i => ({...i, quality: Math.max(0, i.quality - 1)}),
+    nextQuality: i => {
+      const change = i.sellIn < 0 ? 2 * dailyQualityChange : dailyQualityChange;
+      return {
+        ...i,
+        quality: clipQuality(i.quality - change),
+      };
+    },
   },
 ];
 
+// gets the first rule that matches the item
 function getRule(item) {
   return rules.find(r => r.test(item));
 }

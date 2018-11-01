@@ -32,6 +32,13 @@ describe('inventory rules', () => {
         const actual = getRule(item).nextQuality(item);
         expect(actual).toEqual(item);
       });
+
+      it('decreses twice as fast after sellBy date', () => {
+        item = {...item, sellIn: -1};
+        const expected = {...item, quality: 8};
+        const actual = getRule(item).nextQuality(item);
+        expect(actual).toEqual(expected);
+      });
     });
   });
 
@@ -114,6 +121,16 @@ describe('inventory rules', () => {
       const expected = {
         ...item,
         quality: item.quality + 3,
+      };
+      const actual = getRule(item).nextQuality(item);
+      expect(actual).toEqual(expected);
+    });
+
+    it('does not increase quality to more than 50', () => {
+      item = {...item, sellIn: 5, quality: 49};
+      const expected = {
+        ...item,
+        quality: 50,
       };
       const actual = getRule(item).nextQuality(item);
       expect(actual).toEqual(expected);
