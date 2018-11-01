@@ -3,6 +3,13 @@ const inventory = require('./inventory');
 
 const app = express();
 
+// enabling cors
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 // "Ask for the details of a single item by name"
 app.get('/items/:name', (req, res) => {
   inventory.find({name: req.params.name}).then(item => {
