@@ -22,25 +22,25 @@ describe('server', () => {
       .get('/items')
       .expect(200)
       .expect([item]);
-    expect(inventory.find).toBeCalled();
+    expect(inventory.find).lastCalledWith({});
   });
 
   describe('details for an item by name', () => {
     it('returns details of a single item', async () => {
-      inventory.find.mockReturnValue(Promise.resolve(item));
+      inventory.get.mockReturnValue(Promise.resolve(item));
       await request(app)
         .get('/items/name')
         .expect(200)
         .expect(item);
-      expect(inventory.find).toBeCalledWith({name: 'name'});
+      expect(inventory.get).lastCalledWith('name');
     });
 
     it('404s if item is not found', async () => {
-      inventory.find.mockReturnValue(Promise.resolve(undefined));
+      inventory.get.mockReturnValue(Promise.resolve(undefined));
       await request(app)
         .get('/items/name')
         .expect(404);
-      expect(inventory.find).toBeCalledWith({name: 'name'});
+      expect(inventory.get).lastCalledWith('name');
     });
   });
 
@@ -50,7 +50,7 @@ describe('server', () => {
       .patch('/items')
       .expect(200)
       .expect([item]);
-    expect(inventory.nextDay).toBeCalled();
+    expect(inventory.nextDay).lastCalledWith();
   });
 
   it('returns trash', async () => {
@@ -59,6 +59,6 @@ describe('server', () => {
       .get('/items?quality=0')
       .expect(200)
       .expect(item);
-    expect(inventory.find).toBeCalledWith({quality: 0});
+    expect(inventory.find).lastCalledWith({quality: 0});
   });
 });
