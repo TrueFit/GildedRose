@@ -7,6 +7,7 @@ const app = express();
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Methods', 'GET, PATCH');
   next();
 });
 
@@ -31,6 +32,8 @@ app.get('/items', (req, res) => {
 });
 
 // "Progress to the next day"
+// using PATCH because it's not idempotent and can be used for partial changes.
+// PUT wouldn't work because it only allows for replacing the document.
 app.patch('/items', (req, res) => {
   inventory.nextDay().then(items => {
     res.send(items);
