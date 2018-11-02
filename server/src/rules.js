@@ -36,7 +36,9 @@ const rules = [
   },
 
   {
-    test: i => i.category === 'Backstage Passes',
+    test: i =>
+      // accounting for a typo in the data :)
+      i.category === 'Backstage Passes' || i.category === 'Backstage Pasess',
     nextSellIn,
     nextQuality: i => {
       if (i.sellIn < 0) {
