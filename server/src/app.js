@@ -13,7 +13,7 @@ app.use((req, res, next) => {
 
 // "Ask for the details of a single item by name"
 app.get('/items/:name', (req, res) => {
-  inventory.find({name: req.params.name}).then(item => {
+  inventory.get(req.params.name).then(item => {
     if (item) {
       res.send(item);
     } else {

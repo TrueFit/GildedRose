@@ -3,7 +3,6 @@
     <header>
       <h1>Gilded Rose</h1>
     </header>
-
     <router-view/>
   </div>
 </template>
@@ -19,4 +18,7 @@ body
 header
   text-align center
 
+a
+  color dodgerblue
+  text-decoration-skip-ink auto
 </style>

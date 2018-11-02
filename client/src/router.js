@@ -12,7 +12,7 @@ export default new Router({
       component: Inventory
     },
     {
-      path: "/item/:name",
+      path: "/items/:name",
       name: "itemdetails",
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route

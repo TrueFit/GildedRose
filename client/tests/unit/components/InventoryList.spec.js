@@ -15,7 +15,10 @@ describe('inventory list', () => {
 
   it('renders the table', () => {
     const items = [item];
-    const wrapper = shallowMount(InventoryList, { propsData: { items }});
+    const wrapper = shallowMount(InventoryList, {
+      propsData: { items },
+      stubs: ['router-link'],
+    });
 
     expect(wrapper.find('.inventory-list__empty').exists()).toBe(false);
 
@@ -29,7 +32,10 @@ describe('inventory list', () => {
 
   it('renders an empty message', () => {
     const items = [];
-    const wrapper = shallowMount(InventoryList, { propsData: { items }});
+    const wrapper = shallowMount(InventoryList, {
+      propsData: { items },
+      stubs: ['router-link'],
+    });
 
     expect(wrapper.find('.inventory-list__list').exists()).toBe(false);
 

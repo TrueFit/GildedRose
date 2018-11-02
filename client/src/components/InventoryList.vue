@@ -19,7 +19,9 @@
         </thead>
         <tbody>
           <tr v-for="(item, index) in items" :key="index">
-            <td>{{ item.name }}</td>
+            <td>
+              <router-link :to="getPath(item)">{{ item.name }}</router-link>
+            </td>
             <td>{{ item.category }}</td>
             <td class="number">{{ item.sellIn }}</td>
             <td class="number">{{ item.quality }}</td>
@@ -33,6 +35,12 @@
 <script>
 export default {
   props: ['items'],
+
+  methods: {
+    getPath(item) {
+      return `/items/${encodeURIComponent(item.name)}`;
+    }
+  }
 };
 </script>
 

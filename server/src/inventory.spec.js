@@ -23,4 +23,17 @@ describe('inventory', () => {
     const [actual] = await inventory.nextDay();
     expect(actual).toEqual(expected);
   });
+
+  describe('get item details', () => {
+    it('gets', async () => {
+      const [item] = await inventory.find();
+      const actual = await inventory.get(item.name);
+      expect(actual).toEqual(item);
+    });
+
+    it('returns undefined if not found', async () => {
+      const actual = await inventory.get('foo');
+      expect(actual).toBeUndefined();
+    });
+  });
 });

@@ -34,8 +34,13 @@ async function find(query = {}) {
 }
 
 async function nextDay() {
+  // storing in memory, but this is where we'd persist the changes
   items = items.map(nextDayItem);
   return items;
+}
+
+async function get(name) {
+  return items.find(i => i.name == name);
 }
 
 function matches(item, query) {
@@ -48,4 +53,4 @@ function nextDayItem(item) {
   return rule.nextQuality(rule.nextSellIn(item));
 }
 
-module.exports = {init, find, nextDay};
+module.exports = {find, get, init, nextDay};
