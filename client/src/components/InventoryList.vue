@@ -7,8 +7,23 @@
       No items!
     </p>
 
-    <div class="inventory-list__list" v-if="items && items.length > 0">
-      <table>
+    <div class="inventory-list__content" v-if="items && items.length > 0">
+      <!-- for small screens -->
+      <ul class="inventory-list__list">
+        <li
+          v-for="(item, index) in items"
+          :key="index"
+          class="inventory-list__item"
+        >
+          <h3>
+            <router-link :to="getPath(item)">{{ item.name }}</router-link>
+          </h3>
+          <Item :item="item" />
+        </li>
+      </ul>
+
+      <!-- for big screens -->
+      <table class="inventory-list__table">
         <thead>
           <tr>
             <th>Name</th>
@@ -33,7 +48,9 @@
 </template>
 
 <script>
+import Item from './Item';
 export default {
+  components: { Item },
   props: ['items'],
 
   methods: {
@@ -45,15 +62,35 @@ export default {
 </script>
 
 <style lang="stylus">
-.inventory-list__list table
+.inventory-list__table 
+  display none
   width 100%
 
-.inventory-list__list th, .inventory-list__list td
-  text-align left
+  th, td
+    text-align left
 
+    &:not(:last-child)
+      padding-right 1em
+
+  .number
+    text-align right
+
+.inventory-list__list
+  list-style none
+  padding 0
+  text-align center
+
+.inventory-list__item 
   &:not(:last-child)
-    padding-right 1em
+    margin-bottom 2em
 
-.inventory-list__list .number
-  text-align right
+  h3
+    margin-bottom 0
+
+@media (min-width: 30em)
+  .inventory-list__table
+    display table
+
+  .inventory-list__list
+    display none
 </style>
