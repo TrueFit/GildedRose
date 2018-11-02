@@ -71,6 +71,9 @@ export default {
 </script>
 
 <style lang="stylus">
+.item-details
+  text-align center
+
 .item-details__actions
   margin-top 3em
 </style>
