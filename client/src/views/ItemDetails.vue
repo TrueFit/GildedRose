@@ -2,8 +2,8 @@
   <div class="item-details">
     <h2>{{ $route.params.name }}</h2>
 
-    <!-- this message/error/content pattern could be refactored to a
-      template component -->
+    <!-- this message/error/content pattern also shows up in InventoryList
+      and could be refactored to a template component -->
     <p
       class="item-details__message inventory__text"
       v-if="message"
@@ -19,14 +19,7 @@
     </p>
 
     <div class="item-details__content" v-if="item">
-      <!-- very loosely based on https://refactoringui.com/previews/labels-are-a-last-resort/ -->
-      <p class="item-details__data">{{ item.category }}</p>
-      <p class="item-details__data">
-        Quality: <span class="item-details__number">{{ item.quality }}</span>
-      </p>
-      <p class="item-details__data">
-        Sell in <span class="item-details__number">{{ item.sellIn }}</span> days
-      </p>
+      <Item :item="item" />
     </div>
 
     <div class="item-details__actions">
@@ -37,6 +30,7 @@
 
 <script>
 import { get } from '../services/Inventory';
+import Item from '../components/Item';
 
 export default {
   data() {
@@ -46,6 +40,8 @@ export default {
       message: null,
     };
   },
+
+  components: { Item },
 
   mounted() {
     this.get(this.$route.params.name);
@@ -75,16 +71,6 @@ export default {
 </script>
 
 <style lang="stylus">
-.item-details
-  text-align center
-
-.item-details__data
-  margin 0
-
 .item-details__actions
   margin-top 3em
-
-.item-details__number
-  font-weight 700
-  font-size 1.3em
 </style>

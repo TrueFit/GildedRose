@@ -28,7 +28,7 @@ export async function get(name) {
 }
 
 export async function advance() {
-  const res = await fetch('${api}/items', {method: 'PATCH'});
+  const res = await fetch(`${api}/items`, {method: 'PATCH'});
   const json = await res.json();
   if (res.ok) {
     return json;
