@@ -1,8 +1,17 @@
-// TODO note about using fs instead of a real database
+// I decided to read the data from the file and store changes
+// in memory. This allows for an easier setup, and it makes it
+// very easy to reset the data during review.
+//
+// I wouldn't do this for a production application though! It would
+// certainly require a database. In this case, I'd probably recommend
+// Mongo because the data is document-oriented and has no relations.
+//
+// If we were going to update this file to use a database, the
+// exported function signatures could remain the same, but the implementations
+// would be different.
 const fs = require('fs');
 const rules = require('./rules');
 
-// TODO note about storing changes in memory
 let items = undefined;
 
 // TODO refactor to async/await
@@ -28,13 +37,15 @@ function init() {
     .then(parsed => (items = parsed));
 }
 
-// TODO note that this is a very simple query inerface
+// This is a very simple query interface that only returns
+// items where the key matches the value. A full database would
+// give us a more complete query interface.
 async function find(query = {}) {
   return items.filter(i => matches(i, query));
 }
 
 async function nextDay() {
-  // storing in memory, but this is where we'd persist the changes
+  // Storing in memory, but this is where we'd persist the changes.
   items = items.map(nextDayItem);
   return items;
 }

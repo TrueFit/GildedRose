@@ -4,6 +4,8 @@ const inventory = require('./inventory');
 const app = express();
 
 // enabling cors
+// we'd want to make sure this is set up correctly to our
+// production deployment environment
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -12,6 +14,7 @@ app.use((req, res, next) => {
 });
 
 // "Ask for the details of a single item by name"
+// (I'd probably recommend doing this by ID instead of name.)
 app.get('/items/:name', (req, res) => {
   inventory.get(req.params.name).then(item => {
     if (item) {
