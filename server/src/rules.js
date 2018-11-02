@@ -18,6 +18,8 @@ const clipQuality = quality =>
  *
  *   `nextQuality` - returns a copy of the item with the `quality` value updated
  *      for the next day
+ * 
+ * This should make it easy to add and change edge cases!
  */
 const rules = [
   {

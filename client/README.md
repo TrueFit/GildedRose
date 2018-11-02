@@ -1,31 +1,16 @@
-# client
+# Gilded Rose Web Client
 
-## Project setup
+## Setup
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+## Start
 ```
-yarn run serve
-```
-
-### Compiles and minifies for production
-```
-yarn run build
+yarn serve
 ```
 
-### Run your tests
+### Tests
 ```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Run your unit tests
-```
-yarn run test:unit
+yarn test:unit
 ```

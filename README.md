@@ -47,3 +47,31 @@ Here are a couple of thoughts about the domain that could influence your respons
 
 * The world is a magical place - you never know when the next "special requirement" might pop up - how can you make this painless?
 * Keep in mind that accurate inventory is a must for the shop, how might you ensure that the future programmer who takes over the code while you are off adventuring doesn't mistakenly mess things up?
+
+## Application
+
+### System Requirements
+* Node v11.0 or later
+* Yarn v1.9.4 or later
+
+### Startup
+
+From the project root, run:
+```
+cd server
+yarn install
+yarn start
+```
+
+In a separate console, also from the project root, run:
+```
+cd client
+yarn install
+yarn serve
+```
+
+The console will display the URL of the application.
+
+### Other Notes
+
+Please see the source for comments on my thoughts and decisions. Thanks!
