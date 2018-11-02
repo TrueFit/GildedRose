@@ -1,27 +1,13 @@
 <template>
   <div class="inventory-list">
     <p
-      class="inventory-list__loading inventory-list__text"
-      v-if="isFetching"
-    >
-      Fetching inventory...
-    </p>
-
-    <p
-      class="inventory-list__error inventory-list__text"
-      v-if="error"
-    >
-      {{ error }}
-    </p>
-
-    <p
-      class="inventory-list__empty inventory-list__text"
-      v-if="inventory && inventory.length === 0"
+      class="inventory-list__empty inventory__text"
+      v-if="items && items.length === 0"
     >
       No items!
     </p>
 
-    <div class="inventory-list__list" v-if="inventory && inventory.length > 0">
+    <div class="inventory-list__list" v-if="items && items.length > 0">
       <table>
         <thead>
           <tr>
@@ -32,7 +18,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, index) in inventory" :key="index">
+          <tr v-for="(item, index) in items" :key="index">
             <td>{{ item.name }}</td>
             <td>{{ item.category }}</td>
             <td class="number">{{ item.sellIn }}</td>
@@ -45,47 +31,8 @@
 </template>
 
 <script>
-import { find } from "../services/Inventory";
-
 export default {
-  data() {
-    return {
-      error: null,
-      inventory: null,
-      isFetching: false,
-    };
-  },
-
-  props: {
-    'filter': { type: Object, default: () => ({}) },
-  },
-
-  mounted() {
-    this.fetchInventory();
-  },
-
-  methods: {
-    async fetchInventory() {
-      this.isFetching = true;
-
-      try {
-        this.inventory = await find(this.filter);
-        this.error = null;
-        this.isFetching = false;
-      }
-      catch (error) {
-        this.inventory = null;
-        this.error = error;
-        this.isFetching = false;
-      }
-    }
-  },
-
-  watch: {
-    filter() {
-      this.fetchInventory();
-    }
-  }
+  props: ['items'],
 };
 </script>
 
@@ -101,11 +48,4 @@ export default {
 
 .inventory-list__list .number
   text-align right
-
-.inventory-list__text
-  text-align center
-
-.inventory-list__error
-  color firebrick
-  font-weight 700
 </style>
