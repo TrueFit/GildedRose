@@ -99,7 +99,6 @@ describe('inventory rules', () => {
     it('increases quality by 1 when more than 10 days away', () => {
       const expected = {
         ...item,
-        sellIn: 20,
         quality: item.quality + 1,
       };
       const actual = getRule(item).nextQuality(item);
@@ -142,6 +141,17 @@ describe('inventory rules', () => {
         ...item,
         sellIn: -1,
         quality: 0,
+      };
+      const actual = getRule(item).nextQuality(item);
+      expect(actual).toEqual(expected);
+    });
+
+    it('handles typo in data', () => {
+      item = {...item, category: 'Backstage Pasess'};
+      const expected = {
+        ...item,
+        category: 'Backstage Pasess',
+        quality: item.quality + 1,
       };
       const actual = getRule(item).nextQuality(item);
       expect(actual).toEqual(expected);
