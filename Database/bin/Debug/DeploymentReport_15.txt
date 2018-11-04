@@ -1,0 +1,36 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [inventory] (Filegroup)
+       [membership] (Filegroup)
+       [inventory] (Schema)
+       [membership] (Schema)
+       [dbo].[AuditDate] (User-Defined Data Type)
+       [dbo].[AuditUser] (User-Defined Data Type)
+       [dbo].[Email] (User-Defined Data Type)
+       [dbo].[PWD] (User-Defined Data Type)
+       [inventory].[ItemsOnHand] (Table)
+       [inventory].[Items] (Table)
+       [inventory].[Items].[UIX_inventory_item_name] (Index)
+       [inventory].[Items].[IX_Items_lookup] (Index)
+       [inventory].[Categories] (Table)
+       [inventory].[Categories].[UIX_inventory_category_name] (Index)
+       [membership].[Users] (Table)
+       Default Constraint: unnamed constraint on [inventory].[ItemsOnHand] (Default Constraint)
+       Default Constraint: unnamed constraint on [inventory].[Items] (Default Constraint)
+       Default Constraint: unnamed constraint on [inventory].[Categories] (Default Constraint)
+       Default Constraint: unnamed constraint on [membership].[Users] (Default Constraint)
+       [inventory].[FK_ItemsOnHand_Items] (Foreign Key)
+       [inventory].[FK_Items_Category] (Foreign Key)
+       [dbo].[getCategoryIdByName] (Function)
+
+** Supporting actions
