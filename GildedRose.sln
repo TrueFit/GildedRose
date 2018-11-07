@@ -1,0 +1,75 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2048
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "GildedRose", "Database\GildedRose.sqlproj", "{CC71D6BC-C633-415C-902F-193BD3675312}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{33726231-2C51-4AAA-85EF-9352CF8C43C8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform", "Platform", "{825C116F-F20C-4024-B3FE-674379B010E2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GildedRose.DataStore", "Components\DataStore\GildedRose.DataStore.csproj", "{2886A5C4-D358-4007-99C5-AEF9672C5FEB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GildedRose.Core", "Components\Core\GildedRose.Core.csproj", "{DB8EEA76-4F89-4048-9D44-3903B57B9E28}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GildedRose.Contracts", "Components\GildedRose.Contracts\GildedRose.Contracts.csproj", "{2C1847E7-D2BE-4944-BE7F-DD3D489B61C7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GildedRose.Entities", "Components\GildedRose.Entities\GildedRose.Entities.csproj", "{59EA41B5-ADA4-4410-A462-1D0AEC4D98A1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Analyzers", "Analyzers", "{72007226-E5D8-42FA-A48C-9C434BB8E1B6}"
+	ProjectSection(SolutionItems) = preProject
+		Analyzers\stylecop.json = Analyzers\stylecop.json
+		Analyzers\Stylecop.ruleset = Analyzers\Stylecop.ruleset
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GildedRose.Managers", "Components\GildedRose.Managers\GildedRose.Managers.csproj", "{D7AB015C-FE14-4108-85B7-293256275B22}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC71D6BC-C633-415C-902F-193BD3675312}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC71D6BC-C633-415C-902F-193BD3675312}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC71D6BC-C633-415C-902F-193BD3675312}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{CC71D6BC-C633-415C-902F-193BD3675312}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC71D6BC-C633-415C-902F-193BD3675312}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC71D6BC-C633-415C-902F-193BD3675312}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2886A5C4-D358-4007-99C5-AEF9672C5FEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2886A5C4-D358-4007-99C5-AEF9672C5FEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2886A5C4-D358-4007-99C5-AEF9672C5FEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2886A5C4-D358-4007-99C5-AEF9672C5FEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB8EEA76-4F89-4048-9D44-3903B57B9E28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB8EEA76-4F89-4048-9D44-3903B57B9E28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB8EEA76-4F89-4048-9D44-3903B57B9E28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB8EEA76-4F89-4048-9D44-3903B57B9E28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C1847E7-D2BE-4944-BE7F-DD3D489B61C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C1847E7-D2BE-4944-BE7F-DD3D489B61C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C1847E7-D2BE-4944-BE7F-DD3D489B61C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C1847E7-D2BE-4944-BE7F-DD3D489B61C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59EA41B5-ADA4-4410-A462-1D0AEC4D98A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59EA41B5-ADA4-4410-A462-1D0AEC4D98A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59EA41B5-ADA4-4410-A462-1D0AEC4D98A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59EA41B5-ADA4-4410-A462-1D0AEC4D98A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7AB015C-FE14-4108-85B7-293256275B22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7AB015C-FE14-4108-85B7-293256275B22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7AB015C-FE14-4108-85B7-293256275B22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7AB015C-FE14-4108-85B7-293256275B22}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CC71D6BC-C633-415C-902F-193BD3675312} = {33726231-2C51-4AAA-85EF-9352CF8C43C8}
+		{2886A5C4-D358-4007-99C5-AEF9672C5FEB} = {825C116F-F20C-4024-B3FE-674379B010E2}
+		{DB8EEA76-4F89-4048-9D44-3903B57B9E28} = {825C116F-F20C-4024-B3FE-674379B010E2}
+		{2C1847E7-D2BE-4944-BE7F-DD3D489B61C7} = {825C116F-F20C-4024-B3FE-674379B010E2}
+		{59EA41B5-ADA4-4410-A462-1D0AEC4D98A1} = {825C116F-F20C-4024-B3FE-674379B010E2}
+		{D7AB015C-FE14-4108-85B7-293256275B22} = {825C116F-F20C-4024-B3FE-674379B010E2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {83D75DD5-145D-469F-8243-597D08F5F2EF}
+	EndGlobalSection
+EndGlobal

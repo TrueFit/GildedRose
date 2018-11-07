@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>GildedRose.DataStore</AssemblyName>
+    <RootNamespace>GildedRose.DataStore</RootNamespace>
+    <CodeAnalysisRuleSet>..\..\Analyzers\Stylecop.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisAdditionalOptions>..\..\Analyzers\stylecop.json</CodeAnalysisAdditionalOptions>
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Item\GetAll.sql" />
+    <None Remove="Item\GetByCategory.sql" />
+    <None Remove="Item\GetByName.sql" />
+    <None Remove="Item\Remove.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Item\Remove.sql" />
+    <EmbeddedResource Include="Item\GetByName.sql" />
+    <EmbeddedResource Include="Item\GetByCategory.sql" />
+    <EmbeddedResource Include="Item\GetAll.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.50.5" />
+    <PackageReference Include="Dapper.SqlBuilder" Version="1.50.5" />
+    <PackageReference Include="FastMember" Version="1.4.1" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta009">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\GildedRose.Core.csproj" />
+    <ProjectReference Include="..\GildedRose.Contracts\GildedRose.Contracts.csproj" />
+    <ProjectReference Include="..\GildedRose.Entities\GildedRose.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

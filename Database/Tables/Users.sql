@@ -5,6 +5,8 @@
 	[Email] [Email] NOT NULL,
 	[PasswordHash] [PWD] NOT NULL,
 	[Created] [AuditDate] DEFAULT getutcdate(),
-    [CreatedBy] [AuditUser], 
+    [CreatedBy] [AuditUser],
+	[Modified] [AuditDate] NULL,
+    [ModifiedBy] [AuditUser] NULL, 
     CONSTRAINT [PK_CategoryIdentifier] PRIMARY KEY CLUSTERED ([Id] ASC) on [membership]
 );

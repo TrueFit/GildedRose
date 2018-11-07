@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>GildedRose.Contracts</AssemblyName>
+    <RootNamespace>GildedRose.Contracts</RootNamespace>
+    <CodeAnalysisRuleSet>..\..\Analyzers\Stylecop.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisAdditionalOptions>..\..\Analyzers\stylecop.json</CodeAnalysisAdditionalOptions>
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta009">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GildedRose.Entities\GildedRose.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

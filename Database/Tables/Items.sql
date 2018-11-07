@@ -9,6 +9,8 @@
 	[IsDeleted] BIT NOT NULL,
 	[Created] [AuditDate] NOT NULL DEFAULT getutcdate(),
     [CreatedBy] [AuditUser] NOT NULL, 
+	[Modified] [AuditDate] NULL,
+    [ModifiedBy] [AuditUser] NULL, 
     CONSTRAINT [PK_ItemIdentifier] PRIMARY KEY CLUSTERED ([Identifier] ASC) on [inventory],
 	CONSTRAINT [FK_Items_Category] FOREIGN KEY ([Category]) REFERENCES [inventory].[Categories]([Id]), 
 );

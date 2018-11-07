@@ -3,7 +3,9 @@
     [Id] INT NOT NULL IDENTITY(1,1), 
     [Name] NVARCHAR(100) NOT NULL,
 	[Created] [AuditDate] NOT NULL DEFAULT getutcdate(),
-    [CreatedBy] [AuditUser] NOT NULL, 
+    [CreatedBy] [AuditUser] NOT NULL,
+	[Modified] [AuditDate] NULL,
+    [ModifiedBy] [AuditUser] NULL, 
     CONSTRAINT [PK_CategoryIdentifier] PRIMARY KEY CLUSTERED ([Id] ASC) on [inventory]
 );
 
