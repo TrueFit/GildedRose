@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GildedRose.Managers.Base;
-using GildedRose.Stores.Base;
+using GildedRose.Store.Base;
 
 namespace GildedRose.Managers
 {

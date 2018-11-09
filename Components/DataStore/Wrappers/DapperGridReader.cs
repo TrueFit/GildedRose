@@ -1,4 +1,4 @@
-﻿using GildedRose.Stores.Base;
+﻿using GildedRose.Store.Base;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static Dapper.SqlMapper;
 
-namespace GildedRose.Stores.Wrappers
+namespace GildedRose.Store.Wrappers
 {
     public class DapperGridReader : IGridReader
     {

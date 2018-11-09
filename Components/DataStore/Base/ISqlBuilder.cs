@@ -1,6 +1,6 @@
 ﻿using GildedRose.Store.Contracts;
 
-namespace GildedRose.Stores.Base
+namespace GildedRose.Store.Base
 {
     public interface ISqlBuilder
     {

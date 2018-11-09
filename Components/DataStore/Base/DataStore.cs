@@ -7,10 +7,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using GildedRose.Core.Contracts;
-using GildedRose.Stores.Contracts;
-using GildedRose.Stores.Wrappers;
+using GildedRose.Store.Contracts;
+using GildedRose.Store.Wrappers;
 
-namespace GildedRose.Stores.Base
+namespace GildedRose.Store.Base
 {
     public class DataStore : IDataStore
     {

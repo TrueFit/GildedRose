@@ -1,10 +1,10 @@
-﻿using GildedRose.Stores.Base;
+﻿using GildedRose.Store.Base;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 
-namespace GildedRose.Stores.Contracts
+namespace GildedRose.Store.Contracts
 {
     public interface IDataStore
     {

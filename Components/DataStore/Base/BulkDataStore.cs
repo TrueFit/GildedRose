@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using System.Data.Common;
 using FastMember;
 
-namespace GildedRose.Stores.Base
+namespace GildedRose.Store.Base
 {
     public class BulkDataStore
     {

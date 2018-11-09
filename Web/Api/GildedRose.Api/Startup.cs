@@ -36,51 +36,25 @@ namespace GildedRose.Api
             this.env = env;
             this.config = config;
             this.loggerFactory = loggerFactory;
+
+            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", EnvironmentVariableTarget.Machine);
+            var appParentDirectory = new DirectoryInfo(this.env.ContentRootPath).Parent.FullName;
+            var environmentName = this.env.EnvironmentName ?? "Dev";
+
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{environmentName}.json", optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables();
+            this.Configuration = builder.Build();
         }
+
+        public IConfigurationRoot Configuration { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            DefaultTypeMap.MatchNamesWithUnderscores = true;
-            var connectionString = this.config.GetConnectionString("GildedRose");
-            if (string.IsNullOrWhiteSpace(connectionString))
-            {
-                throw new CriticalStartupException("Unable to load connection string");
-            }
-
-
-            var containerBuilder = new ContainerBuilder();
-
-            // Once you've registered everything in the ServiceCollection, call
-            // Populate to bring those registrations into Autofac. This is
-            // just like a foreach over the list of things in the collection
-            // to add them to Autofac.
-            containerBuilder.Populate(services);
-            
-            // Make your Autofac registrations. Order is important!
-            // If you make them BEFORE you call Populate, then the
-            // registrations in the ServiceCollection will override Autofac
-            // registrations; if you make them AFTER Populate, the Autofac
-            // registrations will override. You can make registrations
-            // before or after Populate, however you choose.
-            containerBuilder.RegisterType<MessageHandler>().As<IHandler>();
-
-            // Creating a new AutofacServiceProvider makes the container
-            // available to your app using the Microsoft IServiceProvider
-            // interface so you can use those abstractions rather than
-            // binding directly to Autofac.
-            var container = containerBuilder.Build();
-            var serviceProvider = new AutofacServiceProvider(container);
-
-
-
-
-
-
-
-
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Item Service", Version = "v1" });
@@ -93,6 +67,12 @@ namespace GildedRose.Api
                 .AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+        }
+
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            var connectionString = this.Configuration.GetConnectionString("GildedRose");
+            ServiceConfiguration.Register(this.AddWebServices, connectionString);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -117,6 +97,10 @@ namespace GildedRose.Api
             });
 
             app.UseMvc();
+        }
+
+        private void AddWebServices(ContainerBuilder builder)
+        {
         }
     }
 }

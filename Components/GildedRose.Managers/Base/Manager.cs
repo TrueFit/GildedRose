@@ -1,15 +1,18 @@
-﻿using GildedRose.Stores.Base;
-using GildedRose.Stores.Contracts;
+﻿using GildedRose.Store.Base;
+using GildedRose.Store.Contracts;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace GildedRose.Managers.Base
 {
-    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1512:ElementsMustBeOrderedByAccess", Justification = "<Pending>")]
     public class Manager
     {
-        private int timeout = 1800;
+        //Disable warning because this needs to be private,
+        //TODO: This Store and manager modules need some refactoring
+        #pragma warning disable SA1401 // Fields should be private
+        protected int timeout = 1800;
+        #pragma warning restore SA1401 // Fields should be private
 
         public Manager(IDataStore store)
         {

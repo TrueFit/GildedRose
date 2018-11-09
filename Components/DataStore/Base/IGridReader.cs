@@ -4,7 +4,7 @@ using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GildedRose.Stores.Base
+namespace GildedRose.Store.Base
 {
     public interface IGridReader : IDisposable
     {

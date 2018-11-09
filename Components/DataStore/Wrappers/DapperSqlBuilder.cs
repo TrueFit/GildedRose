@@ -1,9 +1,8 @@
-﻿using GildedRose.Stores.Contracts;
-using GildedRose.Store.Contracts;
+﻿using GildedRose.Store.Contracts;
 using Dapper;
-using GildedRose.Stores.Base;
+using GildedRose.Store.Base;
 
-namespace GildedRose.Stores.Wrappers
+namespace GildedRose.Store.Wrappers
 {
     public class DapperSqlBuilder : ISqlBuilder
     {

@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Components\Configuration\GildedRose.Configuration.csproj" />
     <ProjectReference Include="..\..\..\Components\Core\GildedRose.Core.csproj" />
     <ProjectReference Include="..\..\..\Components\DataStore\GildedRose.DataStore.csproj" />
     <ProjectReference Include="..\..\..\Components\Exceptions\GildedRose.Exceptions.csproj" />

@@ -1,7 +1,7 @@
 ﻿using GildedRose.Store.Contracts;
 using static Dapper.SqlBuilder;
 
-namespace GildedRose.Stores.Wrappers
+namespace GildedRose.Store.Wrappers
 {
     public class DapperTemplate : ITemplate
     {
