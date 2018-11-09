@@ -1,13 +1,15 @@
 ﻿using GildedRose.Stores.Base;
 using GildedRose.Stores.Contracts;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace GildedRose.Managers.Base
 {
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1512:ElementsMustBeOrderedByAccess", Justification = "<Pending>")]
     public class Manager
     {
-        protected int timeout = 1800;
+        private int timeout = 1800;
 
         public Manager(IDataStore store)
         {
