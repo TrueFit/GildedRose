@@ -7,3 +7,4 @@ D:\src\GildedRose\Database\obj\Debug\Model.xml
 D:\src\GildedRose\Database\obj\Debug\refactor.xml
 D:\src\GildedRose\Database\obj\Debug\postdeploy.sql
 D:\src\GildedRose\Database\obj\Debug\predeploy.sql
+D:\src\GildedRose\Database\obj\Debug\GildedRose.sqlprojAssemblyReference.cache
