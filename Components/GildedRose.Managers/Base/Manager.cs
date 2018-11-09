@@ -1,6 +1,5 @@
 ﻿using GildedRose.Store.Base;
 using GildedRose.Store.Contracts;
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
