@@ -1,0 +1,67 @@
+<h1>Trash</h1>
+
+<div class="scroll">
+
+    <div class="scroll-handle top col-lg-12"></div>
+
+    <div class="scroll-body col-lg-12">
+
+        <div *ngIf="!items || settingUp"><loading></loading></div>
+
+        <div class="inventory-item-container" *ngIf="items && !settingUp">
+
+            <div class="inventory-item-item col-sm-4" *ngFor="let item of items">
+
+                <h4><span class='glyphicon glyphicon-shopping-cart'></span>{{ item.name }}</h4>
+
+                <div class="inventory-item-body">
+
+                    <div class="inventory-item-value">
+                        <div class="col-sm-5">Purchased</div>
+                        <div class="buy-date col-sm-7"><span class='glyphicon glyphicon-time'></span>{{ item.purchasedOn | date:'shortDate' }}</div>
+                    </div>
+
+                    <div class="inventory-item-value">
+                        <div class="col-sm-5">Sell By</div>
+                        <div class="col-sm-7"><span class='glyphicon glyphicon-time'></span>{{ item.sellBy | date:'shortDate' }}</div>
+                    </div>
+
+                    <div class="inventory-item-value">
+                        <div class="col-sm-5">Category</div>
+                        <div class="inventory-item-category col-sm-7"><span class='glyphicon glyphicon-tag'></span>{{ item.category.name }}</div>
+                    </div>
+
+                </div>
+
+                <div class="inventory-item-quality-container col-sm-12">
+
+                    <div class="quality-value col-sm-6">
+                        <div class="col-sm-12">
+                            {{ item.quality.initial }}
+                        </div>
+                        <div class="col-sm-12 subtitle">Initial</div>
+                    </div>
+
+                    <div class="quality-value total col-sm-6">
+                        <div class="col-sm-12">
+                            {{ item.quality.current }}
+                        </div>
+                        <div class="col-sm-12 subtitle">Current</div>
+                    </div>
+
+                </div>
+
+                <div class="delete-item col-sm-12">
+                    <button class="btn btn-primary delete" (click)="deleteItem()"><span class='glyphicon glyphicon-trash'></span>Toss It</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="scroll-handle bottom col-lg-12"></div>
+
+</div>
+

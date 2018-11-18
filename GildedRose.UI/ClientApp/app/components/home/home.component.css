@@ -1,0 +1,11 @@
+﻿.scroll-body > .text > p::first-letter {
+    initial-letter: 3;
+    -webkit-initial-letter: 3;
+    color: #882d2d;
+    font-size: 2.6em;
+    border: 4px solid #882d2d;
+    padding: 5px 10px 0px 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    float: left;
+}

@@ -1,0 +1,8 @@
+﻿.loading {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+    .loading > img {
+        margin: 0 auto;
+    }

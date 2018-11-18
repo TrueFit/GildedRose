@@ -1,0 +1,8 @@
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Models\bin\Debug\netcoreapp2.0\GuildedRose.Models.deps.json
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Models\bin\Debug\netcoreapp2.0\GuildedRose.Models.dll
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Models\bin\Debug\netcoreapp2.0\GuildedRose.Models.pdb
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Models\obj\Debug\netcoreapp2.0\GuildedRose.Models.csproj.CoreCompileInputs.cache
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Models\obj\Debug\netcoreapp2.0\GuildedRose.Models.AssemblyInfoInputs.cache
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Models\obj\Debug\netcoreapp2.0\GuildedRose.Models.AssemblyInfo.cs
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Models\obj\Debug\netcoreapp2.0\GuildedRose.Models.dll
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Models\obj\Debug\netcoreapp2.0\GuildedRose.Models.pdb

@@ -1,0 +1,86 @@
+﻿.back {
+    cursor: pointer;
+}
+
+.inventory-item-container {
+    height: 100%;
+}
+
+.inventory-item-body {
+    background: url(../../assets/wood.png) repeat;
+    background-size: 12%;
+    height: 100%
+}
+
+.inventory-item-item {
+    background: #e8e7e0;
+    border: 4px solid #9e8f8f;
+    padding: 0px;
+    width: 32%;
+    margin-right: 1%;
+    margin-bottom: 1%;
+}
+
+    .inventory-item-item h4 {
+        color: #e8e7e0;
+        background: #882d2d;
+        margin-top: 0px;
+        padding: 15px 10px 15px 10px;
+        margin-bottom: 0px;
+        border-bottom: 4px solid #9e8f8f;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: .8em;
+    }
+
+    .inventory-item-item .glyphicon:before {
+        margin-right: 5px;
+        top: -1px;
+    }
+
+    .inventory-item-item h4 .glyphicon {
+        margin: 0px 5px;
+        top: -1px;
+    }
+
+.inventory-item-value > div {
+    padding: 10px 20px;
+    font-size: 0.8em;
+}
+
+.inventory-item-quality-container {
+    padding: 0px;
+    border-top: 4px solid #9e8f8f;
+    background: #754531;
+}
+
+    .inventory-item-quality-container .quality-value {
+        padding: 7px 10px;
+        text-align: center;
+        font-size: 1.05em;
+        color: #e8e7e0;
+        background: #ceb493;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+        .inventory-item-quality-container .quality-value .subtitle {
+            font-size: .65em;
+        }
+
+        .inventory-item-quality-container .quality-value.total {
+            background: #754531;
+        }
+
+.inventory-item-category {
+    min-height: 52px;
+}
+
+.delete-item {
+    padding: 0px;
+}
+
+    .delete-item > button {
+        width: 100%;
+    }

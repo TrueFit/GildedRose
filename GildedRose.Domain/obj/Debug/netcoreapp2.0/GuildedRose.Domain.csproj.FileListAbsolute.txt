@@ -1,0 +1,12 @@
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Domain\bin\Debug\netcoreapp2.0\GuildedRose.Domain.deps.json
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Domain\bin\Debug\netcoreapp2.0\GuildedRose.Domain.dll
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Domain\bin\Debug\netcoreapp2.0\GuildedRose.Domain.pdb
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Domain\obj\Debug\netcoreapp2.0\GuildedRose.Domain.csprojAssemblyReference.cache
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Domain\obj\Debug\netcoreapp2.0\GuildedRose.Domain.csproj.CoreCompileInputs.cache
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Domain\obj\Debug\netcoreapp2.0\GuildedRose.Domain.AssemblyInfoInputs.cache
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Domain\obj\Debug\netcoreapp2.0\GuildedRose.Domain.AssemblyInfo.cs
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Domain\obj\Debug\netcoreapp2.0\GuildedRose.Domain.dll
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Domain\obj\Debug\netcoreapp2.0\GuildedRose.Domain.pdb
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Domain\bin\Debug\netcoreapp2.0\GuildedRose.Models.dll
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Domain\bin\Debug\netcoreapp2.0\GuildedRose.Models.pdb
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Domain\obj\Debug\netcoreapp2.0\GuildedRose.Domain.csproj.CopyComplete

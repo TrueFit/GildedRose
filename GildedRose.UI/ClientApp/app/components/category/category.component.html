@@ -1,0 +1,54 @@
+<h1>Categories</h1>
+
+<div class="scroll">
+
+    <div class="scroll-handle top col-lg-12"></div>
+
+    <div class="scroll-body col-lg-12">
+
+        <div *ngIf="!categories"><loading></loading></div>
+
+        <div class="category-container categories" *ngIf="categories">
+
+            <div class="category-item col-sm-4" *ngFor="let category of categories">
+
+                <h4>{{ category.name }}</h4>
+
+                <div>
+                    <div class="col-sm-9">Max Quality</div>
+                    <div class="col-sm-3">{{ category.maximumQuality }}</div>
+                </div>
+                <div>
+                    <div class="col-sm-9">Min Quality</div>
+                    <div class="col-sm-3">{{ category.minimumQuality }}</div>
+                </div>
+
+                <div>
+                    <div class="col-sm-9">Threshold</div>
+                    <div class="col-sm-3">{{ category.degradation.threshold }}</div>
+                </div>
+                <div>
+                    <div class="col-sm-9">Interval</div>
+                    <div class="col-sm-3">{{ category.degradation.interval }}</div>
+                </div>
+                <div>
+                    <div class="col-sm-9">No Expiration Value</div>
+                    <div class="col-sm-3">{{ category.degradation.hasNoValuePastExpiration }}</div>
+                </div>
+
+                <div>
+                    <div class="col-sm-9">Rate</div>
+                    <div class="col-sm-3">{{ category.degradation.rate }}</div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="scroll-handle bottom col-lg-12"></div>
+
+</div>
+
+

@@ -1,0 +1,17 @@
+C:\Users\mmorrow\Source\Repos\GildedRose\GildedRose.Models\obj\Debug\netcoreapp2.0\GildedRose.Models.csproj.CoreCompileInputs.cache
+C:\Users\mmorrow\Source\Repos\GildedRose\GildedRose.Models\obj\Debug\netcoreapp2.0\GildedRose.Models.AssemblyInfoInputs.cache
+C:\Users\mmorrow\Source\Repos\GildedRose\GildedRose.Models\obj\Debug\netcoreapp2.0\GildedRose.Models.AssemblyInfo.cs
+C:\Users\mmorrow\Source\Repos\GildedRose\GildedRose.Models\bin\Debug\netcoreapp2.0\GildedRose.Models.deps.json
+C:\Users\mmorrow\Source\Repos\GildedRose\GildedRose.Models\bin\Debug\netcoreapp2.0\GildedRose.Models.dll
+C:\Users\mmorrow\Source\Repos\GildedRose\GildedRose.Models\bin\Debug\netcoreapp2.0\GildedRose.Models.pdb
+C:\Users\mmorrow\Source\Repos\GildedRose\GildedRose.Models\obj\Debug\netcoreapp2.0\GildedRose.Models.dll
+C:\Users\mmorrow\Source\Repos\GildedRose\GildedRose.Models\obj\Debug\netcoreapp2.0\GildedRose.Models.pdb
+C:\Users\mmorrow\Source\Repos\GildedRose2\GildedRose.Models\bin\Debug\netcoreapp2.0\GildedRose.Models.deps.json
+C:\Users\mmorrow\Source\Repos\GildedRose2\GildedRose.Models\bin\Debug\netcoreapp2.0\GildedRose.Models.dll
+C:\Users\mmorrow\Source\Repos\GildedRose2\GildedRose.Models\bin\Debug\netcoreapp2.0\GildedRose.Models.pdb
+C:\Users\mmorrow\Source\Repos\GildedRose2\GildedRose.Models\obj\Debug\netcoreapp2.0\GildedRose.Models.csprojAssemblyReference.cache
+C:\Users\mmorrow\Source\Repos\GildedRose2\GildedRose.Models\obj\Debug\netcoreapp2.0\GildedRose.Models.csproj.CoreCompileInputs.cache
+C:\Users\mmorrow\Source\Repos\GildedRose2\GildedRose.Models\obj\Debug\netcoreapp2.0\GildedRose.Models.AssemblyInfoInputs.cache
+C:\Users\mmorrow\Source\Repos\GildedRose2\GildedRose.Models\obj\Debug\netcoreapp2.0\GildedRose.Models.AssemblyInfo.cs
+C:\Users\mmorrow\Source\Repos\GildedRose2\GildedRose.Models\obj\Debug\netcoreapp2.0\GildedRose.Models.dll
+C:\Users\mmorrow\Source\Repos\GildedRose2\GildedRose.Models\obj\Debug\netcoreapp2.0\GildedRose.Models.pdb

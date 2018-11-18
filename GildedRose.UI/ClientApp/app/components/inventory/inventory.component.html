@@ -1,0 +1,32 @@
+<h1>Inventories</h1>
+
+<div class="scroll">
+
+    <div class="scroll-handle top col-lg-12"></div>
+
+    <div class="scroll-body col-lg-12">
+
+        <div *ngIf="!inventories"><loading></loading></div>
+
+        <div class="inventories-container categories" *ngIf="inventories">
+
+            <div class="inventory-item col-sm-4"
+                 *ngFor="let inventory of inventories"
+                 (click)="openInventory(inventory.inventoryId);">
+
+                <h3>{{ inventory.name }}</h3>
+
+                <div>
+                    <div class="inventory-owner col-sm-12">{{ inventory.owner }}</div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="scroll-handle bottom col-lg-12"></div>
+
+</div>
+

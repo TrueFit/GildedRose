@@ -3,3 +3,8 @@
 ################################################################################
 
 /GildedRose/bin
+/GildedRose.Domain/bin
+/GildedRose/Properties/PublishProfiles
+/TestResults/0b32f959-b2a3-41ff-b1f7-c7c972f86fd0
+*.coverage
+/.vs

@@ -1,0 +1,45 @@
+<h1>Welcome</h1>
+
+<div class="scroll">
+
+    <div class="scroll-handle top col-lg-12"></div>
+
+    <div class="scroll-body col-lg-12">
+
+        <div *ngIf="settingUp">
+            <loading></loading>
+        </div>
+
+        <div *ngIf="!settingUp" class="text">
+
+            <p>
+                Good evening, and welcome to the Gilded Rose.
+                There are a few things you should know before you get started managing our fine inventory.
+                <br /><br />
+                We're starting out with a standard set of items, so you'll only be able to purchase whole inventories of
+                our standard grouping at the moment.  To do so, <b>provide the name of the inventory and the owner, then click 'Purchase Inventory' below</b> and we'll have you all set up.
+                <br /><br />
+                After that, you'll be stocked and ready to manage your first inventory in our shop.  You can do so by
+                <b>clicking 'Inventories'</b> to the left.
+                <br /><br />
+                To open an inventory, <b>click on a chest</b> and you'll be able to view your items.
+            </p>
+
+
+            <div class="create-inventory">
+                <div class="col-sm-6">
+                    <input type="text" id="name" placeholder="Inventory Name" maxlength="10" [(ngModel)]="name" />
+                </div>
+                <div class="col-sm-6">
+                    <input type="text" id="owner" placeholder="Owner" maxlength="10" [(ngModel)]="owner" />
+                </div>
+            </div>
+            <button (click)="purchaseInventory()" class="btn btn-primary purchase-inventory">Purchase Inventory</button>
+
+        </div>
+
+    </div>
+
+    <div class="scroll-handle bottom col-lg-12"></div>
+
+</div>

@@ -1,0 +1,14 @@
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Persistence\bin\Debug\netcoreapp2.0\GuildedRose.Persistence.deps.json
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Persistence\bin\Debug\netcoreapp2.0\GuildedRose.Persistence.dll
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Persistence\bin\Debug\netcoreapp2.0\GuildedRose.Persistence.pdb
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Persistence\obj\Debug\netcoreapp2.0\GuildedRose.Persistence.csproj.CoreCompileInputs.cache
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Persistence\obj\Debug\netcoreapp2.0\GuildedRose.Persistence.AssemblyInfoInputs.cache
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Persistence\obj\Debug\netcoreapp2.0\GuildedRose.Persistence.AssemblyInfo.cs
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Persistence\obj\Debug\netcoreapp2.0\GuildedRose.Persistence.dll
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Persistence\obj\Debug\netcoreapp2.0\GuildedRose.Persistence.pdb
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Persistence\obj\Debug\netcoreapp2.0\GuildedRose.Persistence.csprojAssemblyReference.cache
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Persistence\bin\Debug\netcoreapp2.0\GuildedRose.Models.dll
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Persistence\bin\Debug\netcoreapp2.0\GuildedRose.Models.pdb
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Persistence\obj\Debug\netcoreapp2.0\GuildedRose.Persistence.csproj.CopyComplete
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Persistence\bin\Debug\netcoreapp2.0\GuildedRose.Persistence.runtimeconfig.json
+C:\Users\mmorrow\Source\Repos\GuildedRose\GuildedRose.Persistence\bin\Debug\netcoreapp2.0\GuildedRose.Persistence.runtimeconfig.dev.json
