@@ -1,0 +1,23 @@
+﻿<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <!-- source: https://www.123rf.com/photo_1372747_sword-and-rose.html -->
+        <!-- 209x307 -->
+        <img src="res/images/gild.png" style="width:43px; height:64px;" />
+        Gilded Rose
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" ng-repeat="menuItem in model.menuItems">
+                <a class="nav-link" ui-sref="{{menuItem.link}}">
+                    <i ng-if="menuItem.icon" ng-class="'{{menuItem.icon}}'"></i>
+                    {{menuItem.title}}
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

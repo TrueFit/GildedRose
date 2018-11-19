@@ -1,0 +1,36 @@
+﻿<div class="container-fluid" style="background-color:#EEEEEE;">
+    <div class="row">
+        <div class="w-200">
+            <div style="font-weight:bold; margin-left:20px; margin-top:30px; margin-right:20px; vertical-align:middle;">                
+                Current Day:
+                {{model.currentDay}}
+            </div>
+        </div>
+        <div class="w-200">
+            <span style="margin-top:10px; margin-bottom:10px;">
+                <br />
+                <button class="btn btn-primary btn-sm" ng-click="onNextDayClicked()" style="height:42px;">
+                    <!-- original: 315 x 183 -->
+                    &nbsp;
+                    <img src="res/images/day-transition.png" style="width:55px; height:32px;" />
+                    &nbsp;&nbsp;
+                    Next Day
+                    &nbsp;&nbsp;
+                </button>
+                <br /><br />
+            </span>
+        </div>
+        <div class="col">
+            <span style="margin-top:10px; margin-bottom:10px;">
+                <br />
+                <button class="btn btn-warning btn-sm" ng-click="onResetTheUniverseClicked()" style="height:42px;">
+                    <!--<img src="res/images/who.png" style="width:32px; height:32px;" />-->
+                    <img src="res/images/comet-earth.png" style="width:32px; height:32px;" />
+                    Reset the universe!
+                    &nbsp;&nbsp;
+                </button>
+                <br /><br />
+            </span>
+        </div>
+    </div>
+</div>

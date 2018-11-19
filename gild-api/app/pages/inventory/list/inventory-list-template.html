@@ -1,0 +1,41 @@
+﻿<h3>
+    Inventory
+</h3>
+These are the items that are currently in stock.
+
+<div class="row">&nbsp;</div>
+
+<div style="font-size:24px;font-style:italic;">
+    <span ng-if="model.inventory.isLoading">
+        <loading></loading>
+    </span>
+    <!-- Take up some space even if it's not loading to prevent it from jumping around. -->
+    <span>&nbsp;</span>    
+</div>
+
+<div>
+    <table class="table table-striped" ng-style="model.inventory.isLoading ? {'background-color':'lightgrey'} : {}">
+        <thead>
+            <tr style="font-weight:bold;">
+                <td ng-if="showDebug">Id</td>
+                <td></td>
+                <td>Item Name</td>
+                <td>Item Category</td>
+                <td>Sell In</td>
+                <td>Quality</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-class="{ 'clickable': !model.inventory.isLoading }" ng-repeat="item in model.inventory.data" ui-sref="inventory-detail({id: item.name})">
+                <td ng-if="showDebug">{{item.id}}</td>
+                <td>
+                    <img ng-if="item.icon" ng-src="{{item.icon}}" style="width:32px; height:32px;" />
+                </td>
+                <td>{{item.name}}</td>
+                <td>{{item.category}}</td>
+                <td>{{item.sellIn}}</td>
+                <td>{{item.quality}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

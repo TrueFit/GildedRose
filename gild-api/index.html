@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Gilded Rose</title>
+
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="node_modules/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="node_modules/angular-toastr/dist/angular-toastr.css" rel="stylesheet" />
+    <link href="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css" rel="stylesheet" />
+    <link href="res/styles/main.css" rel="stylesheet" />
+
+    <script src="node_modules/lodash/lodash.min.js"></script>
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.min.js"></script>
+
+    <script src="app/modules/main-module.js"></script>
+    <script src="app/routes/main-routes.js"></script>
+
+    <script src="app/services/alert-service.js"></script>
+    <script src="app/services/error-service.js"></script>
+    <script src="app/services/icon-service.js"></script>
+    <script src="app/services/day-service.js"></script>
+    <script src="app/services/inventory-service.js"></script>
+    <script src="app/services/apocalypse-service.js"></script>
+
+    <script src="app/directives/loading-directive/loading-directive.js"></script>
+
+    <script src="app/pages/menu/menu-controller.js"></script>
+    <script src="app/pages/day/day-controller.js"></script>
+    <script src="app/services/apocalypse-service.js"></script>
+
+    <script src="app/pages/home/home-controller.js"></script>
+    <script src="app/pages/inventory/list/inventory-list-controller.js"></script>
+    <script src="app/pages/inventory/detail/inventory-detail-controller.js"></script>
+    <script src="app/pages/operations/operations-controller.js"></script>
+    <script src="app/pages/trash/trash-controller.js"></script>
+
+</head>
+
+<body ng-app="main">
+    <div class="container-fluid">
+        <div ui-view="menu"></div>
+        <div ui-view="day"></div>
+        <br />
+        <div ui-view="main" class="container-fluid"></div>
+    </div>
+</body>
+
+</html>

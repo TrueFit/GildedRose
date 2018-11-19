@@ -1,0 +1,34 @@
+﻿Thanks for taking the time to review my project.
+Here are a few notes on the technical choices I made.
+
+Data:
+The data is persisted in a series of text files.
+For an application in production, this probably wouldn't be a great choice.
+However, for a demo, it removes the dependency on having a running database.
+
+The data is stored as a series of events/snapshots rather than a in a relational fashion.
+(Similarly to how this is commonly done with MongoDB, Azure's DocumentDb, CouchDb, etc.)
+Using SqlServer, MySql, or another RDBMS would also work just fine for simple inventory management.
+Since it's trickier to add constraints on text files, going with events/snapshots works out well
+in this situation.
+
+--
+
+HTTP-POST for all Ajax calls:
+HTTP-GET Ajax calls leave a history trail in some browsers.
+Although it breaks from traditionl ReST, using POST for everything avoids this situation.
+
+--
+
+Things there weren't time to implement:
+View Models - I'm just sending the snapshots directly to the client.
+UI automated testing - There is none. What could possibly go wrong.
+Nonces / Idempotence - If there were a timeout, the API could potentially process a request multiple times.
+CSS / SASS - In the interest of time, I'm using inline styles for most things.
+Konami Code - If you type UP UP DOWN DOWN LEFT RIGHT LEFT RIGHT B A SELECT START, nothing happens.
+
+Disclosures:
+Artwork - I didn't create the artwork.
+Routes - For the UI, I reused some of the "app-routes.js" that I'd previously written for another application of mine.
+
+Doug

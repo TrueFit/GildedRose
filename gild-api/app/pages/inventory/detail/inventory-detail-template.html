@@ -1,0 +1,25 @@
+﻿<h3>
+    Inventory Detail
+</h3>
+
+
+<div class="row">
+
+    <div class="w-400">
+        <img ng-src="{{model.inventoryItem.icon}}" style="width:64px; height:64px;" />
+    </div>
+    <div class="w-200" style="font-weight:bold;">
+        <div>Name:</div>
+        <div>Category:</div>
+        <div>Sell In:</div>
+        <div>Quality:</div>
+    </div>
+    <div class="col">
+        <div>{{model.inventoryItem.name}}</div>
+        <div>{{model.inventoryItem.category}}</div>
+        <div>{{model.inventoryItem.sellIn}}</div>
+        <div>{{model.inventoryItem.quality}}</div>
+    </div>
+    <div class="col">
+    </div>
+</div>

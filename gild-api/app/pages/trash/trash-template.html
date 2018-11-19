@@ -1,0 +1,42 @@
+﻿<h3>
+    Trash
+</h3>
+
+These are the items that should be thrown away.
+
+<div class="row">&nbsp;</div>
+
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr style="font-weight:bold;">
+                <td ng-if="showDebug">Id</td>
+                <td></td>
+                <td>Item Name</td>
+                <td>Item Category</td>
+                <td>Sell In</td>
+                <td>Quality</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in model.trash.data">
+                <td ng-if="showDebug">{{item.id}}</td>
+                <td>
+                    <!--<i class="fas fa-wine-bottle" style="color:red;"></i>-->
+                    <img ng-if="item.category.toUpperCase() === 'Weapon'.toUpperCase()" src="res/images/sword.png" style="width:32px; height:32px;" />
+                    <img ng-if="item.category.toUpperCase() === 'Food'.toUpperCase()" src="res/images/chicken.png" style="width:32px; height:32px;" />
+                    <img ng-if="item.category.toUpperCase() === 'Sulfuras'.toUpperCase()" src="res/images/sulfuras.png" style="width:32px; height:32px;" />
+                    <img ng-if="item.category.toUpperCase() === 'Backstage Passes'.toUpperCase()" src="res/images/ticket.png" style="width:32px; height:32px;" />
+                    <img ng-if="item.category.toUpperCase() === 'Potion'.toUpperCase()" src="res/images/potion.png" style="width:32px; height:32px;" />
+                    <img ng-if="item.category.toUpperCase() === 'Conjured'.toUpperCase()" src="res/images/bolt.png" style="width:32px; height:32px;" />
+                    <img ng-if="item.category.toUpperCase() === 'Armor'.toUpperCase()" src="res/images/armor.png" style="width:32px; height:32px;" />
+                    <img ng-if="item.category.toUpperCase() === 'Misc'.toUpperCase()" src="res/images/bag.png" style="width:32px; height:32px;" />
+                </td>
+                <td>{{item.name}}</td>
+                <td>{{item.category}}</td>
+                <td>{{item.sellIn}}</td>
+                <td>{{item.quality}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
