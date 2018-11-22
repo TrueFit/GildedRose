@@ -35,6 +35,7 @@
     <ProjectReference Include="..\..\..\Components\GildedRose.Entities\GildedRose.Entities.csproj" />
     <ProjectReference Include="..\..\..\Components\GildedRose.Managers\GildedRose.Managers.csproj" />
     <ProjectReference Include="..\..\..\Components\Http\GildedRose.HttpClient.csproj" />
+    <ProjectReference Include="..\..\..\Membership\GildedRose.Membership\GildedRose.Membership.csproj" />
   </ItemGroup>
 
 </Project>

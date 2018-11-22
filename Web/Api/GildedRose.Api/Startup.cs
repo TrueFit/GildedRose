@@ -1,23 +1,20 @@
 ﻿using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using Dapper;
 using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Swashbuckle.AspNetCore.Swagger;
-using GildedRose.Api.Exceptions;
-using GildedRose.HttpClient;
-using GildedRose.Managers;
-using GildedRose.Contracts;
-using Microsoft.Extensions.Logging;
 using System.IO;
-using Microsoft.Extensions.FileProviders;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using GildedRose.Membership.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace GildedRose.Api
 {
@@ -26,10 +23,10 @@ namespace GildedRose.Api
         private readonly IHostingEnvironment env;
 
         public Startup(
-            IHostingEnvironment env)
+            IHostingEnvironment env,
+            IConfiguration config)
         {
             this.env = env;
-
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", EnvironmentVariableTarget.Machine);
             var appParentDirectory = new DirectoryInfo(this.env.ContentRootPath).Parent.FullName;
 
@@ -50,7 +47,7 @@ namespace GildedRose.Api
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-
+            // TODO: ENABLE OR REMOVE THESE LINES!!!
             // the 3 lines below fix the issue mentioned here: https://github.com/aspnet/Home/issues/3132
             // without then, the build will fail.
             //var manager = new ApplicationPartManager();
@@ -62,12 +59,42 @@ namespace GildedRose.Api
             {
                 c.SwaggerDoc("v1", new Info { Title = "Item Service", Version = "v1" });
                 c.DescribeAllEnumsAsStrings();
+                c.AddSecurityDefinition("bearer", new ApiKeyScheme
+                {
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey",
+                });
+            });
+
+            var jwt = this.Configuration.GetSection("Jwt").Get<Jwt>();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = jwt.Issuer,
+                    ValidAudience = jwt.Issuer,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key)),
+                };
             });
 
             services
-                .AddMvc()
-                .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1)
-                .AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
+                   .AddMvc(o =>
+                   {
+                       // Default all endpoints to require Authentication unless overrided with attribute
+                       var policy = new AuthorizationPolicyBuilder()
+                           .RequireAuthenticatedUser()
+                           .Build();
+                       o.Filters.Add(new AuthorizeFilter(policy));
+                   })
+                   .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1)
+                   .AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
 
             var connectionString = this.Configuration.GetConnectionString("GildedRose");
             var containerBuilder = ServiceConfiguration.Register(this.AddWebServices, connectionString);
@@ -96,6 +123,8 @@ namespace GildedRose.Api
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
+
+            app.UseAuthentication();
 
             app.UseMvc();
         }

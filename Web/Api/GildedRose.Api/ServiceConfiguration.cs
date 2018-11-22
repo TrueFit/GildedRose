@@ -1,14 +1,9 @@
 ﻿using Autofac;
 using GildedRose.Configuration;
-using GildedRose.Contracts;
 using GildedRose.Core.Contracts;
-using GildedRose.Managers;
-using GildedRose.Store;
+using GildedRose.Membership;
 using GildedRose.Store.DependencyManagement;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GildedRose.Api
 {
@@ -19,7 +14,7 @@ namespace GildedRose.Api
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterType<ConfigurationStore>().As<IConfigurationStore>().InstancePerLifetimeScope();
 
-            //containerBuilder.RegisterType<Context>().AsSelf().InstancePerLifetimeScope();
+            containerBuilder.RegisterType<IdentityHelper>().As<IdentityHelper>().InstancePerLifetimeScope();
 
             //Register Managers
             containerBuilder.RegisterModule(new Managers.DependencyManagement.ServiceModule());
@@ -34,6 +29,5 @@ namespace GildedRose.Api
 
             return containerBuilder;
         }
-
     }
 }

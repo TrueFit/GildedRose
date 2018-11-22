@@ -4,9 +4,11 @@
     [UserName] NVARCHAR(100) NOT NULL,
 	[Email] [Email] NOT NULL,
 	[PasswordHash] [PWD] NOT NULL,
+	[OrganizationIdentifier] UNIQUEIDENTIFIER,
 	[Created] [AuditDate] DEFAULT getutcdate(),
     [CreatedBy] [AuditUser],
 	[Modified] [AuditDate] NULL,
     [ModifiedBy] [AuditUser] NULL, 
-    CONSTRAINT [PK_CategoryIdentifier] PRIMARY KEY CLUSTERED ([Id] ASC) on [membership]
+    CONSTRAINT [PK_UserIdentifier] PRIMARY KEY CLUSTERED ([Id] ASC) on [membership],
+	CONSTRAINT [FK_User_Organization] FOREIGN KEY ([OrganizationIdentifier]) REFERENCES [membership].[Organization]([Identifier]), 
 );
