@@ -9,6 +9,7 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
+:r .\PostDeploy\Membership.Organization.sql
 :r .\PostDeploy\Membership.Users.sql
 :r .\PostDeploy\Inventory.Categories.sql
 :r .\PostDeploy\Inventory.Items.sql

@@ -1,0 +1,2 @@
+﻿CREATE TYPE [dbo].[City]
+    FROM NVARCHAR (100) NOT NULL;

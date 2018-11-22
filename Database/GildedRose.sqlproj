@@ -84,6 +84,12 @@
     <None Include="PostDeploy\Membership.Users.sql" />
     <Build Include="Functions\getCategoryIdByName.sql" />
     <Build Include="Functions\getItemIdentifierByName.sql" />
+    <Build Include="Tables\Organization.sql" />
+    <Build Include="UserDefinedTypes\Address.sql" />
+    <Build Include="UserDefinedTypes\City.sql" />
+    <Build Include="UserDefinedTypes\State.sql" />
+    <Build Include="UserDefinedTypes\PostalCode.sql" />
+    <None Include="PostDeploy\Membership.Organization.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schema\inventory.sql" />
