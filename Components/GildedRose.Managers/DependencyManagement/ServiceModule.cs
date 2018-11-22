@@ -10,7 +10,7 @@ namespace GildedRose.Managers.DependencyManagement
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<ItemManager>().As<IItemManager>();
+            builder.RegisterType<ItemManager>().As<IItemManager>().InstancePerLifetimeScope();
         }
     }
 }

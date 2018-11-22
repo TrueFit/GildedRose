@@ -17,25 +17,18 @@ using Microsoft.Extensions.Logging;
 using System.IO;
 using Microsoft.Extensions.FileProviders;
 using Autofac;
+using Autofac.Extensions.DependencyInjection;
 
 namespace GildedRose.Api
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         private readonly IHostingEnvironment env;
-        private readonly IConfiguration config;
-        private readonly ILoggerFactory loggerFactory;
 
         public Startup(
-            IHostingEnvironment env,
-            IConfiguration config,
-            ILoggerFactory loggerFactory)
+            IHostingEnvironment env)
         {
             this.env = env;
-            this.config = config;
-            this.loggerFactory = loggerFactory;
 
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", EnvironmentVariableTarget.Machine);
             var appParentDirectory = new DirectoryInfo(this.env.ContentRootPath).Parent.FullName;
@@ -55,8 +48,16 @@ namespace GildedRose.Api
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+
+            // the 3 lines below fix the issue mentioned here: https://github.com/aspnet/Home/issues/3132
+            // without then, the build will fail.
+            //var manager = new ApplicationPartManager();
+            //manager.ApplicationParts.Add(new AssemblyPart(typeof(Startup).Assembly));
+            //services.AddSingleton(manager);
+            services.AddSingleton(this.Configuration);
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Item Service", Version = "v1" });
@@ -68,13 +69,11 @@ namespace GildedRose.Api
                 .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1)
                 .AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-        }
-
-        public void ConfigureContainer(ContainerBuilder builder)
-        {
             var connectionString = this.Configuration.GetConnectionString("GildedRose");
-            ServiceConfiguration.Register(this.AddWebServices, connectionString);
+            var containerBuilder = ServiceConfiguration.Register(this.AddWebServices, connectionString);
+            containerBuilder.Populate(services);
+            var container = containerBuilder.Build();
+            return new AutofacServiceProvider(container);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

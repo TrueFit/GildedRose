@@ -69,6 +69,7 @@ namespace GildedRose.Managers.Base
         {
             var className = this.GetType().Name;
             className = className.Replace("Service", string.Empty);
+            className = className.Replace("Manager", string.Empty);
             string resourcePath = null;
 
             if (templateName != null)

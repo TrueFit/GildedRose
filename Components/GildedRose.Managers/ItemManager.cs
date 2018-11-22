@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using GildedRose.Managers.Base;
 using GildedRose.Store.Base;
+using GildedRose.Store.Contracts;
 
 namespace GildedRose.Managers
 {
     public class ItemManager : Manager, IItemManager
     {
-        public ItemManager(DataStore store)
+        public ItemManager(IDataStore store)
            : base(store)
         {
         }
