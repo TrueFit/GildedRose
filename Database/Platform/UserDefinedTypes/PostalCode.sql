@@ -1,0 +1,2 @@
+﻿CREATE TYPE [dbo].[PostalCode]
+    FROM NVARCHAR (10) NOT NULL;

@@ -1,0 +1,2 @@
+﻿CREATE TYPE [dbo].[State]
+    FROM NVARCHAR (2) NOT NULL;

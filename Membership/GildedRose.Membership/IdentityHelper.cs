@@ -1,9 +1,10 @@
 ﻿using GildedRose.Core.Contracts;
+using GildedRose.Membership.Data;
 using GildedRose.Membership.Models;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
+using System.Linq;
 using System.Text;
 
 namespace GildedRose.Membership
@@ -11,20 +12,25 @@ namespace GildedRose.Membership
     public class IdentityHelper
     {
         private IConfigurationStore config;
+        private UserDbContext dbContext;
 
-        public IdentityHelper(IConfigurationStore config)
+        public IdentityHelper(
+            IConfigurationStore config,
+            UserDbContext dbContext)
         {
             this.config = config;
+            this.dbContext = dbContext;
         }
 
         public string BuildToken(UserModel user)
         {
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Name),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim(JwtRegisteredClaimNames.Birthdate, user.Birthdate.ToString("yyyy-MM-dd")),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new System.Security.Claims.Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                new System.Security.Claims.Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new System.Security.Claims.Claim(JwtRegisteredClaimNames.GivenName, user.FirstName),
+                new System.Security.Claims.Claim(JwtRegisteredClaimNames.FamilyName, user.LastName),
+                new System.Security.Claims.Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.config.GetConfiguration<string>("Jwt:Key")));
@@ -42,19 +48,10 @@ namespace GildedRose.Membership
 
         public UserModel Authenticate(LoginModel login)
         {
-            UserModel user = null;
-
-            if (login.Username == "mario" && login.Password == "secret")
-            {
-                user = new UserModel { Name = "Mario Rossi", Email = "mario.rossi@domain.com", Birthdate = new DateTime(1983, 9, 23) };
-            }
-
-            if (login.Username == "mary" && login.Password == "barbie")
-            {
-                user = new UserModel { Name = "Mary Smith", Email = "mary.smith@domain.com", Birthdate = new DateTime(2001, 5, 13) };
-            }
-
-            return user;
+            return this.dbContext
+                .Users
+                .Where(x => x.UserName.ToUpper() == login.Username.ToUpper() && x.PasswordHash == login.Password)
+                .FirstOrDefault();
         }
     }
 }

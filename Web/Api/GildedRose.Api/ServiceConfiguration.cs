@@ -13,7 +13,6 @@ namespace GildedRose.Api
         {
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterType<ConfigurationStore>().As<IConfigurationStore>().InstancePerLifetimeScope();
-
             containerBuilder.RegisterType<IdentityHelper>().As<IdentityHelper>().InstancePerLifetimeScope();
 
             //Register Managers

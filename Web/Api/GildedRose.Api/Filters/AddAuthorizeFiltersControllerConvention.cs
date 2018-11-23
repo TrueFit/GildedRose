@@ -7,13 +7,9 @@ namespace GildedRose.Membership.Filters
     {
         public void Apply(ControllerModel controller)
         {
-            if (controller.ControllerName.Contains("Token"))
+            if (!controller.ControllerName.Contains("Token"))
             {
-                controller.Filters.Add(new AuthorizeFilter("apipolicy"));
-            }
-            else
-            {
-                controller.Filters.Add(new AuthorizeFilter("defaultpolicy"));
+                controller.Filters.Add(new AuthorizeFilter("securepolicy"));
             }
         }
     }

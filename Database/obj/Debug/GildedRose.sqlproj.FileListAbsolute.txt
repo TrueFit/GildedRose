@@ -1,9 +1,0 @@
-D:\src\GildedRose\Database\bin\Debug\GildedRose.dacpac
-D:\src\GildedRose\Database\bin\Debug\GildedRose.dll
-D:\src\GildedRose\Database\bin\Debug\GildedRose.pdb
-D:\src\GildedRose\Database\obj\Debug\GildedRose.dll
-D:\src\GildedRose\Database\obj\Debug\GildedRose.pdb
-D:\src\GildedRose\Database\obj\Debug\Model.xml
-D:\src\GildedRose\Database\obj\Debug\refactor.xml
-D:\src\GildedRose\Database\obj\Debug\postdeploy.sql
-D:\src\GildedRose\Database\obj\Debug\predeploy.sql

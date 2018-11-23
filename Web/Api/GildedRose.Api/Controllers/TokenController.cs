@@ -15,7 +15,7 @@ namespace GildedRose.Api.Controllers
             this.auth = auth;
         }
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpPost]
         public object CreateToken([FromBody]LoginModel login)
         {

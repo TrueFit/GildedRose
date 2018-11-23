@@ -15,6 +15,12 @@ using System.Text;
 using GildedRose.Membership.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using GildedRose.Api.Extensions;
+using GildedRose.Membership.Data;
+using Microsoft.EntityFrameworkCore;
+using GildedRose.Membership.Filters;
+using System.Security.Claims;
+using System.Collections.Generic;
 
 namespace GildedRose.Api
 {
@@ -55,18 +61,6 @@ namespace GildedRose.Api
             //services.AddSingleton(manager);
             services.AddSingleton(this.Configuration);
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info { Title = "Item Service", Version = "v1" });
-                c.DescribeAllEnumsAsStrings();
-                c.AddSecurityDefinition("bearer", new ApiKeyScheme
-                {
-                    Name = "Authorization",
-                    In = "header",
-                    Type = "apiKey",
-                });
-            });
-
             var jwt = this.Configuration.GetSection("Jwt").Get<Jwt>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -87,17 +81,32 @@ namespace GildedRose.Api
             services
                    .AddMvc(o =>
                    {
-                       // Default all endpoints to require Authentication unless overrided with attribute
-                       var policy = new AuthorizationPolicyBuilder()
-                           .RequireAuthenticatedUser()
-                           .Build();
-                       o.Filters.Add(new AuthorizeFilter(policy));
+                       o.Conventions.Add(new AddAuthorizeFiltersControllerConvention());
                    })
                    .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1)
                    .AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
 
-            var connectionString = this.Configuration.GetConnectionString("GildedRose");
-            var containerBuilder = ServiceConfiguration.Register(this.AddWebServices, connectionString);
+            services.AddAuthorization(o =>
+            {
+                o.AddPolicy("securepolicy", b =>
+                {
+                    b.RequireAuthenticatedUser();
+                    b.AuthenticationSchemes = new List<string> { JwtBearerDefaults.AuthenticationScheme };
+                });
+            });
+
+            var platformConnectionString = this.Configuration.GetConnectionString("GildedRose.Platform");
+            var membershipConnectionString = this.Configuration.GetConnectionString("GildedRose.Membership");
+
+            var containerBuilder = ServiceConfiguration.Register(this.AddWebServices, platformConnectionString);
+
+            services.AddEntityFrameworkSqlServer().AddDbContext<UserDbContext>(options =>
+            {
+                options.UseSqlServer(membershipConnectionString);
+            });
+
+            services.AddSwaggerDocumentation();
+
             containerBuilder.Populate(services);
             var container = containerBuilder.Build();
             return new AutofacServiceProvider(container);
@@ -108,24 +117,16 @@ namespace GildedRose.Api
         {
             if (env.IsDevelopment())
             {
+                app.UseSwaggerDocumentation();
                 app.UseDeveloperExceptionPage();
             }
             else
             {
                 app.UseHsts();
+                app.UseHttpsRedirection();
             }
 
-            app.UseHttpsRedirection();
-
-            app.UseSwagger();
-
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            });
-
             app.UseAuthentication();
-
             app.UseMvc();
         }
 
