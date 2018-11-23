@@ -48,6 +48,11 @@ namespace GildedRose.Membership
 
         public UserModel Authenticate(LoginModel login)
         {
+            if (string.IsNullOrEmpty(login.Username) || string.IsNullOrEmpty(login.Password))
+            {
+                return null;
+            }
+
             return this.dbContext
                 .Users
                 .Where(x => x.UserName.ToUpper() == login.Username.ToUpper() && x.PasswordHash == login.Password)
