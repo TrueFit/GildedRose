@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using GildedRose.Api.Filters;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace GildedRose.Api.Extensions
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1.0", new Info { Title = "GildedRose API", Version = "v1.0" });
-
+                c.DocumentFilter<SecurityRequirementsDocumentFilter>();
                 c.AddSecurityDefinition("Bearer", new ApiKeyScheme
                 {
                     Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",

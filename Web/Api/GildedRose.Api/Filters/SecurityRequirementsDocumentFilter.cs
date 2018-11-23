@@ -13,7 +13,6 @@ namespace GildedRose.Api.Filters
                 new Dictionary<string, IEnumerable<string>>()
                 {
                     { "Bearer", new string[] { } },
-                    { "Basic", new string[] { } },
                 },
             };
         }
