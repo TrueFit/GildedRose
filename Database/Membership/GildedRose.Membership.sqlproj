@@ -90,5 +90,6 @@
     <Build Include="Schema\logs.sql" />
     <Build Include="Storage\logs.sql" />
     <Build Include="Tables\SQLException.sql" />
+    <Build Include="Tables\ApiLog.sql" />
   </ItemGroup>
 </Project>

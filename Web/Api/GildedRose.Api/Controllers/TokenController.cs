@@ -3,6 +3,8 @@ using GildedRose.Api.Validators;
 using GildedRose.Membership;
 using GildedRose.Membership.Models;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
+using Serilog.Core.Enrichers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -14,16 +16,18 @@ namespace GildedRose.Api.Controllers
         private IdentityHelper auth;
         private CreateAccountModel_Validator validateCreateAccount;
         private LoginModel_Validator validateLogin;
+        private ILogger logger;
 
         public TokenController(
             IdentityHelper auth,
             CreateAccountModel_Validator validateCreateAccount,
-            LoginModel_Validator validateLogin
-            )
+            LoginModel_Validator validateLogin,
+            ILogger logger)
         {
             this.auth = auth;
             this.validateCreateAccount = validateCreateAccount;
             this.validateLogin = validateLogin;
+            this.logger = logger;
         }
 
         [HttpPost]
@@ -55,6 +59,14 @@ namespace GildedRose.Api.Controllers
             {
                 var tokenString = this.auth.BuildToken(user);
                 response = this.Ok(new { token = tokenString });
+
+                this.logger
+                    .ForContext(
+                        new[]
+                        {
+                            new PropertyEnricher("Token", tokenString),
+                        })
+                    .Information("Created token");
             }
 
             return response;

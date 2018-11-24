@@ -1,7 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Serilog;
 
 namespace GildedRose.Api
 {
@@ -17,6 +17,7 @@ namespace GildedRose.Api
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
+                .UseSerilog()
                 .UseStartup<Startup>()
                 .Build();
     }

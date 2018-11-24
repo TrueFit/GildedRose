@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Configuration;
-using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
@@ -21,8 +20,7 @@ using System.Security.Claims;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
-using GildedRose.Api.Filters;
-using GildedRose.Core.Models;
+using Serilog;
 
 namespace GildedRose.Api
 {
@@ -56,83 +54,103 @@ namespace GildedRose.Api
         public IServiceProvider ConfigureServices(
             IServiceCollection services)
         {
-            // TODO: ENABLE OR REMOVE THESE LINES!!!
-            // the 3 lines below fix the issue mentioned here: https://github.com/aspnet/Home/issues/3132
-            // without then, the build will fail.
-            //var manager = new ApplicationPartManager();
-            //manager.ApplicationParts.Add(new AssemblyPart(typeof(Startup).Assembly));
-            //services.AddSingleton(manager);
-            services.AddSingleton(this.Configuration);
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(this.Configuration)
+                .CreateLogger();
 
-            var jwt = this.Configuration.GetSection("Jwt").Get<Jwt>();
+            //Serilog.Debugging.SelfLog.Enable(msg =>
+            //{
+            //    Debug.Print(msg);
+            //    Debugger.Break();
+            //});
+            services.AddLogging(x => x.AddSerilog(dispose: true));
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = jwt.Issuer,
-                        ValidAudience = jwt.Issuer,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key)),
-                    };
-                    options.Events = new JwtBearerEvents
-                    {
-                        OnTokenValidated = context =>
-                        {
-                            // Add the access_token as a claim, as we may actually need it
-                            var accessToken = context.SecurityToken as JwtSecurityToken;
-                            if (accessToken != null)
-                            {
-                                ClaimsIdentity identity = context.Principal.Identity as ClaimsIdentity;
-                                if (identity != null)
-                                {
-                                    identity.AddClaim(new Claim("access_token", accessToken.RawData));
-                                }
-                            }
-
-                            return Task.CompletedTask;
-                        },
-                    };
-                });
-
-            services
-                .AddMvc(o =>
-                {
-                    o.Conventions.Add(new AddAuthorizeFiltersControllerConvention());
-                })
-                .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1)
-                .AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
-
-            services
-                .AddAuthorization(o =>
-                {
-                    o.AddPolicy("securepolicy", b =>
-                    {
-                        b.RequireAuthenticatedUser();
-                        b.AuthenticationSchemes = new List<string> { JwtBearerDefaults.AuthenticationScheme };
-                    });
-                });
-
-            var platformConnectionString = this.Configuration.GetConnectionString("GildedRose.Platform");
-            var membershipConnectionString = this.Configuration.GetConnectionString("GildedRose.Membership");
-
-            var containerBuilder = ServiceConfiguration.Register(this.AddWebServices, platformConnectionString);
-
-            services.AddEntityFrameworkSqlServer().AddDbContext<UserDbContext>(options =>
+            try
             {
-                options.UseSqlServer(membershipConnectionString);
-            });
+                Log.Information("API Started");
 
-            services.AddSwaggerDocumentation();
-            services.AddHttpContextAccessor();
+                services.AddSingleton(this.Configuration);
 
-            containerBuilder.Populate(services);
-            var container = containerBuilder.Build();
-            return new AutofacServiceProvider(container);
+                var jwt = this.Configuration.GetSection("Jwt").Get<Jwt>();
+                services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddJwtBearer(options =>
+                    {
+                        options.TokenValidationParameters = new TokenValidationParameters
+                        {
+                            ValidateIssuer = true,
+                            ValidateAudience = true,
+                            ValidateLifetime = true,
+                            ValidateIssuerSigningKey = true,
+                            ValidIssuer = jwt.Issuer,
+                            ValidAudience = jwt.Issuer,
+                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key)),
+                        };
+                        options.Events = new JwtBearerEvents
+                        {
+                            OnTokenValidated = context =>
+                            {
+                                // Add the access_token as a claim, as we may actually need it
+                                if (context.SecurityToken is JwtSecurityToken accessToken)
+                                {
+                                    if (context.Principal.Identity is ClaimsIdentity identity)
+                                    {
+                                        identity.AddClaim(new Claim("access_token", accessToken.RawData));
+                                    }
+                                }
+
+                                return Task.CompletedTask;
+                            },
+                        };
+                    });
+
+                services
+                    .AddMvc(o =>
+                    {
+                        o.Conventions.Add(new AddAuthorizeFiltersControllerConvention());
+                    })
+                    .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1)
+                    .AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
+
+                services
+                    .AddAuthorization(o =>
+                    {
+                        o.AddPolicy("securepolicy", b =>
+                        {
+                            b.RequireAuthenticatedUser();
+                            b.AuthenticationSchemes = new List<string> { JwtBearerDefaults.AuthenticationScheme };
+                        });
+                    });
+
+                var platformConnectionString = this.Configuration.GetConnectionString("GildedRose.Platform");
+                var membershipConnectionString = this.Configuration.GetConnectionString("GildedRose.Membership");
+
+                var containerBuilder = ServiceConfiguration.Register(
+                    this.AddWebServices,
+                    this.Configuration,
+                    platformConnectionString);
+
+                services.AddEntityFrameworkSqlServer().AddDbContext<UserDbContext>(options =>
+                {
+                    options.UseSqlServer(membershipConnectionString);
+                });
+
+                services.AddSwaggerDocumentation();
+                services.AddHttpContextAccessor();
+
+                containerBuilder.Populate(services);
+                var container = containerBuilder.Build();
+                return new AutofacServiceProvider(container);
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Host terminated unexpectedly");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
+
+            return null;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

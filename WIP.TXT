@@ -1,10 +1,2 @@
-* Implement Action Filters
-* Implement Seri lOG
-  
-* User Context
-  Inject into datastore
 
-  *LoginModel Validator
-
-  CreateUser / Authenticate http interceptors
   
