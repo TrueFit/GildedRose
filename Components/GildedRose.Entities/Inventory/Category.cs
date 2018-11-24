@@ -1,8 +1,9 @@
-﻿using System;
+﻿using GildedRose.Core.Contracts;
+using System;
 
 namespace GildedRose.Entities.Inventory
 {
-    public class Category
+    public class Category : IAuditable
     {
         public int Id { get; set; }
 
@@ -11,5 +12,9 @@ namespace GildedRose.Entities.Inventory
         public DateTime Created { get; set; }
 
         public int CreatedBy { get; set; }
+
+        public DateTime? Modified { get; set; }
+
+        public int? ModifiedBy { get; set; }
     }
 }

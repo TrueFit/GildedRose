@@ -6,7 +6,7 @@
     [LastName] NVARCHAR(100) NOT NULL,
 	[Email] [Email] NOT NULL,
 	[PasswordHash] [PWD] NOT NULL,
-	[OrganizationIdentifier] UNIQUEIDENTIFIER,
+	[OrganizationIdentifier] UNIQUEIDENTIFIER NULL,
 	[Created] [AuditDate] DEFAULT getutcdate(),
     [CreatedBy] [AuditUser],
 	[Modified] [AuditDate] NULL,
@@ -14,3 +14,9 @@
     CONSTRAINT [PK_UserIdentifier] PRIMARY KEY CLUSTERED ([Id] ASC) on [membership],
 	CONSTRAINT [FK_User_Organization] FOREIGN KEY ([OrganizationIdentifier]) REFERENCES [membership].[Organization]([Identifier]), 
 );
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_Users_Email] ON [membership].[Users]([Email]);
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_Users_userName] ON [membership].[Users]([UserName]);

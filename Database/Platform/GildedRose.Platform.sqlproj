@@ -84,6 +84,9 @@
     <Build Include="UserDefinedTypes\City.sql" />
     <Build Include="UserDefinedTypes\State.sql" />
     <Build Include="UserDefinedTypes\PostalCode.sql" />
+    <Build Include="Schema\logs.sql" />
+    <Build Include="Storage\logs.sql" />
+    <Build Include="Tables\SQLException.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schema\inventory.sql" />

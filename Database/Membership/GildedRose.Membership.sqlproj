@@ -85,4 +85,10 @@
     <Build Include="UserDefinedTypes\PostalCode.sql" />
     <None Include="PostDeploy\Membership.Organization.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="StoredProcedures\CreateAccount.sql" />
+    <Build Include="Schema\logs.sql" />
+    <Build Include="Storage\logs.sql" />
+    <Build Include="Tables\SQLException.sql" />
+  </ItemGroup>
 </Project>

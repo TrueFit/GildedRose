@@ -2,10 +2,8 @@
 
 namespace GildedRose.Membership.Models
 {
-    public class UserModel
+    public class CreateAccountModel
     {
-        public int Id { get; set; }
-
         public string UserName { get; set; }
 
         public string FirstName { get; set; }
@@ -14,6 +12,10 @@ namespace GildedRose.Membership.Models
 
         public string Email { get; set; }
 
-        public string PasswordHash { get; set; }
+        public string Password { get; set; }
+
+        public string ConfirmPassword { get; set; }
+
+        public Guid? OrganizationIdentifier { get; set; }
     }
 }

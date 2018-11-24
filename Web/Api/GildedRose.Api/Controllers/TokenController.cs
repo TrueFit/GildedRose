@@ -1,7 +1,7 @@
 ﻿using GildedRose.Membership;
 using GildedRose.Membership.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace GildedRose.Api.Controllers
 {
@@ -15,9 +15,9 @@ namespace GildedRose.Api.Controllers
             this.auth = auth;
         }
 
-        //[AllowAnonymous]
         [HttpPost]
-        public object CreateToken([FromBody]LoginModel login)
+        [Route("createuser")]
+        public IActionResult CreateToken([FromBody]LoginModel login)
         {
             IActionResult response = this.Unauthorized();
             var user = this.auth.Authenticate(login);
@@ -29,6 +29,24 @@ namespace GildedRose.Api.Controllers
             }
 
             return response;
+        }
+
+        [HttpPost]
+        [Route("createaccount")]
+        public async Task<object> CreateAccount([FromBody]CreateAccountModel newAccount)
+        {
+            if (newAccount.Password != newAccount.ConfirmPassword)
+            {
+                this.BadRequest(new { message = "Passwords do not match." });
+            }
+
+            var id = await this.auth.CreateAccount(newAccount);
+            if (id != 0)
+            {
+                return this.Ok(new { message = "User Account has been created successfully." });
+            }
+
+            return this.BadRequest(new { message = "Account Could not be created, please try again later." });
         }
     }
 }

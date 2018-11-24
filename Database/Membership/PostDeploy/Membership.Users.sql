@@ -5,7 +5,7 @@
     [LastName] NVARCHAR(100) NOT NULL,
 	[Email] [Email] NOT NULL,
 	[PasswordHash] [PWD] NOT NULL,
-	[OrganizationIdentifier] UNIQUEIDENTIFIER NOT NULL,
+	[OrganizationIdentifier] UNIQUEIDENTIFIER NULL,
     [CreatedBy] [AuditUser]
 );
 
@@ -13,8 +13,8 @@
 INSERT INTO 
 	@Users ([Id], [UserName], [FirstName], [LastName], [Email], [PasswordHash], [OrganizationIdentifier], [CreatedBy]) 
 VALUES
-(1, 'talkersoft', 'Todd', 'Alker', 'talkersoft@gmail.com', 'abc', '9C1ACC19-30B6-4C4F-ABB7-161482542709', 1),
-(2, 'jgretz', 'Josh', 'Gretz', 'jgretz@truefit.io', 'efg', '9C1ACC19-30B6-4C4F-ABB7-161482542709', 1)
+(1, 'talkersoft', 'Todd', 'Alker', 'talkersoft@gmail.com', 'password', '9C1ACC19-30B6-4C4F-ABB7-161482542709', 1),
+(2, 'jgretz', 'Josh', 'Gretz', 'jgretz@truefit.io', 'password', '9C1ACC19-30B6-4C4F-ABB7-161482542709', 1)
 
  
 -- Merge Statement Used to ensure list of items maintained in the table variable are persisted into the database

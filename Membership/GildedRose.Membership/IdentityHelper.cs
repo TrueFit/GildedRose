@@ -1,11 +1,15 @@
 ﻿using GildedRose.Core.Contracts;
 using GildedRose.Membership.Data;
+using GildedRose.Membership.Entities;
 using GildedRose.Membership.Models;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using Dapper;
 
 namespace GildedRose.Membership
 {
@@ -22,7 +26,7 @@ namespace GildedRose.Membership
             this.dbContext = dbContext;
         }
 
-        public string BuildToken(UserModel user)
+        public string BuildToken(User user)
         {
             var claims = new[]
             {
@@ -36,17 +40,18 @@ namespace GildedRose.Membership
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.config.GetConfiguration<string>("Jwt:Key")));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
+            var tokenTimeout = int.Parse(this.config.GetConfiguration<string>("TokenTimeout") ?? "30");
             var token = new JwtSecurityToken(
                 this.config.GetConfiguration<string>("Jwt:Issuer"),
                 this.config.GetConfiguration<string>("Jwt:Issuer"),
                 claims,
-                expires: DateTime.Now.AddMinutes(30),
+                expires: DateTime.Now.AddMinutes(tokenTimeout),
                 signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public UserModel Authenticate(LoginModel login)
+        public User Authenticate(LoginModel login)
         {
             if (string.IsNullOrEmpty(login.Username) || string.IsNullOrEmpty(login.Password))
             {
@@ -57,6 +62,43 @@ namespace GildedRose.Membership
                 .Users
                 .Where(x => x.UserName.ToUpper() == login.Username.ToUpper() && x.PasswordHash == login.Password)
                 .FirstOrDefault();
+        }
+
+        public async Task<int> CreateAccount(CreateAccountModel newAccount)
+        {
+            var connection = this.dbContext.Database.GetDbConnection();
+            if (connection.State != System.Data.ConnectionState.Open)
+            {
+                connection.Open();
+            }
+
+            try
+            {
+                return await connection.ExecuteScalarAsync<int>(
+                    "[membership].[CreateAccount]",
+                    new
+                    {
+                        newAccount.UserName,
+                        newAccount.FirstName,
+                        newAccount.LastName,
+                        newAccount.Email,
+                        PasswordHash = newAccount.Password,
+                        Organization = newAccount.OrganizationIdentifier,
+                    },
+                    commandType: System.Data.CommandType.StoredProcedure);
+            }
+            catch (Exception ex) when (ex.Message.Contains("duplicate key"))
+            {
+                return 0;
+            }
+        }
+
+        public async Task<User> GetUser(int id)
+        {
+            return await this.dbContext
+                .Users
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
         }
     }
 }

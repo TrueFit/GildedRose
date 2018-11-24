@@ -1,8 +1,5 @@
-﻿using GildedRose.Membership.Models;
+﻿using GildedRose.Membership.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GildedRose.Membership.Data
 {
@@ -13,7 +10,7 @@ namespace GildedRose.Membership.Data
         {
         }
 
-        public DbSet<UserModel> Users { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -23,7 +20,7 @@ namespace GildedRose.Membership.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserModel>().ToTable("Users", "membership");
+            modelBuilder.Entity<User>().ToTable("Users", "membership");
 
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
@@ -33,7 +30,7 @@ namespace GildedRose.Membership.Data
                 }
             }
 
-            modelBuilder.Entity<UserModel>().HasKey(x => new { x.Id });
+            modelBuilder.Entity<User>().HasKey(x => new { x.Id });
         }
     }
 }
