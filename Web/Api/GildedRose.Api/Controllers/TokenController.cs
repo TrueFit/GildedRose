@@ -12,22 +12,44 @@ namespace GildedRose.Api.Controllers
     public class TokenController : Controller
     {
         private IdentityHelper auth;
-        private CreateAccount_Validator test;
+        private CreateAccountModel_Validator validateCreateAccount;
+        private LoginModel_Validator validateLogin;
 
         public TokenController(
             IdentityHelper auth,
-            CreateAccount_Validator test)
+            CreateAccountModel_Validator validateCreateAccount,
+            LoginModel_Validator validateLogin
+            )
         {
             this.auth = auth;
-            this.test = test;
+            this.validateCreateAccount = validateCreateAccount;
+            this.validateLogin = validateLogin;
         }
 
         [HttpPost]
         [Route("createtoken")]
-        public IActionResult CreateToken([FromBody]LoginModel login)
+        public async Task<IActionResult> CreateToken([FromBody]LoginModel login)
         {
+            var result = await this.validateLogin.ValidateAsync(login);
+            if (!result.IsValid)
+            {
+                var errorResponse = new List<ResponseError>();
+                foreach (var error in result.Errors)
+                {
+                    errorResponse.Add(
+                        new ResponseError()
+                        {
+                            Field = error.PropertyName,
+                            ErrorMessage = error.ErrorMessage,
+                            InputData = error.AttemptedValue,
+                        });
+                }
+
+                return this.BadRequest(errorResponse);
+            }
+
             IActionResult response = this.Unauthorized();
-            var user = this.auth.Authenticate(login);
+            var user = await this.auth.Authenticate(login);
 
             if (user != null)
             {
@@ -40,9 +62,9 @@ namespace GildedRose.Api.Controllers
 
         [HttpPost]
         [Route("createaccount")]
-        public async Task<object> CreateAccount([FromBody]CreateAccountModel newAccount)
+        public async Task<IActionResult> CreateAccount([FromBody]CreateAccountModel newAccount)
         {
-            var result = await this.test.ValidateAsync(newAccount);
+            var result = await this.validateCreateAccount.ValidateAsync(newAccount);
             if (!result.IsValid)
             {
                 var errorResponse = new List<ResponseError>();

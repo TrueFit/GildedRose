@@ -17,7 +17,7 @@ namespace GildedRose.Membership.Entities
 
         public string PasswordHash { get; set; }
 
-        public Guid OrganizationIdentifier { get; set; }
+        public Guid? OrganizationIdentifier { get; set; }
 
         public DateTime Created { get; set; }
 

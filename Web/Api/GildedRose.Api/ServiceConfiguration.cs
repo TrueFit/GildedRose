@@ -16,10 +16,11 @@ namespace GildedRose.Api
         {
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterType<ConfigurationStore>().As<IConfigurationStore>().InstancePerLifetimeScope();
-            containerBuilder.RegisterType<UserContext>().AsSelf().InstancePerLifetimeScope();
+            //containerBuilder.RegisterType<UserContext>().AsSelf().InstancePerLifetimeScope();
 
             containerBuilder.RegisterType<IdentityHelper>().As<IdentityHelper>().InstancePerLifetimeScope();
-            containerBuilder.RegisterType<CreateAccount_Validator>().As<CreateAccount_Validator>().InstancePerLifetimeScope();
+            containerBuilder.RegisterType<CreateAccountModel_Validator>().As<CreateAccountModel_Validator>().InstancePerLifetimeScope();
+            containerBuilder.RegisterType<LoginModel_Validator>().As<LoginModel_Validator>().InstancePerLifetimeScope();
 
             //Register Managers
             containerBuilder.RegisterModule(new Managers.DependencyManagement.ManagerModule());

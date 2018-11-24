@@ -58,15 +58,15 @@ namespace GildedRose.Membership
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public User Authenticate(LoginModel login)
+        public async Task<User> Authenticate(LoginModel login)
         {
             var key = this.config.GetConfiguration<string>("Secret");
             var iv = this.config.GetConfiguration<string>("IV");
 
-            var userAccount = this.dbContext
+            var userAccount = await this.dbContext
                 .Users
                 .Where(x => x.UserName.ToUpper() == login.Username.ToUpper())
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             if (userAccount == null)
             {
