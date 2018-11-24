@@ -19,12 +19,6 @@ namespace GildedRose.Store.Base
             this.connectionFactory = connection;
         }
 
-        public BulkDataStore(Func<IDbConnection> connection)
-        {
-            this.UserId = 1;
-            this.connectionFactory = connection;
-        }
-
         public int UserId { get; private set; }
 
         public async Task BulkInsertAsync(DbDataReader reader, string destinationTableName, int? timeout = null)

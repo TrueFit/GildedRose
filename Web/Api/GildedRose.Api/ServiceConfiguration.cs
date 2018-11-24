@@ -2,8 +2,9 @@
 using GildedRose.Api.Validators;
 using GildedRose.Configuration;
 using GildedRose.Core.Contracts;
+using GildedRose.Core.Models;
 using GildedRose.Membership;
-using GildedRose.Membership.DependencyManagement;
+using GildedRose.Membership.Models;
 using GildedRose.Store.DependencyManagement;
 using System;
 
@@ -15,6 +16,8 @@ namespace GildedRose.Api
         {
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterType<ConfigurationStore>().As<IConfigurationStore>().InstancePerLifetimeScope();
+            containerBuilder.RegisterType<UserContext>().AsSelf().InstancePerLifetimeScope();
+
             containerBuilder.RegisterType<IdentityHelper>().As<IdentityHelper>().InstancePerLifetimeScope();
             containerBuilder.RegisterType<CreateAccount_Validator>().As<CreateAccount_Validator>().InstancePerLifetimeScope();
 

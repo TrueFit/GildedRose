@@ -23,13 +23,6 @@ namespace GildedRose.Store.Base
             sqlStatements = new Dictionary<string, string>();
         }
 
-        //TODO: Remove this overload when authentication is functional
-        public DataStore(Func<IDbConnection> connection)
-        {
-            this.UserId = 1;
-            this.connectionFactory = connection;
-        }
-
         public DataStore(int userId, Func<IDbConnection> connection)
         {
             this.UserId = userId;

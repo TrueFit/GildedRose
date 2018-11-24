@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Dapper;
 using GildedRose.Membership.Crypto;
 using System.Security.Cryptography;
+using System.Security.Claims;
 
 namespace GildedRose.Membership
 {
@@ -35,11 +36,12 @@ namespace GildedRose.Membership
         {
             var claims = new[]
             {
-                new System.Security.Claims.Claim(JwtRegisteredClaimNames.Sub, user.UserName),
-                new System.Security.Claims.Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new System.Security.Claims.Claim(JwtRegisteredClaimNames.GivenName, user.FirstName),
-                new System.Security.Claims.Claim(JwtRegisteredClaimNames.FamilyName, user.LastName),
-                new System.Security.Claims.Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName),
+                new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.config.GetConfiguration<string>("Jwt:Key")));

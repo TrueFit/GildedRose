@@ -1,1 +1,1 @@
-curl -X POST -H 'Content-Type: application/json' -d '{"username": "mario", "password": "secret"}' http://localhost:5000/api/token
+curl -X POST -H 'Content-Type: application/json' -d '{"username": "talkersoft", "password": "password"}' http://localhost:5000/api/token/createtoken

@@ -13,14 +13,16 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using GildedRose.Membership.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using GildedRose.Api.Extensions;
 using GildedRose.Membership.Data;
 using Microsoft.EntityFrameworkCore;
 using GildedRose.Membership.Filters;
 using System.Security.Claims;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Threading.Tasks;
+using GildedRose.Api.Filters;
+using GildedRose.Core.Models;
 
 namespace GildedRose.Api
 {
@@ -51,7 +53,8 @@ namespace GildedRose.Api
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public IServiceProvider ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(
+            IServiceCollection services)
         {
             // TODO: ENABLE OR REMOVE THESE LINES!!!
             // the 3 lines below fix the issue mentioned here: https://github.com/aspnet/Home/issues/3132
@@ -64,36 +67,55 @@ namespace GildedRose.Api
             var jwt = this.Configuration.GetSection("Jwt").Get<Jwt>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
+                .AddJwtBearer(options =>
                 {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = jwt.Issuer,
-                    ValidAudience = jwt.Issuer,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key)),
-                };
-            });
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = jwt.Issuer,
+                        ValidAudience = jwt.Issuer,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key)),
+                    };
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnTokenValidated = context =>
+                        {
+                            // Add the access_token as a claim, as we may actually need it
+                            var accessToken = context.SecurityToken as JwtSecurityToken;
+                            if (accessToken != null)
+                            {
+                                ClaimsIdentity identity = context.Principal.Identity as ClaimsIdentity;
+                                if (identity != null)
+                                {
+                                    identity.AddClaim(new Claim("access_token", accessToken.RawData));
+                                }
+                            }
+
+                            return Task.CompletedTask;
+                        },
+                    };
+                });
 
             services
-                   .AddMvc(o =>
-                   {
-                       o.Conventions.Add(new AddAuthorizeFiltersControllerConvention());
-                   })
-                   .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1)
-                   .AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
-
-            services.AddAuthorization(o =>
-            {
-                o.AddPolicy("securepolicy", b =>
+                .AddMvc(o =>
                 {
-                    b.RequireAuthenticatedUser();
-                    b.AuthenticationSchemes = new List<string> { JwtBearerDefaults.AuthenticationScheme };
+                    o.Conventions.Add(new AddAuthorizeFiltersControllerConvention());
+                })
+                .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1)
+                .AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
+
+            services
+                .AddAuthorization(o =>
+                {
+                    o.AddPolicy("securepolicy", b =>
+                    {
+                        b.RequireAuthenticatedUser();
+                        b.AuthenticationSchemes = new List<string> { JwtBearerDefaults.AuthenticationScheme };
+                    });
                 });
-            });
 
             var platformConnectionString = this.Configuration.GetConnectionString("GildedRose.Platform");
             var membershipConnectionString = this.Configuration.GetConnectionString("GildedRose.Membership");
@@ -106,6 +128,7 @@ namespace GildedRose.Api
             });
 
             services.AddSwaggerDocumentation();
+            services.AddHttpContextAccessor();
 
             containerBuilder.Populate(services);
             var container = containerBuilder.Build();
@@ -126,6 +149,7 @@ namespace GildedRose.Api
                 app.UseHttpsRedirection();
             }
 
+            //app.UseMiddleware<UserContextMiddleware>();
             app.UseAuthentication();
             app.UseMvc();
         }
