@@ -3,6 +3,7 @@ using GildedRose.Api.Validators;
 using GildedRose.Configuration;
 using GildedRose.Core.Contracts;
 using GildedRose.Membership;
+using GildedRose.Membership.DependencyManagement;
 using GildedRose.Store.DependencyManagement;
 using System;
 
@@ -25,6 +26,9 @@ namespace GildedRose.Api
             {
                 ConnectionString = connectionString,
             });
+
+            //Register Membership
+            containerBuilder.RegisterModule(new Membership.DependencyManagement.MembershipModule());
 
             additionalRegistration(containerBuilder);
 

@@ -23,7 +23,7 @@ namespace GildedRose.Api.Controllers
         }
 
         [HttpPost]
-        [Route("createuser")]
+        [Route("createtoken")]
         public IActionResult CreateToken([FromBody]LoginModel login)
         {
             IActionResult response = this.Unauthorized();
@@ -60,8 +60,7 @@ namespace GildedRose.Api.Controllers
                 return this.BadRequest(errorResponse);
             }
 
-            var id = await this.auth.CreateAccount(newAccount);
-            if (id != 0)
+            if (await this.auth.CreateAccount(newAccount) != 0)
             {
                 return this.Ok(new { message = "User Account has been created successfully." });
             }

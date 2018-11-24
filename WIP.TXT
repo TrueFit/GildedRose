@@ -1,6 +1,12 @@
 * Implement Action Filters
 * Implement Seri lOG
- 
-* fluent validators: validate user creation
-* fname GivinName, LName FamilyName
+  
 * Encryption of password stored in database
+
+* User Context
+  Inject into datastore
+
+  *LoginModel Validator
+
+  CreateUser / Authenticate should be action filters!
+  

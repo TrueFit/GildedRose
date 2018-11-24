@@ -1,12 +1,9 @@
 ﻿using Autofac;
-using GildedRose.Core.Contracts;
 using GildedRose.Store.Base;
 using GildedRose.Store.Contracts;
 using GildedRose.Store.Wrappers;
 using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Text;
 
 namespace GildedRose.Store.DependencyManagement
 {
