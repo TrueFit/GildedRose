@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using GildedRose.Api.Validators;
 using GildedRose.Configuration;
 using GildedRose.Core.Contracts;
 using GildedRose.Membership;
@@ -14,9 +15,10 @@ namespace GildedRose.Api
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterType<ConfigurationStore>().As<IConfigurationStore>().InstancePerLifetimeScope();
             containerBuilder.RegisterType<IdentityHelper>().As<IdentityHelper>().InstancePerLifetimeScope();
+            containerBuilder.RegisterType<CreateAccount_Validator>().As<CreateAccount_Validator>().InstancePerLifetimeScope();
 
             //Register Managers
-            containerBuilder.RegisterModule(new Managers.DependencyManagement.ServiceModule());
+            containerBuilder.RegisterModule(new Managers.DependencyManagement.ManagerModule());
 
             // Register Store Module
             containerBuilder.RegisterModule(new StoreModule()

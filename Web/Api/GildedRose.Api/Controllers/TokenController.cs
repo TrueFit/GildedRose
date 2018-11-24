@@ -1,6 +1,9 @@
-﻿using GildedRose.Membership;
+﻿using GildedRose.Api.Models;
+using GildedRose.Api.Validators;
+using GildedRose.Membership;
 using GildedRose.Membership.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GildedRose.Api.Controllers
@@ -9,10 +12,14 @@ namespace GildedRose.Api.Controllers
     public class TokenController : Controller
     {
         private IdentityHelper auth;
+        private CreateAccount_Validator test;
 
-        public TokenController(IdentityHelper auth)
+        public TokenController(
+            IdentityHelper auth,
+            CreateAccount_Validator test)
         {
             this.auth = auth;
+            this.test = test;
         }
 
         [HttpPost]
@@ -35,9 +42,22 @@ namespace GildedRose.Api.Controllers
         [Route("createaccount")]
         public async Task<object> CreateAccount([FromBody]CreateAccountModel newAccount)
         {
-            if (newAccount.Password != newAccount.ConfirmPassword)
+            var result = await this.test.ValidateAsync(newAccount);
+            if (!result.IsValid)
             {
-                this.BadRequest(new { message = "Passwords do not match." });
+                var errorResponse = new List<ResponseError>();
+                foreach (var error in result.Errors)
+                {
+                    errorResponse.Add(
+                        new ResponseError()
+                        {
+                            Field = error.PropertyName,
+                            ErrorMessage = error.ErrorMessage,
+                            InputData = error.AttemptedValue,
+                        });
+                }
+
+                return this.BadRequest(errorResponse);
             }
 
             var id = await this.auth.CreateAccount(newAccount);

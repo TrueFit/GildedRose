@@ -6,7 +6,7 @@ using System.Text;
 
 namespace GildedRose.Managers.DependencyManagement
 {
-    public class ServiceModule : Module
+    public class ManagerModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
