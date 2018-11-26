@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using GildedRose.Membership.Models;
 using System.Linq;
+
 namespace GildedRose.Api.Validators
 {
     public class CreateAccountModel_Validator : AbstractValidator<CreateAccountModel>

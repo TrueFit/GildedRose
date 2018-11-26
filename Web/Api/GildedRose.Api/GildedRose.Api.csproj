@@ -33,13 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Components\Configuration\GildedRose.Configuration.csproj" />
-    <ProjectReference Include="..\..\..\Components\Core\GildedRose.Core.csproj" />
-    <ProjectReference Include="..\..\..\Components\DataStore\GildedRose.DataStore.csproj" />
     <ProjectReference Include="..\..\..\Components\Exceptions\GildedRose.Exceptions.csproj" />
-    <ProjectReference Include="..\..\..\Components\GildedRose.Contracts\GildedRose.Contracts.csproj" />
     <ProjectReference Include="..\..\..\Components\GildedRose.Entities\GildedRose.Entities.csproj" />
-    <ProjectReference Include="..\..\..\Components\GildedRose.Managers\GildedRose.Managers.csproj" />
+    <ProjectReference Include="..\..\..\Components\GildedRose.Logic\GildedRose.Logic.csproj" />
     <ProjectReference Include="..\..\..\Components\Http\GildedRose.HttpClient.csproj" />
     <ProjectReference Include="..\..\..\Membership\GildedRose.Membership\GildedRose.Membership.csproj" />
   </ItemGroup>

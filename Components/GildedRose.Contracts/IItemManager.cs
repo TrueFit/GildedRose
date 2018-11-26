@@ -8,11 +8,11 @@ namespace GildedRose.Contracts
 {
     public interface IItemManager
     {
-        Task<IEnumerable<Item>> GetAll();
+        Task<IEnumerable<ItemsView>> GetAll();
 
-        Task<IEnumerable<Item>> GetByName(string itemName);
+        Task<IEnumerable<ItemsView>> GetByName(string itemName);
 
-        Task<IEnumerable<Item>> GetByCategory(int categoryId);
+        Task<IEnumerable<ItemsView>> GetByCategory(int categoryId);
 
         Task Remove(Guid identifer);
     }

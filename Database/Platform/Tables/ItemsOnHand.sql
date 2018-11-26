@@ -2,6 +2,7 @@
 (
     [Identifier] UNIQUEIDENTIFIER NOT NULL, 
     [ItemIdentifier] UNIQUEIDENTIFIER NOT NULL, 
+	[InitialQuality] INT NOT NULL,
 	[StockDate] DATETIME2 NOT NULL,
 	[Sold] BIT NOT NULL DEFAULT 0,
 	[Created] [AuditDate] NOT NULL DEFAULT getutcdate(),

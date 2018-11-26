@@ -1,15 +1,17 @@
 ﻿SELECT 
 	 [Identifier]
 	,[Name]
-    ,[Category]
     ,[ShelfLife]
-    ,[MaxQuality]
+    ,[InitialQuality]
     ,[IsLegendary]
+	,[StockDate]
     ,[Created]
     ,[CreatedBy]
 	,[Modified]
 	,[ModifiedBy]
+	,[CategoryId]
+	,[CategoryName]
 FROM 
-	[Inventory].[Items]
+	[Inventory].[ItemsView]
 WHERE 
 	IsDeleted = 0;

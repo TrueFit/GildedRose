@@ -1,15 +1,16 @@
 ﻿SELECT 
 	 [Identifier]
 	,[Name]
-    ,[Category]
     ,[ShelfLife]
-    ,[MaxQuality]
+    ,[InitialQuality]
     ,[IsLegendary]
     ,[Created]
     ,[CreatedBy]
 	,[Modified]
 	,[ModifiedBy]
+	,[CategoryId]
+	,[CategoryName]
 FROM 
-	[Inventory].[Items]
+	[Inventory].[ItemsView]
 WHERE 
 	IsDeleted = 0 AND [Name] Like @itemName;

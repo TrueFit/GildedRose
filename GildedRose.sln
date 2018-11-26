@@ -41,6 +41,10 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "GildedRose.Membership", "Da
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "GildedRose.Platform", "Database\Platform\GildedRose.Platform.sqlproj", "{CC71D6BC-C633-415C-902F-193BD3675312}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logic", "Logic", "{956A64D2-1B30-4F47-8726-93BEABC73021}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GildedRose.Logic", "Components\GildedRose.Logic\GildedRose.Logic.csproj", "{6EF7C21A-CC9B-48C9-8B96-347C4A3CE148}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +103,10 @@ Global
 		{CC71D6BC-C633-415C-902F-193BD3675312}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC71D6BC-C633-415C-902F-193BD3675312}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CC71D6BC-C633-415C-902F-193BD3675312}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{6EF7C21A-CC9B-48C9-8B96-347C4A3CE148}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EF7C21A-CC9B-48C9-8B96-347C4A3CE148}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EF7C21A-CC9B-48C9-8B96-347C4A3CE148}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EF7C21A-CC9B-48C9-8B96-347C4A3CE148}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -116,6 +124,7 @@ Global
 		{1C6508A7-0023-4390-8AB4-1EB6219038D1} = {C4E13ED9-D4E5-46E9-B038-B50CD3FF1E71}
 		{9F1E9699-3FF0-490E-86D9-5AA4D8E410B9} = {33726231-2C51-4AAA-85EF-9352CF8C43C8}
 		{CC71D6BC-C633-415C-902F-193BD3675312} = {33726231-2C51-4AAA-85EF-9352CF8C43C8}
+		{6EF7C21A-CC9B-48C9-8B96-347C4A3CE148} = {956A64D2-1B30-4F47-8726-93BEABC73021}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {83D75DD5-145D-469F-8243-597D08F5F2EF}

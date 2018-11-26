@@ -16,24 +16,24 @@ namespace GildedRose.Managers
         {
         }
 
-        public async Task<IEnumerable<Item>> GetAll()
+        public async Task<IEnumerable<ItemsView>> GetAll()
         {
             var query = await this.GetQueryAsync();
-            var items = await this.Store.GetListAsync<Item>(query);
+            var items = await this.Store.GetListAsync<ItemsView>(query);
             return items;
         }
 
-        public async Task<IEnumerable<Item>> GetByCategory(int categoryId)
+        public async Task<IEnumerable<ItemsView>> GetByCategory(int categoryId)
         {
             var query = await this.GetQueryAsync();
-            var items = await this.Store.GetListAsync<Item>(query, new { categoryId }, this.timeout);
+            var items = await this.Store.GetListAsync<ItemsView>(query, new { categoryId }, this.timeout);
             return items;
         }
 
-        public async Task<IEnumerable<Item>> GetByName(string itemName)
+        public async Task<IEnumerable<ItemsView>> GetByName(string itemName)
         {
             var query = await this.GetQueryAsync();
-            var items = await this.Store.GetListAsync<Item>(query, new { itemName }, this.timeout);
+            var items = await this.Store.GetListAsync<ItemsView>(query, new { itemName }, this.timeout);
             return items;
         }
 

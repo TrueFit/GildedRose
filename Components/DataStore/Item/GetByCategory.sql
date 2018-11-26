@@ -1,17 +1,16 @@
 ﻿SELECT 
-	 i.[Identifier]
-    ,i.[Name]
-    ,i.[Category]
-    ,i.[ShelfLife]
-    ,i.[MaxQuality]
-    ,i.[IsLegendary]
-    ,i.[Created]
-    ,i.[CreatedBy]
-    ,i.[Modified]
-	,i.[ModifiedBy]
+	 [Identifier]
+	,[Name]
+    ,[ShelfLife]
+    ,[InitialQuality]
+    ,[IsLegendary]
+    ,[Created]
+    ,[CreatedBy]
+	,[Modified]
+	,[ModifiedBy]
+	,[CategoryId]
+	,[CategoryName]
 FROM 
-	[GildedRose].[inventory].[Items] i
-INNER JOIN 
-	inventory.Categories c on i.Category = c.Id
+	[Inventory].[ItemsView]
 WHERE 
-	i.IsDeleted = 0 AND c.Id = @categoryId;
+	i.IsDeleted = 0 AND CategoryId = @categoryId;

@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
-using GildedRose.Contracts;
-using Microsoft.AspNetCore.Authorization;
+﻿using System;
+using System.Threading.Tasks;
+using GildedRose.Logic.Repo;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GildedRose.Api.Controllers
@@ -9,18 +9,18 @@ namespace GildedRose.Api.Controllers
     [ApiController]
     public class ItemController : ControllerBase
     {
-        private readonly IItemManager itemManager;
+        private readonly ItemRepo itemRepo;
 
-        public ItemController(IItemManager itemManager)
+        public ItemController(ItemRepo itemRepo)
         {
-            this.itemManager = itemManager;
+            this.itemRepo = itemRepo;
         }
 
         [HttpGet]
         [Route("")]
         public async Task<IActionResult> GetAll()
         {
-            var allItems = await this.itemManager.GetAll();
+            var allItems = await this.itemRepo.GetAll(DateTime.Now.AddDays(5));
             return this.Ok(allItems);
         }
 
@@ -28,16 +28,16 @@ namespace GildedRose.Api.Controllers
         [Route("name/{itemName}")]
         public async Task<IActionResult> GetByName(string itemName)
         {
-            var items = await this.itemManager.GetByName(itemName);
-            return this.Ok(items);
+            var allItems = await this.itemRepo.GetAll(DateTime.Now);
+            return this.Ok(allItems);
         }
 
         [HttpGet]
         [Route("category/{categoryId}")]
         public async Task<IActionResult> GetAll(int categoryId)
         {
-            var items = await this.itemManager.GetByCategory(categoryId);
-            return this.Ok(items);
+            var allItems = await this.itemRepo.GetAll(DateTime.Now);
+            return this.Ok(allItems);
         }
     }
 }

@@ -3,17 +3,15 @@ using System;
 
 namespace GildedRose.Entities.Inventory
 {
-    public class Item : IAuditable
+    public class ItemsView : IAuditable
     {
         public Guid Identifier { get; set; }
 
         public string Name { get; set; }
 
-        public int CategoryId { get; set; }
-
-        public string CategoryName { get; set; }
-
         public int ShelfLife { get; set; }
+
+        public int InitialQuality { get; set; }
 
         public bool IsLegendary { get; set; }
 
@@ -26,5 +24,9 @@ namespace GildedRose.Entities.Inventory
         public DateTime? Modified { get; set; }
 
         public int? ModifiedBy { get; set; }
+
+        public int CategoryId { get; set; }
+
+        public string CategoryName { get; set; }
     }
 }

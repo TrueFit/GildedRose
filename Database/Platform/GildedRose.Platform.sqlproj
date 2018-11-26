@@ -64,6 +64,7 @@
     <Folder Include="Storage" />
     <Folder Include="UserDefinedTypes" />
     <Folder Include="Functions" />
+    <Folder Include="Views" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Post-Deploy.sql" />
@@ -88,6 +89,7 @@
     <Build Include="Storage\logs.sql" />
     <Build Include="Tables\SQLException.sql" />
     <Build Include="Tables\ApiLog.sql" />
+    <Build Include="Views\ItemsView.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schema\inventory.sql" />

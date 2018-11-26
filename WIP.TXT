@@ -1,2 +1,7 @@
+generic exceptoin handler logging
+ 
 
-  
+ IdentityHelper
+
+ Add Contracts for Item Repo!
+ and anything else that needs one

@@ -2,6 +2,7 @@
 (
     [Id] INT NOT NULL IDENTITY(1,1), 
     [Name] NVARCHAR(100) NOT NULL,
+	[IsLegendary] BIT NOT NULL,
 	[Created] [AuditDate] NOT NULL DEFAULT getutcdate(),
     [CreatedBy] [AuditUser] NOT NULL,
 	[Modified] [AuditDate] NULL,

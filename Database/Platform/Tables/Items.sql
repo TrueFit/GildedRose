@@ -4,8 +4,6 @@
     [Name] NVARCHAR(100) NOT NULL, 
     [Category] INT NOT NULL, 
 	[ShelfLife] INT NOT NULL,
-	[MaxQuality] INT NOT NULL,
-	[IsLegendary] BIT NOT NULL,
 	[IsDeleted] BIT NOT NULL,
 	[Created] [AuditDate] NOT NULL DEFAULT getutcdate(),
     [CreatedBy] [AuditUser] NOT NULL, 

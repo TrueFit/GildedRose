@@ -1,9 +1,8 @@
-﻿using GildedRose.Core.Contracts;
-using System;
+﻿using System;
 
-namespace GildedRose.Entities.Inventory
+namespace GildedRose.Logic.Models
 {
-    public class Item : IAuditable
+    public class Inventory
     {
         public Guid Identifier { get; set; }
 
@@ -13,11 +12,11 @@ namespace GildedRose.Entities.Inventory
 
         public string CategoryName { get; set; }
 
-        public int ShelfLife { get; set; }
+        public int CurrentQuality { get; set; }
+
+        public int SellIn { get; set; }
 
         public bool IsLegendary { get; set; }
-
-        public DateTime StockDate { get; set; }
 
         public DateTime Created { get; set; }
 

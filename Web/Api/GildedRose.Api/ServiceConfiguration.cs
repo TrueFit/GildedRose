@@ -2,10 +2,10 @@
 using GildedRose.Api.Validators;
 using GildedRose.Configuration;
 using GildedRose.Core.Contracts;
+using GildedRose.Logic.Repo;
 using GildedRose.Membership;
 using GildedRose.Store.DependencyManagement;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using Serilog;
 using System;
 
@@ -18,34 +18,30 @@ namespace GildedRose.Api
             IConfigurationRoot configuration,
             string connectionString)
         {
-            var containerBuilder = new ContainerBuilder();
-            containerBuilder.RegisterType<ConfigurationStore>().As<IConfigurationStore>().InstancePerLifetimeScope();
-            containerBuilder.RegisterType<IdentityHelper>().As<IdentityHelper>().InstancePerLifetimeScope();
-            containerBuilder.RegisterType<CreateAccountModel_Validator>().As<CreateAccountModel_Validator>().InstancePerLifetimeScope();
-            containerBuilder.RegisterType<LoginModel_Validator>().As<LoginModel_Validator>().InstancePerLifetimeScope();
-            containerBuilder
-                .Register<Serilog.ILogger>((c, p) =>
+            var builder = new ContainerBuilder();
+            //builder.RegisterType<ConfigurationStore>().As<IConfigurationStore>().InstancePerLifetimeScope();
+            builder.RegisterType<IdentityHelper>().As<IdentityHelper>().InstancePerLifetimeScope();
+            builder.RegisterType<CreateAccountModel_Validator>().As<CreateAccountModel_Validator>().InstancePerLifetimeScope();
+            builder.RegisterType<LoginModel_Validator>().As<LoginModel_Validator>().InstancePerLifetimeScope();
+
+            builder
+                .Register<ILogger>((c, p) =>
                 {
                     return new LoggerConfiguration()
                         .ReadFrom.Configuration(configuration)
                 .CreateLogger();
                 }).SingleInstance();
 
-            //Register Managers
-            containerBuilder.RegisterModule(new Managers.DependencyManagement.ManagerModule());
-
-            // Register Store Module
-            containerBuilder.RegisterModule(new StoreModule()
+            //Register modules
+            builder.RegisterModule(new Membership.DependencyManagement.MembershipModule());
+            builder.RegisterModule(new Logic.DependencyManagement.RepoModule()
             {
                 ConnectionString = connectionString,
             });
 
-            //Register Membership
-            containerBuilder.RegisterModule(new Membership.DependencyManagement.MembershipModule());
+            additionalRegistration(builder);
 
-            additionalRegistration(containerBuilder);
-
-            return containerBuilder;
+            return builder;
         }
     }
 }
