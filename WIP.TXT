@@ -1,3 +1,5 @@
+*** BROKE BUSINESS RULES, FIGURE OUT WHATS WRONG IN CALCULATE METHOD ** 
+
 * Database naming convention should use _ not .
 * Build in all Exception handling and logging
 * Add Contracts for Item Repo and anything else that needs a contract
