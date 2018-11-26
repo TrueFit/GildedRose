@@ -1,7 +1,5 @@
-generic exceptoin handler logging
- 
-
- IdentityHelper
-
- Add Contracts for Item Repo!
- and anything else that needs one
+* Database naming convention should use _ not .
+* Build in all Exception handling and logging
+* Add Contracts for Item Repo and anything else that needs a contract
+* onsider moving business rules to F# BIG MAYBE!!!!
+* ADD VARS IN DACPAC PROJECT SO WE CAN USE A SEPERATE LOGGING DATABASE WITH A SINGLE SQLEXCEPTION LOG (ADD VARS TO DEPLOY SCRIPT)
