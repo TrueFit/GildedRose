@@ -17,11 +17,16 @@ namespace GildedRose.Api.Controllers
         }
 
         [HttpGet]
-        [Route("")]
-        public async Task<IActionResult> GetAll(DateTime timeMachine)
+        [Route("getall")]
+        public async Task<IActionResult> GetAll(string viewByDate)
         {
-            var allItems = await this.itemRepo.GetAll(DateTime.Now.AddDays(5));
-            return this.Ok(allItems);
+            if (DateTime.TryParse(viewByDate, out DateTime outputDate))
+            {
+                var allItems = await this.itemRepo.GetAll(outputDate);
+                return this.Ok(allItems);
+            }
+
+            return this.BadRequest();
         }
 
         [HttpGet]

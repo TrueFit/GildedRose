@@ -6,6 +6,7 @@
     <RootNamespace>GildedRose.Api</RootNamespace>
     <CodeAnalysisRuleSet>..\..\..\Analyzers\Stylecop.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisAdditionalOptions>..\..\..\Analyzers\stylecop.json</CodeAnalysisAdditionalOptions>
+    <StartupObject>GildedRose.Api.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

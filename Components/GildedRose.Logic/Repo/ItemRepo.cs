@@ -35,7 +35,7 @@ namespace GildedRose.Logic.Repo
                             (int)(dateViewed.Date - x.StockDate.Date).TotalDays,
                             x.InitialQuality,
                             x.ShelfLife),
-                    SellIn = x.ShelfLife - (int)(x.StockDate - dateViewed).TotalDays,
+                    SellIn = x.ShelfLife - (int)(dateViewed.Date - x.StockDate.Date).TotalDays,
                     CategoryId = x.CategoryId,
                     CategoryName = x.CategoryName,
                     IsLegendary = x.IsLegendary,

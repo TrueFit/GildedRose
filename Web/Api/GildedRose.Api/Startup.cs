@@ -37,8 +37,8 @@ namespace GildedRose.Api
             var appParentDirectory = new DirectoryInfo(this.env.ContentRootPath).Parent.FullName;
 
             // Lets not take their word for it and use the environment variable and our own convention
-            // var environmentName = this.env.EnvironmentName ?? "Dev";
-            var environmentName = environment ?? "Dev";
+            // var environmentName = this.env.EnvironmentName ?? "Development";
+            var environmentName = environment ?? "Development";
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
