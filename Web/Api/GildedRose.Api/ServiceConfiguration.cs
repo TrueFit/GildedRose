@@ -1,13 +1,9 @@
-﻿using Autofac;
-using GildedRose.Api.Validators;
-using GildedRose.Configuration;
-using GildedRose.Core.Contracts;
-using GildedRose.Logic.Repo;
-using GildedRose.Membership;
-using GildedRose.Store.DependencyManagement;
+﻿using System;
 using Microsoft.Extensions.Configuration;
+using Autofac;
+using GildedRose.Api.Validators;
+using GildedRose.Membership;
 using Serilog;
-using System;
 
 namespace GildedRose.Api
 {
@@ -15,11 +11,9 @@ namespace GildedRose.Api
     {
         public static ContainerBuilder Register(
             Action<ContainerBuilder> additionalRegistration,
-            IConfigurationRoot configuration,
-            string connectionString)
+            IConfigurationRoot configuration)
         {
             var builder = new ContainerBuilder();
-            //builder.RegisterType<ConfigurationStore>().As<IConfigurationStore>().InstancePerLifetimeScope();
             builder.RegisterType<IdentityHelper>().As<IdentityHelper>().InstancePerLifetimeScope();
             builder.RegisterType<CreateAccountModel_Validator>().As<CreateAccountModel_Validator>().InstancePerLifetimeScope();
             builder.RegisterType<LoginModel_Validator>().As<LoginModel_Validator>().InstancePerLifetimeScope();
@@ -32,11 +26,13 @@ namespace GildedRose.Api
                 .CreateLogger();
                 }).SingleInstance();
 
+            var platformConnectionString = configuration.GetConnectionString("GildedRose.Platform");
+
             //Register modules
             builder.RegisterModule(new Membership.DependencyManagement.MembershipModule());
             builder.RegisterModule(new Logic.DependencyManagement.RepoModule()
             {
-                ConnectionString = connectionString,
+                ConnectionString = platformConnectionString,
             });
 
             additionalRegistration(builder);

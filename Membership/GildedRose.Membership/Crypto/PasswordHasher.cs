@@ -85,24 +85,24 @@ namespace GildedRose.Membership.Crypto
 
             byte[] encrypted;
 
-            using (AesManaged aesAlg = new AesManaged())
+            using (AesManaged algorithm = new AesManaged())
             {
-                aesAlg.Key = key;
-                aesAlg.IV = iv;
+                algorithm.Key = key;
+                algorithm.IV = iv;
 
-                ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
+                ICryptoTransform encryptor = algorithm.CreateEncryptor(algorithm.Key, algorithm.IV);
 
-                using (MemoryStream msEncrypt = new MemoryStream())
+                using (MemoryStream encryptedMemoryStream = new MemoryStream())
                 {
-                    using (CryptoStream csEncrypt =
-                            new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                    using (CryptoStream cryptoStream =
+                            new CryptoStream(encryptedMemoryStream, encryptor, CryptoStreamMode.Write))
                     {
-                        using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
+                        using (StreamWriter streamWriter = new StreamWriter(cryptoStream))
                         {
-                            swEncrypt.Write(plainText);
+                            streamWriter.Write(plainText);
                         }
 
-                        encrypted = msEncrypt.ToArray();
+                        encrypted = encryptedMemoryStream.ToArray();
                     }
                 }
             }
@@ -138,14 +138,14 @@ namespace GildedRose.Membership.Crypto
 
                 ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
 
-                using (MemoryStream msDecrypt = new MemoryStream(cipherText))
+                using (MemoryStream encryptedMemoryStream = new MemoryStream(cipherText))
                 {
-                    using (CryptoStream csDecrypt =
-                            new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                    using (CryptoStream cryptoStream =
+                            new CryptoStream(encryptedMemoryStream, decryptor, CryptoStreamMode.Read))
                     {
-                        using (StreamReader srDecrypt = new StreamReader(csDecrypt))
+                        using (StreamReader streamReader = new StreamReader(cryptoStream))
                         {
-                            plaintext = srDecrypt.ReadToEnd();
+                            plaintext = streamReader.ReadToEnd();
                         }
                     }
                 }

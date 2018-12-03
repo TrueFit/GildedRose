@@ -1,12 +1,12 @@
-﻿using GildedRose.Api.Models;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using GildedRose.Api.Models;
 using GildedRose.Api.Validators;
 using GildedRose.Membership;
 using GildedRose.Membership.Models;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using Serilog.Core.Enrichers;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace GildedRose.Api.Controllers
 {

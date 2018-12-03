@@ -1,25 +1,25 @@
 ﻿using System;
+using System.Reflection;
+using System.IO;
+using System.Text;
+using System.Security.Claims;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Configuration;
-using System.IO;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using GildedRose.Membership.Models;
 using GildedRose.Api.Extensions;
 using GildedRose.Membership.Data;
 using Microsoft.EntityFrameworkCore;
 using GildedRose.Membership.Filters;
-using System.Security.Claims;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Threading.Tasks;
 using Serilog;
 
 namespace GildedRose.Api
@@ -58,11 +58,6 @@ namespace GildedRose.Api
                 .ReadFrom.Configuration(this.Configuration)
                 .CreateLogger();
 
-            //Serilog.Debugging.SelfLog.Enable(msg =>
-            //{
-            //    Debug.Print(msg);
-            //    Debugger.Break();
-            //});
             services.AddLogging(x => x.AddSerilog(dispose: true));
 
             try
@@ -114,20 +109,20 @@ namespace GildedRose.Api
                 services
                     .AddAuthorization(o =>
                     {
-                        o.AddPolicy("securepolicy", b =>
-                        {
-                            b.RequireAuthenticatedUser();
-                            b.AuthenticationSchemes = new List<string> { JwtBearerDefaults.AuthenticationScheme };
-                        });
+                        o.AddPolicy(
+                            "securepolicy",
+                            b =>
+                            {
+                                b.RequireAuthenticatedUser();
+                                b.AuthenticationSchemes = new List<string> { JwtBearerDefaults.AuthenticationScheme };
+                            });
                     });
 
-                var platformConnectionString = this.Configuration.GetConnectionString("GildedRose.Platform");
                 var membershipConnectionString = this.Configuration.GetConnectionString("GildedRose.Membership");
 
                 var containerBuilder = ServiceConfiguration.Register(
                     this.AddWebServices,
-                    this.Configuration,
-                    platformConnectionString);
+                    this.Configuration);
 
                 services.AddEntityFrameworkSqlServer().AddDbContext<UserDbContext>(options =>
                 {

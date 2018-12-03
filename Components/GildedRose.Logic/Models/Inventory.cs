@@ -12,7 +12,11 @@ namespace GildedRose.Logic.Models
 
         public string CategoryName { get; set; }
 
+        public int InitialQuality { get; set; }
+
         public int CurrentQuality { get; set; }
+
+        public int MaxQuality { get; set; }
 
         public int SellIn { get; set; }
 

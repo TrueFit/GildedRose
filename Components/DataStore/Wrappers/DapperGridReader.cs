@@ -1,9 +1,8 @@
-﻿using GildedRose.Store.Base;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Threading.Tasks;
+using GildedRose.Store.Base;
 using static Dapper.SqlMapper;
 
 namespace GildedRose.Store.Wrappers

@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Configuration\GildedRose.Configuration.csproj" />
     <ProjectReference Include="..\Core\GildedRose.Core.csproj" />
     <ProjectReference Include="..\DataStore\GildedRose.DataStore.csproj" />
     <ProjectReference Include="..\GildedRose.Contracts\GildedRose.Contracts.csproj" />

@@ -1,16 +1,14 @@
-﻿using GildedRose.Contracts;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using GildedRose.Logic.Models;
-using System;
+using GildedRose.Contracts;
 
 namespace GildedRose.Logic.Repo
 {
     public class ItemRepo
     {
-        private const int MaxQuality = 50;
-
         private readonly IItemManager itemManager;
 
         public ItemRepo(IItemManager itemManager)
@@ -35,6 +33,8 @@ namespace GildedRose.Logic.Repo
                             (int)(dateViewed.Date - x.StockDate.Date).TotalDays,
                             x.InitialQuality,
                             x.ShelfLife),
+                    MaxQuality = x.CategoryName != "Sulfuras" ? 50 : 80,
+                    InitialQuality = x.InitialQuality,
                     SellIn = x.ShelfLife - (int)(dateViewed.Date - x.StockDate.Date).TotalDays,
                     CategoryId = x.CategoryId,
                     CategoryName = x.CategoryName,

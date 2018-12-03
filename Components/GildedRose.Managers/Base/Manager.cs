@@ -1,18 +1,12 @@
-﻿using GildedRose.Store.Base;
-using GildedRose.Store.Contracts;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using GildedRose.Store.Base;
+using GildedRose.Store.Contracts;
 
 namespace GildedRose.Managers.Base
 {
-    public class Manager
+    public abstract class Manager
     {
-        //Disable warning because this needs to be private,
-        //TODO: This Store and manager modules need some refactoring
-        #pragma warning disable SA1401 // Fields should be private
-        protected int timeout = 1800;
-        #pragma warning restore SA1401 // Fields should be private
-
         public Manager(IDataStore store)
         {
             this.Store = store;
@@ -27,6 +21,11 @@ namespace GildedRose.Managers.Base
         {
             this.Store = store;
             this.BulkStore = bulkStore;
+        }
+
+        protected int Timeout
+        {
+            get; set;
         }
 
         protected IDataStore Store { get; set; }

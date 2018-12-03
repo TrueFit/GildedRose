@@ -1,6 +1,6 @@
-﻿using FluentValidation;
+﻿using System.Linq;
+using FluentValidation;
 using GildedRose.Membership.Models;
-using System.Linq;
 
 namespace GildedRose.Api.Validators
 {

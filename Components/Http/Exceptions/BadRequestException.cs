@@ -1,5 +1,5 @@
-﻿using GildedRose.Exceptions;
-using System;
+﻿using System;
+using GildedRose.Exceptions;
 
 namespace GildedRose.HttpClient.Exceptions
 {

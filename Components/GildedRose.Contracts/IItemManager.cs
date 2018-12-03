@@ -1,8 +1,7 @@
-﻿using GildedRose.Entities.Inventory;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using GildedRose.Entities.Inventory;
 
 namespace GildedRose.Contracts
 {

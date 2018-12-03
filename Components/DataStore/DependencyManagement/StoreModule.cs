@@ -1,13 +1,12 @@
-﻿using Autofac;
-using GildedRose.Core.Models;
+﻿using System;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Security.Claims;
+using Autofac;
 using GildedRose.Store.Base;
 using GildedRose.Store.Contracts;
 using GildedRose.Store.Wrappers;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Security.Claims;
 
 namespace GildedRose.Store.DependencyManagement
 {

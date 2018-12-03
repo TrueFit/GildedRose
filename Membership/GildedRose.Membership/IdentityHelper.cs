@@ -1,18 +1,18 @@
-﻿using GildedRose.Core.Contracts;
-using GildedRose.Membership.Data;
-using GildedRose.Membership.Entities;
-using GildedRose.Membership.Models;
-using Microsoft.IdentityModel.Tokens;
-using System;
+﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
-using Dapper;
-using GildedRose.Membership.Crypto;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Dapper;
+using GildedRose.Core.Contracts;
+using GildedRose.Membership.Data;
+using GildedRose.Membership.Entities;
+using GildedRose.Membership.Models;
+using GildedRose.Membership.Crypto;
 
 namespace GildedRose.Membership
 {

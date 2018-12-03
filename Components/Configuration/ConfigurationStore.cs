@@ -1,8 +1,6 @@
-﻿using GildedRose.Core.Contracts;
+﻿using System;
+using GildedRose.Core.Contracts;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GildedRose.Configuration
 {

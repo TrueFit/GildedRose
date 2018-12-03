@@ -1,5 +1,5 @@
-﻿using GildedRose.Core.Contracts;
-using System;
+﻿using System;
+using GildedRose.Core.Contracts;
 
 namespace GildedRose.Entities.Inventory
 {
