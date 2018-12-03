@@ -1,12 +1,23 @@
-* Middleware should verify a user is attached to a valid license
+Client Features / Enhancments
+
+	* storybook for material add typescript support
+ 
+	* add babel for polyfills
+
+	* Middleware should verify a user is attached to a valid license
 	* cache licenses with Redis?
 
-* Database naming convention should use _ not .
 
-* Build in all Exception handling and logging
+Api Features / Enhancments
 
-* Add Contracts for Item Repo and anything else that needs a contract
+	* Build in all Exception handling and logging
 
-* ADD VARS IN DACPAC PROJECT SO WE CAN USE A SEPERATE LOGGING DATABASE WITH A SINGLE SQLEXCEPTION LOG (ADD VARS TO DEPLOY SCRIPT)
+	* Add Contracts for Item Repo and anything else that needs a contract
 
-* Add integration tests to test calculations
+	* ADD VARS IN DACPAC PROJECT SO WE CAN USE A SEPERATE LOGGING DATABASE WITH A SINGLE SQLEXCEPTION LOG (ADD VARS TO DEPLOY SCRIPT)
+
+	* Add integration tests to test calculations
+
+Database Features / Enhancments
+
+	* Database naming convention should use _ not .

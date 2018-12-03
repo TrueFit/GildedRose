@@ -1,0 +1,26 @@
+{
+  "name": "GildedRose.App",
+  "author": "Todd Alker",
+  "version": "1.0.0",
+  "description": "This package is responsible for the GildedRose UI",
+  "main": "app.ts",
+  "scripts": {
+    "build": "webpack",
+    "server": "webpack-dev-server --progress --config .\\webpack.server.js --content-base dist\\ --inline --hot",
+    "dev": "webpack-dev-server --progress --config .\\webpack.server.js --content-base dist\\ --inline --hot",
+    "build:refs": "webpack --config .\\webpack.vendor.config.js",
+    "prod:build": "webpack --optimize-minimize --define process.env.NODE_ENV=\"'production'\"",
+    "prod:refs": "webpack --config .\\webpack.vendor.config.js --optimize-minimize  --define process.env.NODE_ENV=\"'production'\"",
+    "watch": "webpack --config .\\webpack.build.config.js --watch",
+    "test": "karma start",
+    "clear-node": "rimraf node_modules",
+    "clean-dist": "rimraf dist"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^10.12.11",
+    "webpack": "^4.26.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  }
+}

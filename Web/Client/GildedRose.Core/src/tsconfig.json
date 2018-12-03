@@ -1,0 +1,37 @@
+{
+  "atom": {
+    "rewriteTsconfig": false
+  },
+  "compilerOptions": {
+    "baseUrl": ".",
+    "experimentalDecorators": true,
+    "jsx": "react",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "scripthost",
+      "es2015.promise",
+      "es2015"
+    ],
+    "module": "es6",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "outDir": "./dist/tempOutput/",
+    "paths": {
+      "core/*": [
+          "../GildedRose.Core/src/*"
+      ],
+      "coremodels/*": [
+        "../GildedRose.Core/src/models/*"
+      ],
+      "models/*": [
+        "./models/*"
+      ],
+    },
+    "sourceMap": true,
+    "target": "es5"
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

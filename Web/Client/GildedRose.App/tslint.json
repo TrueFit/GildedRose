@@ -1,0 +1,3 @@
+{
+  "extends": "../GildedRose.Core/tslint.json"
+}
