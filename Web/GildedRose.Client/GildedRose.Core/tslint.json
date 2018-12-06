@@ -1,0 +1,61 @@
+{
+  "extends": "tslint:recommended",
+  "defaultSeverity": "warning",
+  "linterOptions": {
+    "exclude": [
+        "node_modules/**"
+    ]
+  },
+  "rules": {
+    "no-any": true,
+    "no-namespace": false,
+    "no-debugger": false,
+    "no-inferrable-types": true,
+    "typedef": [
+      true,
+      "call-signature",
+      "parameter",
+      "property-declaration",
+      "member-variable-declaration",
+      "array-destructuring"
+    ],
+    "no-conditional-assignment": true,
+    "no-duplicate-super": false,
+    "no-invalid-this": true,
+    "no-null-keyword": true,
+    "no-switch-case-fall-through": true,
+    "triple-equals": [
+      true,
+      "allow-undefined-check"
+    ],
+    "max-line-length": [
+      true,
+      140
+    ],
+    "no-default-export": true,
+    "no-require-imports": false,
+    "arrow-parens": [
+      true,
+      "ban-single-arg-parens"
+    ],
+    "arrow-return-shorthand": [
+      true
+    ],
+    "interface-name": [
+      true,
+      "never-prefix"
+    ],
+    "interface-over-type-literal": false,
+    "no-parameter-properties": false,
+    "no-consecutive-blank-lines": [
+      true,
+      1
+    ],
+    "eofline": false,
+    "object-literal-sort-keys": false,
+    "object-literal-shorthand": false,
+    "ordered-imports": [
+      false
+    ]
+  }
+}

@@ -6,7 +6,7 @@ then
     echo "Usage:"
     echo "gettoken.sh {username} {password}"
 else
-	token=$(http POST http://localhost:5000/api/Token/createtoken username='talkersoft' password='password' | jq ".token" | sed 's|\"||g')
+	token=$(http POST http://localhost:5000/api/Token/createtoken username="$username" password="$password" --ignore-stdin | jq ".token" | sed 's|\"||g')
 	echo "$token"
 	echo "Writing to clipboard"
 	echo -n "$token" > /dev/clipboard
