@@ -1,0 +1,19 @@
+.ReactTable .rt-table {
+  overflow: visible;
+}
+
+.inventoryGrid.ReactTable .rt-th, .inventoryGrid.ReactTable .rt-td {
+  overflow: visible;
+  border: solid;
+  border-width: 0px 0px 0px 0.5px;
+  border-color: #ddd;
+}
+
+.ReactTable .rt-noData {
+  margin-top: 12px;
+  background: none;
+}
+
+.inventoryGrid .rt-table .-header {
+  min-height: 40px;
+}

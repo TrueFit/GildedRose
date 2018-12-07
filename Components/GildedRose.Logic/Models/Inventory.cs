@@ -21,13 +21,5 @@ namespace GildedRose.Logic.Models
         public int SellIn { get; set; }
 
         public bool IsLegendary { get; set; }
-
-        public DateTime Created { get; set; }
-
-        public int CreatedBy { get; set; }
-
-        public DateTime? Modified { get; set; }
-
-        public int? ModifiedBy { get; set; }
     }
 }

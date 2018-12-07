@@ -1,0 +1,35 @@
+
+.panelflex {
+    display: flex;
+    flex-Flow: column nowrap;
+    border: solid;
+    justify-Content: space-between;
+    background-Color: #DDF8FF;
+    border-Width: 1px;
+    border-Color: #B2ECFA;
+    padding: 5px 0px 5px 20px;
+    border-radius: 5px;;
+}
+
+.panelrow {
+    display: flex;
+    flex: 1 0;
+    flex-Flow: row nowrap;
+}
+
+.panelitem {
+    display: flex;
+    flex-Flow: row nowrap;
+}
+
+
+
+
+.quality-panel section { padding: 1em; background: black; display: flex; flex-flow: column; height: 100%; justify-content: space-around; }
+/* Flex Items */
+.quality-item div { border-top: 1px solid #ccc; background: #f2f2f2; height: 25%; }
+.quality-item div:first-child{ border-top: 1px solid transparent; }
+.quality-item div:hover { background: white; }
+
+
+

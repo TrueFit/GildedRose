@@ -1,9 +1,9 @@
 import * as React from "react";
 import * as style from "./style.css";
 import { RouteComponentProps } from "react-router";
-import { TodoActions } from "../../../app/actions";
-import { RootState } from "../../../app/reducers";
-import { TodoModel } from "../../../app/models";
+import { TodoActions } from "../../actions";
+import { RootState } from "../../reducers";
+import { TodoModel } from "../../models";
 
 export namespace Flap {
   export interface Props extends RouteComponentProps<void> {

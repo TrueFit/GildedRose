@@ -39,10 +39,6 @@ namespace GildedRose.Logic.Repo
                     CategoryId = x.CategoryId,
                     CategoryName = x.CategoryName,
                     IsLegendary = x.IsLegendary,
-                    Created = x.Created,
-                    CreatedBy = x.CreatedBy,
-                    Modified = x.Modified,
-                    ModifiedBy = x.ModifiedBy,
                 });
 
             return items;

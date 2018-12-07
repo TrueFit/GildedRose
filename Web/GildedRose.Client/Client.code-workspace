@@ -35,6 +35,8 @@
       ".prettierrc": true,
       "**/.editorconfig": true,
       ".editorconfig": true,
+      "**/build": true,
+      "build": true,
     },
     "search.exclude": {
       "**/node_modules": true,

@@ -1,6 +1,6 @@
 import * as React from "react";
-import { TodoTextInput } from "../TodoTextInput";
-import { TodoActions } from "../../../app/actions/todos";
+import { TodoTextInput } from "../../components/TodoTextInput";
+import { TodoActions } from "../../actions";
 
 export namespace Header {
   export interface Props {
