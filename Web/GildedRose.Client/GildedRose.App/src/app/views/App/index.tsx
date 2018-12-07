@@ -3,13 +3,14 @@ import * as style from "./style.css";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import { RouteComponentProps } from "react-router";
-import { TodoActions } from "../../actions";
-import { RootState } from "../../reducers";
-import { TodoModel } from "../../models";
-import { omit } from "../../utils";
-import { TodoList } from "../../components/TodoList";
-import { Header } from "../../components/Header";
-import { Footer } from "../../components/Footer";
+import { TodoActions } from "app/actions";
+import { RootState } from "app/reducers";
+import { TodoModel } from "models";
+import { omit } from "app/utils";
+import { TodoList } from "components/TodoList";
+import { Header } from "components/Header";
+import { Footer } from "components/Footer";
+import { Link, Route } from "react-router-dom";
 
 const FILTER_VALUES = (Object.keys(TodoModel.Filter) as Array<keyof typeof TodoModel.Filter>)
   .map(
@@ -63,18 +64,34 @@ export class App extends React.Component<App.Props> {
         return (todo.completed ? count + 1 : count);
       }, 0);
 
+    const linkButtonWithParam = () => (
+      <Route render={({ history }) => (
+        <a onClick={() => { history.push("inventory/id/5"); }}>
+          Inventory with 5
+        </a>
+      )} />);
+
     return (
-      <div className={style.normal}>
-        <Header addTodo={actions.addTodo} />
-        <TodoList todos={filteredTodos} actions={actions} />
-        <Footer
-          filter={filter}
-          activeCount={activeCount}
-          completedCount={completedCount}
-          onClickClearCompleted={this.handleClearCompleted}
-          onClickFilter={this.handleFilterChange}
-        />
-      </div>
+      <>
+        <nav>
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/inventory">Inventory</Link></li>
+            <li>{linkButtonWithParam()}</li>
+          </ul>
+        </nav>
+        <div className={style.normal}>
+          <Header addTodo={actions.addTodo} />
+          <TodoList todos={filteredTodos} actions={actions} />
+          <Footer
+            filter={filter}
+            activeCount={activeCount}
+            completedCount={completedCount}
+            onClickClearCompleted={this.handleClearCompleted}
+            onClickFilter={this.handleFilterChange}
+          />
+        </div>
+      </>
     );
   }
 

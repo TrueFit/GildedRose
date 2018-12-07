@@ -1,2 +1,2 @@
-export * from "./TodoModel";
-export * from "./Inventory";
+export * from "models/TodoModel";
+export * from "models/InventoryModel";

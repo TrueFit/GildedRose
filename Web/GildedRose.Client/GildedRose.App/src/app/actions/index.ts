@@ -1,2 +1,2 @@
-export * from "./TodoActions";
-export * from "./InventoryActions";
+export * from "app/actions/TodoActions";
+export * from "app/actions/InventoryActions";

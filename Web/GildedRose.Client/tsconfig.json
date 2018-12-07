@@ -16,44 +16,66 @@
     "noUnusedLocals": true,
     "strict": true,
     "outDir": "build",
-    "sourceMap": true,
     "baseUrl": ".",
     "paths": {
-      "app/*": ["./GildedRose.App/src/app/*"]
-    },    
+      "app/*": [
+        "./GildedRose.App/src/app/*"
+      ],
+      "core/*": [
+        "./GildedRose.Core/src/*"
+      ],      
+      "views": [
+        "./GildedRose.App/src/app/views/"
+      ],   
+      "views/*": [
+        "./GildedRose.App/src/app/views/*"
+      ],   
+      "models": [
+        "./GildedRose.App/src/app/models/"
+      ],
+      "models/*": [
+        "./GildedRose.App/src/app/models/*"
+      ],      
+      "components": [
+        "./GildedRose.App/src/app/components/"
+      ],
+      "components/*": [
+        "./GildedRose.App/src/app/components/*"
+      ]             
+    },
     "lib": [
-        "ES6",
-        "ES2015",
-        "ES7",
-        "ES2016",
-        "ES2017",
-        "ES2018",
-        "ScriptHost",
-        "DOM",
-        "DOM.Iterable",
-        "ES2015.Core",
-        "ES2015.Collection",
-        "ES2015.Generator",
-        "ES2015.Iterable",
-        "ES2015.Promise",
-        "ES2015.Proxy",
-        "ES2015.Reflect",
-        "ES2015.Symbol",
-        "ES2015.Symbol.WellKnown",
-        "ES2016.Array.Include",
-        "ES2017.object",
-        "ES2017.Intl",
-        "ES2017.SharedMemory",
-        "ES2017.String",
-        "ES2017.TypedArrays",
-        "ES2018.Intl",
-        "ES2018.Promise",
-        "ES2018.RegExp",
-        "ESNext",
-        "ESNext.AsyncIterable",
-        "ESNext.Array",
-        "ESNext.Intl",
-        "ESNext.Symbol"
+      "es6",
+      "es2015",
+      "es7",
+      "es2016",
+      "es2017",
+      "es2018",
+      "scripthost",
+      "dom",
+      "dom.iterable",
+      "es2015.core",
+      "es2015.collection",
+      "es2015.generator",
+      "es2015.iterable",
+      "es2015.promise",
+      "es2015.proxy",
+      "es2015.reflect",
+      "es2015.symbol",
+      "es2015.symbol.wellknown",
+      "es2016.array.include",
+      "es2017.object",
+      "es2017.intl",
+      "es2017.sharedmemory",
+      "es2017.string",
+      "es2017.typedarrays",
+      "es2018.intl",
+      "es2018.promise",
+      "es2018.regexp",
+      "esnext",
+      "esnext.asynciterable",
+      "esnext.array",
+      "esnext.intl",
+      "esnext.symbol"
     ],
   },
   "exclude": [
@@ -64,4 +86,3 @@
     "./**/*"
   ]
 }
-

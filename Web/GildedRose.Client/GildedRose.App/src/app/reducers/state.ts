@@ -1,4 +1,4 @@
-import { TodoModel, InventoryModel } from "../models";
+import { TodoModel, InventoryModel } from "models";
 
 export interface RootState {
   todos: RootState.TodoState;

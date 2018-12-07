@@ -1,10 +1,13 @@
 var webpack = require('webpack');
 var path = require('path');
 
+
 // variables
+var currentDirectory = __dirname;
 var isProduction = process.argv.indexOf('-p') >= 0 || process.env.NODE_ENV === 'production';
-var sourcePath = path.join(__dirname, '../src');
-var outPath = path.join(__dirname, '../build');
+var sourcePath = path.join(currentDirectory, '../src');
+var outPath = path.join(currentDirectory, '../build');
+
 
 // plugins
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -28,7 +31,11 @@ module.exports = {
     // (jsnext:main directs not usually distributable es6 format, but es6 sources)
     mainFields: ['module', 'browser', 'main'],
     alias: {
-      app: path.resolve(__dirname, 'src/app/')
+      app: path.resolve(currentDirectory, '../src/app/'),
+      core: path.resolve(currentDirectory, "../../GildedRose.Core/src/"),
+      views: path.resolve(currentDirectory, '../src/app/views/'),
+      models: path.resolve(currentDirectory, '../src/app/models/'),
+      components: path.resolve(currentDirectory, '../src/app/components/'),
     }
   },
   module: {

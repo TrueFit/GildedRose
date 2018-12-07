@@ -13,6 +13,6 @@ export interface InventoryModel {
 export namespace InventoryModel {
   export enum Filter {
     SHOW_ALL = "all",
-    SHOW_ACTIVE = "trash",
+    SHOW_TRASH = "trash",
   }
 }

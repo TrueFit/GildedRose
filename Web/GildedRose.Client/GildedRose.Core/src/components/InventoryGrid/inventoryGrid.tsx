@@ -2,8 +2,8 @@ import * as React from "react";
 import ReactTable, { Column, FinalState, Instance } from "react-table";
 import "./InventoryGrid.css";
 import "react-table/react-table.css";
-import { DonutChart } from "../DonutChart/DonutChart";
-import "coreComponents/DonutChart/DonutChart.css";
+import { DonutChart } from "core/components/DonutChart/DonutChart";
+import "core/components/DonutChart/DonutChart.css";
 import "../Styles/Flexbox.css";
 
 type Props = {

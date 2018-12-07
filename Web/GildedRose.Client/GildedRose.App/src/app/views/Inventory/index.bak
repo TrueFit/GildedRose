@@ -4,10 +4,10 @@ import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import { RouteComponentProps } from "react-router";
 import { InventoryActions } from "app/actions";
-import { RootState } from "reducers";
+import { RootState } from "app/reducers";
 import { InventoryModel } from "app/models";
-import { omit } from "utils";
-import { InventoryGrid } from "core/components/InventoryGrid";
+import { omit } from "../../utils";
+import { InventoryGrid } from "../../../../../GildedRose.Core/src/components/InventoryGrid";
 
 const FILTER_VALUES = (Object.keys(InventoryModel.Filter) as Array<keyof typeof InventoryModel.Filter>)
   .map(

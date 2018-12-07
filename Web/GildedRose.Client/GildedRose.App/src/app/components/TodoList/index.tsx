@@ -1,8 +1,8 @@
 import * as React from "react";
 import * as style from "./style.css";
-import { TodoActions } from "../../actions";
-import { TodoItem } from "../../components/TodoItem";
-import { TodoModel } from "../../models";
+import { TodoActions } from "app/actions";
+import { TodoItem } from "components/TodoItem";
+import { TodoModel } from "models";
 
 export namespace TodoList {
   export interface Props {

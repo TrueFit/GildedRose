@@ -2,7 +2,7 @@ import * as React from "react";
 import { Header } from "./header";
 import { Footer } from "./footer";
 import { Sidebar } from "./sidebar";
-import { User } from "../../models/user";
+import { User } from "core/models/user";
 
 export type ShellProps = {
   user: User;

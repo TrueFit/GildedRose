@@ -1,6 +1,6 @@
 import * as React from "react";
-import { TodoTextInput } from "../../components/TodoTextInput";
-import { TodoActions } from "../../actions";
+import { TodoTextInput } from "components/TodoTextInput";
+import { TodoActions } from "app/actions";
 
 export namespace Header {
   export interface Props {
@@ -18,8 +18,10 @@ export class Header extends React.Component<Header.Props> {
   public render(): JSX.Element {
     return (
       <header>
+
         <h1>Todos</h1>
         <TodoTextInput newTodo onSave={this.handleSave} placeholder="What needs to be done?" />
+
       </header>
     );
   }
