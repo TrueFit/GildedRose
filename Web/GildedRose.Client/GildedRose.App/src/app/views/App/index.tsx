@@ -6,7 +6,7 @@ import { RouteComponentProps } from "react-router";
 import { TodoActions } from "app/actions";
 import { RootState } from "app/reducers";
 import { TodoModel } from "models";
-import { omit } from "app/utils";
+import { omit } from "core/utils";
 import { TodoList } from "components/TodoList";
 import { Header } from "components/Header";
 import { Footer } from "components/Footer";
@@ -81,7 +81,7 @@ export class App extends React.Component<App.Props> {
           </ul>
         </nav>
         <div className={style.normal}>
-          <Header addTodo={actions.addTodo} />
+          <Header addTodo={actions.addTodo} history={this.props.history} location={this.props.location} match={this.props.match} />
           <TodoList todos={filteredTodos} actions={actions} />
           <Footer
             filter={filter}

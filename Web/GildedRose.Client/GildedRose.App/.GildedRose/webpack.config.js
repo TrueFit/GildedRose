@@ -137,9 +137,7 @@ module.exports = {
     contentBase: sourcePath,
     hot: true,
     inline: true,
-    historyApiFallback: {
-      disableDotRule: true
-    },
+    historyApiFallback: true,
     stats: 'minimal',
     clientLogLevel: 'warning'
   },

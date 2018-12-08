@@ -1,6 +1,6 @@
 import { Store, createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { logger } from "app/middleware/logger";
+import { logger } from "core/middleware/logger";
 import { RootState, rootReducer } from "app/reducers";
 
 export function configureStore(initialState?: RootState): Store<RootState> {
