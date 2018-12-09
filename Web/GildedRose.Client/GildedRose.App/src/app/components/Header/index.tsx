@@ -13,7 +13,6 @@ export class Header extends React.Component<Header.Props> {
   // tslint:disable-next-line:no-any
   constructor(props: Header.Props, context?: any) {
     super(props, context);
-    this.handleSave = this.handleSave.bind(this);
   }
 
   public render(): JSX.Element {
@@ -48,13 +47,6 @@ export class Header extends React.Component<Header.Props> {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-
-      // <header>
-
-      //   <h1>Todos</h1>
-      //   <TodoTextInput newTodo onSave={this.handleSave} placeholder="What needs to be done?" />
-
-      // </header>
     );
   }
 }

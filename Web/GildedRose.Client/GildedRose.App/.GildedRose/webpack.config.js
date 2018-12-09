@@ -93,9 +93,10 @@ module.exports = {
                 })
               ]
             }
-          }
+          },
         ]
       },
+      { test: /\.scss$/, use: 'sass-loader' },
       // static assets
       { test: /\.html$/, use: 'html-loader' },
       { test: /\.(a?png|svg)$/, use: 'url-loader?limit=10000' },

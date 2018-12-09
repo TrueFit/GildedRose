@@ -5,6 +5,8 @@ import { createBrowserHistory } from "history";
 import { configureStore } from "app/store";
 import { Router } from "react-router";
 import { App } from "app/App";
+import "bootstrap-sass";
+import "./assets/styles.scss";
 
 const history = createBrowserHistory();
 const store = configureStore();
