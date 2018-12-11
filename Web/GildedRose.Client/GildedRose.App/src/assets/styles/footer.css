@@ -1,0 +1,20 @@
+
+.container > .footer {
+  position: relative;
+  margin: 0;
+  padding-bottom: 6rem;
+  min-height: 100%;
+  /* font-family: "Helvetica Neue", Arial, sans-serif; */
+}
+
+
+.footer {
+  position: absolute;
+  background-color: #4d4d4d;
+  color: #fff;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  text-align: center;
+}

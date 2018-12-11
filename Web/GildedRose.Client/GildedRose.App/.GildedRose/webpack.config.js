@@ -36,22 +36,21 @@ module.exports = {
       views: path.resolve(currentDirectory, '../src/app/views/'),
       models: path.resolve(currentDirectory, '../src/app/models/'),
       components: path.resolve(currentDirectory, '../src/app/components/'),
+      styles: path.resolve(currentDirectory, '../src/assets/styles/'),
     }
   },
   module: {
     rules: [
-      // .ts, .tsx
       {
         test: /\.(tsx|ts)$/,
         enforce: 'pre',
         loader: 'tslint-loader',
         options: {
-          emitErrors: false,
+          emitErrors: true,
           failOnHint: false,
           configFile: 'tslint.json'
         }
       },
-      // .ts, .tsx
       {
         test: /\.tsx?$/,
         use: [
@@ -62,44 +61,18 @@ module.exports = {
           'ts-loader'
         ].filter(Boolean)
       },
-      // css
+      {
+        test: /\.(png|gif|jpg|woff|eot|ttf|svg|woff2)$/i,
+        use: "file-loader?name=content/[name][hash].[ext]",
+      },
+      {
+        test: /\.(config)$/i,
+        use: "file-loader?name=[name].[ext]",
+      },
       {
         test: /\.css$/,
-        use: [
-          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
-          {
-            loader: 'css-loader',
-            query: {
-              modules: true,
-              sourceMap: !isProduction,
-              importLoaders: 1,
-              localIdentName: isProduction ? '[hash:base64:5]' : '[local]__[hash:base64:5]'
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              plugins: [
-                require('postcss-import')({ addDependencyTo: webpack }),
-                require('postcss-url')(),
-                require('postcss-preset-env')({
-                  /* use stage 2 features (defaults) */
-                  stage: 2,
-                }),
-                require('postcss-reporter')(),
-                require('postcss-browser-reporter')({
-                  disabled: isProduction
-                })
-              ]
-            }
-          },
-        ]
-      },
-      // static assets
-      { test: /\.html$/, use: 'html-loader' },
-      { test: /\.(a?png|svg)$/, use: 'url-loader?limit=10000' },
-      { test: /\.(jpe?g|gif|bmp|mp3|mp4|ogg|wav|eot|ttf|woff|woff2)$/, use: 'file-loader' }
+        use: ["style-loader", "css-loader", "postcss-loader"]
+      }
     ]
   },
   optimization: {

@@ -23,25 +23,31 @@
       ],
       "core/*": [
         "./GildedRose.Core/src/*"
-      ],      
+      ],
       "views": [
         "./GildedRose.App/src/app/views/"
-      ],   
+      ],
       "views/*": [
         "./GildedRose.App/src/app/views/*"
-      ],   
+      ],
       "models": [
         "./GildedRose.App/src/app/models/"
       ],
       "models/*": [
         "./GildedRose.App/src/app/models/*"
-      ],      
+      ],
       "components": [
         "./GildedRose.App/src/app/components/"
       ],
       "components/*": [
         "./GildedRose.App/src/app/components/*"
-      ]             
+      ],
+      "styles": [
+        "./GildedRose.App/src/assets/styles/"
+      ],
+      "styles/*": [
+        "./GildedRose.App/src/assets/styles/*"
+      ]
     },
     "lib": [
       "es6",
