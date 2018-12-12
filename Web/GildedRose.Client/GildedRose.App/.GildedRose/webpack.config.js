@@ -110,7 +110,10 @@ module.exports = {
     contentBase: sourcePath,
     hot: true,
     inline: true,
-    historyApiFallback: true,
+    // historyApiFallback: true,
+    historyApiFallback: {
+      index: 'index.html'
+    },
     stats: 'minimal',
     clientLogLevel: 'warning'
   },

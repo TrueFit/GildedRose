@@ -1,7 +1,7 @@
 import { InventoryModel } from "models";
 
 export interface RootState {
-  inventory: RootState.InventoryState;
+  inventoryData: RootState.InventoryState;
   // tslint:disable-next-line:no-any
   router?: any;
 }

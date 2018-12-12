@@ -15,8 +15,8 @@ type Props = {
 };
 
 type DispatchProps = {
-  OnPageSizeChange?: (newPageSize: number, newPage: number) => {};
-  OnPageChange?: (page: number) => {};
+  OnPageSizeChange?: (newPageSize: number, newPage: number) => void;
+  OnPageChange?: (page: number) => void;
   OnSortingChange?: () => void;
 };
 
