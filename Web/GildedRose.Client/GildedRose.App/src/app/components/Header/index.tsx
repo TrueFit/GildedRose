@@ -1,9 +1,12 @@
 import * as React from "react";
+import { Route } from "react-router-dom";
 import "styles/nav.css";
 
 export namespace Header {
   export interface Props {
     title?: string;
+    handleLogin?: () => void;
+    isAuthenticated: boolean;
   }
 }
 
@@ -14,6 +17,15 @@ export class Header extends React.Component<Header.Props> {
   }
 
   public render(): JSX.Element {
+    const loginLink = () => (
+      <Route render={({ history }) => (
+        <a onClick={() => {
+          history.push("/login");
+        }}>
+          Login
+      </a>
+      )} />);
+
     return (
       <div className="nav">
         <div className="nav-header">
@@ -30,13 +42,17 @@ export class Header extends React.Component<Header.Props> {
         </div>
         <input type="checkbox" id="nav-check" />
         <div className="nav-links">
-          <a href="//github.io/jo_geek" target="_blank">Github</a>
-          <a href="http://stackoverflow.com/users/4084003/" target="_blank">Stackoverflow</a>
-          <a href="https://in.linkedin.com/in/jonesvinothjoseph" target="_blank">LinkedIn</a>
-          <a href="https://codepen.io/jo_Geek/" target="_blank">Codepen</a>
-          <a href="https://jsfiddle.net/user/jo_Geek/" target="_blank">JsFiddle</a>
+          <a href="https://in.linkedin.com/in/jonesvinothjoseph" target="_blank">Inventory</a>
+          {!this.props.isAuthenticated && loginLink()}
+          {this.props.isAuthenticated &&
+            <a href="http://stackoverflow.com/users/4084003/" target="_blank" onClick={this.logout}>Logout</a>}
         </div>
       </div>
     );
   }
+
+  private logout = () => {
+    alert("logout");
+  }
+
 }

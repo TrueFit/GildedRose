@@ -1,28 +1,31 @@
 import * as React from "react";
 import { Header } from "app/components/Header";
 import { Footer } from "app/components/Footer";
+import { Login } from "app/components/Login";
 
-export class App extends React.Component<{}> {
+export class LoginView extends React.Component<{}> {
   // tslint:disable-next-line:member-ordering
   constructor(props: {}) {
     super(props);
   }
 
   public render(): JSX.Element {
+    const loginStyle = {
+      textAlign: "center",
+    } as React.CSSProperties;
+
     return (
       <>
-        <Header title={"Giled Rose"} handleLogin={this.showLoginModal} isAuthenticated={false} />
+        <Header title={"Login Screen"} isAuthenticated={false} />
         <div>
-          <div>
-            Welcome to the Gilded Rose Inventory Application.
+          <div style={loginStyle}>
+            <div>
+              <Login />
+            </div>
           </div>
         </div>
         <Footer language={"© Copyright 2018 GildedRose LLC"} />
       </>
     );
-  }
-
-  private showLoginModal = () => {
-    alert("hello");
   }
 }
