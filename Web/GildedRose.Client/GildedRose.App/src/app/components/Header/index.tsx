@@ -17,13 +17,13 @@ export class Header extends React.Component<Header.Props> {
   }
 
   public render(): JSX.Element {
-    const loginLink = () => (
+    const renderLink = (label: string, route: string) => (
       <Route render={({ history }) => (
         <a onClick={() => {
-          history.push("/login");
+          history.push(route);
         }}>
-          Login
-      </a>
+          {label}
+        </a>
       )} />);
 
     return (
@@ -42,17 +42,11 @@ export class Header extends React.Component<Header.Props> {
         </div>
         <input type="checkbox" id="nav-check" />
         <div className="nav-links">
-          <a href="https://in.linkedin.com/in/jonesvinothjoseph" target="_blank">Inventory</a>
-          {!this.props.isAuthenticated && loginLink()}
-          {this.props.isAuthenticated &&
-            <a href="http://stackoverflow.com/users/4084003/" target="_blank" onClick={this.logout}>Logout</a>}
+          {renderLink("Inventory", "/Inventory")}
+          {!this.props.isAuthenticated && renderLink("Login", "/Login")}
+          {this.props.isAuthenticated && renderLink("Logout", "/")}
         </div>
       </div>
     );
   }
-
-  private logout = () => {
-    alert("logout");
-  }
-
 }
