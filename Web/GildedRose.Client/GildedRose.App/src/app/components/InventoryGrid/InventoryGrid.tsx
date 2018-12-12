@@ -4,7 +4,7 @@ import "./InventoryGrid.css";
 import "react-table/react-table.css";
 import { DonutChart } from "core/components/DonutChart/DonutChart";
 import "core/components/DonutChart/DonutChart.css";
-import "../../../assets/styles/flexbox.css";
+import "core/components/styles/flexbox.css";
 import { GridData, Quality } from "models";
 
 type Props = {
