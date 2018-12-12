@@ -6,6 +6,7 @@ import { DonutChart } from "core/components/DonutChart/DonutChart";
 import "core/components/DonutChart/DonutChart.css";
 import "core/components/styles/flexbox.css";
 import { GridData, Quality } from "models";
+import { Route } from "react-router-dom";
 
 type Props = {
   Data: GridData[];
@@ -69,6 +70,28 @@ const columns: Array<Column<GridData>> = [
                   />
                 </div>
               </div>
+            </div>
+          );
+        },
+      },
+      {
+        Header: "",
+        accessor: "id",
+        maxWidth: 80,
+        minWidth: 80,
+        Cell: (row: { value: string }) => {
+          const route = `/inventory/details/${row.value}`;
+          const linkStyle = {
+            cursor: "pointer",
+            marginTop: "28px",
+          } as React.CSSProperties;
+          return (
+            <div style={linkStyle}>
+              <Route render={({ history }) => (
+                <a onClick={() => { history.push(route); }}>
+                  <i className="fa fa-info" />
+                </a>
+              )} />
             </div>
           );
         },

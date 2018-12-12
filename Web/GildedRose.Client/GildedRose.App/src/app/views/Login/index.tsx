@@ -16,7 +16,7 @@ export class LoginView extends React.Component<{}> {
 
     return (
       <>
-        <Header title={"Login Screen"} isAuthenticated={false} />
+        <Header title={"Login"} isAuthenticated={false} />
         <div>
           <div style={loginStyle}>
             <div>

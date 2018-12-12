@@ -6,7 +6,7 @@ import { InventoryActions } from "app/actions";
 import * as apiService from "app/services";
 import { Header } from "app/components/Header";
 // import { Footer } from "app/components/Footer";
-import { InventoryGrid } from "../../components/InventoryGrid/InventoryGrid";
+import { InventoryGrid } from "app/components/InventoryGrid/InventoryGrid";
 import { GridData, InventoryModel } from "models";
 import { RootState } from "app/reducers";
 import { omit } from "core/utils";
@@ -16,14 +16,11 @@ const FILTER_VALUES =
     .map(key => InventoryModel.Filter[key]);
 
 export namespace InventoryView {
-  export interface Params {
-    id: string;
-  }
   export interface LocalState {
     pageNumber: number;
     pageSize: number;
   }
-  export interface Props extends RouteComponentProps<Params> {
+  export interface Props extends RouteComponentProps<void> {
     InventoryState: RootState.InventoryState;
     actions: InventoryActions;
     filter: InventoryModel.Filter;
@@ -79,10 +76,6 @@ export class InventoryView extends React.Component<InventoryView.Props, Inventor
       });
     };
 
-    const loginStyle = {
-      textAlign: "center",
-    } as React.CSSProperties;
-
     const pageSize = this.state.pageSize;
     const pageNumber = this.state.pageNumber;
     const totalItems = this.props.InventoryState.length;
@@ -108,20 +101,17 @@ export class InventoryView extends React.Component<InventoryView.Props, Inventor
       });
     return (
       <>
-        <Header title={"Login Screen"} isAuthenticated={false} />
+        <Header title={"Inventory"} isAuthenticated={false} />
         <div>
-          <div style={loginStyle}>
-            <div>
-              <InventoryGrid
-                Data={dto}
-                PageSize={pageSize}
-                TotalPages={totalPages}
-                PageNumber={pageNumber}
-                OnPageSizeChange={onPageSizeChange}
-                OnPageChange={onPageChange}
-              />
-            </div>
-
+          <div>
+            <InventoryGrid
+              Data={dto}
+              PageSize={pageSize}
+              TotalPages={totalPages}
+              PageNumber={pageNumber}
+              OnPageSizeChange={onPageSizeChange}
+              OnPageChange={onPageChange}
+            />
           </div>
         </div>
         {/* <Footer language={"© Copyright 2018 GildedRose LLC"} /> */}
