@@ -9,7 +9,9 @@ export class Login extends React.Component<{}> {
 
   public render(): JSX.Element {
     return (
-      <LoginBox handleQuit={this.handleQuit} handleLogin={this.handleLogin} />
+      <>
+        <LoginBox handleQuit={this.handleQuit} handleLogin={this.handleLogin} />
+      </>
     );
   }
 
