@@ -5,7 +5,7 @@ import { RouteComponentProps } from "react-router";
 import { InventoryActions } from "app/actions";
 import * as apiService from "app/services";
 import { Header } from "app/components/Header";
-import { Footer } from "app/components/Footer";
+// import { Footer } from "app/components/Footer";
 import { InventoryGrid } from "../../components/InventoryGrid/InventoryGrid";
 import { GridData, InventoryModel } from "models";
 import { RootState } from "app/reducers";
@@ -18,6 +18,10 @@ const FILTER_VALUES =
 export namespace InventoryView {
   export interface Params {
     id: string;
+  }
+  export interface LocalState {
+    pageNumber: number;
+    pageSize: number;
   }
   export interface Props extends RouteComponentProps<Params> {
     InventoryState: RootState.InventoryState;
@@ -37,7 +41,7 @@ export namespace InventoryView {
   }),
 )
 
-export class InventoryView extends React.Component<InventoryView.Props> {
+export class InventoryView extends React.Component<InventoryView.Props, InventoryView.LocalState> {
   public static defaultProps: Partial<InventoryView.Props> = {
     filter: InventoryModel.Filter.SHOW_ALL,
   };
@@ -45,6 +49,10 @@ export class InventoryView extends React.Component<InventoryView.Props> {
   // tslint:disable-next-line:no-any
   constructor(props: InventoryView.Props, context?: any) {
     super(props, context);
+    this.state = {
+      pageSize: 10,
+      pageNumber: 1,
+    };
   }
 
   public async componentDidMount(): Promise<void> {
@@ -58,38 +66,46 @@ export class InventoryView extends React.Component<InventoryView.Props> {
       return (<div>Loading Data...</div>);
     }
 
-    const onPageSizeChange = (newPageSize: number, newPage: number) => {
-      alert("page size changed");
+    const onPageSizeChange = (newPageSize: number, newPageIndex: number) => {
+      this.setState({
+        pageSize: newPageSize,
+        pageNumber: newPageIndex + 1,
+      });
     };
 
-    const onPageChange = (page: number) => {
-      alert("page size changed");
+    const onPageChange = (newPageIndex: number) => {
+      this.setState({
+        pageNumber: newPageIndex + 1,
+      });
     };
 
     const loginStyle = {
       textAlign: "center",
     } as React.CSSProperties;
 
-    const pageSize = 10;
+    const pageSize = this.state.pageSize;
+    const pageNumber = this.state.pageNumber;
     const totalItems = this.props.InventoryState.length;
-    const totalPages = pageSize > totalItems ? totalItems / pageSize : 1;
-
-    const dto = this.props.InventoryState.map((x: InventoryModel) => {
-      return {
-        id: x.identifier,
-        name: x.name,
-        categoryId: x.categoryId,
-        categoryName: x.categoryName,
-        quality: {
-          current: x.currentQuality,
-          initial: x.initialQuality,
-          max: x.maxQuality,
-        },
-        sellIn: x.sellIn,
-        isLegendary: x.isLegendary,
-      } as GridData;
-    });
-
+    const totalPages = pageSize < totalItems ? totalItems / pageSize : 1;
+    const startPosition = pageNumber === 1 ? 0 : ((pageSize * pageNumber) - (pageSize));
+    const endPosition = pageSize + startPosition;
+    const dto = this.props.InventoryState
+      .slice(startPosition, endPosition)
+      .map((x: InventoryModel) => {
+        return {
+          id: x.identifier,
+          name: x.name,
+          categoryId: x.categoryId,
+          categoryName: x.categoryName,
+          quality: {
+            current: x.currentQuality,
+            initial: x.initialQuality,
+            max: x.maxQuality,
+          },
+          sellIn: x.sellIn,
+          isLegendary: x.isLegendary,
+        } as GridData;
+      });
     return (
       <>
         <Header title={"Login Screen"} isAuthenticated={false} />
@@ -100,16 +116,15 @@ export class InventoryView extends React.Component<InventoryView.Props> {
                 Data={dto}
                 PageSize={pageSize}
                 TotalPages={totalPages}
-                PageNumber={1}
+                PageNumber={pageNumber}
                 OnPageSizeChange={onPageSizeChange}
                 OnPageChange={onPageChange}
-
               />
             </div>
 
           </div>
         </div>
-        <Footer language={"© Copyright 2018 GildedRose LLC"} />
+        {/* <Footer language={"© Copyright 2018 GildedRose LLC"} /> */}
       </>
     );
   }
