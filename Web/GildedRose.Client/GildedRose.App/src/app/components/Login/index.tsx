@@ -33,7 +33,7 @@ export class Login extends React.Component<Login.Props, Login.LocalState> {
     if (response) {
       if (response.token) {
         this.setState({ invalidCredentials: false });
-        Cookie.set("Authorization", response.token);
+        Cookie.set("Authorization", response.token, { expires: 1 });
         this.props.loginSuccess();
       } else if (response.hint && response.hint === "401") {
         this.setState({ invalidCredentials: true });
