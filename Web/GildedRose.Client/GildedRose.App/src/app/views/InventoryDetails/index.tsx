@@ -39,7 +39,7 @@ export class InventoryDetailsView extends React.Component<InventoryDetailsView.P
 
     return (
       <>
-        <Header title={"Inventory Details"} isAuthenticated={false} />
+        <Header title={"GildedRose"} isAuthenticated={false} />
         <div>
           <div>
             <div>

@@ -1,5 +1,7 @@
 import * as React from "react";
 import { LoginBox } from "core/components/LoginBox";
+import { getToken } from "app/services";
+import * as Cookie from "js-cookie";
 
 export class Login extends React.Component<{}> {
   // tslint:disable-next-line:no-any
@@ -15,11 +17,18 @@ export class Login extends React.Component<{}> {
     );
   }
 
-  private handleLogin = () => {
-    alert("login");
+  private async LoginUser(username: string, password: string): Promise<void> {
+    const response = await getToken(username, password);
+    if (response && response.token) {
+      Cookie.set("Authorization", response.token);
+    }
   }
 
   private handleQuit = () => {
-    alert("login");
+    alert("quit");
+  }
+
+  private handleLogin = async (username: string, password: string) => {
+    await this.LoginUser(username, password);
   }
 }

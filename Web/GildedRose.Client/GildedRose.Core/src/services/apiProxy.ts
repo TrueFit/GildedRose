@@ -11,6 +11,9 @@ axios.defaults.headers.Expires = "0";
 export async function get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
   url = `/api/${url}`;
   try {
+    axios.defaults.headers.common.Authorization = getHeader();
+
+    debugger;
     const response = await axios.get(url, config);
     return response.data;
   } catch (e) {
@@ -29,6 +32,7 @@ export async function get<T>(url: string, config?: AxiosRequestConfig): Promise<
 export async function post<T>(url: string, data: {}, config?: AxiosRequestConfig): Promise<T> {
   url = `/api/${url}`;
   try {
+    axios.defaults.headers.common.Authorization = getHeader();
     const response = await axios.post(url, data, config);
     return response.data;
   } catch (e) {
@@ -99,12 +103,12 @@ export async function remove<T>(url: string, config?: AxiosRequestConfig): Promi
 }
 
 function getHeader(): string {
+  debugger;
   const cookieValue = Cookie.get("Authorization");
   return `bearer ${cookieValue}`;
 }
 
 function navigateToLogout(): void {
-  // const sourceUrl = Cookie.get("SourceUrl");
   logout();
 }
 

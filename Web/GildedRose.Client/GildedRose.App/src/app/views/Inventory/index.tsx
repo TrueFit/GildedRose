@@ -3,7 +3,7 @@ import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { InventoryActions } from "app/actions";
-import * as apiService from "app/services";
+import { getInventoryByDateViewed } from "app/services";
 import { Header } from "app/components/Header";
 // import { Footer } from "app/components/Footer";
 import { InventoryGrid } from "app/components/InventoryGrid/InventoryGrid";
@@ -53,7 +53,7 @@ export class InventoryView extends React.Component<InventoryView.Props, Inventor
   }
 
   public async componentDidMount(): Promise<void> {
-    const data = await apiService.getInventoryByDateViewed(new Date("12/01/2018"));
+    const data = await getInventoryByDateViewed(new Date("12/01/2018"));
     this.props.actions.AddOverwriteInventory(data);
   }
 
@@ -101,7 +101,7 @@ export class InventoryView extends React.Component<InventoryView.Props, Inventor
       });
     return (
       <>
-        <Header title={"Inventory"} isAuthenticated={false} />
+        <Header title={"GildedRose"} isAuthenticated={false} />
         <div>
           <div>
             <InventoryGrid

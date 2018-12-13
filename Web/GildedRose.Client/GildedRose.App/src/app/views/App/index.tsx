@@ -11,7 +11,7 @@ export class App extends React.Component<{}> {
   public render(): JSX.Element {
     return (
       <>
-        <Header title={"Giled Rose"} handleLogin={this.showLoginModal} isAuthenticated={false} />
+        <Header title={"GildedRose"} isAuthenticated={false} />
         <div>
           <div>
             Welcome to the Gilded Rose Inventory Application.
@@ -20,9 +20,5 @@ export class App extends React.Component<{}> {
         <Footer language={"© Copyright 2018 GildedRose LLC"} />
       </>
     );
-  }
-
-  private showLoginModal = () => {
-    alert("hello");
   }
 }

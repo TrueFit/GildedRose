@@ -4,7 +4,6 @@ import { Footer } from "app/components/Footer";
 import { Login } from "app/components/Login";
 
 export class LoginView extends React.Component<{}> {
-  // tslint:disable-next-line:member-ordering
   constructor(props: {}) {
     super(props);
   }
@@ -16,7 +15,7 @@ export class LoginView extends React.Component<{}> {
 
     return (
       <>
-        <Header title={"Login"} isAuthenticated={false} />
+        <Header title={"GildedRose"} isAuthenticated={false} />
         <div>
           <div style={loginStyle}>
             <div>

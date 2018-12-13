@@ -5,7 +5,6 @@ import "styles/nav.css";
 export namespace Header {
   export interface Props {
     title?: string;
-    handleLogin?: () => void;
     isAuthenticated: boolean;
   }
 }
@@ -30,7 +29,7 @@ export class Header extends React.Component<Header.Props> {
       <div className="nav">
         <div className="nav-header">
           <div className="nav-title">
-            {this.props.title}
+            {renderLink(this.props.title || "", "/")}
           </div>
         </div>
         <div className="nav-btn">
