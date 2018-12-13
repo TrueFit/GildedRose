@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Header } from "app/components/Header";
-import { Footer } from "app/components/Footer";
+import { Shell } from "app/components/Shell/shell";
 import { RootState } from "app/reducers";
 import { connect } from "react-redux";
 
@@ -32,18 +31,18 @@ export class App extends React.Component<App.FluxProps> {
 
     return (
       <>
-        <Header title={"GildedRose"} isAuthenticated={this.props.AuthenticationState.isAuthenticated} />
-        <div style={containerStyle}>
-          {!this.props.AuthenticationState.isAuthenticated &&
-            <article style={articleStyle}>
-              Welcome to the Gilded Rose Inventory Application. Please login or create an account.
+        <Shell>
+          <div style={containerStyle}>
+            {!this.props.AuthenticationState.isAuthenticated &&
+              <article style={articleStyle}>
+                Welcome to the Gilded Rose Inventory Application. Please login or create an account.
           </article>}
-          {this.props.AuthenticationState.isAuthenticated &&
-            <article style={articleStyle}>
-              Welcome to the Gilded Rose Inventory Application. Please choose an option no the navigation bar.
+            {this.props.AuthenticationState.isAuthenticated &&
+              <article style={articleStyle}>
+                Welcome to the Gilded Rose Inventory Application. Please choose an option no the navigation bar.
           </article>}
-        </div>
-        <Footer language={"© Copyright 2018 GildedRose LLC"} />
+          </div>
+        </Shell>
       </>
     );
   }

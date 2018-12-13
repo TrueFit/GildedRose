@@ -1,7 +1,6 @@
 import * as React from "react";
 import { bindActionCreators, Dispatch } from "redux";
-import { Header } from "app/components/Header";
-import { Footer } from "app/components/Footer";
+import { Shell } from "app/components/Shell/shell";
 import { Login } from "app/components/Login";
 import { RouteComponentProps } from "react-router";
 import { RootState } from "app/reducers";
@@ -40,15 +39,15 @@ export class LoginView extends React.Component<LoginView.RouteProps & LoginView.
 
     return (
       <>
-        <Header title={"GildedRose"} isAuthenticated={this.props.AuthenticationState.isAuthenticated} />
-        <div>
-          <div style={loginStyle}>
-            <div>
-              <Login loginSuccess={this.loginUser} cancelLogin={this.cancelLogin} />
+        <Shell>
+          <div>
+            <div style={loginStyle}>
+              <div>
+                <Login loginSuccess={this.loginUser} cancelLogin={this.cancelLogin} />
+              </div>
             </div>
           </div>
-        </div>
-        <Footer language={"© Copyright 2018 GildedRose LLC"} />
+        </Shell>
       </>
     );
   }

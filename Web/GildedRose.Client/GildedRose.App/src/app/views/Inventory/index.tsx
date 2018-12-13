@@ -3,8 +3,7 @@ import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import { InventoryActions } from "app/actions";
 import { getInventoryByDateViewed } from "app/services";
-import { Header } from "app/components/Header";
-// import { Footer } from "app/components/Footer";
+import { Shell } from "app/components/Shell/shell";
 import { InventoryGrid } from "app/components/InventoryGrid/InventoryGrid";
 import { GridData, InventoryModel } from "models";
 import { RootState } from "app/reducers";
@@ -101,20 +100,20 @@ export class InventoryView extends React.Component<InventoryView.FluxProps, Inve
       });
     return (
       <>
-        <Header title={"GildedRose"} isAuthenticated={this.props.AuthenticationState.isAuthenticated} />
-        <div>
+        <Shell hideFooter={true}>
           <div>
-            <InventoryGrid
-              Data={dto}
-              PageSize={pageSize}
-              TotalPages={totalPages}
-              PageNumber={pageNumber}
-              OnPageSizeChange={onPageSizeChange}
-              OnPageChange={onPageChange}
-            />
+            <div>
+              <InventoryGrid
+                Data={dto}
+                PageSize={pageSize}
+                TotalPages={totalPages}
+                PageNumber={pageNumber}
+                OnPageSizeChange={onPageSizeChange}
+                OnPageChange={onPageChange}
+              />
+            </div>
           </div>
-        </div>
-        {/* <Footer language={"© Copyright 2018 GildedRose LLC"} /> */}
+        </Shell>
       </>
     );
   }

@@ -1,10 +1,9 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
-import { Header } from "app/components/Header";
-import { Footer } from "app/components/Footer";
 import { RootState } from "app/reducers";
 import * as _ from "lodash";
+import { Shell } from "app/components/Shell/shell";
 
 export namespace InventoryDetailsView {
   export interface Params {
@@ -42,15 +41,15 @@ export class InventoryDetailsView extends React.Component<InventoryDetailsView.F
 
     return (
       <>
-        <Header title={"GildedRose"} isAuthenticated={false} />
-        <div>
+        <Shell>
           <div>
             <div>
-              Hello Inventory Details {result.name}
+              <div>
+                Hello Inventory Details {result.name}
+              </div>
             </div>
           </div>
-        </div>
-        <Footer language={"© Copyright 2018 GildedRose LLC"} />
+        </Shell>
       </>
     );
   }

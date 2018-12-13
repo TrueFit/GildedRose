@@ -7,6 +7,7 @@ export namespace Header {
   export interface Props {
     title?: string;
     isAuthenticated: boolean;
+    logout: () => void;
   }
 }
 
@@ -30,6 +31,7 @@ export class Header extends React.Component<Header.Props> {
       <Route render={({ history }) => (
         <a onClick={() => {
           Cookie.remove("Authorization");
+          this.props.logout();
           history.push("/");
         }}>
           {"Logout"}
