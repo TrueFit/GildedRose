@@ -34,10 +34,12 @@ namespace GildedRose.Api.Controllers
         [Route("createtoken")]
         public async Task<IActionResult> CreateToken([FromBody]LoginModel login)
         {
+            List<ResponseError> errorResponse;
+
             var result = await this.validateLogin.ValidateAsync(login);
             if (!result.IsValid)
             {
-                var errorResponse = new List<ResponseError>();
+                errorResponse = new List<ResponseError>();
                 foreach (var error in result.Errors)
                 {
                     errorResponse.Add(
@@ -52,7 +54,7 @@ namespace GildedRose.Api.Controllers
                 return this.BadRequest(errorResponse);
             }
 
-            IActionResult response = this.Unauthorized();
+            IActionResult response;
             var user = await this.auth.Authenticate(login);
 
             if (user != null)
@@ -67,6 +69,18 @@ namespace GildedRose.Api.Controllers
                             new PropertyEnricher("Token", tokenString),
                         })
                     .Information("Created token");
+            }
+            else
+            {
+                errorResponse = new List<ResponseError>();
+                errorResponse.Add(
+                      new ResponseError()
+                      {
+                          Field = "Credentials",
+                          ErrorMessage = "Invalid username and password.",
+                          InputData = string.Empty,
+                      });
+                response = this.Ok(new { Hint = "401", Errors = errorResponse });
             }
 
             return response;

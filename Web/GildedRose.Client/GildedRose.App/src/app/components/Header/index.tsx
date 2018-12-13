@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Route } from "react-router-dom";
 import "styles/nav.css";
+import * as Cookie from "js-cookie";
 
 export namespace Header {
   export interface Props {
@@ -25,6 +26,16 @@ export class Header extends React.Component<Header.Props> {
         </a>
       )} />);
 
+    const logoutLink = () => (
+      <Route render={({ history }) => (
+        <a onClick={() => {
+          Cookie.remove("Authorization");
+          history.push("/");
+        }}>
+          {"Logout"}
+        </a>
+      )} />);
+
     return (
       <div className="nav">
         <div className="nav-header">
@@ -43,7 +54,7 @@ export class Header extends React.Component<Header.Props> {
         <div className="nav-links">
           {renderLink("Inventory", "/Inventory")}
           {!this.props.isAuthenticated && renderLink("Login", "/Login")}
-          {this.props.isAuthenticated && renderLink("Logout", "/")}
+          {this.props.isAuthenticated && logoutLink()}
         </div>
       </div>
     );

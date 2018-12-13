@@ -10,20 +10,23 @@ export namespace InventoryDetailsView {
   export interface Params {
     id: string;
   }
-  export interface Props extends RouteComponentProps<Params> {
+  export interface RouteProps extends RouteComponentProps<Params> {
+  }
+  export interface FluxProps {
     InventoryState: RootState.InventoryState;
+    AuthenticationState: RootState.AuthenticationState;
   }
 }
 
 @connect(
-  (state: RootState, ownProps): Pick<InventoryDetailsView.Props, "InventoryState"> => {
-    return { InventoryState: state.inventoryData };
+  (state: RootState, ownProps): Pick<InventoryDetailsView.FluxProps, "InventoryState" | "AuthenticationState"> => {
+    return { InventoryState: state.inventoryData, AuthenticationState: state.authenticationData };
   },
 )
 
-export class InventoryDetailsView extends React.Component<InventoryDetailsView.Props> {
+export class InventoryDetailsView extends React.Component<InventoryDetailsView.FluxProps & InventoryDetailsView.RouteProps> {
   // tslint:disable-next-line:no-any
-  constructor(props: InventoryDetailsView.Props, context?: any) {
+  constructor(props: InventoryDetailsView.FluxProps & InventoryDetailsView.RouteProps, context?: any) {
     super(props, context);
   }
 

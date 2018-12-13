@@ -4,7 +4,8 @@ import "./LoginBox.css";
 export namespace LoginBox {
   export interface Props {
     handleLogin: (username: string, password: string) => void;
-    handleQuit: () => void;
+    cancelLogin: () => void;
+    invalidCredentials: boolean;
   }
   export interface State {
     username: string;
@@ -43,6 +44,11 @@ export class LoginBox extends React.Component<LoginBox.Props, LoginBox.State> {
               </span>
             </div>
             <div className="LoginRow">
+              <span style={{ color: "red" }}>
+                {this.props.invalidCredentials && <small> Invalid username and password. </small>}
+              </span>
+            </div>
+            <div className="LoginRow">
               <span>
                 <label htmlFor="remember">
                   <input id="remember" type="checkbox" /> Remember me
@@ -61,7 +67,7 @@ export class LoginBox extends React.Component<LoginBox.Props, LoginBox.State> {
                 <button
                   type="button"
                   style={{ ...buttonStyle, marginLeft: "12px" }}
-                  onClick={this.props.handleQuit}
+                  onClick={this.props.cancelLogin}
                   className="pure-button pure-button-secondary">
                   Cancel
               </button>

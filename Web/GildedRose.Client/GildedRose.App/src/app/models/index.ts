@@ -1,6 +1,4 @@
 export * from "models/InventoryModel";
 export * from "models/GridData";
-
-export interface TokenResponse {
-  token: string;
-}
+export * from "models/TokenResponse";
+export * from "models/AuthenticationModel";

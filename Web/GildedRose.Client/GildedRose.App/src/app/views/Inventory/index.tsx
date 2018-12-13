@@ -1,7 +1,6 @@
 import * as React from "react";
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
-import { RouteComponentProps } from "react-router";
 import { InventoryActions } from "app/actions";
 import { getInventoryByDateViewed } from "app/services";
 import { Header } from "app/components/Header";
@@ -20,31 +19,32 @@ export namespace InventoryView {
     pageNumber: number;
     pageSize: number;
   }
-  export interface Props extends RouteComponentProps<void> {
+  export interface FluxProps {
     InventoryState: RootState.InventoryState;
+    AuthenticationState: RootState.AuthenticationState;
     actions: InventoryActions;
     filter: InventoryModel.Filter;
   }
 }
 
 @connect(
-  (state: RootState, ownProps): Pick<InventoryView.Props, "InventoryState" | "filter"> => {
+  (state: RootState, ownProps): Pick<InventoryView.FluxProps, "InventoryState" | "AuthenticationState" | "filter"> => {
     const hash = ownProps.location && ownProps.location.hash.replace("#", "");
     const filter = FILTER_VALUES.find(value => value === hash) || InventoryModel.Filter.SHOW_ALL;
-    return { InventoryState: state.inventoryData, filter: filter };
+    return { InventoryState: state.inventoryData, filter: filter, AuthenticationState: state.authenticationData };
   },
-  (dispatch: Dispatch): Pick<InventoryView.Props, "actions"> => ({
+  (dispatch: Dispatch): Pick<InventoryView.FluxProps, "actions"> => ({
     actions: bindActionCreators(omit(InventoryActions, "Type"), dispatch),
   }),
 )
 
-export class InventoryView extends React.Component<InventoryView.Props, InventoryView.LocalState> {
-  public static defaultProps: Partial<InventoryView.Props> = {
+export class InventoryView extends React.Component<InventoryView.FluxProps, InventoryView.LocalState> {
+  public static defaultProps: Partial<InventoryView.FluxProps> = {
     filter: InventoryModel.Filter.SHOW_ALL,
   };
 
   // tslint:disable-next-line:no-any
-  constructor(props: InventoryView.Props, context?: any) {
+  constructor(props: InventoryView.FluxProps, context?: any) {
     super(props, context);
     this.state = {
       pageSize: 10,
@@ -101,7 +101,7 @@ export class InventoryView extends React.Component<InventoryView.Props, Inventor
       });
     return (
       <>
-        <Header title={"GildedRose"} isAuthenticated={false} />
+        <Header title={"GildedRose"} isAuthenticated={this.props.AuthenticationState.isAuthenticated} />
         <div>
           <div>
             <InventoryGrid

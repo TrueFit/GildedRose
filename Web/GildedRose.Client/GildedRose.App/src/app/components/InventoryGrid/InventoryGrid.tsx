@@ -13,9 +13,6 @@ type Props = {
   PageSize: number;
   TotalPages: number;
   PageNumber: number;
-};
-
-type DispatchProps = {
   OnPageSizeChange?: (newPageSize: number, newPage: number) => void;
   OnPageChange?: (page: number) => void;
   OnSortingChange?: () => void;
@@ -100,7 +97,7 @@ const columns: Array<Column<GridData>> = [
   },
 ];
 
-export class InventoryGrid extends React.Component<Props & DispatchProps> {
+export class InventoryGrid extends React.Component<Props> {
   // public componentWillMount(): void {}
 
   public render(): JSX.Element {

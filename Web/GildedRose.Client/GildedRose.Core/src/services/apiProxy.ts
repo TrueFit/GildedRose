@@ -1,7 +1,6 @@
 import axios from "axios";
 import { AxiosRequestConfig, AxiosError } from "axios";
 import * as Cookie from "js-cookie";
-import { logout } from "core/helpers/logout";
 
 axios.defaults.headers.common.Authorization = getHeader();
 axios.defaults.headers["Cache-Control"] = "no-cache,no-store,must-revalidate,max-age=-1,private";
@@ -12,8 +11,6 @@ export async function get<T>(url: string, config?: AxiosRequestConfig): Promise<
   url = `/api/${url}`;
   try {
     axios.defaults.headers.common.Authorization = getHeader();
-
-    debugger;
     const response = await axios.get(url, config);
     return response.data;
   } catch (e) {
@@ -103,15 +100,15 @@ export async function remove<T>(url: string, config?: AxiosRequestConfig): Promi
 }
 
 function getHeader(): string {
-  debugger;
   const cookieValue = Cookie.get("Authorization");
   return `bearer ${cookieValue}`;
 }
 
 function navigateToLogout(): void {
-  logout();
+  Cookie.remove("Authorization");
+  window.location.assign("/assets/logout.html");
 }
 
 function navigateToError(e: Error): void {
-  window.location.assign(window.location.pathname + "/error");
+  window.location.assign("/");
 }
