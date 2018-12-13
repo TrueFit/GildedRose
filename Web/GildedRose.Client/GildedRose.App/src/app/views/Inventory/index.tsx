@@ -11,29 +11,23 @@ import { omit } from "core/utils";
 import { DatePicker } from "core/components/DatePicker/DatePicker";
 import * as Moment from "moment";
 
-const FILTER_VALUES =
-  (Object.keys(InventoryModel.Filter) as Array<keyof typeof InventoryModel.Filter>)
-    .map(key => InventoryModel.Filter[key]);
-
 export namespace InventoryView {
   export interface LocalState {
     pageNumber: number;
     pageSize: number;
     currentDate: Moment.Moment;
+    filter: InventoryModel.Filter;
   }
   export interface FluxProps {
     InventoryState: RootState.InventoryState;
     AuthenticationState: RootState.AuthenticationState;
     actions: InventoryActions;
-    filter: InventoryModel.Filter;
   }
 }
 
 @connect(
-  (state: RootState, ownProps): Pick<InventoryView.FluxProps, "InventoryState" | "AuthenticationState" | "filter"> => {
-    const hash = ownProps.location && ownProps.location.hash.replace("#", "");
-    const filter = FILTER_VALUES.find(value => value === hash) || InventoryModel.Filter.SHOW_ALL;
-    return { InventoryState: state.inventoryData, filter: filter, AuthenticationState: state.authenticationData };
+  (state: RootState, ownProps): Pick<InventoryView.FluxProps, "InventoryState" | "AuthenticationState"> => {
+    return { InventoryState: state.inventoryData, AuthenticationState: state.authenticationData };
   },
   (dispatch: Dispatch): Pick<InventoryView.FluxProps, "actions"> => ({
     actions: bindActionCreators(omit(InventoryActions, "Type"), dispatch),
@@ -41,10 +35,6 @@ export namespace InventoryView {
 )
 
 export class InventoryView extends React.Component<InventoryView.FluxProps, InventoryView.LocalState> {
-  public static defaultProps: Partial<InventoryView.FluxProps> = {
-    filter: InventoryModel.Filter.SHOW_ALL,
-  };
-
   // tslint:disable-next-line:no-any
   constructor(props: InventoryView.FluxProps, context?: any) {
     super(props, context);
@@ -52,11 +42,12 @@ export class InventoryView extends React.Component<InventoryView.FluxProps, Inve
       pageSize: 10,
       pageNumber: 1,
       currentDate: Moment(),
+      filter: InventoryModel.Filter.SHOW_ALL,
     };
   }
 
   public async componentDidMount(): Promise<void> {
-    const data = await getInventoryByDateViewed(new Date("12/01/2018"));
+    const data = await getInventoryByDateViewed(new Date(Moment().format("MM/DD/YYYY").toString()));
     this.props.actions.AddOverwriteInventory(data);
   }
 
@@ -65,6 +56,22 @@ export class InventoryView extends React.Component<InventoryView.FluxProps, Inve
     if (!this.props.InventoryState || this.props.InventoryState.length === 0) {
       return (<div>Loading Data...</div>);
     }
+
+    const onShowAll = () => {
+      this.setState({
+        filter: InventoryModel.Filter.SHOW_ALL,
+        pageNumber: 1,
+        pageSize: 10,
+      });
+    };
+
+    const onShowTrash = () => {
+      this.setState({
+        filter: InventoryModel.Filter.SHOW_TRASH,
+        pageNumber: 1,
+        pageSize: 10,
+      });
+    };
 
     const onPageSizeChange = (newPageSize: number, newPageIndex: number) => {
       this.setState({
@@ -91,35 +98,90 @@ export class InventoryView extends React.Component<InventoryView.FluxProps, Inve
     const totalPages = pageSize < totalItems ? totalItems / pageSize : 1;
     const startPosition = pageNumber === 1 ? 0 : ((pageSize * pageNumber) - (pageSize));
     const endPosition = pageSize + startPosition;
-    const dto = this.props.InventoryState
-      .slice(startPosition, endPosition)
-      .map((x: InventoryModel) => {
-        return {
-          id: x.identifier,
-          name: x.name,
-          categoryId: x.categoryId,
-          categoryName: x.categoryName,
-          quality: {
-            current: x.currentQuality,
-            initial: x.initialQuality,
-            max: x.maxQuality,
-          },
-          sellIn: x.sellIn,
-          isLegendary: x.isLegendary,
-        } as GridData;
-      });
+
+    let dto: GridData[];
+    if (this.state.filter === InventoryModel.Filter.SHOW_ALL) {
+      dto = this.props.InventoryState
+        .slice(startPosition, endPosition)
+        .map((x: InventoryModel) => {
+          return {
+            id: x.identifier,
+            name: x.name,
+            categoryId: x.categoryId,
+            categoryName: x.categoryName,
+            quality: {
+              current: x.currentQuality,
+              initial: x.initialQuality,
+              max: x.maxQuality,
+            },
+            sellIn: x.sellIn,
+            isLegendary: x.isLegendary,
+          } as GridData;
+        });
+    } else {
+      dto = this.props.InventoryState
+        .slice(startPosition, endPosition)
+        .filter(x => x.currentQuality === 0)
+        .map((x: InventoryModel) => {
+          return {
+            id: x.identifier,
+            name: x.name,
+            categoryId: x.categoryId,
+            categoryName: x.categoryName,
+            quality: {
+              current: x.currentQuality,
+              initial: x.initialQuality,
+              max: x.maxQuality,
+            },
+            sellIn: x.sellIn,
+            isLegendary: x.isLegendary,
+          } as GridData;
+        });
+    }
 
     const dateContainerStyle = {
       width: "220px",
       marginTop: "20px",
     } as React.CSSProperties;
+
+    const tabContainerStyle = {
+      width: "800px",
+      marginTop: "20px",
+    } as React.CSSProperties;
+
+    const buttonStyle = {
+      width: "140px",
+      marginRight: "1px",
+    } as React.CSSProperties;
+
     return (
       <>
         <Shell hideFooter={true}>
           <div>
             <div>
-              <div style={dateContainerStyle}>
-                <DatePicker onDateChange={onDateChange} value={this.state.currentDate} />
+              <div>
+                <div style={dateContainerStyle}>
+                  <DatePicker onDateChange={onDateChange} value={this.state.currentDate} />
+                </div>
+              </div>
+              <div style={tabContainerStyle}>
+                <button
+                  type="button"
+                  style={buttonStyle}
+                  onClick={onShowAll}
+                  className={this.state.filter === InventoryModel.Filter.SHOW_ALL ?
+                    "pure-button pure-button-primary" : "pure-button pure-button-secondary"}>
+                  Show All
+                </button>
+
+                <button
+                  type="button"
+                  style={buttonStyle}
+                  onClick={onShowTrash}
+                  className={this.state.filter === InventoryModel.Filter.SHOW_TRASH ?
+                    "pure-button pure-button-primary" : "pure-button pure-button-secondary"}>
+                  Show Trash
+                </button>
               </div>
               <InventoryGrid
                 Data={dto}
