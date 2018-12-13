@@ -8,6 +8,8 @@ import { InventoryGrid } from "app/components/InventoryGrid/InventoryGrid";
 import { GridData, InventoryModel } from "models";
 import { RootState } from "app/reducers";
 import { omit } from "core/utils";
+import { DatePicker } from "core/components/DatePicker/DatePicker";
+import * as Moment from "moment";
 
 const FILTER_VALUES =
   (Object.keys(InventoryModel.Filter) as Array<keyof typeof InventoryModel.Filter>)
@@ -17,6 +19,7 @@ export namespace InventoryView {
   export interface LocalState {
     pageNumber: number;
     pageSize: number;
+    currentDate: Moment.Moment;
   }
   export interface FluxProps {
     InventoryState: RootState.InventoryState;
@@ -48,6 +51,7 @@ export class InventoryView extends React.Component<InventoryView.FluxProps, Inve
     this.state = {
       pageSize: 10,
       pageNumber: 1,
+      currentDate: Moment(),
     };
   }
 
@@ -75,6 +79,12 @@ export class InventoryView extends React.Component<InventoryView.FluxProps, Inve
       });
     };
 
+    const onDateChange = async (value: Moment.Moment | string) => {
+      const data = await getInventoryByDateViewed(new Date(Moment(value).format("MM/DD/YYYY").toString()));
+      this.props.actions.AddOverwriteInventory(data);
+      this.setState({ currentDate: Moment(value) });
+    };
+
     const pageSize = this.state.pageSize;
     const pageNumber = this.state.pageNumber;
     const totalItems = this.props.InventoryState.length;
@@ -98,11 +108,19 @@ export class InventoryView extends React.Component<InventoryView.FluxProps, Inve
           isLegendary: x.isLegendary,
         } as GridData;
       });
+
+    const dateContainerStyle = {
+      width: "220px",
+      marginTop: "20px",
+    } as React.CSSProperties;
     return (
       <>
         <Shell hideFooter={true}>
           <div>
             <div>
+              <div style={dateContainerStyle}>
+                <DatePicker onDateChange={onDateChange} value={this.state.currentDate} />
+              </div>
               <InventoryGrid
                 Data={dto}
                 PageSize={pageSize}
