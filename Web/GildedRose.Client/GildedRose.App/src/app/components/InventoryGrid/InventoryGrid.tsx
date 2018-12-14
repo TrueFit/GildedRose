@@ -1,6 +1,6 @@
 import * as React from "react";
 import ReactTable, { Column, FinalState, Instance } from "react-table";
-import "./InventoryGrid.css";
+import "./inventoryGrid.css";
 import "react-table/react-table.css";
 import { DonutChart } from "core/components/DonutChart/DonutChart";
 import "core/components/DonutChart/DonutChart.css";
@@ -18,17 +18,60 @@ type Props = {
   OnSortingChange?: () => void;
 };
 
+const renderTextColumn = (value: string): JSX.Element => {
+  const columnStyle = {
+    marginTop: "28px",
+    marginLeft: "8px",
+    fontSize: "large",
+    color: "blue",
+  } as React.CSSProperties;
+  return (
+    <div style={columnStyle}>
+      {value}
+    </div>
+  );
+};
 const columns: Array<Column<GridData>> = [
   {
     Header: "Name",
     columns: [
       {
+        Header: "",
+        accessor: "id",
+        maxWidth: 80,
+        minWidth: 80,
+        Cell: (row: { value: string }) => {
+          const route = `/inventory/details/${row.value}`;
+          const linkStyle = {
+            cursor: "pointer",
+            marginTop: "18px",
+            marginLeft: "28px",
+            fontSize: "xx-large",
+          } as React.CSSProperties;
+          return (
+            <div style={linkStyle} className="infoLink">
+              <Route render={({ history }) => (
+                <a onClick={() => { history.push(route); }}>
+                  <i className="fa fa-info" />
+                </a>
+              )} />
+            </div>
+          );
+        },
+      },
+      {
         Header: "Name",
         accessor: "name",
+        Cell: (row: { value: string }) => {
+          return (renderTextColumn(row.value));
+        },
       },
       {
         Header: "Category",
         accessor: "categoryName",
+        Cell: (row: { value: string }) => {
+          return (renderTextColumn(row.value));
+        },
       },
       {
         Header: "Quality",
@@ -67,30 +110,6 @@ const columns: Array<Column<GridData>> = [
                   />
                 </div>
               </div>
-            </div>
-          );
-        },
-      },
-      {
-        Header: "",
-        accessor: "id",
-        maxWidth: 80,
-        minWidth: 80,
-        Cell: (row: { value: string }) => {
-          const route = `/inventory/details/${row.value}`;
-          const linkStyle = {
-            cursor: "pointer",
-            marginTop: "28px",
-            marginLeft: "28px",
-            fontSize: "xx-large",
-          } as React.CSSProperties;
-          return (
-            <div style={linkStyle} className="infoLink">
-              <Route render={({ history }) => (
-                <a onClick={() => { history.push(route); }}>
-                  <i className="fa fa-info" />
-                </a>
-              )} />
             </div>
           );
         },

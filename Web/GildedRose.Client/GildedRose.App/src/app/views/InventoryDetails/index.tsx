@@ -41,13 +41,24 @@ export class InventoryDetailsView extends React.Component<InventoryDetailsView.F
     }
 
     const detailsContainer = {
-      textAlign: "center",
       marginTop: "24px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
     } as React.CSSProperties;
     const rowStyle = {
       paddingTop: "8px",
+      fontSize: "x-large",
+      maxWidth: "400px",
     } as React.CSSProperties;
 
+    const renderRow = (label: string, value: string): JSX.Element => {
+      return (
+        <div style={rowStyle}>
+          <div><strong>{label}:</strong>&nbsp;&nbsp;{value}</div>
+        </div>
+      );
+    };
     return (
       <>
         <Shell>
@@ -55,35 +66,26 @@ export class InventoryDetailsView extends React.Component<InventoryDetailsView.F
             <Route render={({ history }) => (
               <button
                 type="button"
+                style={{ marginTop: "4px" }}
                 className={"pure-button pure-button-primary"}
                 onClick={() => {
                   history.push("/inventory");
                 }}>
-                Back
+                &#60;&#60; Back to Inventory
               </button>
             )} />
           </div>
           <div style={detailsContainer}>
             <div>
-              <div style={rowStyle}>
-                Name: {result.name}
-              </div>
-              <div style={rowStyle}>
-                Category: {result.categoryName}
-              </div>
-              <div style={rowStyle}>
-                Current Quality: {result.currentQuality}
-              </div>
-              <div style={rowStyle}>
-                Initial Quality: {result.initialQuality}
-              </div>
-              <div style={rowStyle}>
-                Sell In (days): {result.sellIn}
-              </div>
+              {renderRow("Name", result.name)}
+              {renderRow("Category", result.categoryName)}
+              {renderRow("Current Quality", result.currentQuality.toString())}
+              {renderRow("Initial Quality", result.initialQuality.toString())}
+              {renderRow("Sell In (days)", result.sellIn.toString())}
               {result.isLegendary &&
-                <div style={rowStyle}>
-                  This is a Legendary product
-              </div>}
+                <div style={{ ...rowStyle, ...{ paddingTop: "48px", color: "red" } }}>
+                  <i>This is a Legendary product</i>
+                </div>}
             </div>
           </div>
         </Shell>
