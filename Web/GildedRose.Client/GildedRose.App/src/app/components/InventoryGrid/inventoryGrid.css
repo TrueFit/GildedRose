@@ -17,3 +17,11 @@
 .inventoryGrid .rt-table .-header {
   min-height: 40px;
 }
+
+.infoLink {
+  color: black;
+}
+
+.infoLink:hover {
+  color: blue;
+}

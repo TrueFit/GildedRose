@@ -81,9 +81,11 @@ const columns: Array<Column<GridData>> = [
           const linkStyle = {
             cursor: "pointer",
             marginTop: "28px",
+            marginLeft: "28px",
+            fontSize: "xx-large",
           } as React.CSSProperties;
           return (
-            <div style={linkStyle}>
+            <div style={linkStyle} className="infoLink">
               <Route render={({ history }) => (
                 <a onClick={() => { history.push(route); }}>
                   <i className="fa fa-info" />
