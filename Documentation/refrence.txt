@@ -1,0 +1,108 @@
+This application is build with .net core 2.1 and .net standard for the api. The client is build using React, with webpack for development server. Webpack's configuration uses a proxy to communicate with the development server. Both the client application, and the api have hot loaders, which automatically re-compile/re-transpile the application during execution in your development environment. 
+
+Additional tools such as storybook for the client and swagger for the api, allow testing of individual components / endpoints. More details will be discussed later in this document.
+
+Additionally there are bash scripts that can be ran in order to build/deploy/run the database and api's, currently running of the client application is not included in these scripts, however webpack can be ran by a simple command using yarn or npm.
+
+Required Dependencies for this deployment are microsoft visual studio 2017 build tools.
+	Optional dependencies: jq, and httpie
+	Optional package managers: pip, and chocolatey
+
+Database Deployment:
+
+The database is in sql server, the directions here are to deploy the database via windows sql server, a linux deployment of sql server may or may not be supported.
+
+
+There are two ways to deploy the database
+* Manually though visual studio 
+	(requires the installation of sql data tool during visual studio setup)
+* Automated through bash script 
+	(requires an vs build tools 2017 sdk)
+	** choco install visualstudio2017buildtools
+	** or if you don't have choco the installer is included in /Utilities/Commmand/BuildDependencies
+
+
+
+Manually through visual studio
+	
+	1. Open GildedRose.sln
+	2. In the Database solution folder you will see two database projects Platform and Membership
+	3. Double click on GildedRose.*.publish.xml
+	4. This will prompt you to deploy the database, an option to change the connection string will be available, change the connection string to your sql server installation, the default stored in the xml file is LocalDB which is installed with visual studio when you choose to install database tools.
+	5. Repeat this process for both Platform and Membership
+
+
+Automated through bash script.
+	1. Make sure you have build tools sdk installed, the installer can be found in this repo at /Utilities/Command/BuildDependencies/vs_buildtools.exe
+		** using chocolatey package manager for windows you can also install the build tools via "choco install visualstudio2017buildtools"
+	2. Check connection strings inside GildedRose.*.publish.xml for both Platform and Membership databases, the default is set to LocalDb which comes with Visual studio when you install the database tools. Change the connection string in this file accordingly and save it.
+	3. Open your bash console emulator (git bash, conEmu, Cmder, etc...)
+	4. navigate to /Utilities/Command
+	5. execute ./gr.sh
+	6. run build command
+	7. Build both Platform / Membership Dacpac
+	8. keep typing exit until your back at the main menu
+	9. type deploy
+	10. type Platform or Membership
+	11. repeat step for both Platform and Membership database
+		** If there is a failure note the erorr message, check your connection string, do you have vs2017 build tools installed?
+
+
+Running the API:
+
+Option 1: Visual studio
+	* Open GildedRolse.sln
+	* check connection string in appsettings.development.json
+	* Make sure GildedRose.Api is set as Startup Project
+	* Hit F5
+
+-- Your now running the api using Kestrel via a process started by visual studio
+
+Option 2: Hot Loader
+	* check connection string in appsettings.development.json
+	* using bash emulator navigate to /Utilities/Command
+	* type ./gr.sh
+	* type run
+	* type api
+
+-- Now the api is running in kestrel via hot loader mode, you may change code in the api and your changes will be recompiled automatically with the hot loader.
+
+Testing API via swagger:
+
+ * to test api endpoints through swagger navigate to /swagger example: http://localhost:5000/swagger
+ * now we need a token in order to test most of the api endpoints with the exception of the token controller
+ * goto the token controller and test the createtoken api
+ 	** there are two accounts already created from sample data loaded via the dacpac they are `jgretz` and `talkersoft`, both of these accounts have the password of "password", passwords stored in the database are encrypted, technically you could also create an account via swagger, the create account option in the web application is not yet implemented.
+ * click the "try it out" button and supply the correct credentials for this endpoint, click the execute button, this will supply you with a token. 
+ * adding the token to swagger is done by simply clicking the authorize button and supplying the following value "bearer {token}". That is the string bearer followed by a space and the token without the curly braces or quotation marks surrounding the token.
+ 	** additionally you can gain a token by executing ./gettoken.sh {username} {password} from /Utilities/Command while the api is running
+ 	** ./gettoken.sh has two dependencies as follows
+ 	*** jqlib (choco install jq)
+ 	*** httpie (pip install httpie) 
+ 	**** pip is the package manager included with python
+ 	**** choco is a 3rd party windows package manager easily installed via command line via powershell
+
+
+
+Running the client application:
+
+	* From /Web/GildedRose.Client execute yarn install
+		** if you do not have yarn you can always use npm install, to install yarn npm install yarn -g.
+	* From /Web/GildedRose.Client/GildedRose.App execute yarn install
+	* From /Web/GildedRose.Client/GildedRose.App execute yarn run server, this will run the webpack dev server running on port 3000
+		** while the api is running on port 5000, the webpack configuration provides a proxy from port 3000 to the api on port 5000.
+
+Running storybook
+	From the storybook/custom_ui directory execute yarn install
+	From the storybook/custom_ui directory execute yarn run storybook
+
+Additional notes:
+	Bash scripts still need updated to run the webpack server and install application dependencies, additionally this should check if yarn exists and install yarn if necessary.
+
+	HistoryAPIFallback, is supposed to be a webpack configuration setting so that if the user hits F5 or refreshes their browser so that the user is directed to the react application during a refresh, for whatever reason this is not working, I might have had my paths incorrect this is something I plan on looking at.
+
+	A Create user function should be implemented in the client react application, the api enpoint already exists.
+
+
+
+
