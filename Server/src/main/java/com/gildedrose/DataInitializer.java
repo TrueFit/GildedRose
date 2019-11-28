@@ -2,11 +2,12 @@ package com.gildedrose;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
@@ -42,7 +43,8 @@ public class DataInitializer implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws IOException {
 
 		// Read the inventory file into a list of file records
-		Collection<FileRecord> fileRecords = readInventoryFile();
+		Resource resource = resourceLoader.getResource("classpath:inventory.txt");
+		Collection<FileRecord> fileRecords = readInventoryFile(resource.getInputStream());
 
 		// Build the necessary entities. They can all be attached through categories
 		Collection<ItemCategory> categories = buildEntities(fileRecords);
@@ -51,29 +53,27 @@ public class DataInitializer implements ApplicationRunner {
 		persistEntities(categories);
 	}
 
-	/* -- PRIVATE METHODS -- */
+	/* -- INTERNAL METHODS -- */
 
-	private Collection<FileRecord> readInventoryFile() throws IOException {
-		Collection<FileRecord> inventoryItems = new ArrayList<>();
-		Resource resource = resourceLoader.getResource("classpath:inventory.txt");
+	List<FileRecord> readInventoryFile(InputStream inputStream) throws IOException {
+		List<FileRecord> inventoryItems = new ArrayList<>();
 
-		try (BufferedReader reader = new BufferedReader(new InputStreamReader(resource.getInputStream()))) {
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
 			String line = reader.readLine();
 
 			while (line != null) {
 				line = line.trim();
 
-				if (StringUtils.isEmpty(line))
-					continue;
+				if (!StringUtils.isEmpty(line)) {
+					String[] lineParts = line.split(",");
 
-				String[] lineParts = line.split(",");
-
-				FileRecord inventoryItem = new FileRecord();
-				inventoryItem.itemName = lineParts[0];
-				inventoryItem.categoryName = lineParts[1];
-				inventoryItem.sellIn = Integer.parseInt(lineParts[2]);
-				inventoryItem.quality = Integer.parseInt(lineParts[3]);
-				inventoryItems.add(inventoryItem);
+					FileRecord inventoryItem = new FileRecord();
+					inventoryItem.itemName = lineParts[0];
+					inventoryItem.categoryName = lineParts[1];
+					inventoryItem.sellIn = Integer.parseInt(lineParts[2]);
+					inventoryItem.quality = Integer.parseInt(lineParts[3]);
+					inventoryItems.add(inventoryItem);
+				}
 
 				line = reader.readLine();
 			}
@@ -82,10 +82,9 @@ public class DataInitializer implements ApplicationRunner {
 		return inventoryItems;
 	}
 
-	private Collection<ItemCategory> buildEntities(Collection<FileRecord> fileRecords) {
+	Collection<ItemCategory> buildEntities(Collection<FileRecord> fileRecords) {
 		Map<String, ItemCategory> categoriesByName = new HashMap<>();
 		Map<String, ItemDefinition> definitionsByName = new HashMap<>();
-		LocalDate today = LocalDate.now();
 
 		for (FileRecord fileRecord : fileRecords) {
 
@@ -107,9 +106,8 @@ public class DataInitializer implements ApplicationRunner {
 
 			// Create the item
 			Item item = new Item();
+			item.setSellIn(fileRecord.sellIn);
 			item.setQuality(fileRecord.quality);
-			item.setSellByDate(today.plusDays(fileRecord.sellIn));
-			item.setQualityLastCalculatedDate(today);
 			item.setDefinition(definitionsByName.get(fileRecord.itemName));
 			item.getDefinition().getItems().add(item);
 		}
@@ -117,7 +115,7 @@ public class DataInitializer implements ApplicationRunner {
 		return categoriesByName.values();
 	}
 
-	private void persistEntities(Collection<ItemCategory> categories) {
+	void persistEntities(Collection<ItemCategory> categories) {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		entityManager.getTransaction().begin();
 
@@ -135,7 +133,7 @@ public class DataInitializer implements ApplicationRunner {
 
 	/* -- CLASSES -- */
 
-	private class FileRecord {
+	static class FileRecord {
 		public String itemName;
 		public String categoryName;
 		public int sellIn;

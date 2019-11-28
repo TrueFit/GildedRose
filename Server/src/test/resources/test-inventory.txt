@@ -1,0 +1,3 @@
+Elixir of the Mongoose,Potion,5,7
+
++5 Dexterity Vest,Armor,10,20
