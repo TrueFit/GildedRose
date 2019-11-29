@@ -2,6 +2,8 @@ package com.gildedrose.service;
 
 import java.time.LocalDate;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,8 @@ import groovy.lang.GroovyShell;
 @Transactional(readOnly = false)
 public class InventoryCalculationServiceImpl implements InventoryCalculationService {
 
+	private static final Logger Log = LoggerFactory.getLogger(InventoryCalculationServiceImpl.class);
+
 	@Autowired
 	private InventoryService inventoryService;
 
@@ -26,6 +30,8 @@ public class InventoryCalculationServiceImpl implements InventoryCalculationServ
 		// Increment the inventory date
 		SystemDate inventoryDate = inventoryService.getInventoryDate();
 		inventoryDate.setDate(inventoryDate.getDate().plusDays(1));
+
+		Log.info(String.format("Calculating inventory for date %s", inventoryDate.getDate()));
 
 		// Update the sell-in, quality and possibliy discarded date of each item
 		for (Item item : inventoryService.getAvailableItems()) {
@@ -42,12 +48,26 @@ public class InventoryCalculationServiceImpl implements InventoryCalculationServ
 			throw new IllegalStateException(String.format("Item with id %d is already discarded", item.getId()));
 
 		// Calculate the new sell-in and quality
+		int origSellIn = item.getSellIn();
+		int origQuality = item.getQuality();
+
 		updateSellIn(item);
 		updateQuality(item);
 
 		// Set the item as discarded if the quality has reached zero
 		if (item.getQuality() == 0)
 			item.setDiscardedDate(inventoryDate);
+
+		// Log the action for easier debugging
+		if (!item.isDiscarded()) {
+			Log.debug("Updated item   '{}' in '{}': sellIn {} -> {}, quality {} -> {}", item.getName(), item.getCategoryName(),
+					origSellIn, item.getSellIn(), origQuality, item.getQuality());
+		}
+		else {
+			Log.debug("Discarded item '{}' in '{}': sellIn {} -> {}, quality {} -> {}, discardedDate {}", item.getName(),
+					item.getCategoryName(), origSellIn, item.getSellIn(), origQuality, item.getQuality(),
+					item.getDiscardedDate());
+		}
 	}
 
 	void updateSellIn(Item item) {

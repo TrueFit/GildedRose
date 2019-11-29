@@ -1,0 +1,5 @@
+Sword,Weapon,3,5
+Aged Brie,Food,50,47
+Hand of Ragnaros,Sulfuras,80,80
+I am Murloc,Backstage Passes,12,32
+Giant Slayer,Conjured,5,7
