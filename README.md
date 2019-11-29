@@ -2,7 +2,9 @@
 
 ## The Solution
 
-This section explains my solution to this project, how it is tested and how to run it.
+The technologies I chose to implement this project were Java, Spring Boot, JUnit, H2 (database) and Angular. I am also using Groovy to perform quality calculations at runtime.
+
+The following sections explain the design (high-level) of my solution, how it is tested and how to run it.
 
 ### Design
 In order to accommodate the likely need to support multiple instances of the same item, and to provide normalization of the persisted items, the following database schema was used.
@@ -18,11 +20,17 @@ To demonstrate this, the following is the ITEM_CATEGORIES table. The "Conjured",
 
 ![Categories Table](Doc/categories-table.png)
 
-While this solution may not be able to address all future requirements, it felt like a right-size approach given how nicely it was able to handle the initial set of requirements. So long as new requirements do not alter the calculations that are applied consistently across all items, then this solution should be able to handle them.
+While this solution may not be able to address all future requirements, it felt like a right-size approach given how nicely it was able to handle the initial set of requirements.
 
-To track the current date of the inventory, I have added the SYSTEM_DATES table. It has a single record which holds the data for which item values were last calculated.
+To track the current date of the inventory, I have added the SYSTEM_DATES table. It has a single record which holds the date for which item values were last calculated.
 
 Loading of data into the schema is done at application startup by the com.gildedrose.DataInitializer class. It reads the inventory.txt file, builds the JPA entities and persists them to the database. It is also responsible for populating the values of the IGNORE_SELL_IN and QUALITY_CHANGE_EXPRESSION columns on the entities.
+
+Regarding class types used in the Java layer, I kept it reasonable slim. Flow of control for a request is as follows:
+	
+	RestController ---> ServiceImpl ---> JPA EntityManager ---> (database)
+
+In larger, more complex system I would often include a Repository layer, along with Converter classes dedicated to converting entities to DTO (data transfer objects). However, all that felt like overkill for this solution as the service layer is able to work with the EntityManager, and the code is straight-forward.
 
 ### Testing
 Ensuring that the logic needed to compute sellIn and quality values is correct (and stays that way after future enhancements) is very important. For this reason I chose to focus my testing efforts on this area. There are two areas of the code that need to be rigorously tested in order to achieve this goal:
@@ -30,9 +38,21 @@ Ensuring that the logic needed to compute sellIn and quality values is correct (
 * com.gildedrose.DataInitializer
 * com.gildedrose.service.InventoryCalculationServiceImpl
 
-The DataInitializer class handles the import of data into the system. It is important to ensure that data is being read correctly, and that the initial JPA entities are being populated correctly.
+The DataInitializer class handles the import of data into the system. It is important to ensure that data is being read correctly, and that the initial JPA entities are being built correctly. The DataInitializerTests class has tests that address this area.
 
-The InventoryCalculationServiceImpl class performs the daily calculation of each item. This is where the tricky logic lives, and also where the Groovy expressions defining custom logic get executed. The InventoryCalculationServiceImplTests class addresses each requirement with a unit test which progresses an item through as series of day, and validates that the item's values are correct on each given day. It also validates that items are marked as discarded (setting of the DISCARDED_DATE).
+The InventoryCalculationServiceImpl class performs the daily calculation of each item. This is where the tricky logic lives, and also where the Groovy expressions defining custom logic get executed. The InventoryCalculationServiceImplTests class addresses each requirement with a unit test that progresses an item through as series of days, and validates that the item's values are correct on each given day. It also validates that items are correctly marked as discarded (setting of the DISCARDED_DATE) when their quality becomes zero.
+
+There are other types of tests which I would generally include in a system such as this, but for this project chose not to implement (due to time)
+* Testing the JPA queries of the service layer against the H2 database
+* Spring MockMvc testing at the REST API layer to ensure the controller and service are behaving correctly
+* Selenium tests against the UI to ensure the system works correctly end to end
+
+### Running the Application
+The server project is built with Maven. I used Spring Tool Suite 4 and JDK 1.8 to develop and run the server project.
+It is configured to run on port 8080.
+The SQL produced by the system can be logged to the console by setting 'spring.jpa.show-sql' to true in the application.properties file.
+
+I have provided a Postman collection file in the root of the repository. It has a request to test each of the available REST APIs.
 
 ## The Problem
 Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city run by a friendly innkeeper named Allison. We also buy and sell only the finest goods. Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We need you to write a system that allows us to manage our inventory, so that we are able to service all of the adventurers who frequent our store (we don't want to run out of healing potions when an tiefling comes in unlike last time - poor Leeroy).
