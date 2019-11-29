@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gildedrose.Constants;
+import com.gildedrose.InvocationException;
 import com.gildedrose.model.Item;
 import com.gildedrose.model.SystemDate;
 
@@ -85,7 +86,16 @@ class InventoryServiceImpl implements InventoryService {
 
 	@Override
 	public Item getItem(long id) {
-		return (Item) entityManager.createQuery(getItemQuery).setParameter("id", id).getSingleResult();
+		@SuppressWarnings("unchecked")
+		List<Item> items = entityManager.createQuery(getItemQuery).setParameter("id", id).getResultList();
+
+		if (items.isEmpty())
+			throw new InvocationException(String.format("No item found for id %d", id));
+
+		if (items.size() > 1)
+			throw new IllegalStateException(String.format("Multiple items found for id %d", id));
+
+		return items.get(0);
 	}
 
 	@Override
