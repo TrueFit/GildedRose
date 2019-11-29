@@ -149,10 +149,10 @@ public class InventoryCalculationServiceImplTests {
 	public void updateItem_conjuredItemsDegradeTwiceAsFast() {
 
 		// Arrange
-		Item item = createItem("name", "Conjured", 3, 11);
+		Item item = createItem("name", "Conjured", 2, 11);
 		item.getCategory().setQualityChangeExpression("defaultChange * 2");
 
-		ValuePair[] expected = parseValuePairs("2,9 | 1,7 | 0,3 | -1,0");
+		ValuePair[] expected = parseValuePairs("1,9 | 0,5 | -1,1 | -2,0");
 
 		// Act
 		ValuePair[] actual = progressItem(item, expected.length, today);
