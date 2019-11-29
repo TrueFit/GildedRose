@@ -77,4 +77,16 @@ public class Item {
 	public void setDefinition(ItemDefinition definition) {
 		this.definition = definition;
 	}
+
+	public boolean isDiscarded() {
+		return this.discardedDate != null;
+	}
+
+	public String getName() {
+		return definition.getName();
+	}
+
+	public String getCategoryName() {
+		return definition.getCategory().getName();
+	}
 }

@@ -1,7 +1,10 @@
 package com.gildedrose.service;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -14,6 +17,8 @@ import com.gildedrose.model.ItemDefinition;
 
 public class InventoryServiceImplTests {
 
+	private LocalDate today = LocalDate.now();
+
 	/* -- PUBLIC METHODS -- */
 
 	@Test
@@ -24,10 +29,11 @@ public class InventoryServiceImplTests {
 		ValuePair[] expected = parseValuePairs("2,4 | 1,3");
 
 		// Act
-		ValuePair[] actual = progressItem(item, expected.length);
+		ValuePair[] actual = progressItem(item, expected.length, today);
 
 		// Assert
 		assertArrayEquals(expected, actual);
+		assertNull(item.getDiscardedDate());
 	}
 
 	@Test
@@ -38,24 +44,26 @@ public class InventoryServiceImplTests {
 		ValuePair[] expected = parseValuePairs("2,10 | 1,9 | 0,7 | -1,5 | -2,3 | -3,1 | -4,0");
 
 		// Act
-		ValuePair[] actual = progressItem(item, expected.length);
+		ValuePair[] actual = progressItem(item, expected.length, today);
 
 		// Assert
 		assertArrayEquals(expected, actual);
+		assertEquals(today, item.getDiscardedDate());
 	}
 
 	@Test
 	public void updateItem_qualityIsNeverNegative() {
 
 		// Arrange
-		Item item = createItem("name", "Food", 2, 1);
-		ValuePair[] expected = parseValuePairs("1,0 | 0,0 | -1,0");
+		Item item = createItem("name", "Food", -1, 1);
+		ValuePair[] expected = parseValuePairs("-2,0");
 
 		// Act
-		ValuePair[] actual = progressItem(item, expected.length);
+		ValuePair[] actual = progressItem(item, expected.length, today);
 
 		// Assert
 		assertArrayEquals(expected, actual);
+		assertEquals(today, item.getDiscardedDate());
 	}
 
 	@Test
@@ -66,10 +74,26 @@ public class InventoryServiceImplTests {
 		ValuePair[] expected = parseValuePairs("4,49 | 3,50 | 2,50");
 
 		// Act
-		ValuePair[] actual = progressItem(item, expected.length);
+		ValuePair[] actual = progressItem(item, expected.length, today);
 
 		// Assert
 		assertArrayEquals(expected, actual);
+		assertNull(item.getDiscardedDate());
+	}
+
+	@Test
+	public void updateItem_agedBrieQualityIncreases() {
+
+		// Arrange
+		Item item = createItem("Aged Brie", "Food", 20, 46);
+		ValuePair[] expected = parseValuePairs("20,47 | 20,48 | 20,49 | 20,50 | 20,50");
+
+		// Act
+		ValuePair[] actual = progressItem(item, expected.length, today);
+
+		// Assert
+		assertArrayEquals(expected, actual);
+		assertNull(item.getDiscardedDate());
 	}
 
 	@Test
@@ -80,10 +104,11 @@ public class InventoryServiceImplTests {
 		ValuePair[] expected = parseValuePairs("80,80 | 80,80 | 80,80");
 
 		// Act
-		ValuePair[] actual = progressItem(item, expected.length);
+		ValuePair[] actual = progressItem(item, expected.length, today);
 
 		// Assert
 		assertArrayEquals(expected, actual);
+		assertNull(item.getDiscardedDate());
 	}
 
 	@Test
@@ -95,10 +120,11 @@ public class InventoryServiceImplTests {
 				"11,26 | 10,28 | 9,30 | 8,32 | 7,34 | 6,36 | 5,39 | 4,42 | 3,45 | 2,48 | 1,50 | 0,0");
 
 		// Act
-		ValuePair[] actual = progressItem(item, expected.length);
+		ValuePair[] actual = progressItem(item, expected.length, today);
 
 		// Assert
 		assertArrayEquals(expected, actual);
+		assertEquals(today, item.getDiscardedDate());
 	}
 
 	@Test
@@ -109,10 +135,11 @@ public class InventoryServiceImplTests {
 		ValuePair[] expected = parseValuePairs("2,9 | 1,7 | 0,3 | -1,0");
 
 		// Act
-		ValuePair[] actual = progressItem(item, expected.length);
+		ValuePair[] actual = progressItem(item, expected.length, today);
 
 		// Assert
 		assertArrayEquals(expected, actual);
+		assertEquals(today, item.getDiscardedDate());
 	}
 
 	/* -- PRIVATE METHODS -- */
@@ -135,12 +162,12 @@ public class InventoryServiceImplTests {
 		return item;
 	}
 
-	private ValuePair[] progressItem(Item item, int days) {
+	private ValuePair[] progressItem(Item item, int days, LocalDate inventoryDate) {
 		InventoryServiceImpl service = new InventoryServiceImpl();
 		ValuePair[] results = new ValuePair[days];
 
 		for (int i = 0; i < days; i++) {
-			service.updateItem(item);
+			service.updateItem(item, inventoryDate);
 			results[i] = new ValuePair(item.getSellIn(), item.getQuality());
 		}
 

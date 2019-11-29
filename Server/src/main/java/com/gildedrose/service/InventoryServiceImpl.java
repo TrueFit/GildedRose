@@ -47,11 +47,29 @@ class InventoryServiceImpl implements InventoryService {
 		"ORDER BY d.name ASC, i.sellIn ASC, i.quality ASC";
 	// @formatter:on
 
+	private static final String getItemQuery =
+	// @formatter:off
+		"SELECT i " +
+		"FROM Item i " +
+		"INNER JOIN FETCH i.definition d " +
+		"INNER JOIN FETCH d.category " +
+		"WHERE i.id = :id";
+	// @formatter:on
+
+	private static final String getItemsByNameQuery =
+	// @formatter:off
+		"SELECT i " +
+		"FROM Item i " +
+		"INNER JOIN FETCH i.definition d " +
+		"INNER JOIN FETCH d.category " +
+		"WHERE d.name = :name";
+	// @formatter:on
+
 	/* -- PUBLIC METHODS -- */
 
 	@Override
-	public LocalDate getInventoryDate() {
-		return ((SystemDate) entityManager.createQuery(getInventoryDateQuery).getSingleResult()).getDate();
+	public SystemDate getInventoryDate() {
+		return (SystemDate) entityManager.createQuery(getInventoryDateQuery).getSingleResult();
 	}
 
 	@Override
@@ -67,27 +85,45 @@ class InventoryServiceImpl implements InventoryService {
 	}
 
 	@Override
+	public Item getItem(long id) {
+		return (Item) entityManager.createQuery(getItemQuery).setParameter("id", id).getSingleResult();
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Item> getItemsByName(String name) {
+		return (List<Item>) entityManager.createQuery(getItemsByNameQuery).setParameter("name", name).getResultList();
+	}
+
+	@Override
 	@Transactional(readOnly = false)
 	public void progressDate() {
 
-		// Update the sell-in and quality for each item
-		for (Item item : getAvailableItems()) {
-			updateItem(item);
-		}
-
 		// Increment the inventory date
-		SystemDate inventoryDate = (SystemDate) entityManager
-				.createQuery(String.format("SELECT d FROM SystemDate d WHERE d.id = '%s'", Constants.InventoryDateId))
-				.getSingleResult();
-
+		SystemDate inventoryDate = getInventoryDate();
 		inventoryDate.setDate(inventoryDate.getDate().plusDays(1));
+
+		// Update the sell-in, quality and possibliy discarded date of each item
+		for (Item item : getAvailableItems()) {
+			updateItem(item, inventoryDate.getDate());
+		}
 	}
 
 	/* -- INTERNAL METHODS -- */
 
-	void updateItem(Item item) {
+	void updateItem(Item item, LocalDate inventoryDate) {
+
+		// Assert that we are never updating an item that is already discarded
+		if (item.isDiscarded())
+			throw new IllegalStateException(String.format("Item with id %d is already discarded", item.getId()));
+
+		// Calculate the new sell-in and quality
 		updateSellIn(item);
 		updateQuality(item);
+
+		// Set the item as discarded if the quality has reached zero
+		if (item.getQuality() == 0)
+			item.setDiscardedDate(inventoryDate);
 	}
 
 	void updateSellIn(Item item) {
@@ -95,8 +131,12 @@ class InventoryServiceImpl implements InventoryService {
 		// Default the sell-in change to subtract one day
 		int sellInChange = -1;
 
+		// Aged brie never need to be sold, so never change its sell-in value
+		if ("Aged Brie".equals(item.getName()))
+			sellInChange = 0;
+
 		// Sulfuras never need to be sold, so never change its sell-in value
-		if ("Sulfuras".equals(item.getDefinition().getCategory().getName()))
+		if ("Sulfuras".equals(item.getCategoryName()))
 			sellInChange = 0;
 
 		// Update the sell-in value
@@ -109,13 +149,17 @@ class InventoryServiceImpl implements InventoryService {
 		// Default the quality change to subtract one point
 		int qualityChange = -1;
 
+		// Aged brie increases in quality
+		if ("Aged Brie".equals(item.getName()))
+			qualityChange = 1;
+
 		// Sulfuras never decreases in quality
-		if ("Sulfuras".equals(item.getDefinition().getCategory().getName()))
+		if ("Sulfuras".equals(item.getCategoryName()))
 			qualityChange = 0;
 
 		// Backstage passes increase more near sell-in, then fall to zero once the
 		// sell-in date is past
-		if ("Backstage Passes".equals(item.getDefinition().getCategory().getName())) {
+		if ("Backstage Passes".equals(item.getCategoryName())) {
 			if (item.getSellIn() <= 0)
 				qualityChange = item.getQuality() * -1;
 			else if (item.getSellIn() <= 5)
@@ -127,7 +171,7 @@ class InventoryServiceImpl implements InventoryService {
 		}
 
 		// Conjured items degrade twice as fast as normal items
-		if ("Conjured".equals(item.getDefinition().getCategory().getName()))
+		if ("Conjured".equals(item.getCategoryName()))
 			qualityChange = -2;
 
 		// Once the sell by date has passed, degrade quality twice as fast (only for

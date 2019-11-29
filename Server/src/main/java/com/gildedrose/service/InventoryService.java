@@ -1,16 +1,16 @@
 package com.gildedrose.service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import com.gildedrose.model.Item;
+import com.gildedrose.model.SystemDate;
 
 public interface InventoryService {
 
 	/**
 	 * Retrieves the current date inventory items have been progressed to.
 	 */
-	LocalDate getInventoryDate();
+	SystemDate getInventoryDate();
 
 	/**
 	 * Retrieves all items which are available to sell. Resulting items are sorted
@@ -24,6 +24,16 @@ public interface InventoryService {
 	 * then by name.
 	 */
 	List<Item> getDiscardedItems();
+
+	/**
+	 * Retrieves a single item by its id.
+	 */
+	Item getItem(long id);
+
+	/**
+	 * Retrieves a list of all items with the given name.
+	 */
+	List<Item> getItemsByName(String name);
 
 	/**
 	 * Instructs the system to progress the inventory date to the next day, thus
