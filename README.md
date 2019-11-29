@@ -1,11 +1,18 @@
 # Gilded Rose
 
 ## The Solution
-In order to accommodate the likely need to support multiple instances of the same item, and to provide normalization of the persisted items, the following database schema was designed.
+In order to accommodate the likely need to support multiple instances of the same item, and to provide normalization of the persisted items, the following database schema was used.
 
 ![Database Schema](Doc/schema.png)
 
-Not only does this schema save us from repeating item and category names within the database, but it also provides locations to store settings that customize the daily calculations based on item or category.
+Not only does this schema save us from repeating item and category names within the database, but it also provides locations to store settings that customize the daily calculations based on item or category. The following columns are used for this.
+
+* IGNORE_SELL_IN: When set to true, indicates that the sellIn value does not apply to the given item or category of items.
+* QUALITY_CHANGE_EXPRESSION: A Groovy expression which will calculate the daily change in quality for the given item or category of items.
+
+To demonstrate this, the following is the ITEM_CATEGORIES table. The "Conjured", "Sulfuras" and "Backstage Passes" records have custom values in one or more of these columns.
+
+![Categories Table](Doc/categories-table.png)
 
 ## The Problem
 Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city run by a friendly innkeeper named Allison. We also buy and sell only the finest goods. Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We need you to write a system that allows us to manage our inventory, so that we are able to service all of the adventurers who frequent our store (we don't want to run out of healing potions when an tiefling comes in unlike last time - poor Leeroy).
