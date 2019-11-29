@@ -1,6 +1,10 @@
 # Gilded Rose
 
 ## The Solution
+
+This section explains my solution to this project, how it is tested and how to run it.
+
+### Design
 In order to accommodate the likely need to support multiple instances of the same item, and to provide normalization of the persisted items, the following database schema was used.
 
 ![Database Schema](Doc/schema.png)
@@ -13,6 +17,22 @@ Not only does this schema save us from repeating item and category names within 
 To demonstrate this, the following is the ITEM_CATEGORIES table. The "Conjured", "Sulfuras" and "Backstage Passes" records have custom values in one or more of these columns.
 
 ![Categories Table](Doc/categories-table.png)
+
+While this solution may not be able to address all future requirements, it felt like a right-size approach given how nicely it was able to handle the initial set of requirements. So long as new requirements do not alter the calculations that are applied consistently across all items, then this solution should be able to handle them.
+
+To track the current date of the inventory, I have added the SYSTEM_DATES table. It has a single record which holds the data for which item values were last calculated.
+
+Loading of data into the schema is done at application startup by the com.gildedrose.DataInitializer class. It reads the inventory.txt file, builds the JPA entities and persists them to the database. It is also responsible for populating the values of the IGNORE_SELL_IN and QUALITY_CHANGE_EXPRESSION columns on the entities.
+
+### Testing
+Ensuring that the logic needed to compute sellIn and quality values is correct (and stays that way after future enhancements) is very important. For this reason I chose to focus my testing efforts on this area. There are two areas of the code that need to be rigorously tested in order to achieve this goal:
+
+* com.gildedrose.DataInitializer
+* com.gildedrose.service.InventoryCalculationServiceImpl
+
+The DataInitializer class handles the import of data into the system. It is important to ensure that data is being read correctly, and that the initial JPA entities are being populated correctly.
+
+The InventoryCalculationServiceImpl class performs the daily calculation of each item. This is where the tricky logic lives, and also where the Groovy expressions defining custom logic get executed. The InventoryCalculationServiceImplTests class addresses each requirement with a unit test which progresses an item through as series of day, and validates that the item's values are correct on each given day. It also validates that items are marked as discarded (setting of the DISCARDED_DATE).
 
 ## The Problem
 Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city run by a friendly innkeeper named Allison. We also buy and sell only the finest goods. Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We need you to write a system that allows us to manage our inventory, so that we are able to service all of the adventurers who frequent our store (we don't want to run out of healing potions when an tiefling comes in unlike last time - poor Leeroy).
