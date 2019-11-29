@@ -52,7 +52,7 @@ public class InventoryController {
 		dto.setName(item.getDefinition().getName());
 		dto.setCategory(item.getDefinition().getCategory().getName());
 		dto.setSellIn(item.getSellIn());
-		dto.setQuantity(item.getQuality());
+		dto.setQuality(item.getQuality());
 		return dto;
 	}
 }

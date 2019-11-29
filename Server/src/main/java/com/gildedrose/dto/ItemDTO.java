@@ -13,7 +13,7 @@ public class ItemDTO {
 
 	private int sellIn;
 
-	private int quantity;
+	private int quality;
 
 	/* -- PUBLIC METHODS -- */
 
@@ -49,11 +49,11 @@ public class ItemDTO {
 		this.sellIn = sellIn;
 	}
 
-	public int getQuantity() {
-		return quantity;
+	public int getQuality() {
+		return quality;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setQuality(int quality) {
+		this.quality = quality;
 	}
 }
