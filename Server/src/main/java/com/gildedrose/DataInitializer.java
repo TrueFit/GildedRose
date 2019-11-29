@@ -100,6 +100,7 @@ public class DataInitializer implements ApplicationRunner {
 			if (!categoriesByName.containsKey(fileRecord.categoryName)) {
 				ItemCategory category = new ItemCategory();
 				category.setName(fileRecord.categoryName);
+				applySpecialBehaviorSettings(category);
 				categoriesByName.put(category.getName(), category);
 			}
 
@@ -109,6 +110,7 @@ public class DataInitializer implements ApplicationRunner {
 				definition.setName(fileRecord.itemName);
 				definition.setCategory(categoriesByName.get(fileRecord.categoryName));
 				definition.getCategory().getDefinitions().add(definition);
+				applySpecialBehaviorSettings(definition);
 				definitionsByName.put(definition.getName(), definition);
 			}
 
@@ -141,6 +143,20 @@ public class DataInitializer implements ApplicationRunner {
 		finally {
 			entityManager.getTransaction().rollback();
 		}
+	}
+
+	void applySpecialBehaviorSettings(ItemCategory category) {
+
+		// Sulfuras never need to be sold, so ignore its sell-in value
+		if ("Sulfuras".equals(category.getName()))
+			category.setIgnoreSellIn(true);
+	}
+
+	void applySpecialBehaviorSettings(ItemDefinition definition) {
+
+		// Aged Brie only increases in quality, so ignore its sell-in value
+		if ("Aged Brie".equals(definition.getName()))
+			definition.setIgnoreSellIn(true);
 	}
 
 	/* -- CLASSES -- */

@@ -86,6 +86,8 @@ public class InventoryServiceImplTests {
 
 		// Arrange
 		Item item = createItem("Aged Brie", "Food", 20, 46);
+		item.getDefinition().setIgnoreSellIn(true);
+
 		ValuePair[] expected = parseValuePairs("20,47 | 20,48 | 20,49 | 20,50 | 20,50");
 
 		// Act
@@ -101,6 +103,8 @@ public class InventoryServiceImplTests {
 
 		// Arrange
 		Item item = createItem("name", "Sulfuras", 80, 80);
+		item.getCategory().setIgnoreSellIn(true);
+
 		ValuePair[] expected = parseValuePairs("80,80 | 80,80 | 80,80");
 
 		// Act

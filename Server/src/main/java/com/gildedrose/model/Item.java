@@ -86,6 +86,10 @@ public class Item {
 		return definition.getName();
 	}
 
+	public ItemCategory getCategory() {
+		return definition.getCategory();
+	}
+
 	public String getCategoryName() {
 		return definition.getCategory().getName();
 	}

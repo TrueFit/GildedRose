@@ -27,6 +27,9 @@ public class ItemCategory {
 	@Column(nullable = false, length = 100)
 	private String name;
 
+	@Column(nullable = true)
+	private Boolean ignoreSellIn;
+
 	@OneToMany(mappedBy = "category", cascade = CascadeType.PERSIST)
 	private List<ItemDefinition> definitions = new ArrayList<>();
 
@@ -46,6 +49,14 @@ public class ItemCategory {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Boolean getIgnoreSellIn() {
+		return ignoreSellIn;
+	}
+
+	public void setIgnoreSellIn(Boolean ignoreSellIn) {
+		this.ignoreSellIn = ignoreSellIn;
 	}
 
 	public List<ItemDefinition> getDefinitions() {

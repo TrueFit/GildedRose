@@ -30,6 +30,9 @@ public class ItemDefinition {
 	@Column(nullable = false, length = 100)
 	private String name;
 
+	@Column(nullable = true)
+	private Boolean ignoreSellIn;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CATEGORY_ID", nullable = false)
 	private ItemCategory category;
@@ -53,6 +56,14 @@ public class ItemDefinition {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Boolean getIgnoreSellIn() {
+		return ignoreSellIn;
+	}
+
+	public void setIgnoreSellIn(Boolean ignoreSellIn) {
+		this.ignoreSellIn = ignoreSellIn;
 	}
 
 	public ItemCategory getCategory() {

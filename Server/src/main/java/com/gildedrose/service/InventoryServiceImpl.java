@@ -131,12 +131,14 @@ class InventoryServiceImpl implements InventoryService {
 		// Default the sell-in change to subtract one day
 		int sellInChange = -1;
 
-		// Aged brie never need to be sold, so never change its sell-in value
-		if ("Aged Brie".equals(item.getName()))
-			sellInChange = 0;
+		// Let the item's definition or category indicate whether to ignore sell-in, and
+		// thus not change the value
+		Boolean ignoreSellIn = item.getDefinition().getIgnoreSellIn();
 
-		// Sulfuras never need to be sold, so never change its sell-in value
-		if ("Sulfuras".equals(item.getCategoryName()))
+		if (ignoreSellIn == null)
+			ignoreSellIn = item.getCategory().getIgnoreSellIn();
+
+		if (ignoreSellIn != null && ignoreSellIn)
 			sellInChange = 0;
 
 		// Update the sell-in value

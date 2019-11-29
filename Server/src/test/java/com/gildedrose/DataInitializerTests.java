@@ -1,6 +1,8 @@
 package com.gildedrose;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -95,9 +97,59 @@ public class DataInitializerTests {
 
 		Item item1 = definition2.getItems().get(0);
 
-		assertEquals("name2", item1.getDefinition().getName());
-		assertEquals("category2", item1.getDefinition().getCategory().getName());
+		assertEquals("name2", item1.getName());
+		assertEquals("category2", item1.getCategoryName());
 		assertEquals(6, item1.getSellIn());
 		assertEquals(5, item1.getQuality());
+		assertNull(item1.getDefinition().getIgnoreSellIn());
+		assertNull(item1.getCategory().getIgnoreSellIn());
+	}
+
+	@Test
+	public void buildEntities_agedBrieSpecialBehavior() {
+		DataInitializer dataInitializer = new DataInitializer();
+
+		List<FileRecord> fileRecords = new ArrayList<>();
+
+		FileRecord fr1 = new FileRecord();
+		fr1.itemName = "Aged Brie";
+		fr1.categoryName = "Food";
+		fr1.sellIn = 2;
+		fr1.quality = 1;
+		fileRecords.add(fr1);
+
+		// Act
+		Collection<ItemCategory> categories = dataInitializer.buildEntities(fileRecords);
+
+		// Assert
+		ItemCategory category = categories.stream().filter(c -> "Food".equals(c.getName())).findFirst().get();
+		ItemDefinition definition = category.getDefinitions().get(0);
+
+		assertNull(category.getIgnoreSellIn());
+		assertTrue(definition.getIgnoreSellIn());
+	}
+
+	@Test
+	public void buildEntities_sulfurasSpecialBehavior() {
+		DataInitializer dataInitializer = new DataInitializer();
+
+		List<FileRecord> fileRecords = new ArrayList<>();
+
+		FileRecord fr1 = new FileRecord();
+		fr1.itemName = "Hand of Ragnaros";
+		fr1.categoryName = "Sulfuras";
+		fr1.sellIn = 2;
+		fr1.quality = 1;
+		fileRecords.add(fr1);
+
+		// Act
+		Collection<ItemCategory> categories = dataInitializer.buildEntities(fileRecords);
+
+		// Assert
+		ItemCategory category = categories.stream().filter(c -> "Sulfuras".equals(c.getName())).findFirst().get();
+		ItemDefinition definition = category.getDefinitions().get(0);
+
+		assertTrue(category.getIgnoreSellIn());
+		assertNull(definition.getIgnoreSellIn());
 	}
 }
