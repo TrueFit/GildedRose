@@ -15,7 +15,15 @@ import com.gildedrose.model.Item;
 import com.gildedrose.model.ItemCategory;
 import com.gildedrose.model.ItemDefinition;
 
-public class InventoryServiceImplTests {
+public class InventoryCalculationServiceImplTests {
+
+	private static final String BackstagePassesExpression =
+	// @formatter:off
+		"if (sellIn <= 0) return quality * -1; \n" +
+		"if (sellIn <= 5) return 3; \n" +
+		"if (sellIn <= 10) return 2; \n" +
+		"return 1;";
+	// @formatter:on
 
 	private LocalDate today = LocalDate.now();
 
@@ -71,6 +79,8 @@ public class InventoryServiceImplTests {
 
 		// Arrange
 		Item item = createItem("name", "Backstage Passes", 5, 46);
+		item.getCategory().setQualityChangeExpression(BackstagePassesExpression);
+
 		ValuePair[] expected = parseValuePairs("4,49 | 3,50 | 2,50");
 
 		// Act
@@ -87,6 +97,7 @@ public class InventoryServiceImplTests {
 		// Arrange
 		Item item = createItem("Aged Brie", "Food", 20, 46);
 		item.getDefinition().setIgnoreSellIn(true);
+		item.getDefinition().setQualityChangeExpression("1");
 
 		ValuePair[] expected = parseValuePairs("20,47 | 20,48 | 20,49 | 20,50 | 20,50");
 
@@ -104,6 +115,7 @@ public class InventoryServiceImplTests {
 		// Arrange
 		Item item = createItem("name", "Sulfuras", 80, 80);
 		item.getCategory().setIgnoreSellIn(true);
+		item.getCategory().setQualityChangeExpression("0");
 
 		ValuePair[] expected = parseValuePairs("80,80 | 80,80 | 80,80");
 
@@ -120,6 +132,8 @@ public class InventoryServiceImplTests {
 
 		// Arrange
 		Item item = createItem("name", "Backstage Passes", 12, 25);
+		item.getCategory().setQualityChangeExpression(BackstagePassesExpression);
+
 		ValuePair[] expected = parseValuePairs(
 				"11,26 | 10,28 | 9,30 | 8,32 | 7,34 | 6,36 | 5,39 | 4,42 | 3,45 | 2,48 | 1,50 | 0,0");
 
@@ -136,6 +150,8 @@ public class InventoryServiceImplTests {
 
 		// Arrange
 		Item item = createItem("name", "Conjured", 3, 11);
+		item.getCategory().setQualityChangeExpression("defaultChange * 2");
+
 		ValuePair[] expected = parseValuePairs("2,9 | 1,7 | 0,3 | -1,0");
 
 		// Act
@@ -167,7 +183,7 @@ public class InventoryServiceImplTests {
 	}
 
 	private ValuePair[] progressItem(Item item, int days, LocalDate inventoryDate) {
-		InventoryServiceImpl service = new InventoryServiceImpl();
+		InventoryCalculationServiceImpl service = new InventoryCalculationServiceImpl();
 		ValuePair[] results = new ValuePair[days];
 
 		for (int i = 0; i < days; i++) {

@@ -30,6 +30,9 @@ public class ItemCategory {
 	@Column(nullable = true)
 	private Boolean ignoreSellIn;
 
+	@Column(nullable = true)
+	private String qualityChangeExpression;
+
 	@OneToMany(mappedBy = "category", cascade = CascadeType.PERSIST)
 	private List<ItemDefinition> definitions = new ArrayList<>();
 
@@ -57,6 +60,14 @@ public class ItemCategory {
 
 	public void setIgnoreSellIn(Boolean ignoreSellIn) {
 		this.ignoreSellIn = ignoreSellIn;
+	}
+
+	public String getQualityChangeExpression() {
+		return qualityChangeExpression;
+	}
+
+	public void setQualityChangeExpression(String qualityChangeExpression) {
+		this.qualityChangeExpression = qualityChangeExpression;
 	}
 
 	public List<ItemDefinition> getDefinitions() {

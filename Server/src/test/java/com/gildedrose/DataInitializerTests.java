@@ -20,6 +20,16 @@ import com.gildedrose.model.ItemDefinition;
 
 public class DataInitializerTests {
 
+	private static final String BackstagePassesExpression =
+	// @formatter:off
+		"if (sellIn <= 0) return quality * -1; \n" +
+		"if (sellIn <= 5) return 3; \n" +
+		"if (sellIn <= 10) return 2; \n" +
+		"return 1;";
+	// @formatter:on
+
+	/* -- PUBLIC METHODS -- */
+
 	@Test
 	public void readInventoryFile() throws IOException {
 
@@ -127,6 +137,7 @@ public class DataInitializerTests {
 
 		assertNull(category.getIgnoreSellIn());
 		assertTrue(definition.getIgnoreSellIn());
+		assertEquals("1", definition.getQualityChangeExpression());
 	}
 
 	@Test
@@ -151,5 +162,51 @@ public class DataInitializerTests {
 
 		assertTrue(category.getIgnoreSellIn());
 		assertNull(definition.getIgnoreSellIn());
+		assertEquals("0", category.getQualityChangeExpression());
+	}
+
+	@Test
+	public void buildEntities_conjuredSpecialBehavior() {
+		DataInitializer dataInitializer = new DataInitializer();
+
+		List<FileRecord> fileRecords = new ArrayList<>();
+
+		FileRecord fr1 = new FileRecord();
+		fr1.itemName = "Giant Slayer";
+		fr1.categoryName = "Conjured";
+		fr1.sellIn = 2;
+		fr1.quality = 1;
+		fileRecords.add(fr1);
+
+		// Act
+		Collection<ItemCategory> categories = dataInitializer.buildEntities(fileRecords);
+
+		// Assert
+		ItemCategory category = categories.stream().filter(c -> "Conjured".equals(c.getName())).findFirst().get();
+
+		assertEquals("defaultChange * 2", category.getQualityChangeExpression());
+	}
+
+	@Test
+	public void buildEntities_backstagePassesSpecialBehavior() {
+		DataInitializer dataInitializer = new DataInitializer();
+
+		List<FileRecord> fileRecords = new ArrayList<>();
+
+		FileRecord fr1 = new FileRecord();
+		fr1.itemName = "I am Murloc";
+		fr1.categoryName = "Backstage Passes";
+		fr1.sellIn = 2;
+		fr1.quality = 1;
+		fileRecords.add(fr1);
+
+		// Act
+		Collection<ItemCategory> categories = dataInitializer.buildEntities(fileRecords);
+
+		// Assert
+		ItemCategory category = categories.stream().filter(c -> "Backstage Passes".equals(c.getName())).findFirst()
+				.get();
+
+		assertEquals(BackstagePassesExpression, category.getQualityChangeExpression());
 	}
 }

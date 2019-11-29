@@ -33,6 +33,9 @@ public class ItemDefinition {
 	@Column(nullable = true)
 	private Boolean ignoreSellIn;
 
+	@Column(nullable = true)
+	private String qualityChangeExpression;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CATEGORY_ID", nullable = false)
 	private ItemCategory category;
@@ -66,6 +69,14 @@ public class ItemDefinition {
 		this.ignoreSellIn = ignoreSellIn;
 	}
 
+	public String getQualityChangeExpression() {
+		return qualityChangeExpression;
+	}
+
+	public void setQualityChangeExpression(String qualityChangeExpression) {
+		this.qualityChangeExpression = qualityChangeExpression;
+	}
+
 	public ItemCategory getCategory() {
 		return category;
 	}
@@ -80,5 +91,34 @@ public class ItemDefinition {
 
 	public void setItems(List<Item> items) {
 		this.items = items;
+	}
+
+	/**
+	 * Indicates whether sell-in is ignored for this item by first looking for an
+	 * explicit answer on the item definition, and then on the category. Otherwise
+	 * false is returned.
+	 */
+	public boolean computeIgnoreSellIn() {
+		if (getIgnoreSellIn() != null)
+			return getIgnoreSellIn();
+
+		if (category.getIgnoreSellIn() != null)
+			return category.getIgnoreSellIn();
+
+		return false;
+	}
+
+	/**
+	 * Returns any custom quality change expression by first looking for it at the
+	 * item definition, and then on the category. Otherwise null is returned.
+	 */
+	public String computeQualityChangeExpression() {
+		if (getQualityChangeExpression() != null)
+			return getQualityChangeExpression();
+
+		if (category.getQualityChangeExpression() != null)
+			return category.getQualityChangeExpression();
+
+		return null;
 	}
 }

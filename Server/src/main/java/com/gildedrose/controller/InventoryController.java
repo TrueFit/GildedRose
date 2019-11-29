@@ -16,6 +16,7 @@ import com.gildedrose.dto.DateDTO;
 import com.gildedrose.dto.EmptyDTO;
 import com.gildedrose.dto.ItemDTO;
 import com.gildedrose.model.Item;
+import com.gildedrose.service.InventoryCalculationService;
 import com.gildedrose.service.InventoryService;
 
 @RestController
@@ -24,6 +25,9 @@ public class InventoryController {
 
 	@Autowired
 	private InventoryService inventoryService;
+
+	@Autowired
+	private InventoryCalculationService inventoryCalculationService;
 
 	/* -- PUBLIC METHODS -- */
 
@@ -54,7 +58,7 @@ public class InventoryController {
 
 	@PostMapping("/progress-date")
 	public EmptyDTO progressDate() {
-		inventoryService.progressDate();
+		inventoryCalculationService.progressDate();
 		return new EmptyDTO();
 	}
 

@@ -33,6 +33,14 @@ import com.gildedrose.model.SystemDate;
 @Component
 public class DataInitializer implements ApplicationRunner {
 
+	private static final String BackstagePassesExpression =
+	// @formatter:off
+		"if (sellIn <= 0) return quality * -1; \n" +
+		"if (sellIn <= 5) return 3; \n" +
+		"if (sellIn <= 10) return 2; \n" +
+		"return 1;";
+	// @formatter:on
+
 	@Autowired
 	private EntityManagerFactory entityManagerFactory;
 
@@ -148,15 +156,30 @@ public class DataInitializer implements ApplicationRunner {
 	void applySpecialBehaviorSettings(ItemCategory category) {
 
 		// Sulfuras never need to be sold, so ignore its sell-in value
-		if ("Sulfuras".equals(category.getName()))
+		if ("Sulfuras".equals(category.getName())) {
 			category.setIgnoreSellIn(true);
+			category.setQualityChangeExpression("0");
+		}
+
+		// Backstage passes increase in quality at a custom rate, until sell-in is
+		// reached, then it quality goes to zero
+		if ("Backstage Passes".equals(category.getName())) {
+			category.setQualityChangeExpression(BackstagePassesExpression);
+		}
+
+		// Conjured items degrade in quality twice as fast as normal items
+		if ("Conjured".equals(category.getName())) {
+			category.setQualityChangeExpression("defaultChange * 2");
+		}
 	}
 
 	void applySpecialBehaviorSettings(ItemDefinition definition) {
 
 		// Aged Brie only increases in quality, so ignore its sell-in value
-		if ("Aged Brie".equals(definition.getName()))
+		if ("Aged Brie".equals(definition.getName())) {
 			definition.setIgnoreSellIn(true);
+			definition.setQualityChangeExpression("1");
+		}
 	}
 
 	/* -- CLASSES -- */

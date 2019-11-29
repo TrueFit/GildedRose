@@ -34,11 +34,4 @@ public interface InventoryService {
 	 * Retrieves a list of all items with the given name.
 	 */
 	List<Item> getItemsByName(String name);
-
-	/**
-	 * Instructs the system to progress the inventory date to the next day, thus
-	 * recalculating the sell-in and quality values for each available item. Items
-	 * whose quality becomes zero are marked as discarded.
-	 */
-	void progressDate();
 }
