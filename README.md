@@ -20,7 +20,17 @@ To demonstrate this, the following is the ITEM_CATEGORIES table. The "Conjured",
 
 ![Categories Table](Doc/categories-table.png)
 
-While this solution may not be able to address all future requirements, it felt like a right-size approach given how nicely it was able to handle the initial set of requirements.
+My first pass at the logic was to simply hard-code it all (can be seen in commit history). I wrote all the unit tests against that. I then swapped out parts of the logic for Groovy expressions, ensuring that the tests still passed. There are pros and cons to the solution (Groovy) that I chose, but ultimately I felt it was the better of the two. Here are the pros and cons that I see:
+
+Pros:
+  * Logic is attached to item definition and item category records. Items and categories can be renamed or deleted and the logic still sticks.
+  * New items and categories can be added and given new logic.
+  * Being isolated as it is, logic for one item cannot accidentally affect the calculation for other items.
+
+Cons:
+  * May be a bit more confusing for a new developer to understand.
+  * While logic can be created or altered by an end user, they may not be able to do it, or do it correctly.
+  * Unit tests of the logic need to be kept in sync with changes to the logic. Ideally a developer would update the unit tests whenever logic changes are made.
 
 To track the current date of the inventory, I have added the SYSTEM_DATES table. It has a single record which holds the date for which item values were last calculated.
 
