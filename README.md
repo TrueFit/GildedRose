@@ -23,20 +23,19 @@ To demonstrate this, the following is the ITEM_CATEGORIES table. The "Conjured",
 My first pass at the logic was to simply hard-code it all (can be seen in commit history). I wrote all the unit tests against that. I then swapped out parts of the logic for Groovy expressions, ensuring that the tests still passed. There are pros and cons to the solution (Groovy) that I chose, but ultimately I felt it was the better of the two. Here are the pros and cons that I see:
 
 Pros:
-  * Logic is attached to item definition and item category records. Items and categories can be renamed or deleted and the logic still sticks.
-  * New items and categories can be added and given new logic.
+  * Logic is attached to item definition and item category records. Items and categories can be added, renamed or deleted and the logic follows.
   * Being isolated as it is, logic for one item cannot accidentally affect the calculation for other items.
+  * Logic could be made available for editing by an end user (may or may not be a good idea).
 
 Cons:
   * May be a bit more confusing for a new developer to understand.
-  * While logic can be created or altered by an end user, they may not be able to do it, or do it correctly.
   * Unit tests of the logic need to be kept in sync with changes to the logic. Ideally a developer would update the unit tests whenever logic changes are made.
 
 To track the current date of the inventory, I have added the SYSTEM_DATES table. It has a single record which holds the date for which item values were last calculated.
 
 Loading of data into the schema is done at application startup by the com.gildedrose.DataInitializer class. It reads the inventory.txt file, builds the JPA entities and persists them to the database. It is also responsible for populating the values of the IGNORE_SELL_IN and QUALITY_CHANGE_EXPRESSION columns on the entities.
 
-Regarding class types used in the Java layer, I kept it reasonable slim. Flow of control for a request is as follows:
+Regarding class types used in the Java layer, I kept it reasonably slim. Flow of control for a request is as follows:
 	
 	RestController ---> ServiceImpl ---> JPA EntityManager ---> (database)
 
@@ -48,7 +47,7 @@ Ensuring that the logic needed to compute sellIn and quality values is correct (
 * com.gildedrose.DataInitializer
 * com.gildedrose.service.InventoryCalculationServiceImpl
 
-The DataInitializer class handles the import of data into the system. It is important to ensure that data is being read correctly, and that the initial JPA entities are being built correctly. The DataInitializerTests class has tests that address this area.
+The DataInitializer class handles the initial import of data into the system. It is important to ensure that data is being read correctly, and that the initial JPA entities are being built correctly. The DataInitializerTests class has tests that address this area.
 
 The InventoryCalculationServiceImpl class performs the daily calculation of each item. This is where the tricky logic lives, and also where the Groovy expressions defining custom logic get executed. The InventoryCalculationServiceImplTests class addresses each requirement with a unit test that progresses an item through as series of days, and validates that the item's values are correct on each given day. It also validates that items are correctly marked as discarded (setting of the DISCARDED_DATE) when their quality becomes zero.
 
@@ -63,6 +62,10 @@ It is configured to run on port 8080.
 The SQL produced by the system can be logged to the console by setting 'spring.jpa.show-sql' to true in the application.properties file.
 
 I have provided a Postman collection file in the root of the repository. It has a request to test each of the available REST APIs.
+
+The H2 Console is enabled in application.properties, and thus the database console can be accessed at 'http://localhost:8080/h2-console' when the server is running. To log in, ensure the login form looks as follows:
+
+![H2 Login](Doc/h2-login.png)
 
 ## The Problem
 Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city run by a friendly innkeeper named Allison. We also buy and sell only the finest goods. Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We need you to write a system that allows us to manage our inventory, so that we are able to service all of the adventurers who frequent our store (we don't want to run out of healing potions when an tiefling comes in unlike last time - poor Leeroy).
