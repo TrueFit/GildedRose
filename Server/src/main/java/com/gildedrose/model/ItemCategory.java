@@ -24,7 +24,7 @@ public class ItemCategory {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = 100)
 	private String name;
 
 	@OneToMany(mappedBy = "category", cascade = CascadeType.PERSIST)

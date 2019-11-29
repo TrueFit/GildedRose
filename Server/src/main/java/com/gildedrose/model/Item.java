@@ -1,5 +1,7 @@
 package com.gildedrose.model;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,6 +28,9 @@ public class Item {
 
 	@Column(nullable = false)
 	private int quality;
+
+	@Column(nullable = true)
+	private LocalDate discardedDate;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DEFINITION_ID", nullable = false, updatable = false)
@@ -55,6 +60,14 @@ public class Item {
 
 	public void setQuality(int quality) {
 		this.quality = quality;
+	}
+
+	public LocalDate getDiscardedDate() {
+		return discardedDate;
+	}
+
+	public void setDiscardedDate(LocalDate discardedDate) {
+		this.discardedDate = discardedDate;
 	}
 
 	public ItemDefinition getDefinition() {

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gildedrose.dto.DateDTO;
 import com.gildedrose.dto.EmptyDTO;
 import com.gildedrose.dto.ItemDTO;
 import com.gildedrose.model.Item;
@@ -23,24 +24,24 @@ public class InventoryController {
 
 	/* -- PUBLIC METHODS -- */
 
-	/**
-	 * Retrieves all items in the inventory, ordered by name and quality.
-	 */
-	@GetMapping("/items")
-	public List<ItemDTO> getItems() {
-		List<Item> items = inventoryService.getItems();
-
-		return items.stream().map(i -> convertToDTO(i)).collect(Collectors.toList());
+	@GetMapping("/inventory-date")
+	public DateDTO getInventoryDate() {
+		return new DateDTO(inventoryService.getInventoryDate());
 	}
 
-	/**
-	 * Progresses the inventory date one day, updating quality calculations for all
-	 * items in the inventory.
-	 */
+	@GetMapping("/available-items")
+	public List<ItemDTO> getAvailableItems() {
+		return inventoryService.getAvailableItems().stream().map(i -> convertToDTO(i)).collect(Collectors.toList());
+	}
+
+	@GetMapping("/discarded-items")
+	public List<ItemDTO> getDiscardedItems() {
+		return inventoryService.getDiscardedItems().stream().map(i -> convertToDTO(i)).collect(Collectors.toList());
+	}
+
 	@PostMapping("/progress-date")
 	public EmptyDTO progressDate() {
 		inventoryService.progressDate();
-
 		return new EmptyDTO();
 	}
 
@@ -53,6 +54,7 @@ public class InventoryController {
 		dto.setCategory(item.getDefinition().getCategory().getName());
 		dto.setSellIn(item.getSellIn());
 		dto.setQuality(item.getQuality());
+		dto.setDiscardedDate(item.getDiscardedDate());
 		return dto;
 	}
 }

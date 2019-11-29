@@ -1,5 +1,6 @@
 package com.gildedrose.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,7 +9,9 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gildedrose.Constants;
 import com.gildedrose.model.Item;
+import com.gildedrose.model.SystemDate;
 
 @Service
 @Transactional(readOnly = true)
@@ -17,21 +20,50 @@ class InventoryServiceImpl implements InventoryService {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	private static final String getItemsQuery =
+	private static final String getInventoryDateQuery =
+	// @formatter:off
+		"SELECT d " +
+		"FROM SystemDate d " +
+		"WHERE d.id = '" + Constants.InventoryDateId + "'"; 
+	// @formatter:on
+
+	private static final String getAvailableItemsQuery =
 	// @formatter:off
 		"SELECT i " +
 		"FROM Item i " +
 		"INNER JOIN FETCH i.definition d " +
 		"INNER JOIN FETCH d.category " +
-		"ORDER BY d.name ASC, i.quality ASC";
+		"WHERE i.discardedDate IS NULL " +
+		"ORDER BY d.name ASC, i.sellIn ASC, i.quality ASC";
+	// @formatter:on
+
+	private static final String getDiscardedItemsQuery =
+	// @formatter:off
+		"SELECT i " +
+		"FROM Item i " +
+		"INNER JOIN FETCH i.definition d " +
+		"INNER JOIN FETCH d.category " +
+		"WHERE i.discardedDate IS NOT NULL " +
+		"ORDER BY d.name ASC, i.sellIn ASC, i.quality ASC";
 	// @formatter:on
 
 	/* -- PUBLIC METHODS -- */
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<Item> getItems() {
-		return entityManager.createQuery(getItemsQuery).getResultList();
+	public LocalDate getInventoryDate() {
+		return ((SystemDate) entityManager.createQuery(getInventoryDateQuery).getSingleResult()).getDate();
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Item> getAvailableItems() {
+		return entityManager.createQuery(getAvailableItemsQuery).getResultList();
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Item> getDiscardedItems() {
+		return entityManager.createQuery(getDiscardedItemsQuery).getResultList();
 	}
 
 	@Override
@@ -39,9 +71,16 @@ class InventoryServiceImpl implements InventoryService {
 	public void progressDate() {
 
 		// Update the sell-in and quality for each item
-		for (Item item : getItems()) {
+		for (Item item : getAvailableItems()) {
 			updateItem(item);
 		}
+
+		// Increment the inventory date
+		SystemDate inventoryDate = (SystemDate) entityManager
+				.createQuery(String.format("SELECT d FROM SystemDate d WHERE d.id = '%s'", Constants.InventoryDateId))
+				.getSingleResult();
+
+		inventoryDate.setDate(inventoryDate.getDate().plusDays(1));
 	}
 
 	/* -- INTERNAL METHODS -- */

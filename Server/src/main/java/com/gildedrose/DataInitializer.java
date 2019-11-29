@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -24,6 +25,7 @@ import org.springframework.stereotype.Component;
 import com.gildedrose.model.Item;
 import com.gildedrose.model.ItemCategory;
 import com.gildedrose.model.ItemDefinition;
+import com.gildedrose.model.SystemDate;
 
 /**
  * Populates the database with initial data upon application startup.
@@ -46,11 +48,17 @@ public class DataInitializer implements ApplicationRunner {
 		Resource resource = resourceLoader.getResource("classpath:inventory.txt");
 		Collection<FileRecord> fileRecords = readInventoryFile(resource.getInputStream());
 
-		// Build the necessary entities. They can all be attached through categories
-		Collection<ItemCategory> categories = buildEntities(fileRecords);
+		// Build and persist entities
+		Entities entities = new Entities();
+		entities.categories = buildEntities(fileRecords);
+		entities.systemDates = new ArrayList<>();
 
-		// Persist the entities to the database
-		persistEntities(categories);
+		SystemDate inventoryDate = new SystemDate();
+		inventoryDate.setId(Constants.InventoryDateId);
+		inventoryDate.setDate(LocalDate.now());
+		entities.systemDates.add(inventoryDate);
+
+		persistEntities(entities);
 	}
 
 	/* -- INTERNAL METHODS -- */
@@ -115,13 +123,17 @@ public class DataInitializer implements ApplicationRunner {
 		return categoriesByName.values();
 	}
 
-	void persistEntities(Collection<ItemCategory> categories) {
+	void persistEntities(Entities entities) {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		entityManager.getTransaction().begin();
 
 		try {
-			for (ItemCategory category : categories) {
+			for (ItemCategory category : entities.categories) {
 				entityManager.persist(category);
+			}
+
+			for (SystemDate systemDate : entities.systemDates) {
+				entityManager.persist(systemDate);
 			}
 
 			entityManager.getTransaction().commit();
@@ -138,5 +150,10 @@ public class DataInitializer implements ApplicationRunner {
 		public String categoryName;
 		public int sellIn;
 		public int quality;
+	}
+
+	static class Entities {
+		public Collection<ItemCategory> categories;
+		public Collection<SystemDate> systemDates;
 	}
 }

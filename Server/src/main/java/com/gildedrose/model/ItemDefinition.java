@@ -27,7 +27,7 @@ public class ItemDefinition {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = 100)
 	private String name;
 
 	@ManyToOne(fetch = FetchType.LAZY)

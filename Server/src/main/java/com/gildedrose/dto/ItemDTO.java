@@ -1,5 +1,7 @@
 package com.gildedrose.dto;
 
+import java.time.LocalDate;
+
 /**
  * Represention of an inventory item, returned from a REST API.
  */
@@ -14,6 +16,8 @@ public class ItemDTO {
 	private int sellIn;
 
 	private int quality;
+
+	private LocalDate discardedDate;
 
 	/* -- PUBLIC METHODS -- */
 
@@ -55,5 +59,13 @@ public class ItemDTO {
 
 	public void setQuality(int quality) {
 		this.quality = quality;
+	}
+
+	public LocalDate getDiscardedDate() {
+		return discardedDate;
+	}
+
+	public void setDiscardedDate(LocalDate discardedDate) {
+		this.discardedDate = discardedDate;
 	}
 }
