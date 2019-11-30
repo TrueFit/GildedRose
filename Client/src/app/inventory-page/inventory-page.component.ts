@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {DateDTO, ItemDTO} from '../integration/inventory/inventory.dtos';
 
 @Component({
@@ -21,6 +21,8 @@ export class InventoryPageComponent implements OnInit {
   public items: ItemDTO[] = [];
 
   public busy = false;
+
+  public searchText = '';
 
   public get inAvailableMode(): boolean {
     return this.mode === 'available';
@@ -55,6 +57,7 @@ export class InventoryPageComponent implements OnInit {
     if (this.mode !== 'findItems') {
       this.mode = 'findItems';
       this.items = [];
+      this.searchText = '';
     }
   }
 
@@ -67,6 +70,22 @@ export class InventoryPageComponent implements OnInit {
       } else if (this.inDiscardedMode) {
         this.updateDiscarded();
       }
+    });
+  }
+
+  public findItems(): void {
+    this.busy = true;
+    this.items = [];
+
+    const options = {params: new HttpParams().set('name', this.searchText)};
+    this.http.get('/api/inventory/items', options).subscribe(result => {
+      this.items = result as ItemDTO[];
+
+      if (this.items.length > 0) {
+        this.searchText = '';
+      }
+
+      this.busy = false;
     });
   }
 

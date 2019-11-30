@@ -52,7 +52,7 @@ public class InventoryController {
 	}
 
 	@GetMapping("/items")
-	public List<ItemDTO> getItemsByName(@PathParam("name") String name) {
+	public List<ItemDTO> getItemsByName(@PathParam(value = "name") String name) {
 		return inventoryService.getItemsByName(name).stream().map(i -> convertToDTO(i)).collect(Collectors.toList());
 	}
 

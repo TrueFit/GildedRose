@@ -2,7 +2,18 @@
 
 ## The Solution
 
-The technologies I chose to implement this project were Java, Spring Boot, JUnit, H2 (database) and Angular. I am also using Groovy to perform quality calculations at runtime.
+The technologies I chose to implement this project were Java, Spring Boot, JUnit, H2 (database), Angular and Groovy.
+
+Technologies I excluded using (that I likely would have if this were a real project) were Spring Security, Mockito,
+MockMvc and Bootstrap (CSS).
+
+For the most part, I tried to implement this in a realistic way, however there are few places that I did things
+differently than I normally would, in order to save time. I'll just call them out here:
+* The styling of the UI was done pretty basic, and I didn't focus on responsiveness.
+* I generally would not use HttpClient within Angular components. My normal approach is to make all HTTP calls from
+within a service. The service provides common function like error handling and transformation of JSON data into more
+usable model objects.
+* I did not include Selenium, integration or MockMvc tests.
 
 The following sections explain the design (high-level) of my solution, how it is tested and how to run it.
 
@@ -20,52 +31,97 @@ To demonstrate this, the following is the ITEM_CATEGORIES table. The "Conjured",
 
 ![Categories Table](Doc/categories-table.png)
 
-My first pass at the logic was to simply hard-code it all (can be seen in commit history). I wrote all the unit tests against that. I then swapped out parts of the logic for Groovy expressions, ensuring that the tests still passed. There are pros and cons to the solution (Groovy) that I chose, but ultimately I felt it was the better of the two. Here are the pros and cons that I see:
+My first pass at the logic was to simply hard-code it all (can be seen in commit history). I wrote all the unit tests
+against that. I then swapped out parts of the logic for Groovy expressions, ensuring that the tests still passed. There
+are pros and cons to the solution (Groovy) that I chose, but ultimately I felt it was the better of the two. Here are
+the pros and cons that I see:
 
 Pros:
-  * Logic is attached to item definition and item category records. Items and categories can be added, renamed or deleted and the logic follows.
+  * Logic is attached to item definition and item category records. Items and categories can be added, renamed or
+  deleted and the logic follows.
   * Being isolated as it is, logic for one item cannot accidentally affect the calculation for other items.
   * Logic could be made available for editing by an end user (may or may not be a good idea).
 
 Cons:
   * May be a bit more confusing for a new developer to understand.
-  * Unit tests of the logic need to be kept in sync with changes to the logic. Ideally a developer would update the unit tests whenever logic changes are made.
+  * Unit tests of the logic need to be kept in sync with changes to the logic. Ideally a developer would update the
+  unit tests whenever logic changes are made.
 
-To track the current date of the inventory, I have added the SYSTEM_DATES table. It has a single record which holds the date for which item values were last calculated.
+To track the current date of the inventory, I have added the SYSTEM_DATES table. It has a single record which holds the
+date for which item values were last calculated.
 
-Loading of data into the schema is done at application startup by the com.gildedrose.DataInitializer class. It reads the inventory.txt file, builds the JPA entities and persists them to the database. It is also responsible for populating the values of the IGNORE_SELL_IN and QUALITY_CHANGE_EXPRESSION columns on the entities.
+Loading of data into the schema is done at application startup by the com.gildedrose.DataInitializer class. It reads the
+inventory.txt file, builds the JPA entities and persists them to the database. It is also responsible for populating the
+values of the IGNORE_SELL_IN and QUALITY_CHANGE_EXPRESSION columns on the entities.
 
 Regarding class types used in the Java layer, I kept it reasonably slim. Flow of control for a request is as follows:
 	
 	RestController ---> ServiceImpl ---> JPA EntityManager ---> (database)
 
-In larger, more complex system I would often include a Repository layer, along with Converter classes dedicated to converting entities to DTO (data transfer objects). However, all that felt like overkill for this solution as the service layer is able to work with the EntityManager, and the code is straight-forward.
+In larger, more complex systems I would often include a Repository layer, along with Converter classes dedicated to
+converting entities to DTO (data transfer objects). However, all that felt like overkill for this solution as the
+service layer is able to work with the EntityManager, and the code is straight-forward.
 
 ### Testing
-Ensuring that the logic needed to compute sellIn and quality values is correct (and stays that way after future enhancements) is very important. For this reason I chose to focus my testing efforts on this area. There are two areas of the code that need to be rigorously tested in order to achieve this goal:
+Ensuring that the logic needed to compute sellIn and quality values is correct (and stays that way after future
+enhancements) is very important. For this reason I chose to focus my testing efforts on this area. There are two areas
+of the code that need to be rigorously tested in order to achieve this goal:
 
 * com.gildedrose.DataInitializer
 * com.gildedrose.service.InventoryCalculationServiceImpl
 
-The DataInitializer class handles the initial import of data into the system. It is important to ensure that data is being read correctly, and that the initial JPA entities are being built correctly. The DataInitializerTests class has tests that address this area.
+The DataInitializer class handles the initial import of data into the system. It is important to ensure that data is
+being read correctly, and that the initial JPA entities are being built correctly. The DataInitializerTests class has
+tests that address this area.
 
-The InventoryCalculationServiceImpl class performs the daily calculation of each item. This is where the tricky logic lives, and also where the Groovy expressions defining custom logic get executed. The InventoryCalculationServiceImplTests class addresses each requirement with a unit test that progresses an item through as series of days, and validates that the item's values are correct on each given day. It also validates that items are correctly marked as discarded (setting of the DISCARDED_DATE) when their quality becomes zero.
+The InventoryCalculationServiceImpl class performs the daily calculation of each item. This is where the calculation
+logic lives, and also where the Groovy expressions defining custom logic get executed. The
+InventoryCalculationServiceImplTests class addresses each requirement with a unit test that progresses an item through
+as series of days, and validates that the item's values are correct on each given day. It also validates that items are
+correctly marked as discarded (setting of the DISCARDED_DATE) when their quality becomes zero.
 
-There are other types of tests which I would generally include in a system such as this, but for this project chose not to implement (due to time)
-* Testing the JPA queries of the service layer against the H2 database
-* Spring MockMvc testing at the REST API layer to ensure the controller and service are behaving correctly
-* Selenium tests against the UI to ensure the system works correctly end to end
+The following screenshot shows all the unit tests which were written:
+
+![Unit tests](Doc/unit-tests.png)
 
 ### Running the Application
+
+**Server**
+
 The server project is built with Maven. I used Spring Tool Suite 4 and JDK 1.8 to develop and run the server project.
-It is configured to run on port 8080.
-The SQL produced by the system can be logged to the console by setting 'spring.jpa.show-sql' to true in the application.properties file.
+It is configured to run on port 8080 (in application.properties).
 
-I have provided a Postman collection file in the root of the repository. It has a request to test each of the available REST APIs.
+To keep things simple, I used the H2 in-memory database. No database setup is necessary.
 
-The H2 Console is enabled in application.properties, and thus the database console can be accessed at 'http://localhost:8080/h2-console' when the server is running. To log in, ensure the login form looks as follows:
+The H2 Console is enabled in application.properties, and thus the database console can be accessed at
+'http://localhost:8080/h2-console' when the server is running. To log in, ensure the login form looks as follows:
 
 ![H2 Login](Doc/h2-login.png)
+
+The SQL produced by the system can be logged to the console by setting 'spring.jpa.show-sql' to true in the
+application.properties file.
+
+**Postman**
+
+I have provided a Postman collection file in the root of the repository. It has a request to test each of the available
+REST APIs.
+
+**Client**
+
+The client is a standard Angular application. Standard instructions are in the Client/README.md file.
+
+From within the client folder, run:
+* npm install
+* ng serve
+
+The url is http://localhost:4200
+
+The Inventory page provides function to:
+* View available and discarded items
+* Progress the inventory date
+* Find an item by name
+
+![Client](Doc/client.png)
 
 ## The Problem
 Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city run by a friendly innkeeper named Allison. We also buy and sell only the finest goods. Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We need you to write a system that allows us to manage our inventory, so that we are able to service all of the adventurers who frequent our store (we don't want to run out of healing potions when an tiefling comes in unlike last time - poor Leeroy).

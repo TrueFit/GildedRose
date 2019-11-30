@@ -10,6 +10,7 @@ import {InventoryPageComponent} from './inventory-page/inventory-page.component'
 import {ReportsPageComponent} from './reports-page/reports-page.component';
 import {NotFoundPageComponent} from './not-found-page/not-found-page.component';
 import {HttpClientModule} from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {HttpClientModule} from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
