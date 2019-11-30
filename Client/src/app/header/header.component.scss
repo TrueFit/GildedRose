@@ -1,0 +1,15 @@
+.logo {
+  height: 60px;
+}
+
+.nav {
+  position: relative;
+  background-color: rosybrown;
+  overflow: auto;
+
+  .nav-item {
+    float: left;
+    padding: 4px 10px;
+    font-weight: bold;
+  }
+}
