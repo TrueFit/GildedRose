@@ -10,6 +10,8 @@ MockMvc and Bootstrap (CSS).
 
 For the most part, I tried to implement this in a realistic way, however there are few places that I did things
 differently than I normally would, in order to save time. I'll just call them out here:
+* The Quartz configuration uses an in-memory store. Honestly this is probably fine given the nature of the inventory
+update job, but a production system should use a JDBC store.
 * The styling of the UI was done pretty basic, and I didn't focus on responsiveness.
 * I generally would not use HttpClient within Angular components. My normal approach is to make all HTTP calls from
 within a service. The service provides common function like error handling and transformation of JSON data into more
@@ -124,7 +126,7 @@ REST APIs.
 
 The client is a standard Angular application. Standard instructions are in the Client/README.md file.
 
-From within the client folder, run:
+From within the Client folder, run:
 * npm install
 * ng serve
 
