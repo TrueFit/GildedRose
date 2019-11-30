@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "app.quartz.enable",
+    "type": "java.lang.String",
+    "description": "A description for 'app.quartz.enable'"
+  },
+  {
+    "name": "app.quartz.interval",
+    "type": "java.lang.String",
+    "description": "A description for 'app.quartz.interval'"
+  }
+]}

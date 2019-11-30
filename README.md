@@ -2,7 +2,8 @@
 
 ## The Solution
 
-The technologies I chose to implement this project were Java, Spring Boot, JUnit, H2 (database), Angular and Groovy.
+The technologies I chose to implement this project were Java, Spring Boot, JUnit, H2 (database), Angular, Quartz and
+Groovy.
 
 Technologies I excluded using (that I likely would have if this were a real project) were Spring Security, Mockito,
 MockMvc and Bootstrap (CSS).
@@ -62,6 +63,11 @@ In larger, more complex systems I would often include a Repository layer, along 
 converting entities to DTO (data transfer objects). However, all that felt like overkill for this solution as the
 service layer is able to work with the EntityManager, and the code is straight-forward.
 
+Quartz was used in order to run the inventory calculations on a schedule. I have the job set to run every 15 seconds
+(for development), but it only does anything if the inventory date (in SYSTEM_DATES) is in the past. When it runs, it
+will calculate inventory values up to the current date by repeatedly running the service that progresses the inventory
+by one day.
+
 ### Testing
 Ensuring that the logic needed to compute sellIn and quality values is correct (and stays that way after future
 enhancements) is very important. For this reason I chose to focus my testing efforts on this area. There are two areas
@@ -94,12 +100,20 @@ It is configured to run on port 8080 (in application.properties).
 To keep things simple, I used the H2 in-memory database. No database setup is necessary.
 
 The H2 Console is enabled in application.properties, and thus the database console can be accessed at
-'http://localhost:8080/h2-console' when the server is running. To log in, ensure the login form looks as follows:
+http://localhost:8080/h2-console when the server is running. To log in, ensure the login form looks as follows:
 
 ![H2 Login](Doc/h2-login.png)
 
 The SQL produced by the system can be logged to the console by setting 'spring.jpa.show-sql' to true in the
 application.properties file.
+
+**Scheduled Job**
+
+Output from the scheduled Quartz job will appear in the console every 15 seconds. By default it will not update any
+values since the inventory date is current. To see the job execute, use the H2 Console to set the inventory date back
+several days.
+
+    update system_dates set date = '2019-11-28';
 
 **Postman**
 
