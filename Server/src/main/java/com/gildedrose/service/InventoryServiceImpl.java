@@ -44,7 +44,7 @@ class InventoryServiceImpl implements InventoryService {
 		"INNER JOIN FETCH i.definition d " +
 		"INNER JOIN FETCH d.category " +
 		"WHERE i.discardedDate IS NOT NULL " +
-		"ORDER BY d.name ASC, i.sellIn ASC, i.quality ASC";
+		"ORDER BY i.discardedDate DESC, d.name ASC";
 	// @formatter:on
 
 	private static final String getItemQuery =

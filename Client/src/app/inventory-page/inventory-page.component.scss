@@ -1,0 +1,57 @@
+.modes {
+  margin-bottom: 12px;
+  text-align: center;
+
+  & > div {
+    display: inline-block;
+    margin: 4px 8px;
+    padding: 8px 8px 6px 8px;
+    background-color: #eadcee;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &.active {
+      background-color: #ca98df;
+      cursor: default;
+    }
+  }
+}
+
+.inventory-date {
+  margin-bottom: 12px;
+  text-align: center;
+
+  .progress-button {
+    margin-left: 20px;
+    vertical-align: bottom;
+  }
+}
+
+table {
+  margin: 0 auto;
+}
+
+tbody {
+  tr {
+    &:nth-child(odd) {
+      background-color: #f8f2f8;
+    }
+  }
+}
+
+th, td {
+  text-align: left;
+  padding: 4px 8px;
+
+  &.sell-in, &.quality, &.discarded-date {
+    text-align: right;
+  }
+}
+
+.no-items-message {
+  margin-top: 60px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.25em;
+}
+

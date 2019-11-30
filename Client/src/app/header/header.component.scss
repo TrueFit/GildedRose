@@ -1,15 +1,22 @@
 .logo {
-  height: 60px;
+  height: 100px;
+  background-color: #fef7f9;
 }
 
 .nav {
   position: relative;
-  background-color: rosybrown;
+  background-color: #2c98bc;
   overflow: auto;
 
   .nav-item {
     float: left;
     padding: 4px 10px;
     font-weight: bold;
+    color: white;
+    cursor: pointer;
+
+    &:hover, &.active {
+      background-color: #0577a0;
+    }
   }
 }

@@ -1,1 +1,36 @@
-<p>inventory-page works!</p>
+<div class="modes">
+  <div [class.active]="inAvailableMode" (click)="showAvailable()">Available Items</div>
+  <div [class.active]="inDiscardedMode" (click)="showDiscarded()">Discarded Items</div>
+  <div [class.active]="inFindItemsMode" (click)="showFindItems()">Find Items</div>
+</div>
+
+<div *ngIf="!inFindItemsMode" class="inventory-date">
+  <span>Inventory Date: {{this.inventoryDate}}</span>
+  <button class="progress-button" (click)="progressInventoryDate()">Progress Day</button>
+</div>
+
+<table *ngIf="items.length > 0" cellpadding="0" cellspacing="0" border="0">
+  <thead>
+  <tr>
+    <th>Item</th>
+    <th>Category</th>
+    <th class="sell-in">Sell In (Days)</th>
+    <th *ngIf="!inDiscardedMode" class="quality">Quality</th>
+    <th *ngIf="!inAvailableMode" class="discarded-date">Discarded Date</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of items">
+    <td>{{item.name}}</td>
+    <td>{{item.category}}</td>
+    <td class="sell-in">{{item.sellIn}}</td>
+    <td *ngIf="!inDiscardedMode" class="quality">{{item.quality}}</td>
+    <td *ngIf="!inAvailableMode" class="discarded-date">{{item.discardedDate}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<div *ngIf="items.length === 0 && !busy" class="no-items-message">
+  There are no items to show
+</div>
+
