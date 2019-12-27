@@ -47,3 +47,64 @@ Here are a couple of thoughts about the domain that could influence your respons
 
 * The world is a magical place - you never know when the next "special requirement" might pop up - how can you make this painless?
 * Keep in mind that accurate inventory is a must for the shop, how might you ensure that the future programmer who takes over the code while you are off adventuring doesn't mistakenly mess things up?
+
+
+Compiling
+---------
+The project was built in Visual Studio 2019 Community. The target framework is `.NET Core 3.1`.
+
+1. Open `GildedRose.sln`.
+2. Click "Start" in Visual Studio or press (F6).
+3. The code should build without errors.
+
+Projects
+--------
+*GildedRose* - This is a console application of the main app.
+
+*GildedRoseInventory* - This is a DLL that holds the logic of the inventory system.
+
+Running from Visual Studio
+--------------------------
+
+1. Open `GildedRose.sln` in Visual Studio 2019.
+2. Press F5 to run in debug mode.
+3. You should see output like the following:
+```bash
+_____ _ _     _          _  ______
+|  __ (_) |   | |        | | | ___ \
+| |  \/_| | __| | ___  __| | | |_/ /___  ___  ___
+| | __| | |/ _` |/ _ \/ _` | |    // _ \/ __|/ _ \
+| |_\ \ | | (_| |  __/ (_| | | |\ \ (_) \__ \  __/
+ \____/_|_|\__,_|\___|\__,_| \_| \_\___/|___/\___|
+
+Inventory System
+[..\..\..\..\..\..\inventory.txt]
+
+1. List entire inventory
+2. Details of a single item
+3. Progress to the next day
+4. List of trash to throw away
+5. Exit
+
+Enter number (1-5):
+```
+4. Type a number, from 1 to 5, followed by hitting the enter key to go into the different options of the application.
+
+Running from the Command Prompt
+-------------------------------
+1. Make sure you have built the project.
+2. Open a command prompt and change directory into
+`GildedRose\Source\GildedRose\GildedRose\bin\Debug\netcoreapp3.1`
+3. Run the following to start the application using the inventory.txt file in the repo.
+```bash
+dotnet GildedRose.dll "..\..\..\..\..\..\inventory.txt"
+```
+4. The application loads the data in the inventory.txt file, but doesn't save back to the file. Exiting the application and restarting will start from the beginning.
+
+Assumptions
+-----------
+
+I have made the following assumptions:
+
+* I assume that the Quantity of Aged Brie should stay at 50 when the Sell In is 0. This means that it is never trash. Maybe this is something that should change later.
+* I assume that the Sell In will continue to count down when the Quality is 0. Not sure if that is what we want or not.
