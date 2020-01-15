@@ -1,0 +1,19 @@
+﻿img.sign {
+  display: none; }
+
+.add-form {
+  border: 1px solid black;
+  padding: 1rem;
+  margin-bottom: 1rem; }
+  .add-form button {
+    margin-top: 2rem; }
+
+.command-bar {
+  display: flex;
+  margin-bottom: 1rem; }
+
+@media screen and (min-width: 1550px) {
+  img.sign {
+    display: block;
+    position: absolute;
+    right: 2rem; } }

@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/twitter-bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/gilded_rose.min.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">Gilded Rose Inventory Management</a>
+        </nav>
+    </header>
+    <img class="sign" src="~/img/sign.png" alt="Gilded Rose Est. 565" />
+    <div class="container mt-4">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

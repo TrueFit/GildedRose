@@ -1,0 +1,7 @@
+*.suo
+*.user
+.vs/
+bin/
+node_modules/
+obj/
+src/GildedRose.Web/inventory.json

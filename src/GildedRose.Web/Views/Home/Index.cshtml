@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Gilded Rose Inventory Management";
+}
+<div id="root"></div>
+@section Scripts {
+    <partial name="_React" />
+    <script src="~/build/inventory.js"></script>
+    <script type="text/javascript">
+        window.GILDED_ROSE.run(document.getElementById("root"));
+    </script>
+}

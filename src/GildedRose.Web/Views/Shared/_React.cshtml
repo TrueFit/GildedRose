@@ -1,0 +1,16 @@
+﻿<environment include="Development">
+    <script src="~/lib/react/umd/react.development.js"></script>
+    <script src="~/lib/react-dom/umd/react-dom.development.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.6/umd/react.production.min.js"
+            integrity="sha256-3vo65ZXn5pfsCfGM5H55X+SmwJHBlyNHPwRmWAPgJnM="
+            crossorigin="anonymous"
+            asp-fallback-src="~/lib/react/umd/react.production.min.js"
+            asp-fallback-test="window.React"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.6/umd/react-dom.production.min.js"
+            integrity="sha256-qVsF1ftL3vUq8RFOLwPnKimXOLo72xguDliIxeffHRc="
+            crossorigin="anonymous"
+            asp-fallback-src="~/lib/react-dom/umd/react-dom.production.min.js"
+            asp-fallback-test="window.ReactDOM"></script>
+</environment>
