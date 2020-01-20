@@ -1,6 +1,7 @@
-
-.vscode/settings.json
+.vscode
 
 grose-api/*.pyc
 grose-api/__pycache__
 grose-api/venv
+
+grose-ui/node_modules

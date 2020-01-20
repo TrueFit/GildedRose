@@ -20,7 +20,10 @@ def item_by_name(name):
 
 @app.route('/nextday', methods=['POST'])
 def next_day():
-    return 'next day'
+    result = models.set_degrade_items()
+    if len(result):
+        return {'results': result}, 200
+    return 'Bad Request', 400    
 
 if __name__ == "__main__":
     app.run()

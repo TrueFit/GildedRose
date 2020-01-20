@@ -1,0 +1,29 @@
+.App {
+  text-align: center;
+}
+
+.App .Controls button {
+  display: inline-block;
+  margin: 4px;
+}
+
+.InventoryView {
+  display: table;
+  margin: 0 auto;
+}
+
+.InventoryView .Heading {
+  display: table-header-group;
+}
+
+.InventoryView .Heading div,
+.InventoryItem div {
+  text-align: left;
+  display: table-cell;
+  padding: 4px;
+}
+
+
+.InventoryItem {
+  display: table-row;
+}
