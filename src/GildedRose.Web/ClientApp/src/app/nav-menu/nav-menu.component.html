@@ -1,0 +1,29 @@
+<header>
+  <div class="container d-flex">
+    <div><a class="brand" [routerLink]="['/']"><img src="/assets/images/logo.png" alt="Gilded Rose" class="logo" /></a></div>
+    <div class="ml-auto">
+      <ul class="nav nav-pills">
+        <li class="nav-item"
+            [routerLinkActive]="['link-active']"
+            [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link"
+             [ngClass]="(activeTab == 1 ? 'active' : '')"
+             [routerLink]="['/']"
+             (click)="setActive(1)">Home</a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['link-active']">
+          <a class="nav-link"
+             [ngClass]="(activeTab == 2 ? 'active' : '')"
+             [routerLink]="['/inventory']"
+             (click)="setActive(2)">Inventory</a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['link-active']">
+          <a class="nav-link"
+             [ngClass]="(activeTab == 3 ? 'active' : '')"
+             [routerLink]="['/inventory-history']"
+             (click)="setActive(3)">Inventory History</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>

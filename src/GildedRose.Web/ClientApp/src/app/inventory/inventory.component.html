@@ -1,0 +1,47 @@
+<div class="d-flex">
+  <div><h1 id="tableLabel">Inventory</h1></div>
+  <div class="ml-auto">
+    <button class="btn btn-outline-dark" type="button" (click)="performAging()">Perform Aging</button>
+  </div>
+</div>
+<div class="d-flex">
+  <div></div>
+  <div class="ml-auto">
+    <div class="btn-group" role="group" aria-label="Filter Selection">
+      <span class="label">Show:</span>
+      <button type="button"
+              class="btn btn-group-toggle"
+              autofocus="autofocus"
+              (click)="setShowTrashOnly(false)">All Items</button>
+      <button type="button"
+              class="btn btn-group-toggle"
+              (click)="setShowTrashOnly(true)">Trash Only</button>
+    </div>
+  </div>
+</div>
+
+<p *ngIf="!inventory"><em>Loading...</em></p>
+
+<div class="alert alert-success" *ngIf="showNofication">
+  <button type="button" class="close" data-dismiss="alert" (click)="hideNotification()">&times;</button>
+  <strong>Aging completed successfully!</strong>
+</div>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="inventory">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Sell In</th>
+      <th>Quality</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of inventory">
+      <td>{{item.name}}</td>
+      <td>{{item.category}}</td>
+      <td>{{item.sellIn }}</td>
+      <td>{{item.quality}}</td>
+    </tr>
+  </tbody>
+</table>

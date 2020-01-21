@@ -1,0 +1,28 @@
+<h1 id="tableLabel">Inventory History</h1>
+
+<p *ngIf="!inventoryHistory"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="inventoryHistory">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Sell In</th>
+      <th>Quality</th>
+      <th>Inventory Added</th>
+      <th>Last Modified</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of inventoryHistory">
+      <td>{{item.name}}</td>
+      <td>{{item.category}}</td>
+      <td>{{item.sellIn }}</td>
+      <td>{{item.quality}}</td>
+      <td>{{item.inventoryAddedDate | date:'short'}}</td>
+      <td>{{item.lastModifiedDate | date:'short'}}</td>
+      <td>{{item.action}}</td>
+    </tr>
+  </tbody>
+</table>

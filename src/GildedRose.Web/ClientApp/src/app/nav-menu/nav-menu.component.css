@@ -1,0 +1,31 @@
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+.logo {
+  height: 120px;
+  width: 276px;
+}
+
+.nav.nav-pills {
+  margin: 2px 0 2px 0;
+}
+
+.nav-pills .nav-link.active {
+  background-color: #deb887;
+}
