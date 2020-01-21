@@ -1,3 +1,6 @@
+import redis
+store = redis.Redis(host='redis', port=6379)
+
 # TODO until we get some basic hookup operations,
 # this will be a mock data adapter, a python dictionaries
 # Impl should be similar to a k/v store like redis

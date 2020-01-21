@@ -1,5 +1,26 @@
 # Gilded Rose
 
+## Installation and Deployment
+
+Install Docker (enterprise systems) or Docker Toolbox.
+
+Then, use `docker-compose` to build and raise the containers:
+
+`$ docker-compose up -d --build`
+
+## Usage
+
+A user interface is exposed at your docker IP (default 192.168.99.100).
+
+API is exposed on port 5001.
+Datastore is exposed on port 6379.
+
+## Teardown
+
+This will destroy all containers.
+
+`$ docker-compose down`
+
 ## The Problem
 Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city run by a friendly innkeeper named Allison. We also buy and sell only the finest goods. Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We need you to write a system that allows us to manage our inventory, so that we are able to service all of the adventurers who frequent our store (we don't want to run out of healing potions when an tiefling comes in unlike last time - poor Leeroy).
 

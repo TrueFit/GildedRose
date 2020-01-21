@@ -1,0 +1,25 @@
+version: '3'
+services:
+    grose-ui:
+        container_name: grose-ui
+        build:
+            context: ./grose-ui
+            dockerfile: Dockerfile
+        volumes:
+            - '.:/build'
+            - '/build/node_modules'
+        ports:
+            - '80:80'
+        environment:
+            - API_URL=0.0.0.0:5001
+            - NODE_ENV=development
+    grose-api:
+        build: './grose-api'
+        ports:
+            - "5001:5000"
+        volumes:
+            - .:/build
+        environment:
+            FLASK_ENV: development   
+    redis:
+        image: "redis:alpine"
