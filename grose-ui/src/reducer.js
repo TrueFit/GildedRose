@@ -1,26 +1,22 @@
 import {
-    GET_ALL_ITEMS,
-    GET_TRASH,
-    ADVANCE_DAY,
+    UI_RECEIVE_INVENTORY,
+    UI_RECEIVE_SEARCH,
 } from './actions';
-import {
-    getAllItems,
-    getTrash,
-    postAdvanceDay,
-} from './api';
+
 
 export const initialState = { inventory: [] }
 
 export const appReducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_ALL_ITEMS:
-            return await getAllItems();
-        case GET_TRASH:
-            return await getTrash();
-        case ADVANCE_DAY:
-            let advance_day_resp = await postAdvanceDay();
+        case UI_RECEIVE_INVENTORY:
             return {
-                'inventory': advance_day_resp.results,
+                ...state,
+                inventory: action.inventory,
+            };
+        case UI_RECEIVE_SEARCH:
+            return {
+                ...state,
+                inventory: action.results,
             };
         default:
             return state
