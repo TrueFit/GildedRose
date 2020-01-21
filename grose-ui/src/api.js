@@ -1,33 +1,18 @@
-// TODO replace this mock data with fetch hookups
+import wretch from 'wretch';
 
-export const getAllItems = () => {
-    return {'inventory': [
-        {
-          'name': 'hello',
-          'category': 'howareyou',
-          'sellIn': 0,
-          'quality': 0,
-        },
-    ]};
-}
-export const getTrash = () => {
-    return {'inventory': [
-        {
-          'name': 'trash',
-          'category': 'trash',
-          'sellIn': 0,
-          'quality': 0,
-        },
-    ]};
+const API_URL = process.env.REACT_APP_API_URL;
+
+export const getAllItems = async () => {
+    const url = `${API_URL}/items`;
+    return await wretch(url).get().json();
 }
 
-export const postAdvanceDay = () => {
-    return {'results': [
-        {
-          'name': 'hello',
-          'category': 'howareyou',
-          'sellIn': 0,
-          'quality': 0,
-        },
-    ]};
+export const getTrash = async () => {
+    const url = `${API_URL}/items?trash`;
+    return await wretch(url).get().json();
+}
+
+export const postAdvanceDay = async () => {
+    const url = `${API_URL}/nextday`;
+    return await wretch(url).post(null).json();
 }

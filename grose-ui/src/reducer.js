@@ -9,22 +9,18 @@ import {
     postAdvanceDay,
 } from './api';
 
-export const initialState = { inventory: [] };
-
+export const initialState = { inventory: [] }
 
 export const appReducer = (state = initialState, action) => {
-    let resp;
     switch (action.type) {
         case GET_ALL_ITEMS:
-            resp = getAllItems();
-            return resp;
+            return await getAllItems();
         case GET_TRASH:
-            resp = getTrash();
-            return resp;
+            return await getTrash();
         case ADVANCE_DAY:
-            resp = postAdvanceDay();
+            let advance_day_resp = await postAdvanceDay();
             return {
-                'inventory': resp.results,
+                'inventory': advance_day_resp.results,
             };
         default:
             return state

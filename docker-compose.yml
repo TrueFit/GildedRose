@@ -11,7 +11,7 @@ services:
         ports:
             - '80:80'
         environment:
-            - API_URL=0.0.0.0:5001
+            - REACT_APP_API_URL=http://0.0.0.0:5001
             - NODE_ENV=development
     grose-api:
         build: './grose-api'
