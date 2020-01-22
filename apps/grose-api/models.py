@@ -1,4 +1,4 @@
-from . import datastore
+import datastore
 
 def get_items():
     return [val for key, val in datastore.get_keys()]

@@ -1,7 +1,7 @@
 .vscode
 
-grose-api/*.pyc
-grose-api/__pycache__
-grose-api/venv
+apps/grose-api/*.pyc
+apps/grose-api/__pycache__
+apps/grose-api/venv
 
-grose-ui/node_modules
+apps/grose-ui/node_modules

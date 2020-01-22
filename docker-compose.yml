@@ -1,25 +1,50 @@
-version: '3'
+version: '3.4'
 services:
-    grose-ui:
-        container_name: grose-ui
-        build:
-            context: ./grose-ui
-            dockerfile: Dockerfile
-        volumes:
-            - '.:/build'
-            - '/build/node_modules'
-        ports:
-            - '80:80'
-        environment:
-            - REACT_APP_API_URL=http://0.0.0.0:5001
-            - NODE_ENV=development
-    grose-api:
-        build: './grose-api'
-        ports:
-            - "5001:5000"
-        volumes:
-            - .:/build
-        environment:
-            FLASK_ENV: development   
-    redis:
-        image: "redis:alpine"
+  grose-ui:
+    container_name: grose-ui
+    build:
+      context: ./apps/grose-ui
+      dockerfile: Dockerfile
+      args:
+        - NODE_ENV=development
+        - REACT_APP_API_URL=http://192.168.99.100:5000
+    volumes:
+      - './apps/grose-ui:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - 3000:3000
+    depends_on:
+      - grose-api
+    links:
+      - grose-api
+  grose-api:
+    container_name: grose-api
+    build:
+      context: ./apps/grose-api
+      dockerfile: Dockerfile
+    volumes:
+      - ./apps/grose-api:/usr/src/app
+    ports:
+      - 5000:5000
+    environment: 
+      - FLASK_DEBUG=1
+    expose:
+      - 5000
+  nginx:
+    container_name: nginx
+    build:
+      context: ./apps/nginx
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - grose-ui
+      - grose-api
+      - redis
+  redis:
+    image: "redis:alpine"
+    ports:
+      - 6379:6379
+    expose:
+      - 6379
