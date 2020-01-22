@@ -1,5 +1,4 @@
 import redis
-store = redis.Redis(host='redis', port=6379)
 
 # TODO until we get some basic hookup operations,
 # this will be a mock data adapter, a python dictionaries
@@ -12,7 +11,7 @@ def get_keys():
 
 def get_key(key):
     # TODO a k/v store should swallow this logic
-    return [i for i in inventory if i[0] == key]
+    return [i for i in inventory if i.get('name') == key]
 
 def set_key(key, newVal):
     # TODO what if there are multiple items of the same name?
@@ -21,3 +20,18 @@ def set_key(key, newVal):
     inventory.update({key: newVal})
     return newVal
 
+# reading in the CSV at startup
+with open('data/inventory.txt') as rosefile:
+    rosereader = rosefile.readlines()
+    for row in rosereader:
+        item_props = row.split(',')
+        try:
+            item = {
+                'name': item_props[0],
+                'category': item_props[1],
+                'sellIn': int(item_props[2]),
+                'quality': int(item_props[3]),
+            }
+            set_key(item['name'], item)
+        except:
+            print("Row parsing failed, discarding...")

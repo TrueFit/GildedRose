@@ -1,16 +1,17 @@
 from flask import Flask, request
+from flask_cors import CORS
 
 import models
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/items', methods=['GET'])
 def items():
-    # inventory = models.get_trash() if ('trash' in request.args) else models.get_items()
-    # if len(inventory):
-    #     return {'inventory': inventory}, 200
-    # return '', 204
-    return {'inventory': []}, 200
+    inventory = models.get_trash() if ('trash' in request.args) else models.get_items()
+    if len(inventory):
+        return {'inventory': inventory}, 200
+    return '', 204
 
 @app.route('/item/<name>', methods=['GET'])
 def item_by_name(name):

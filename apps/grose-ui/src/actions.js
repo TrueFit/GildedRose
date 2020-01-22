@@ -20,6 +20,7 @@ export const uiReady = (data) => {
 }
 
 export const uiInventorySuccess = (data) => {
+    console.log(data);
     return (dispatch) => dispatch({
         type: UI_RECEIVE_INVENTORY,
         data,
@@ -45,15 +46,13 @@ export const uiError = (err) => {
     });
 }
 
-const errorCatch = (err) => uiError(err);
-
 export const getAllItems = () => {
     return async (dispatch) => {
         dispatch(uiLoading());
         const url = `${API_URL}/items`;
         return await wretch(url).get()
-            .json(json => uiInventorySuccess(json))
-            .catch(errorCatch);
+            .json(json => dispatch(uiInventorySuccess(json)))
+            .catch(err => dispatch(uiError(err)));
     }
 }
 
@@ -62,8 +61,8 @@ export const getTrash = () => {
         dispatch(uiLoading());
         const url = `${API_URL}/items?trash`;
         return await wretch(url).get()
-            .json(json => uiInventorySuccess(json))
-            .catch(errorCatch);
+            .json(json => dispatch(uiInventorySuccess(json)))
+            .catch(err => dispatch(uiError(err)));
     }
 }
 
@@ -72,7 +71,7 @@ export const advanceDay = () => {
         dispatch(uiLoading());
         const url = `${API_URL}/nextday`;
         return await wretch(url).post(null)
-            .json(json => uiSearchSuccess(json))
-            .catch(errorCatch);
+            .json(json => dispatch(uiSearchSuccess(json)))
+            .catch(err => dispatch(uiError(err)));
     };
 }

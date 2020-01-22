@@ -1,3 +1,4 @@
 FROM nginx:1.15.0-alpine
 RUN rm /etc/nginx/conf.d/default.conf
+COPY /cors-support /etc/nginx
 COPY /nginx.conf /etc/nginx/conf.d

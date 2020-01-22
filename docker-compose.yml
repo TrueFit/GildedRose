@@ -30,6 +30,8 @@ services:
       - FLASK_DEBUG=1
     expose:
       - 5000
+    # depends_on:
+    #   - redis
   nginx:
     container_name: nginx
     build:
@@ -41,10 +43,13 @@ services:
     depends_on:
       - grose-ui
       - grose-api
-      - redis
-  redis:
-    image: "redis:alpine"
-    ports:
-      - 6379:6379
-    expose:
-      - 6379
+      # - redis
+  # # due to time constraints I'm just going to use python
+  # # memory rather than hook this up, so I can have time
+  # # for a little more UI work
+  # redis:
+  #   image: redis
+  #   ports:
+  #     - 6379:6379
+  #  expose:
+  #    - 6379

@@ -4,8 +4,6 @@ def get_items():
     return [val for key, val in datastore.get_keys()]
 
 def get_item_by_name(name):
-    # TODO: with a k/v store this can probably hit metal
-    # directly through the data adapter
     return datastore.get_key(name)
 
 def get_trash():
