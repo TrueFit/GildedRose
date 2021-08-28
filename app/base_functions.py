@@ -3,6 +3,8 @@ Base Function - This module contains the base functionality
 for the inventory application.
 """
 
+from inventory_item import InventoryItem
+
 
 def main_menu_text_based():
     print()
@@ -14,8 +16,9 @@ def main_menu_text_based():
     print('\t3. Age inventory by one day')
     print('\t4. Display inventory items than can be thrown out')
     print('\t5. Discard items that can be thrown out')
-    print('\t6. Save inventory and exit application')
-    print('\t7. Exit application (do not save any changes from session)')
+    print('\t6. Add inventory item')
+    print('\t7. Save inventory and exit application')
+    print('\t8. Exit application (do not save any changes from session)')
 
 
 def main_menu_get_input():
@@ -88,6 +91,32 @@ def throw_out_low_quality_items(inventory):
     else:
         print('\tDid not throw out any items\n')
         return inventory
+
+
+def add_inventory_item(inventory):
+    print('\nAdd an item to the inventory...\n')
+    print('\tYou will be asked for four inputs in order to add an item.\n'
+          '\tBe mindful of character case.')
+    print()
+    name = input('\n\tEnter the name of the item: ')
+    category = input('\n\tEnter the category of item: ')
+    sell_in = input('\n\tEnter the sell by of the item (in days remaining): ')
+    quality = input('\n\tEnter the quality of the item: (0 to 50, unless special): ')
+
+    # todo add some validation to these inputs
+
+    item = InventoryItem(name, category, sell_in, quality)
+    print()
+    print('\tThe item you have entered looks as follows:\n')
+    print('\t\t' + item.__str__())
+    response = input('\n\tDo you wish to add this item? (y for yes) ')
+    if response == 'Y' or response == 'y':
+        inventory.append(item)
+        print('\t\t...item added\n')
+    else:
+        print('\t\t...item not added\n')
+
+    return inventory
 
 
 if __name__ == '__main__':
