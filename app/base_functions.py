@@ -63,9 +63,12 @@ def age_items_by_one_day(inventory):
 
 def print_throw_out_items_to_screen(inventory):
     print('\nThe following items can be discarded (quality of zero or less): ')
+    item_count = 0
     for item in inventory:
         if item.item_quality <= 0:
             print(item)
+            item_count += 1
+    print(f'\t{item_count} items\n')
 
 
 def throw_out_low_quality_items(inventory):
