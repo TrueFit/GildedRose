@@ -21,17 +21,31 @@ def main_menu_text_based():
     print('\t8. Exit application (do not save any changes from session)')
 
 
-def main_menu_get_input():
+def obtain_valid_numerical_input(display_string):
     while True:
-        num = input('\nEnter action number and press enter: ')
+        user_input = input(display_string)
         try:
-            menu_selection = int(num)
+            numerical_value = int(user_input)
             # print('Input number is: ', menu_selection)
             break
         except ValueError:
             print('\t\tThis is not a number. Please enter a valid number')
 
-    return menu_selection
+    return numerical_value
+
+
+def obtain_valid_string_input(display_string):
+    should_loop = True
+    while should_loop:
+        user_input = input(display_string)
+
+        if len(user_input) == 0:
+            print('\t\tEmpty strings are not allowed. Please enter text')
+            should_loop = True
+        else:
+            should_loop = False
+
+    return user_input
 
 
 def print_inventory_to_screen(inventory):
@@ -43,7 +57,7 @@ def print_inventory_to_screen(inventory):
 
 def find_and_print_item(inventory):
     print('\nFind and display item information...\n')
-    name_to_search_for = input('\nEnter item name to search for: ')
+    name_to_search_for = obtain_valid_string_input('\nEnter item name to search for: ')
     found_item = False
 
     item_count = 0
@@ -60,7 +74,7 @@ def find_and_print_item(inventory):
 
 
 def age_items_by_one_day(inventory):
-    print('\nAging items in inventory by one day')
+    print('\n\tAging items in inventory by one day')
     for item in inventory:
         item.adjust_quality_at_end_of_day()
         # print(item)
@@ -73,7 +87,7 @@ def print_throw_out_items_to_screen(inventory):
     item_count = 0
     for item in inventory:
         if item.item_quality <= 0:
-            print(item)
+            print('\t' + item.__str__())
             item_count += 1
     print(f'\t{item_count} items\n')
 
@@ -98,14 +112,14 @@ def add_inventory_item(inventory):
     print('\tYou will be asked for four inputs in order to add an item.\n'
           '\tBe mindful of character case.')
     print()
-    name = input('\n\tEnter the name of the item: ')
-    category = input('\n\tEnter the category of item: ')
-    sell_in = input('\n\tEnter the sell by of the item (in days remaining): ')
-    quality = input('\n\tEnter the quality of the item: (0 to 50, unless special): ')
+    name = obtain_valid_string_input('\n\tEnter the name of the item: ')
+    category = obtain_valid_string_input('\n\tEnter the category of item: ')
+    sell_in = obtain_valid_numerical_input('\n\tEnter the sell by of the item (in days remaining): ')
+    quality = obtain_valid_numerical_input('\n\tEnter the quality of the item: (0 to 50, unless special): ')
 
-    # todo add some validation to these inputs
+    # inputs_are_valid = validate_add_item_inputs(name, category, sell_in, quality)
 
-    item = InventoryItem(name, category, sell_in, quality)
+    item = InventoryItem(name, category, int(sell_in), int(quality))
     print()
     print('\tThe item you have entered looks as follows:\n')
     print('\t\t' + item.__str__())
