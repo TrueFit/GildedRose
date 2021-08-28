@@ -43,13 +43,17 @@ def find_and_print_item(inventory):
     name_to_search_for = input('\nEnter item name to search for: ')
     found_item = False
 
+    item_count = 0
     for item in inventory:
         if item.item_name == name_to_search_for:
             print(item)
             found_item = True
+            item_count += 1
 
     if not found_item:
         print(f'\tDid not find item, {name_to_search_for}, in inventory\n')
+    else:
+        print(f'\t{item_count} items\n')
 
 
 def age_items_by_one_day(inventory):
@@ -73,6 +77,7 @@ def print_throw_out_items_to_screen(inventory):
 
 def throw_out_low_quality_items(inventory):
     print('\nThrow out low quality items...\n')
+    print_throw_out_items_to_screen(inventory)
     response = input('\nAre you sure you are ready to trash low quality items? (y for yes): ')
     if response == 'Y' or response == 'y':
         # use list comprehension to make new list to avoid iteration stepping potential
