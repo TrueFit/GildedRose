@@ -17,6 +17,10 @@ class InventoryItem:
         self.item_sell_in -= 1
         self.item_quality += self.quality_change_rate()
 
+        # 2. The Quality of an item is never negative
+        if self.item_quality < 0:
+            self.item_quality = 0
+
         # 4. The Quality of an item is never more than 50
         if self.item_quality > 50:
             self.item_quality = 50
@@ -34,10 +38,6 @@ class InventoryItem:
         # 1. Once the sell by date has passed, Quality degrades twice as fast
         if self.item_sell_in < 0:
             quality_change_rate = -2
-
-        # 2. The Quality of an item is never negative
-        if self.item_quality <= 0:
-            quality_change_rate = 0
 
         # 3. "Aged Brie" actually increases in Quality the older it gets
         if self.item_name == 'Aged Brie' and self.item_category == 'Food':

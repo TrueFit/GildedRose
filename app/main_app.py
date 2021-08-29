@@ -43,7 +43,8 @@ def main_menu_loop(inventory):
     while main_loop:
         base_functions.main_menu_text_based()
         prompt_string = '\nEnter action number and press enter: '
-        menu_selection = base_functions.obtain_valid_numerical_input(prompt_string)
+        menu_selection = base_functions.obtain_valid_numerical_input(base_functions.ValidationType.NoValidation,
+                                                                     prompt_string)
         if menu_selection == 1:
             base_functions.print_inventory_to_screen(inventory)
         elif menu_selection == 2:

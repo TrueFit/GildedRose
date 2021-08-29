@@ -11,7 +11,13 @@ Assumptions made in my implementation:
 * All string cases must match (important for category processing and item finding)
 * "Once the sell by date has passed..." means that sell_in is < 0
 * Since not explicitly mentioned in problem, the default quality adjustment is a decrease of 1 unit per day
-* Edge case rule #7, ""Conjured" items degrade in Quality twice as fast as normal items", does not stack with edge case #1, "Once the sell by date has passed, Quality degrades twice as fast" (i.e. decrease for Conjured items after sell by date is not 4 but only 2)
+* Edge case rule #7, ""Conjured" items degrade in Quality twice as fast as normal items", does not stack with edge
+  case #1, "Once the sell by date has passed, Quality degrades twice as fast" (i.e. decrease for Conjured items
+  after sell by date is not 4 but only 2)
+* While adding a new item...
+    - String entries cannot be empty
+    - Quality entry cannot be negative
+    - The letter case you use will be retained
 
 
 ## Version Information
@@ -34,4 +40,10 @@ Find the package corresponding to your OS in the /dist folder of this repository
 Extract the contents, both files, to the same folder.
 
 Run the executable file as you would any other executable.
+
+### Special run mode
+
+A special application run mode is provided for the purpose of reimporting the original
+inventory.txt file. Running the Python script in the command line method above, pass an 
+argument of `-useinput` will instruct the app to use the inventory.txt file if it exists.
 

@@ -34,6 +34,11 @@ def inventory_item_conjured():
     return InventoryItem('Storm Hammer', 'Conjured', 20, 50)
 
 
+@pytest.fixture
+def inventory_item_zero_days_quality_1():
+    return InventoryItem('Special Case: days = 0, qual = 1', 'Misc', 0, 1)
+
+
 # tests here
 
 
@@ -119,6 +124,12 @@ def test_adjust_quality_no_qual_below_zero2(inventory_item_bag_of_holding):
         inventory_item_bag_of_holding.adjust_quality_at_end_of_day()
     assert inventory_item_bag_of_holding.item_quality == 0
 
+@pytest.mark.adjust_quality
+def test_adjust_quality_item_at_zero_days(inventory_item_zero_days_quality_1):
+    """"Test edge case where quality calc dips below zero"""
+    inventory_item_zero_days_quality_1.adjust_quality_at_end_of_day()
+    assert inventory_item_zero_days_quality_1.item_quality == 0
+
 
 @pytest.mark.adjust_quality
 def test_adjust_quality_sell_by_passed_2x_degrade(inventory_item_cheese):
@@ -150,6 +161,7 @@ def test_adjust_quality_qual_never_above_50_2(inventory_item_aged_brie):
     for index in range(0, 72):  # 71 days
         inventory_item_aged_brie.adjust_quality_at_end_of_day()
     assert inventory_item_aged_brie.item_quality == 50
+
 
 @pytest.mark.adjust_quality
 def test_adjust_quality_sulfuras_quality(inventory_item_sulfuras):
