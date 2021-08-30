@@ -11,9 +11,12 @@ Assumptions made in my implementation:
 * All string cases must match (important for category processing and item finding)
 * "Once the sell by date has passed..." means that sell_in is < 0
 * Since not explicitly mentioned in problem, the default quality adjustment is a decrease of 1 unit per day
-* Edge case rule #7, ""Conjured" items degrade in Quality twice as fast as normal items", does not stack with edge
+* Made assumption: Edge case rule #7, ""Conjured" items degrade in Quality twice as fast as normal items", does not stack with edge
   case #1, "Once the sell by date has passed, Quality degrades twice as fast" (i.e. decrease for Conjured items
   after sell by date is not 4 but only 2)
+* Made assumption: Edge case rule #3, "Aged Brie" actually increases in Quality the older it gets, 
+  that aged brie continues increasing in quality even beyond sell date,
+  hence not combining with Edge case rule #1
 * While adding a new item...
     - String entries cannot be empty
     - Quality entry cannot be negative
@@ -47,3 +50,19 @@ A special application run mode is provided for the purpose of reimporting the or
 inventory.txt file. Running the Python script in the command line method above, pass an 
 argument of `-useinput` will instruct the app to use the inventory.txt file if it exists.
 
+## Unit testing support
+
+Unit testing is added via test cases included inside the app/test/ folder.
+
+To run using PyTest...
+
+`cd GildedRose/app`
+
+`python -m pytest -vv`
+
+## Future development notes
+To add new special case functionality, add a new class derived from
+InventoryItem and adjust the create_item factory method.
+
+It is recommended to run unit tests after any change but especially
+after changes to the daily adjustment functionality.

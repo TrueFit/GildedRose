@@ -3,7 +3,7 @@ Base Function - This module contains the base functionality
 for the inventory application.
 """
 
-from inventory_item import InventoryItem
+import inventory_item
 from enum import Enum
 
 
@@ -141,9 +141,7 @@ def add_inventory_item(inventory):
     quality = obtain_valid_numerical_input(ValidationType.NotToBeNegative,
                                            '\n\tEnter the quality of the item: (0 to 50, unless special): ')
 
-    # inputs_are_valid = validate_add_item_inputs(name, category, sell_in, quality)
-
-    item = InventoryItem(name, category, int(sell_in), int(quality))
+    item = inventory_item.create_item(name, category, int(sell_in), int(quality))
     print()
     print('\tThe item you have entered looks as follows:\n')
     print('\t\t' + item.__str__())

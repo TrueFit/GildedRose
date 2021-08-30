@@ -1,42 +1,44 @@
 import pytest
-from app.inventory_item import InventoryItem
+
+import app.inventory_item
+
 
 # fixtures here
 
 
 @pytest.fixture
 def inventory_item_bag_of_holding():
-    return InventoryItem('Bag of Holding', 'Misc', 10, 50)
+    return app.inventory_item.create_item('Bag of Holding', 'Misc', 10, 50)
 
 
 @pytest.fixture
 def inventory_item_cheese():
-    return InventoryItem('Cheese', 'Food', 1, 10)
+    return app.inventory_item.create_item('Cheese', 'Food', 1, 10)
 
 
 @pytest.fixture
 def inventory_item_aged_brie():
-    return InventoryItem('Aged Brie', 'Food', 1, 10)
+    return app.inventory_item.create_item('Aged Brie', 'Food', 1, 10)
 
 
 @pytest.fixture
 def inventory_item_sulfuras():
-    return InventoryItem('Hand of Ragnaros', 'Sulfuras', 80, 80)
+    return app.inventory_item.create_item('Hand of Ragnaros', 'Sulfuras', 80, 80)
 
 
 @pytest.fixture
 def inventory_item_backstage_passes():
-    return InventoryItem('I am Murloc', 'Backstage Passes', 12, 10)
+    return app.inventory_item.create_item('I am Murloc', 'Backstage Passes', 12, 10)
 
 
 @pytest.fixture
 def inventory_item_conjured():
-    return InventoryItem('Storm Hammer', 'Conjured', 20, 50)
+    return app.inventory_item.create_item('Storm Hammer', 'Conjured', 20, 50)
 
 
 @pytest.fixture
 def inventory_item_zero_days_quality_1():
-    return InventoryItem('Special Case: days = 0, qual = 1', 'Misc', 0, 1)
+    return app.inventory_item.create_item('Special Case: days = 0, qual = 1', 'Misc', 0, 1)
 
 
 # tests here
@@ -124,6 +126,7 @@ def test_adjust_quality_no_qual_below_zero2(inventory_item_bag_of_holding):
         inventory_item_bag_of_holding.adjust_quality_at_end_of_day()
     assert inventory_item_bag_of_holding.item_quality == 0
 
+
 @pytest.mark.adjust_quality
 def test_adjust_quality_item_at_zero_days(inventory_item_zero_days_quality_1):
     """"Test edge case where quality calc dips below zero"""
@@ -140,7 +143,7 @@ def test_adjust_quality_sell_by_passed_2x_degrade(inventory_item_cheese):
 
 
 @pytest.mark.adjust_quality
-def test_adjust_quality_sell_by_brie_increases(inventory_item_aged_brie):
+def test_adjust_quality_brie_increases(inventory_item_aged_brie):
     """"Aged Brie" actually increases in Quality the older it gets"""
     for index in range(0, 1):  # 1 days
         inventory_item_aged_brie.adjust_quality_at_end_of_day()
@@ -226,6 +229,18 @@ def test_adjust_quality_backstage_passes_at_5(inventory_item_backstage_passes):
 
 
 @pytest.mark.adjust_quality
+def test_adjust_quality_backstage_passes_at_3(inventory_item_backstage_passes):
+    """"Backstage passes", like aged brie, increases in Quality as it's
+     SellIn value approaches; Quality increases by 2 when there are 10 days
+      or less and by 3 when there are 5 days or less but Quality drops to 0
+       after the concert"""
+    for index in range(0, 9):  # 9 days
+        inventory_item_backstage_passes.adjust_quality_at_end_of_day()
+    assert inventory_item_backstage_passes.item_sell_in == 3
+    assert inventory_item_backstage_passes.item_quality == (10 + 1 + 2 + 2 + 2 + 2 + 2 + 3 + 3 + 3)
+
+
+@pytest.mark.adjust_quality
 def test_adjust_quality_backstage_passes_at_0(inventory_item_backstage_passes):
     """"Backstage passes", like aged brie, increases in Quality as it's
      SellIn value approaches; Quality increases by 2 when there are 10 days
@@ -235,6 +250,18 @@ def test_adjust_quality_backstage_passes_at_0(inventory_item_backstage_passes):
         inventory_item_backstage_passes.adjust_quality_at_end_of_day()
     assert inventory_item_backstage_passes.item_sell_in == 0
     assert inventory_item_backstage_passes.item_quality == (10 + 1 + 5 * 2 + 6 * 3)
+
+
+@pytest.mark.adjust_quality
+def test_adjust_quality_backstage_passes_after_concert(inventory_item_backstage_passes):
+    """"Backstage passes", like aged brie, increases in Quality as it's
+     SellIn value approaches; Quality increases by 2 when there are 10 days
+      or less and by 3 when there are 5 days or less but Quality drops to 0
+       after the concert"""
+    for index in range(0, 15):  # 15 days
+        inventory_item_backstage_passes.adjust_quality_at_end_of_day()
+    assert inventory_item_backstage_passes.item_sell_in == -3
+    assert inventory_item_backstage_passes.item_quality == 0
 
 
 @pytest.mark.adjust_quality
@@ -251,3 +278,8 @@ def test_adjust_quality_conjured_items_2_day(inventory_item_conjured):
     for index in range(0, 2):  # 2 days
         inventory_item_conjured.adjust_quality_at_end_of_day()
     assert inventory_item_conjured.item_quality == 46
+
+
+if __name__ == '__main__':
+    print('module not runnable, use pytest')
+    pass

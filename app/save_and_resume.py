@@ -7,7 +7,7 @@ inventory data and import of first run data file.
 
 import pickle
 import csv
-from inventory_item import InventoryItem
+import inventory_item
 
 data_file_name = 'inventoryData.pickle'
 
@@ -37,7 +37,7 @@ def import_data_on_first_run(data_file):
     for line in csv_reader:
         # print(type(line))
         # print(line)
-        item = InventoryItem(line[0], line[1], int(line[2]), int(line[3]))
+        item = inventory_item.create_item(line[0], line[1], int(line[2]), int(line[3]))
         # print(item)
         inventory_items.append(item)
 
