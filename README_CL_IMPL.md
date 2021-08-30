@@ -44,6 +44,18 @@ Extract the contents, both files, to the same folder.
 
 Run the executable file as you would any other executable.
 
+### Data file information
+
+Upon first run the application will look for a `inventory.txt` in the same directory
+as the executable (or main_app.py script). Once the user chooses the menu item that
+saves data and exits, a new file `inventoryData.pickle` file is created, holding the
+inventory data.  Upon a resume the application will look for this data file and will
+load the inventory from there.
+
+If the `inventoryData.pickle` file is not present with the application, it will revert
+to the `inventory.txt` file.  If neither is present an error message is displayed. In this 
+case simply recreate the `inventory.txt` file.
+
 ### Special run mode
 
 A special application run mode is provided for the purpose of reimporting the original
@@ -56,7 +68,7 @@ Unit testing is added via test cases included inside the app/test/ folder.
 
 To run using PyTest...
 
-`cd GildedRose/app`
+`cd GildedRose`
 
 `python -m pytest -vv`
 
