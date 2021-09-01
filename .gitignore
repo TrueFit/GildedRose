@@ -1,3 +1,6 @@
-*/__pycache__/
+*__pycache__/
 .idea
-/inventoryData.pickle
+inventoryData.pickle
+/app/build/
+/app/*.spec
+*.pytest_cache
