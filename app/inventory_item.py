@@ -98,13 +98,21 @@ class ItemAgedBrie(InventoryItem):
 class ItemConjured(InventoryItem):
     def adjust_quality_at_end_of_day(self):
         #print("ADJUSTING IN CONJURED")
-        """
-         #7. "Conjured" items degrade in Quality twice as fast as normal items
-         """
-        self.item_sell_in -= 1
-        self.item_quality += -2
 
-        # assumption made that conjured items consistently degrade even beyond sell date
+        self.item_sell_in -= 1
+
+        if self.item_sell_in < 0:
+            """
+                1. Once the sell by date has passed, Quality degrades twice as fast
+                and
+                #7. "Conjured" items degrade in Quality twice as fast as normal items
+            """
+            self.item_quality += -4
+        else:
+            """
+                #7. "Conjured" items degrade in Quality twice as fast as normal items
+            """
+            self.item_quality += -2
 
         InventoryItem.general_limits_on_quality(self)
 
@@ -113,10 +121,11 @@ class ItemSulfuras(InventoryItem):
     def adjust_quality_at_end_of_day(self):
         """
         # 8. "Sulfuras" is a legendary item and as such its Quality is 80 and it never alters
+        assumption - that the sell in for sulfuras is also always 80
         """
         #print("ADJUSTING IN SULFURAS")
-        self.item_quality = self.item_quality
-        self.item_sell_in = self.item_sell_in
+        self.item_quality = 80
+        self.item_sell_in = 80
 
 
 if __name__ == '__main__':

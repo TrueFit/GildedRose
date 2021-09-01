@@ -37,6 +37,11 @@ def inventory_item_conjured():
 
 
 @pytest.fixture
+def inventory_item_conjured_0_sellin_10_qual():
+    return app.inventory_item.create_item('Golden Bow', 'Conjured', 0, 10)
+
+
+@pytest.fixture
 def inventory_item_zero_days_quality_1():
     return app.inventory_item.create_item('Special Case: days = 0, qual = 1', 'Misc', 0, 1)
 
@@ -140,6 +145,14 @@ def test_adjust_quality_sell_by_passed_2x_degrade(inventory_item_cheese):
     for index in range(0, 2):  # 2 days
         inventory_item_cheese.adjust_quality_at_end_of_day()
     assert inventory_item_cheese.item_quality == (10 - 1 - 2)
+
+
+@pytest.mark.adjust_quality
+def test_adjust_quality_sell_by_passed_2x_degrade_5day(inventory_item_cheese):
+    """Once the sell by date has passed, Quality degrades twice as fast"""
+    for index in range(0, 5):  # 5 days
+        inventory_item_cheese.adjust_quality_at_end_of_day()
+    assert inventory_item_cheese.item_quality == (10 - 1 - 2 - 2 - 2 - 2)
 
 
 @pytest.mark.adjust_quality
@@ -265,7 +278,7 @@ def test_adjust_quality_backstage_passes_after_concert(inventory_item_backstage_
 
 
 @pytest.mark.adjust_quality
-def test_adjust_quality_conjured_items_1_day(inventory_item_conjured):
+def test_adjust_quality_conjured_items_1_day_before_sellin(inventory_item_conjured):
     """"'Conjured' items degrade in Quality twice as fast as normal items"""
     for index in range(0, 1):  # 1 days
         inventory_item_conjured.adjust_quality_at_end_of_day()
@@ -278,6 +291,17 @@ def test_adjust_quality_conjured_items_2_day(inventory_item_conjured):
     for index in range(0, 2):  # 2 days
         inventory_item_conjured.adjust_quality_at_end_of_day()
     assert inventory_item_conjured.item_quality == 46
+
+@pytest.mark.adjust_quality
+def test_adjust_quality_conjured_items_after_expire(inventory_item_conjured_0_sellin_10_qual):
+    """"
+    'Conjured' items degrade in Quality twice as fast as normal items
+    and
+    Once the sell by date has passed, Quality degrades twice as fast
+    """
+    for index in range(0, 1):  # 1 days
+        inventory_item_conjured_0_sellin_10_qual.adjust_quality_at_end_of_day()
+    assert inventory_item_conjured_0_sellin_10_qual.item_quality == (10 - 4)
 
 
 if __name__ == '__main__':

@@ -72,8 +72,12 @@ def obtain_valid_string_input(display_string):
 
 def print_inventory_to_screen(inventory):
     print('\nCurrent inventory...\n')
+    counter = 1
     for item in inventory:
+        if counter % 16 == 0:
+            user_input = input('\tpress any key for more')
         print(item)
+        counter += 1
     print(f'\t{len(inventory)} items total')
 
 
@@ -106,26 +110,32 @@ def age_items_by_one_day(inventory):
 
 def print_throw_out_items_to_screen(inventory):
     print('\nThe following items can be discarded (quality of zero): ')
-    item_count = 0
+    count_of_discardable_items = 0
     for item in inventory:
         if item.item_quality <= 0:
             print('\t' + item.__str__())
-            item_count += 1
-    print(f'\t{item_count} items\n')
+            count_of_discardable_items += 1
+    print(f'\t{count_of_discardable_items} items\n')
+
+    return count_of_discardable_items
 
 
 def throw_out_low_quality_items(inventory):
     print('\nThrow out low quality items...\n')
-    print_throw_out_items_to_screen(inventory)
-    response = input('\nAre you sure you are ready to trash low quality items? (y for yes, n for no): ')
-    if response == 'Y' or response == 'y':
-        # use list comprehension to make new list to avoid iteration stepping potential for slowness
-        adjusted_inventory = [item for item in inventory if item.item_quality > 0]
-        count_of_low_quality_items = len(inventory) - len(adjusted_inventory)
-        print(f'\tDisposed of {count_of_low_quality_items} items\n')
-        return adjusted_inventory
+    count_of_discardable_items = print_throw_out_items_to_screen(inventory)
+    if count_of_discardable_items > 0:
+        response = input('\nAre you sure you are ready to trash low quality items? (y for yes, n for no): ')
+        if response == 'Y' or response == 'y':
+            # use list comprehension to make new list to avoid iteration stepping potential for slowness
+            adjusted_inventory = [item for item in inventory if item.item_quality > 0]
+            count_of_low_quality_items = len(inventory) - len(adjusted_inventory)
+            print(f'\tDisposed of {count_of_low_quality_items} items\n')
+            return adjusted_inventory
+        else:
+            print('\tDid not dispose of any items\n')
+            return inventory
     else:
-        print('\tDid not throw out any items\n')
+        print('\tNo items to discard\n')
         return inventory
 
 

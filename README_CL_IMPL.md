@@ -11,9 +11,6 @@ Assumptions made in my implementation:
 * All string cases must match (important for category processing and item finding)
 * "Once the sell by date has passed..." means that sell_in is < 0
 * Since not explicitly mentioned in problem, the default quality adjustment is a decrease of 1 unit per day
-* Made assumption: Edge case rule #7, ""Conjured" items degrade in Quality twice as fast as normal items", does not stack with edge
-  case #1, "Once the sell by date has passed, Quality degrades twice as fast" (i.e. decrease for Conjured items
-  after sell by date is not 4 but only 2)
 * Made assumption: Edge case rule #3, "Aged Brie" actually increases in Quality the older it gets, 
   that aged brie continues increasing in quality even beyond sell date,
   hence not combining with Edge case rule #1
@@ -21,6 +18,10 @@ Assumptions made in my implementation:
     - String entries cannot be empty
     - Quality entry cannot be negative
     - The letter case you use will be retained
+    - A negative sell in will be allowed (practically not a good idea, but not listed as requirement)
+    - Aged Brie can be entered with any category, only as Food does it increase in value
+    - A quality above 50 can be entered, for sulfuras, but for other items will be clamped to 50 when the day
+      advances
 
 
 ## Version Information
