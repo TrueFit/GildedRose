@@ -37,7 +37,7 @@ ver 1.0 :: Initial release :: released 2021.xx.xx :: git repo tag 'xx'
 `python3 main_app.py`
 
 
-### Using Windows and Linux supplied binaries (*coming soon*)
+### Using Windows and Linux supplied binaries
 
 Find the package corresponding to your OS in the /dist folder of this repository.
 
