@@ -26,7 +26,7 @@ Assumptions made in my implementation:
 
 ## Version Information
 
-ver 1.0 :: Initial release :: released 2021.xx.xx :: git repo tag 'xx'
+ver 1.0 :: Initial release :: released 2021.09.01 :: git repo tag 'ver_100'
 
 ## Running the Gilded Rose Inventory
 
