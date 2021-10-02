@@ -1,0 +1,12 @@
+<ng-container *ngIf="{ item: item$ | async } as _">
+  <mat-card class="item-card">
+    <mat-card-title>{{ _.item?.name }}</mat-card-title>
+    <mat-card-subtitle>{{ _.item?.category }}</mat-card-subtitle>
+    <mat-card-content>
+      <mat-grid-list cols="2" rowHeight="10rem">
+        <mat-grid-tile>Days Left: {{ _.item?.daysLeft }}</mat-grid-tile>
+        <mat-grid-tile>Quality: {{ _.item?.quality }}</mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+  </mat-card>
+</ng-container>

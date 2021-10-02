@@ -1,0 +1,57 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/">Full Inventory</a>
+      <a mat-list-item routerLink="/trash">Trash</a>
+      <a mat-list-item routerLink="/game-room">Game Room</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span class="app-bar-title"
+        >Cavernous Threshold Inventory Management System</span
+      >
+      <button
+        type="button"
+        aria-label="Reset"
+        mat-raised-button
+        color="accent"
+        (click)="reset()"
+        class="toolbarButton"
+      >
+        Reset
+        <mat-icon aria-label="Reset button icon">autorenew</mat-icon>
+      </button>
+      <button
+        type="button"
+        aria-label="Advance Day"
+        mat-raised-button
+        color="accent"
+        (click)="advanceDay()"
+        class="toolbarButton"
+      >
+        Advance 1 Day
+        <mat-icon aria-label="advance day button icon">next_plan</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
