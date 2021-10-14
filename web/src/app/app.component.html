@@ -1,0 +1,5 @@
+<div class="content" role="main">
+	<app-header (printClicked)="printRequested($event)" (uploadClicked)="uploadInventoryRequested($event)" (ageClicked)="ageInventoryRequested($event)" [date]="currentDate"></app-header>
+	<app-inventory-table [inventory]="inventoryList" (trashClicked)="deleteTrashRequested($event)"></app-inventory-table>
+	<app-footer></app-footer>
+</div>

@@ -1,2 +1,8 @@
-rootProject.name = 'GildedRose'
+rootProject.name = 'gilded-rose'
 
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+enableFeaturePreview('VERSION_CATALOGS')
+
+include ':common'
+include ':server'
+include ':web'

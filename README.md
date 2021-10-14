@@ -1,6 +1,95 @@
 # Gilded Rose
+Gilded Rose is the solution for a coding exercise problem named after the same name.
+The original prompt can be found at the bottom of this page, and the working solution is outline below.
 
-## The Problem
+## [Live Site](https://xmoose25x.github.io/GildedRose/)
+## Demo
+![Demo of GildedRose App](./resources/GildedRoseDemo.gif)
+
+## Technologies used
+
+* [Gradle](https://gradle.org/) - Build Framework
+* [PMD](https://pmd.github.io/) - Static Analysis Tool
+* [JUnit 5](https://junit.org/junit5/) - Java Unit Testing Framework
+* [Karma](https://karma-runner.github.io/latest/index.html) - JavaScript Unit Testing Framework
+* [PiTest](https://pitest.org/) - Mutation Testing Tool
+* [Spring Boot](https://spring.io/projects/spring-boot) - Opinionated Server-Side Java Spring Framework 
+* [Angular](https://angular.io/) - Client-Side JavaScript Framework
+
+## Documentation
+
+## How to build
+
+The GildedRose application is structured as a gradle multi-project build. 
+
+To build all components use:
+
+`gradlew build`
+
+To build an individual project typically you will use:
+
+`gradlew :<project-name>:mainBuild`
+
+Certain projects may have different commands to build. Those commands are documented in the 
+`README.md` of those projects. 
+
+## Deployments
+The application is split between [Heroku](https://dashboard.heroku.com/) for hosting the server project
+and [Github Pages](https://pages.github.com/) for the web project.
+
+* The [Procfile](./Procfile) and [system.properties](./system.properties) control the Heroku deployment.
+* The [docs folder](./docs) controls the content deployed to Github Pages (and is rebuilt via `gradlew deploy`).
+
+## What projects are in this repository
+
+The names of the various projects can be found in one of two ways:
+
+1. Execute `gradlew projects`
+
+1. Check the [settings.gradle](./settings.gradle) file's `include` list
+
+## How to add a project
+
+1. Add a folder in this directory for the new project
+
+1. Add the name of the folder to the `include` list in [settings.gradle](./settings.gradle)
+
+1. Add a `build.gradle` to the new project folder for any project-specific build configuration
+
+1. Add a `src` folder to the project
+
+## Quality
+
+### Static Analysis
+
+#### PMD
+
+For Java projects `PMD` is used to analyze the code and enforce code quality. 
+
+`PMD` is executed via the build, but to run it directly the following command can be used:
+
+`gradlew pmdMain pmdTest`
+
+To build upon and override the default rule set, a custom local configuration is used: [pmd-exclusions.xml](./resources/pmd-exclusions.xml)
+
+### Testing
+
+#### PiTest
+
+For Java projects `PiTest` is used to analyze test quality through Mutation Testing. 
+
+`PiTest` is not ran via the build to avoid enforcing an arbitrary mutation coverage. 
+It can be executed via the following command:
+
+`gradlew pitest`
+
+#### JUnit + Karma
+
+Tests can be executed via
+
+`gradlew test`
+
+## The Original Problem Prompt
 Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city run by a friendly innkeeper named Allison. We also buy and sell only the finest goods. Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We need you to write a system that allows us to manage our inventory, so that we are able to service all of the adventurers who frequent our store (we don't want to run out of healing potions when an tiefling comes in unlike last time - poor Leeroy).
 
 Here are the basic rules for the system that we need:

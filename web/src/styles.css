@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.no-hover-effect.mat-button.mat-primary .mat-button-focus-overlay,
+.no-hover-effect.mat-button.mat-accent .mat-button-focus-overlay,
+.no-hover-effect.mat-button.mat-warn .mat-button-focus-overlay,
+.no-hover-effect .mat-button-focus-overlay
+{
+	background-color: transparent;
+}
+@media print {
+	.no-print, .cdk-overlay-container, footer {
+		display: none !important;
+	}
+	mat-toolbar > span,
+	tr > td,th {
+		color: black !important;
+	}
+	tr.mat-row {
+		height: 0 !important;
+	}
+	.table-container {
+		height: auto !important;
+		overflow-y: visible !important;
+	}
+	#timestamp {
+		display: block !important;
+	}
+}

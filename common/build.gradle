@@ -1,0 +1,15 @@
+plugins {
+	id 'java-library'
+}
+
+archivesBaseName = 'gilded-rose-common'
+
+dependencies {
+	implementation 'com.opencsv:opencsv:5.5.2'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.5'
+}
+
+task mainBuild {
+	dependsOn jar
+	finalizedBy copyToMainDist
+}

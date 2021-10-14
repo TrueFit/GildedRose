@@ -1,0 +1,25 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.5'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+}
+
+archivesBaseName = 'gilded-rose-server'
+
+dependencies {
+	implementation projects.common
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+	testImplementation ('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: "junit", module: "junit"
+		exclude group: "org.junit.vintage", module: "junit-vintage-engine"
+	}
+	testImplementation 'org.springframework.security:spring-security-test'
+}
+
+task mainBuild {
+	dependsOn bootJar
+	finalizedBy copyToMainDist
+}

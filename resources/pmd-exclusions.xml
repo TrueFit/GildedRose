@@ -119,6 +119,12 @@
         </properties>
     </rule>
 
+	<rule ref="category/java/design.xml/UseUtilityClass">
+		<properties>
+			<property name="ignoredAnnotations" value="org.springframework.boot.autoconfigure.SpringBootApplication" />
+		</properties>
+	</rule>
+
     <rule ref='category/java/performance.xml'/>
 
     <rule ref='category/java/security.xml'/>

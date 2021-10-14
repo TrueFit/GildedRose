@@ -1,0 +1,18 @@
+<mat-toolbar color="alt">
+	<button mat-button class="no-hover-effect" aria-label="Example icon-button with menu icon">
+		<img src="assets/Logo.svg" class="logo">
+	</button>
+	<span>Gilded Rose</span>
+	<span class="spacer"></span>
+	<span class="spacer" id="timestamp">{{date | date:'EEEE, MMMM d, y hh:mm a'}}</span>
+	<span class="spacer"></span>
+	<button mat-icon-button class="no-print" aria-label="Print Button" matTooltip="Print the current inventory" (click)="onPrint($event)">
+		<mat-icon>print</mat-icon>
+	</button>
+	<button mat-icon-button class=" no-print" aria-label="Upload Button" matTooltip="Updates the inventory using a new file" (click)="openUploadDialog($event)">
+		<mat-icon>upload</mat-icon>
+	</button>
+	<button mat-icon-button color="warn" class="no-print" aria-label="Skip Next Button" matTooltip="Skips to the next day" (click)="onAgeInventory($event)">
+		<mat-icon>skip_next</mat-icon>
+	</button>
+</mat-toolbar>

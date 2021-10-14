@@ -1,0 +1,32 @@
+plugins {
+  id 'com.github.node-gradle.node' version '3.1.1'
+}
+
+node {
+  version = '14.18.1'
+  npmVersion = '6.14.15'
+  download = true
+  // Switch to `ci` if you need to a clean install
+  npmInstallCommand = 'install'
+}
+
+defaultTasks 'npm_run_build'
+
+copyToMainDist {
+	dependsOn 'mainBuild'
+	from "$projectDir/dist/gilded-rose"
+	into "$rootDir/docs"
+}
+
+task mainBuild {
+	dependsOn 'npm_run_build'
+	finalizedBy 'copyToMainDist'
+}
+
+task run(dependsOn: ['npm_run_start'])
+
+task deploy(type: Copy)  {
+	dependsOn 'npm_run_deploy'
+	from "$projectDir/dist/gilded-rose"
+	into "$rootDir/docs"
+}

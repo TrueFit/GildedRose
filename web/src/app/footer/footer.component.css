@@ -1,0 +1,11 @@
+:host {
+	flex: 0 0 auto;
+}
+footer {
+	display: flex;
+	background-color: rgb(34 32 34);
+	color: white;
+	line-height: 2.5em;
+	justify-content: space-between;
+	padding: 0 16px;
+}

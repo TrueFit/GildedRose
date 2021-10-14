@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Inventory Upload</h1>
+<div mat-dialog-content>
+	<p>You are about to upload an existing inventory file to the server.</p>
+	<p style="color:red">This will replace all of the existing data available.</p>
+	<input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload accept=".txt,.csv">
+	<div class="file-upload">
+
+		{{data.fileName || "No file uploaded yet."}}
+
+		<button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
+			<mat-icon>attach_file</mat-icon>
+		</button>
+	</div>
+</div>
+<div mat-dialog-actions>
+	<button mat-button (click)="onNoClick()">Cancel</button>
+	<button mat-button [mat-dialog-close]="data" [disabled]="!data.fileContents">Upload</button>
+</div>
