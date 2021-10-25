@@ -1,5 +1,17 @@
 # Gilded Rose
 
+## The Inventory System
+
+This inventory system is built with the goal of being easily extensible, utilized in a larger system and exposed through a UI which may be different than expected.  I hope it is a simple, but playful take on things.  I look forward to discussing that and other decisions made to learn more from this exercise.
+
+### Commands
+End Day        Ages the inventory at the end of the day
+List           Lists the current inventory for the Gilded Rose
+Quit           Quits the program
+Remove Trash   Lists the current inventory to be disposed and removes it from inventory
+
+Commands are case sensitive.
+
 ## The Problem
 Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city run by a friendly innkeeper named Allison. We also buy and sell only the finest goods. Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We need you to write a system that allows us to manage our inventory, so that we are able to service all of the adventurers who frequent our store (we don't want to run out of healing potions when an tiefling comes in unlike last time - poor Leeroy).
 
