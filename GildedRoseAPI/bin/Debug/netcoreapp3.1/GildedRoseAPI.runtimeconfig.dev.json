@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "E:\\Nebris\\.dotnet\\store\\|arch|\\|tfm|",
+      "E:\\Nebris\\.nuget\\packages"
+    ]
+  }
+}
