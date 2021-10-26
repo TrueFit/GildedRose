@@ -1,5 +1,24 @@
 # Gilded Rose
 
+## To run:
+* Load solution in Visual Studio and hit Ctrl-F5 to run without debugging.
+* Upon application load, the entire list of inventory is loaded.
+** The Reload page lets the user "Ask for the entire list of inventory".  Again.
+* The Filter lets you "Ask for the details of a single item by name" by allowing the user to search by Name (it is a "contains" so it is a little more flexible than that).
+* The Process End of Day button on the View Active Inventory page allows the user to "Progress to the next day".
+* The Empty Trash button on the View Expired Inventory page let's the user "throw away" expired goods with Quality = 0
+
+## Developer notes
+* Assumptions:
+1. It's not clear to me if SellIn == 0 is the last day we can sell something or if it should be -1.  I chose zero.
+
+* Design choices
+1. I chose Blazor because I never used it before.  It's interesting.
+2. I keep decrementing the SellIn even after the item's Quality hits zero.  This is equivalwent to forgetting to get rid of the milk in your fridge after its "Best By"" date passes :-)
+3. I chose a Name Filter over a Detail Page or Dialog as the interpretation of the "Ask for the details of a single item by name" requirement since details are shown in the table.
+4. I chose a simple factory to create inventory items for expediency.  See code comments for more details on what I would do differently.
+5. I chose to implement a simple HTTP based service to get the inventory list.  It really needs to persist the data between days.
+
 ## The Problem
 Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city run by a friendly innkeeper named Allison. We also buy and sell only the finest goods. Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We need you to write a system that allows us to manage our inventory, so that we are able to service all of the adventurers who frequent our store (we don't want to run out of healing potions when an tiefling comes in unlike last time - poor Leeroy).
 
