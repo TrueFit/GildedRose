@@ -6,7 +6,6 @@ using GildedRose.Data;
 
 namespace GildedRose.Services
 {
-    // TODO - swap this out with a more sophisticated factory that does not violate OCP
     // this is a very naive parameterized factory implementation.  The switch statement is a code smell and does not
     // support the Open Closed Principle when adding new custom Item types but at least all the object creation code
     // is in one spot.

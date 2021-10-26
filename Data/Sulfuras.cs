@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace GildedRose.Data
 {
-    // TODO - deal with the Sellin override
-    public class Sulfuras : Item
+     public class Sulfuras : Item
     {
         // Sulfuras", being a legendary item, never has to be sold or decreases in Quality
         // (Quality is 80 and it never alters)

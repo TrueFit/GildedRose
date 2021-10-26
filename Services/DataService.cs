@@ -15,6 +15,7 @@ namespace GildedRose.Services
         Task<StreamReader> DownloadData();
     }
 
+    // the functionality in this class could just as easily be in the InventoryService
     public class DataService : IDataService
     {
         private const string InventoryUrl =
