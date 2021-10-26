@@ -1,0 +1,23 @@
+@page "/reload"
+@using GildedRose.Data
+@using GildedRose.Services
+@inject InventoryService _inventoryService
+@inject IJSRuntime _jsRuntime
+
+<h1>Reload Inventory</h1>
+
+<p>This will reload inventory and replace all existing data.  Please be sure this is what you want to do!</p>
+
+<button class="btn btn-primary" @onclick="ReloadInventory">Reload</button>
+
+
+@code {
+    private IEnumerable<IItem> _inventory;
+
+    private async void ReloadInventory()
+    {
+        if (!await _jsRuntime.InvokeAsync<bool>("confirm", "Press OK if you want to reload the inventory"))
+            return;
+        _inventory = await _inventoryService.GetInventory();
+    }
+}

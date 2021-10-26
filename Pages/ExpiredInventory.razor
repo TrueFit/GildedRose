@@ -1,10 +1,13 @@
-@page "/"
+﻿@page "/trash"
 
 @using GildedRose.Data
 @using GildedRose.Services
 @inject InventoryService _inventoryService
+@inject IJSRuntime _jsRuntime
 
-<h1>Gilded Rose - Current Inventory</h1>
+<h1>Gilded Rose - Trash Bin</h1>
+
+
 
 @if (_inventory == null)
 {
@@ -21,7 +24,7 @@ else
                    @bind="Filter"
                    @bind:event="oninput">
         </div>
-        <button class="btn btn-primary float-right" @onclick="ProcessCloseOutDay">Close Out Day</button>
+        <button class="btn btn-primary float-right" @onclick="EmptyTrash">EmptyTrash</button>
     </div>
     <table class="table table-hover">
         <thead>
@@ -55,9 +58,12 @@ else
     protected override async Task OnInitializedAsync()
     {
         if (_inventoryService.IsLoaded())
-            _inventory = _inventoryService.ViewActiveInventory();
+            _inventory = _inventoryService.ViewExpiredInventory();
         else
+        {
             _inventory = await _inventoryService.GetInventory();
+            _inventory = _inventoryService.ViewExpiredInventory();
+        }
     }
 
     public string Filter { get; set; }
@@ -76,9 +82,13 @@ else
         return false;
     }
 
-    private void ProcessCloseOutDay()
+    private async void EmptyTrash()
     {
-        _inventoryService.CloseOutDay();
+        _inventory = _inventoryService.EmptyTrash();
 
+        // I'd prefer this be something non-modal like a snackbar
+        if (!await _jsRuntime.InvokeAsync<bool>("confirm", "Trash was emptied."))
+            return;
     }
+
 }
