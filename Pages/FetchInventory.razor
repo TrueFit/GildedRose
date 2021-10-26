@@ -1,0 +1,53 @@
+﻿@page "/fetchinventory"
+
+@using GildedRose.Data
+@using GildedRose.Services
+@inject InventoryService _inventoryService
+
+<h1>Gilded Rose - Current Inventory</h1>
+
+<button class="btn btn-primary" @onclick="ProcessCloseOutDay">Close Out Day</button>
+
+@if (_inventory == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>SellIn</th>
+                <th>Quality</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in _inventory)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Category</td>
+                    <td>@item.SellIn</td>
+                    <td>@item.Quality</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IEnumerable<IItem> _inventory;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _inventory = await _inventoryService.GetInventory();
+    }
+
+    private void ProcessCloseOutDay()
+    {
+        _inventory = _inventoryService.CloseOutDay();
+
+    }
+}
