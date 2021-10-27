@@ -50,6 +50,12 @@ namespace GuildedRoseWebApp.Controllers
             return _itemService.GetItem(request);
         }
 
+        [HttpPost]
+        public ActionResult<GenericResponse> TrashAll()
+        {
+            return _itemService.TrashAll();
+        }
+
         /*
         [HttpPost]
         public ActionResult<GenericResponse> TrashItem(ItemRequest request)

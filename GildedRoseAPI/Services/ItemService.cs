@@ -72,7 +72,7 @@ namespace GildedRoseAPI.Services
         public ItemListResponse GetItems()
         {
             ItemListResponse response = new ItemListResponse();
-            response.items = _db.Items.ToList();
+            response.items = _db.Items.OrderBy(i => i.Category).ThenByDescending(i => i.Quality).ToList();
             response.success = true;
             response.message = "Retrieved all items.";
             return response;
@@ -81,7 +81,7 @@ namespace GildedRoseAPI.Services
         public ItemListResponse GetItemsToTrash()
         {
             ItemListResponse response = new ItemListResponse();
-            response.items = _db.Items.Where(i => i.Quality <= 0).ToList();
+            response.items = _db.Items.Where(i => i.Quality <= 0).OrderBy(i => i.Category).ToList();
             response.success = true;
             response.message = "Retrieved all items to be trashed.";
             return response;
@@ -102,6 +102,30 @@ namespace GildedRoseAPI.Services
             response.item = item;
             response.success = true;
             response.message = $"Retrieved items with name: {request.name}.";
+            return response;
+        }
+
+        public GenericResponse TrashAll()
+        {
+            GenericResponse response = new GenericResponse();
+            _db.Items.Where(i => i.Quality <= 0).OrderBy(i => i.Category).ToList().ForEach(item => 
+            {
+                _db.Items.Remove(item);
+            });
+
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                response.success = false;
+                response.message = $"Error deleting items from database: {ex.Message}";
+                return response;
+            }
+            
+            response.success = true;
+            response.message = "Trashed all items with Quality of 0.";
             return response;
         }
 
