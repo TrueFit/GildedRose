@@ -1,0 +1,33 @@
+
+I had a blast working on this skills test!  I think this is a great way of measuring my fit for this position.  Unfortunately, I do not have all the time in the world, so I am submitting this project as-is with some notes on how to get it working and what I would change if I had more time.
+
+1. You'll need to run npm install in the reactapp dir in order to get the necessary node modules.
+2. Included is a backup file for a microsoft sql database.  Simply restore it, and its good to go. 
+	"\GildedRose\Data\GildedRoseDBContext.cs" contains the connection string to the database. Adjust if needed.
+3. Open the SLN file in Visual Studio, select the "GildedRoseAPI" profile, and run the project.  It should run the backend build, as well as launch the front end react app.  
+	"\GildedRose\Properties\launchSettings.json" contains the launch settings.  Adjust if needed.
+4. Play around!  I implemented some bonus endpoints to reset the data and to take out the trash.
+
+
+Some notes:
+
+If I were not in a rush, here's a few things I would do differently.  Feel free to ask additional details about why/how in the technical interview!
+
+-Not hardcode db connection string, move to appsettings file.
+-Not hardcode api url in front end components.
+-Extract api to its own script and make calls through that (DRY for the fetch code)
+-Redo Item Category as an enum, write conversion code from negotiating enum/int/string when converting from back end to front end.
+-Create form for adding new items.
+-Make tables sortable by clicking on header col, ascending and descending.
+-Publish to free azure account.
+-Authentication/Account Creation/Roles Based Access Control for certain functions (such as trashing, adding, etc).
+-Unit testing, particularly for the progression function.
+-I might also do that big 'process' function differently, by creating a map of individual 'process' functions keyed by category.  
+
+
+All of these are things I could do, but given my time constaints, I feel it would be best for us to just talk about these items, instead.  I'm happy to answer any questions!
+
+
+
+
+							T H A N K S !
