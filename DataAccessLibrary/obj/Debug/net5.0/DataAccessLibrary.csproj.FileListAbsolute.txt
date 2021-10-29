@@ -1,0 +1,15 @@
+G:\GitRepos\GildedRose-BAsh\DataAccessLibrary\bin\Debug\net5.0\DataAccessLibrary.deps.json
+G:\GitRepos\GildedRose-BAsh\DataAccessLibrary\bin\Debug\net5.0\DataAccessLibrary.dll
+G:\GitRepos\GildedRose-BAsh\DataAccessLibrary\bin\Debug\net5.0\ref\DataAccessLibrary.dll
+G:\GitRepos\GildedRose-BAsh\DataAccessLibrary\bin\Debug\net5.0\DataAccessLibrary.pdb
+G:\GitRepos\GildedRose-BAsh\DataAccessLibrary\obj\Debug\net5.0\DataAccessLibrary.csproj.AssemblyReference.cache
+G:\GitRepos\GildedRose-BAsh\DataAccessLibrary\obj\Debug\net5.0\DataAccessLibrary.GeneratedMSBuildEditorConfig.editorconfig
+G:\GitRepos\GildedRose-BAsh\DataAccessLibrary\obj\Debug\net5.0\DataAccessLibrary.AssemblyInfoInputs.cache
+G:\GitRepos\GildedRose-BAsh\DataAccessLibrary\obj\Debug\net5.0\DataAccessLibrary.AssemblyInfo.cs
+G:\GitRepos\GildedRose-BAsh\DataAccessLibrary\obj\Debug\net5.0\DataAccessLibrary.csproj.CoreCompileInputs.cache
+G:\GitRepos\GildedRose-BAsh\DataAccessLibrary\obj\Debug\net5.0\DataAccessLibrary.dll
+G:\GitRepos\GildedRose-BAsh\DataAccessLibrary\obj\Debug\net5.0\ref\DataAccessLibrary.dll
+G:\GitRepos\GildedRose-BAsh\DataAccessLibrary\obj\Debug\net5.0\DataAccessLibrary.pdb
+G:\GitRepos\GildedRose-BAsh\DataAccessLibrary\bin\Debug\net5.0\DataAccessLibrary.runtimeconfig.json
+G:\GitRepos\GildedRose-BAsh\DataAccessLibrary\bin\Debug\net5.0\DataAccessLibrary.runtimeconfig.dev.json
+G:\GitRepos\GildedRose-BAsh\DataAccessLibrary\obj\Debug\net5.0\DataAccessLibrary.genruntimeconfig.cache

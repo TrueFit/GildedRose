@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "ea9e4db2-e5f5-486d-bb3f-75a95a44d403": {
+      "ProjectGuid": "ea9e4db2-e5f5-486d-bb3f-75a95a44d403",
+      "DisplayName": "GildedRose",
+      "ColorIndex": 0
+    },
+    "eda88801-9546-4777-9c2a-c5e5e26929b8": {
+      "ProjectGuid": "eda88801-9546-4777-9c2a-c5e5e26929b8",
+      "DisplayName": "DataAccessLibrary",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}
