@@ -59,6 +59,14 @@ namespace GildedRose.Controllers
             return Ok();
         }
 
+        [HttpGet("{GetAllItemsToTrash}")]
+        public async Task<ActionResult<List<Item>>> GetAllItemsToTrash()
+        {
+            var items = await _context.Items.AsNoTracking().Where(x => x.Quality == 0).ToListAsync();
+            if (items == null) return new List<Item>();
+            return items;
+        }
+
         //Get All Categories
         [HttpGet("{GetAllCategories}")]
         public async Task<ActionResult<List<Category>>> GetAllCategories()

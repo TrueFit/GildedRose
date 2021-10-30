@@ -34,7 +34,7 @@ namespace GildedRose.Helpers
                 db.Add(new Category { CategoryName = "Weapon", IsLegendary = false, DegenerationFactor = 1 });
                 db.Add(new Category { CategoryName = "Food", IsLegendary = false, DegenerationFactor = 1 });
                 db.Add(new Category { CategoryName = "Sulfuras", IsLegendary = true, DegenerationFactor = 0 });
-                db.Add(new Category { CategoryName = "Backstage Passes", IsLegendary = false, DegenerationFactor = 1 });
+                db.Add(new Category { CategoryName = "Backstage Passes", IsLegendary = false, DegenerationFactor = 0 });
                 db.Add(new Category { CategoryName = "Conjured", IsLegendary = false, DegenerationFactor = 2 });
                 db.Add(new Category { CategoryName = "Potion", IsLegendary = false, DegenerationFactor = 1 });
                 db.Add(new Category { CategoryName = "Armor", IsLegendary = false, DegenerationFactor = 1 });

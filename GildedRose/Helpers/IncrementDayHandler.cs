@@ -24,19 +24,18 @@ namespace GildedRose.Helpers
 
             foreach(var item in allItems)
             {
-                //always remove one day from SellIn
-                item.SellIn --;
-
-                //store items category for easy access
+                //store the items category for easy access
                 var category = allCategories.FirstOrDefault(x => x.CategoryId == item.CategoryId);
 
-                //If Legendary, take no action
+                //If Legendary, take no further action
                 if (category.IsLegendary)
                 {
                     tempItemList.Add(item);
                     continue;
                 }
 
+                //always remove one day from SellIn
+                item.SellIn--;
 
                 if (item.QualityAppreciates && item.Quality < 50) //quality increases
                 {
@@ -57,19 +56,25 @@ namespace GildedRose.Helpers
                             case int i when i <= 0:
                                 item.Quality = 0;
                                 break;
-                            default:
-                                break;
                         }
                     }
-                    else //nested inside for future simple increments
+                    else
                     {
-                        if (item.ItemName == "Aged Brie")
-                            item.Quality++;
+                        if (item.ItemName == "Aged Brie") //nested inside for future simple increments
+                            item.Quality += category.DegenerationFactor;
                     }
                 }
-                else if (item.Quality != 0) //quality decreases
+                else if (item.Quality > 0) //quality decreases
                 {
-                    //TODO hanle depreciation
+                    if (item.SellIn > 0)
+                        //sell by hasnt passed, use normal quality degeneration
+                        item.Quality = item.Quality - category.DegenerationFactor;
+                    else
+                        //sell by passed, degenerate quality x2
+                        item.Quality = item.Quality - (category.DegenerationFactor * 2);
+
+                    //make sure we dont go negative on Quality
+                    if(item.Quality < 0) item.Quality = 0;
                 }
 
                 tempItemList.Add(item);
