@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-7&z82yi8h9=pxy*byxeb7*bx7m*e$lb-4-oqxu402w1=kqibdd
 DEBUG = True
 
 ALLOWED_HOSTS = []
+LOGIN_REDIRECT_URL='/inventory/api/'
 
 
 # Application definition
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'inventory'
 ]
 
@@ -124,3 +126,11 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}

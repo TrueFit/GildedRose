@@ -6,6 +6,9 @@
 ## Get Code
    
     git clone git@github.com:snyderra/GildedRose.git
+    
+## Quickstart
+ 1. `bash go.sh`
 
 ## Setup Environment
  1.  `cd GildedRose`
@@ -19,6 +22,7 @@
  1.  from GildedRose/gildedrosepython/gildedrose
  2.  `python manage.py runserver`
  3.  open http://127.0.0.1:8000/ and login with admin:admin
+ 4.  REST api available at http://127.0.0.1:8000/inventory/api/ same u/p
 
 ## Simulating Day Change
 1. Quit the server with CONTROL-C.

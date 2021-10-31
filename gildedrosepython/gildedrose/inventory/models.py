@@ -57,7 +57,6 @@ class Item(models.Model):
         now = get_now()
         return (now.date()-self.received_on).days
 
-    
     def current_quality(self):
         quality_models = QualityModel.objects.filter(
             item=self).order_by('valid_from_n_days_before_expire')

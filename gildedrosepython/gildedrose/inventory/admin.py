@@ -16,6 +16,7 @@ from .util import get_now
 admin.site.site_title = "Gilded Rose"
 admin.site.site_header = "Gilded Rose"
 
+
 class TrashItemsFilter(admin.SimpleListFilter):
     title = 'Trash Product'
     parameter_name = 'trash'
@@ -32,16 +33,15 @@ class TrashItemsFilter(admin.SimpleListFilter):
         if self.value() == 'yes':
             return queryset.filter(id__in=trash)
         if self.value() == 'no':
-                        return queryset.exclude(id__in=trash)
+            return queryset.exclude(id__in=trash)
 
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
     readonly_fields = ("created_at", "updated_at",)
     ordering = ('sell_by',)
-    list_filter = ('category',TrashItemsFilter,)
-    list_display = ('name', 'category','current_quality', 'current_sell_in')
-    
+    list_filter = ('category', TrashItemsFilter,)
+    list_display = ('name', 'category', 'current_quality', 'current_sell_in')
 
 
 @admin.register(Category)
