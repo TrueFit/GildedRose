@@ -5,7 +5,7 @@
 
 ## Get Code
    
-    git clone git@gitlab.com:snyderra/GildedRose.git
+    git clone git@github.com:snyderra/GildedRose.git
 
 ## Setup Environment
  1.  `cd GildedRose`
