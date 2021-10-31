@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\s10admin_local\\source\\repos\\GildedRose\\GildedRose\\GildedRose.csproj": {}
+    "G:\\GitRepos\\GildedRose-BAsh\\GildedRose\\GildedRose.csproj": {}
   },
   "projects": {
-    "C:\\Users\\s10admin_local\\source\\repos\\GildedRose\\DataAccessLibrary\\DataAccessLibrary.csproj": {
+    "G:\\GitRepos\\GildedRose-BAsh\\DataAccessLibrary\\DataAccessLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\s10admin_local\\source\\repos\\GildedRose\\DataAccessLibrary\\DataAccessLibrary.csproj",
+        "projectUniqueName": "G:\\GitRepos\\GildedRose-BAsh\\DataAccessLibrary\\DataAccessLibrary.csproj",
         "projectName": "DataAccessLibrary",
-        "projectPath": "C:\\Users\\s10admin_local\\source\\repos\\GildedRose\\DataAccessLibrary\\DataAccessLibrary.csproj",
+        "projectPath": "G:\\GitRepos\\GildedRose-BAsh\\DataAccessLibrary\\DataAccessLibrary.csproj",
         "packagesPath": "C:\\Users\\s10admin_local\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\s10admin_local\\source\\repos\\GildedRose\\DataAccessLibrary\\obj\\",
+        "outputPath": "G:\\GitRepos\\GildedRose-BAsh\\DataAccessLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -73,18 +73,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-rc.2.21505.57\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\s10admin_local\\source\\repos\\GildedRose\\GildedRose\\GildedRose.csproj": {
+    "G:\\GitRepos\\GildedRose-BAsh\\GildedRose\\GildedRose.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\s10admin_local\\source\\repos\\GildedRose\\GildedRose\\GildedRose.csproj",
+        "projectUniqueName": "G:\\GitRepos\\GildedRose-BAsh\\GildedRose\\GildedRose.csproj",
         "projectName": "GildedRose",
-        "projectPath": "C:\\Users\\s10admin_local\\source\\repos\\GildedRose\\GildedRose\\GildedRose.csproj",
+        "projectPath": "G:\\GitRepos\\GildedRose-BAsh\\GildedRose\\GildedRose.csproj",
         "packagesPath": "C:\\Users\\s10admin_local\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\s10admin_local\\source\\repos\\GildedRose\\GildedRose\\obj\\",
+        "outputPath": "G:\\GitRepos\\GildedRose-BAsh\\GildedRose\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -108,8 +108,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\s10admin_local\\source\\repos\\GildedRose\\DataAccessLibrary\\DataAccessLibrary.csproj": {
-                "projectPath": "C:\\Users\\s10admin_local\\source\\repos\\GildedRose\\DataAccessLibrary\\DataAccessLibrary.csproj"
+              "G:\\GitRepos\\GildedRose-BAsh\\DataAccessLibrary\\DataAccessLibrary.csproj": {
+                "projectPath": "G:\\GitRepos\\GildedRose-BAsh\\DataAccessLibrary\\DataAccessLibrary.csproj"
               }
             }
           }
@@ -157,7 +157,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-rc.2.21505.57\\RuntimeIdentifierGraph.json"
         }
       }
     }

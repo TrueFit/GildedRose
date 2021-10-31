@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using DataAccessLibrary;
+using GildedRose.Helpers;
 
 namespace GildedRose.Controllers
 {
@@ -18,8 +19,16 @@ namespace GildedRose.Controllers
             _context = context;
         }
 
+        //Re-populate DB with default example data
+        [HttpPost("RepopulateDataToDefault")]
+        public async Task<ActionResult> RepopulateDataToDefault()
+        {
+            await DataCreateAndDrop.CreateExampleData();
+            return Ok();
+        }
+
         //Get All Items
-        [HttpGet("{GetAllItems}")]
+        [HttpGet("GetAllItems")]
         public async Task<ActionResult<List<Item>>> GetAllItems()
         {
             var items = await _context.Items.AsNoTracking().Where(x => true).ToListAsync();
@@ -28,7 +37,7 @@ namespace GildedRose.Controllers
         }
 
         //Get a single item
-        [HttpGet("{GetAnItem}/{itemId}")]
+        [HttpGet("GetAnItem/{itemId}")]
         public async Task<ActionResult<Item>> GetAnItem(int itemId)
         {
             var item = await _context.Items.AsNoTracking().FirstOrDefaultAsync(x => x.ItemId == itemId);
@@ -37,7 +46,7 @@ namespace GildedRose.Controllers
         }
 
         //Add a single item
-        [HttpPost("{AddAnItem}")]
+        [HttpPost("AddAnItem")]
         public async Task<ActionResult<Item>> AddAnItem([FromBody] Item item)
         {
             if (item.CategoryId <= 0) return BadRequest($"error: Category ID {item.CategoryId} is not valid");
@@ -50,16 +59,29 @@ namespace GildedRose.Controllers
         }
 
         //Delete a single item
-        [HttpDelete("{DeleteAnItem}/{itemId}")]
+        [HttpDelete("DeleteAnItem/{itemId}")]
         public async Task<ActionResult> DeleteAnItem(int itemId)
         {
             var item = await _context.Items.AsNoTracking().FirstOrDefaultAsync(x => x.ItemId == itemId);
             if (item == null) return NotFound();
             _context.Items.Remove(item);
+            await _context.SaveChangesAsync();
             return Ok();
         }
 
-        [HttpGet("{GetAllItemsToTrash}")]
+        //Delete multiple items
+        [HttpDelete("DeleteMultipleItems/")]
+        public async Task<ActionResult> DeleteAnItem([FromBody] int[] itemIds)
+        {
+            var items = await _context.Items.AsNoTracking().Where(x => itemIds.Contains(x.ItemId)).ToListAsync();
+            if (items == null) return NotFound();
+            _context.Items.RemoveRange(items);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+        //Get all items eligible to be trashed
+        [HttpGet("GetAllItemsForTrash")]
         public async Task<ActionResult<List<Item>>> GetAllItemsToTrash()
         {
             var items = await _context.Items.AsNoTracking().Where(x => x.Quality == 0).ToListAsync();
@@ -68,7 +90,7 @@ namespace GildedRose.Controllers
         }
 
         //Get All Categories
-        [HttpGet("{GetAllCategories}")]
+        [HttpGet("GetAllCategories")]
         public async Task<ActionResult<List<Category>>> GetAllCategories()
         {
             var categories = await _context.Categories.AsNoTracking().Where(x => true).ToListAsync();

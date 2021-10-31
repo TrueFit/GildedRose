@@ -1,6 +1,7 @@
 G:\GitRepos\GildedRose-BAsh\GildedRose\bin\Debug\net5.0\appsettings.Development.json
 G:\GitRepos\GildedRose-BAsh\GildedRose\bin\Debug\net5.0\appsettings.json
 G:\GitRepos\GildedRose-BAsh\GildedRose\bin\Debug\net5.0\GildedRose.exe
+G:\GitRepos\GildedRose-BAsh\GildedRose\bin\Debug\net5.0\DBFile\GildedRoseInventory.db
 G:\GitRepos\GildedRose-BAsh\GildedRose\bin\Debug\net5.0\GildedRose.deps.json
 G:\GitRepos\GildedRose-BAsh\GildedRose\bin\Debug\net5.0\GildedRose.runtimeconfig.json
 G:\GitRepos\GildedRose-BAsh\GildedRose\bin\Debug\net5.0\GildedRose.runtimeconfig.dev.json
