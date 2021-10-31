@@ -42,7 +42,7 @@ class Item(models.Model):
     initial_quality = models.FloatField()
 
     def __str__(self) -> str:
-        return '{} ({}) -- Q:{} -- SELL IN:{} -- AGE:{}'.format(self.name, self.category, self.current_quality, self.current_sell_in, self.get_days_old())
+        return '{} ({})'.format(self.name, self.category)
 
     def current_sell_in(self):
         if self.category.never_expires:
