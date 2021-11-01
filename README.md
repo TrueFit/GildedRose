@@ -1,13 +1,13 @@
 # Gilded Rose
 
-How To:
-The latest public Docker image can be pulled down using: 
-docker pull nution/gildedrose:latest
+**How To:**  
+The latest public Docker image can be pulled down using:  
+**docker pull nution/gildedrose:latest**  
 
-To run the public image locally you can use the command:
-docker run -p 12345:80 --name GildedRose nution/gildedrose:latest
-Then navigate in your browser to http://localhost:12345/index.html
-Using incoming port "12345" is arbitrary and can be changed as needed. 
+To run the public image locally you can use the command:  
+**docker run -p 12345:80 --name GildedRose nution/gildedrose:latest**  
+Then navigate in your browser to http://localhost:12345/index.html  
+Using incoming port "12345" is arbitrary and can be changed as needed.  
 
 
 ## The Problem

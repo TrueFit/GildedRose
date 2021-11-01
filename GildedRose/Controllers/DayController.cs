@@ -20,10 +20,11 @@ namespace GildedRose.Controllers
             _context = context;
         }
 
-        //Add a single item
+        //Increment The day(s)
         [HttpPut("AdvanceDays")]
         public async Task<ActionResult> AdvanceDays(int days)
         {
+            if(days <= 0) return BadRequest("error: Days must be >= 1");
             try
             {
                 //try to increment one day, method resolves true or false
@@ -37,6 +38,5 @@ namespace GildedRose.Controllers
                 return BadRequest("error: " + e.Message);
             }
         }
-
     }
 }

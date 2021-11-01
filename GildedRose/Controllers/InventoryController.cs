@@ -71,8 +71,8 @@ namespace GildedRose.Controllers
         }
 
         //Delete a single item
-        [HttpDelete("DeleteAnItem/{itemId}")]
-        public async Task<ActionResult> DeleteAnItem(int itemId)
+        [HttpDelete("DeleteAnItem/")]
+        public async Task<ActionResult> DeleteAnItem([FromBody] int itemId)
         {
             var item = await _context.Items.FirstOrDefaultAsync(x => x.ItemId == itemId);
             if (item == null) return NotFound();
@@ -102,14 +102,15 @@ namespace GildedRose.Controllers
             return items;
         }
 
-        //Get All Categories
-        [HttpGet("GetAllCategories")]
-        public async Task<ActionResult<List<Category>>> GetAllCategories()
+        //Delete all items eligible to be trashed
+        [HttpDelete("GetAllItemsForTrash")]
+        public async Task<ActionResult<List<Item>>> DeleteAllItemsToTrash()
         {
-            var categories = await _context.Categories.AsNoTracking().Where(x => true).ToListAsync();
-            if (categories == null) return NotFound();
-            return categories;
+            var items = await _context.Items.Where(x => x.Quality == 0).ToListAsync();
+            if (items == null) return NotFound();
+            _context.Items.RemoveRange(items);
+            await _context.SaveChangesAsync();
+            return Ok();
         }
-
     }
 }

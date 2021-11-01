@@ -12,6 +12,7 @@ namespace Test_GildedRose
     public class InventoryControllerTests
     {
         InventoryController _invController;
+        CategoryController _catController;
         DayController _dayController;
         InventoryContext _service;
 
@@ -19,6 +20,7 @@ namespace Test_GildedRose
         {
             _service = new InventoryContext();
             _invController = new InventoryController(_service);
+            _catController = new CategoryController(_service);
             _dayController = new DayController(_service);
             _ = _invController.RepopulateDataToDefault();
         }
@@ -43,21 +45,21 @@ namespace Test_GildedRose
         [Fact]
         public void GetAllCategoriesTest()
         {
-            var result = _invController.GetAllCategories();
+            var result = _catController.GetAllCategories();
             Assert.IsType<ActionResult<List<Category>>>(result.Result);
             var list = result.Result as ActionResult<List<Category>>;
             Assert.IsType<List<Category>>(list.Value);
             var listCategories = list.Value as List<Category>;
             Assert.Equal(8, listCategories.Count);
         }
-
         [Fact]
         public void TestDayIncrement()
         {
-            //repopulate for clean data
+            //repopulate for clean data and verify
             var repopulate = _invController.RepopulateDataToDefault();
+            Assert.IsType<OkResult>(repopulate.Result);
 
-            //advance 1 day
+            //advance 1 day and verify
             var dayResult = _dayController.AdvanceDays(1);
             Assert.IsType<OkResult>(dayResult.Result);
 
@@ -94,6 +96,8 @@ namespace Test_GildedRose
             Assert.Equal(28, InventoryItems3.FirstOrDefault(x => x.ItemName == "Giant Slayer").Quality);
             Assert.Equal(0, InventoryItems3.FirstOrDefault(x => x.ItemName == "Raging Ogre").Quality);
             Assert.Equal(80, InventoryItems3.FirstOrDefault(x => x.ItemName == "Hand of Ragnaros").Quality);
+
+            Assert.DoesNotContain(InventoryItems3, x => x.Quality < 0);
         }
         [Fact]
         public void DeleteSingleItemTest()

@@ -48,8 +48,6 @@ namespace GildedRose.Helpers
                         //Concert Ticket Quality
                         if (category.CategoryName == "Backstage Passes")
                         {
-                            if (item.ItemName == "Raging Ogre")
-                                Console.WriteLine("");
                             for (int d = 1; d < daysToIncrement+1; d++)
                             {
                                 switch (tempSellin - d)
@@ -69,9 +67,8 @@ namespace GildedRose.Helpers
                                 }
                             }
                         }
-                        else
+                        else // simple increment
                         {
-                            if (item.ItemName == "Aged Brie") //nested inside for future simple increments
                                 item.Quality += category.DegenerationFactor * daysToIncrement;
                         }
                     }
