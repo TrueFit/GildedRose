@@ -1,5 +1,15 @@
 # Gilded Rose
 
+How To:
+The latest public Docker image can be pulled down using: 
+docker pull nution/gildedrose:latest
+
+To run the public image locally you can use the command:
+docker run -p 12345:80 --name GildedRose nution/gildedrose:latest
+Then navigate in your browser to http://localhost:12345/index.html
+Using incoming port "12345" is arbitrary and can be changed as needed. 
+
+
 ## The Problem
 Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city run by a friendly innkeeper named Allison. We also buy and sell only the finest goods. Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We need you to write a system that allows us to manage our inventory, so that we are able to service all of the adventurers who frequent our store (we don't want to run out of healing potions when an tiefling comes in unlike last time - poor Leeroy).
 
