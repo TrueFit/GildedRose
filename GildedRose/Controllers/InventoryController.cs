@@ -103,8 +103,8 @@ namespace GildedRose.Controllers
         }
 
         //Delete all items eligible to be trashed
-        [HttpDelete("GetAllItemsForTrash")]
-        public async Task<ActionResult<List<Item>>> DeleteAllItemsToTrash()
+        [HttpDelete("DeleteAllItemsForTrash")]
+        public async Task<ActionResult<List<Item>>> DeleteAllItemsForTrash()
         {
             var items = await _context.Items.Where(x => x.Quality == 0).ToListAsync();
             if (items == null) return NotFound();
