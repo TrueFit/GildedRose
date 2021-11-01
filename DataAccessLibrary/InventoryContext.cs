@@ -26,14 +26,34 @@ namespace DataAccessLibrary
             //SQLiteInstance = $"{filePath}{Path.DirectorySeparatorChar}GildedRoseInventory.db";
 
             //-- Locate DB from project path
-            var projDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            SQLiteInstance = projDirectory + @"/GildedRoseInventory.db";
+            //var projDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            //SQLiteInstance = projDirectory + @"/GildedRoseInventory.db";
+
+            //-- Locate DB from project path
+            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            Console.WriteLine($"1Base Directory == {baseDir}");
+            if (baseDir.Contains("/app/bin/Debug")) // in debug container
+            {
+                var projDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                SQLiteInstance = projDirectory + @"/GildedRoseInventory.db";
+            }
+            else // in live container
+            {
+                SQLiteInstance = $"{baseDir}DBFile/GildedRoseInventory.db";
+            }
+
         }
 
         // Point to local instance of SQLite DB
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite($"Data Source={Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"/GildedRoseInventory.db"}");
-
-
+        {
+            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            Console.WriteLine($"2Base Directory == {baseDir}");
+            if (baseDir.Contains("/app/bin/Debug"))
+            {
+                options.UseSqlite($"Data Source={Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"/GildedRoseInventory.db"}");
+            }
+            else options.UseSqlite($"Data Source={baseDir}DBFile/GildedRoseInventory.db");
+        }
     }
 }

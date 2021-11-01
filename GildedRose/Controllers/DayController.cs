@@ -11,18 +11,18 @@ namespace GildedRose.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class DateTimeController : ControllerBase
+    public class DayController : ControllerBase
     {
         private readonly InventoryContext _context;
 
-        public DateTimeController(InventoryContext context)
+        public DayController(InventoryContext context)
         {
             _context = context;
         }
 
         //Add a single item
         [HttpPut("AdvanceDays")]
-        public async Task<ActionResult<Item>> AdvanceDays(int days)
+        public async Task<ActionResult> AdvanceDays(int days)
         {
             try
             {

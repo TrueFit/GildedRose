@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccessLibrary
 {
@@ -11,5 +12,6 @@ namespace DataAccessLibrary
         public int SellIn { get; set; }
         public int Quality { get; set; }
         public bool QualityAppreciates { get; set; }
+        [NotMapped] public string CategoryName { get; set; }
     }
 }

@@ -45,13 +45,25 @@ namespace GildedRose.Controllers
             return item;
         }
 
+        //Get a single item by name
+        [HttpGet("GetAnItemByName/{itemName}")]
+        public async Task<ActionResult<Item>> GetAnItemByName(string itemName)
+        {
+            var item = await _context.Items.AsNoTracking().FirstOrDefaultAsync(x => x.ItemName.ToLower() == itemName.ToLower());
+            if (item == null) return NotFound();
+            return item;
+        }
+
         //Add a single item
         [HttpPost("AddAnItem")]
         public async Task<ActionResult<Item>> AddAnItem([FromBody] Item item)
         {
-            if (item.CategoryId <= 0) return BadRequest($"error: Category ID {item.CategoryId} is not valid");
-            if (item.SellIn < 0) return BadRequest("error: SellIn value must be greater than or equal to 0");
-            if (string.IsNullOrWhiteSpace(item.ItemName)) return BadRequest($"error: ItemName field must contain a value");
+            if (item.CategoryId <= 0) return BadRequest($"error: Category ID {item.CategoryId} is <=0 or null");
+            if (item.Quality < 0) return BadRequest("error: Quality must be >= 0");
+            if (item.SellIn < 0) return BadRequest("error: SellIn value must be >= 0");
+            if (string.IsNullOrWhiteSpace(item.ItemName)) return BadRequest("error: ItemName field must contain a value");
+            if (!_context.Categories.Any(x=>x.CategoryId == item.CategoryId)) return BadRequest($"error: Category ID {item.CategoryId} does not exist");
+            if (_context.Items.Any(x=>x.ItemName.ToLower() == item.ItemName.ToLower())) return BadRequest($"error: Item {item.ItemName} already exists");
 
             await _context.Items.AddAsync(item);
             await _context.SaveChangesAsync();
@@ -62,7 +74,7 @@ namespace GildedRose.Controllers
         [HttpDelete("DeleteAnItem/{itemId}")]
         public async Task<ActionResult> DeleteAnItem(int itemId)
         {
-            var item = await _context.Items.AsNoTracking().FirstOrDefaultAsync(x => x.ItemId == itemId);
+            var item = await _context.Items.FirstOrDefaultAsync(x => x.ItemId == itemId);
             if (item == null) return NotFound();
             _context.Items.Remove(item);
             await _context.SaveChangesAsync();
@@ -71,10 +83,11 @@ namespace GildedRose.Controllers
 
         //Delete multiple items
         [HttpDelete("DeleteMultipleItems/")]
-        public async Task<ActionResult> DeleteAnItem([FromBody] int[] itemIds)
+        public async Task<ActionResult> DeleteMultipleItems([FromBody] int[] itemIds)
         {
-            var items = await _context.Items.AsNoTracking().Where(x => itemIds.Contains(x.ItemId)).ToListAsync();
+            var items = await _context.Items.Where(x => itemIds.Contains(x.ItemId)).ToListAsync();
             if (items == null) return NotFound();
+            if (items.Count != itemIds.Length) return BadRequest("error: Not able to match all itemId's to an item record");
             _context.Items.RemoveRange(items);
             await _context.SaveChangesAsync();
             return Ok();

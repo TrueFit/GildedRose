@@ -39,18 +39,21 @@ namespace GildedRose.Helpers
                     }
 
                     //always remove day from SellIn
+                    var tempSellin = item.SellIn;
                     item.SellIn =  item.SellIn - daysToIncrement;
+
 
                     if (item.QualityAppreciates && item.Quality < 50) //quality increases
                     {
                         //Concert Ticket Quality
                         if (category.CategoryName == "Backstage Passes")
                         {
-                            for (int d = daysToIncrement; d > 0; d--)
+                            if (item.ItemName == "Raging Ogre")
+                                Console.WriteLine("");
+                            for (int d = 1; d < daysToIncrement+1; d++)
                             {
-                                switch (d)
+                                switch (tempSellin - d)
                                 {
-                                    //case -> d
                                     case int i when i > 10:
                                         item.Quality += 1;
                                         break;
