@@ -5,7 +5,7 @@ from .models import Item, Category, QualityModel
 class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
-        fields = '__all__'
+        fields = ['received_on','sell_by','name','category','initial_sell_in','initial_quality','current_quality','current_sell_in']
         depth = 2
 
 
