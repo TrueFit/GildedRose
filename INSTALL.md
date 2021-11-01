@@ -6,7 +6,7 @@
 ## Get Code
    
     git clone git@github.com:snyderra/GildedRose.git
-    
+
 ## Quickstart
  1. `bash go.sh`
 
@@ -18,6 +18,10 @@
  5.  `cd gildedrosepython/gildedrose`
  6.  `bash init.sh`
 
+## Docker
+ 1. `docker-compose build`
+ 2. `docker-compose up`
+
 ## Run Application
  1.  from GildedRose/gildedrosepython/gildedrose
  2.  `python manage.py runserver`
@@ -28,3 +32,5 @@
 1. Quit the server with CONTROL-C.
 2. set the enviroment variable GR_DAYS to a number of days to add to current date and run the server   
         `GR_DAYS=7 python manage.py runserver`
+3. With Docker
+        `GR_DAYS=7 docker-compose up`

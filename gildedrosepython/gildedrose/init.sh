@@ -1,3 +1,4 @@
+rm db.sqlite3
 python manage.py makemigrations
 python manage.py migrate
 DJANGO_SUPERUSER_PASSWORD=admin  python manage.py createsuperuser --username admin --email 'admin@gr.com' --noinput
