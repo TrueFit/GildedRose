@@ -1,5 +1,8 @@
 # Gilded Rose
 
+**About**  
+This is a .NET Core (.NET 5) Web API project, setup to run in a docker container.   
+
 **How To:**  
 The latest public Docker image can be pulled down using:  
 **docker pull nution/gildedrose:latest**  
@@ -7,7 +10,15 @@ The latest public Docker image can be pulled down using:
 To run the public image locally you can use the command:  
 **docker run -p 12345:80 --name GildedRose nution/gildedrose:latest**  
 Then navigate in your browser to http://localhost:12345/index.html  
-Using incoming port "12345" is arbitrary and can be changed as needed.  
+Using incoming port "12345" is arbitrary and can be changed as needed. 
+  
+## Notes:  
+Items to consider:  
+
+1. Since UI was optional, I created an API and used Swagger as the UI.  
+2. Days can be incremented by passing an int parameter denoting the number of days you would like to increment.  
+3. I added some integration tests, but could use more.  
+4. I did not include parsing out the inventory text file. I added some additional fields, and used a built in SQLite databse, so parsing the text file into new objects ended up being an ugly operation. May add it back in if needed, but given the setup I am using, and that the list never changes, creating a default object list that gets populated on startup seemed to suffice and be cleaner / easier to understand. 
 
 
 ## The Problem
