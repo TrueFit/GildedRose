@@ -1,26 +1,23 @@
 # Gilded Rose
-
+----------------------------------------------------------------------------------------------
 **About**  
-This is a .NET Core (.NET 5) Web API project, setup to run in a docker container.   
+This is a .NET Core (.NET 6) Blazor Web App.   
 
-**How To:**  
-The latest public Docker image can be pulled down using:  
-**docker pull nution/gildedrose:latest**  
-
-To run the public image locally you can use the command:  
-**docker run -p 12345:80 --name GildedRose nution/gildedrose:latest**  
-Then navigate in your browser to http://localhost:12345/index.html  
-Using incoming port "12345" is arbitrary and can be changed as needed. 
+**How To Run:**  
+1. Open the project in VS 2019 or 2022  
+2. If not already, set the startup project as "GildedRose-Blazor.Server"
+3. Run the application 
   
 ## Notes:  
 Items to consider:  
+  
+1. Days can be incremented by passing an int parameter denoting the number of days you would like to increment. I have provided buttons for 1 and 5 days.  
+2. I added some integration tests, but could use more.  
+3. I did not include parsing out the inventory text file. I added some additional fields, and used a built in SQLite database, so parsing the text file into new objects ended up being an ugly operation. May add it back in if needed, but given the setup I am using, and that the list never changes, creating a default object list that gets populated on startup seemed to suffice and be cleaner / easier to understand. 
+4. I used a local SQLite database to emulate a more traditional interaction with a database without requiring the provisioning of one. To keep deployment simple, I didn't want to have to roll out multiple docker containers for various services. Given the scope of the project, it seemed fitting to "spice it up" a little, without overdoing it.
+5. Many architectural choices make no "real world" sense. Namely the use of SQLite. I also wouldn't choose a Blazor application for production. My main goal was to demonstrate the use of Entity Framework, .NET Core, have some integration tests, throw in a few more functions and most of all have the main functionality of incrementing the days be accurate to the specifications.   
 
-1. Since UI was optional, I created an API and used Swagger as the UI.  
-2. Days can be incremented by passing an int parameter denoting the number of days you would like to increment.  
-3. I added some integration tests, but could use more.  
-4. I did not include parsing out the inventory text file. I added some additional fields, and used a built in SQLite databse, so parsing the text file into new objects ended up being an ugly operation. May add it back in if needed, but given the setup I am using, and that the list never changes, creating a default object list that gets populated on startup seemed to suffice and be cleaner / easier to understand. 
-
-
+----------------------------------------------------------------------------------------------
 ## The Problem
 Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city run by a friendly innkeeper named Allison. We also buy and sell only the finest goods. Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We need you to write a system that allows us to manage our inventory, so that we are able to service all of the adventurers who frequent our store (we don't want to run out of healing potions when an tiefling comes in unlike last time - poor Leeroy).
 
