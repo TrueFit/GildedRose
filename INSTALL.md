@@ -34,3 +34,12 @@
         `GR_DAYS=7 python manage.py runserver`
 3. With Docker
         `GR_DAYS=7 docker-compose up`
+
+## Quality Models
+The calculations are done through quality models. This allows rapid additions and adjustments through the interface. The model has the following parameters:
+  1. item -- this links the model to a single item. Null if not used
+  2. category -- this links the model to entire category of items. Null if not used
+  3. valid_from_n_days_before_expire -- Sets start of when the model is to be applied. Inclusive of the day.
+  4. valid_until_n_days_before_expire -- Sets end of when the model is to be applied. Exclusive of the day.
+  5. quality_delta_per_day -- how much the quality changes per day. Negaiive reduces quality, Positive increased quality
+  6. expired_scale -- A multiplication factor of the quality_delta_per_day that is applied after the sell_in is less than 0
