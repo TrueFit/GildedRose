@@ -1,8 +1,6 @@
-using DataAccessLibrary;
-using GildedRose.Controllers;
+using GildedRose_Blazor.Server.Controllers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.Sqlite;
-using System;
+using GildedRose_Blazor.Shared;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
@@ -11,10 +9,10 @@ namespace Test_GildedRose
 {
     public class InventoryControllerTests
     {
-        InventoryController _invController;
-        CategoryController _catController;
-        DayController _dayController;
-        InventoryContext _service;
+        readonly InventoryController _invController;
+        readonly CategoryController _catController;
+        readonly DayController _dayController;
+        readonly InventoryContext _service;
 
         public InventoryControllerTests()
         {
@@ -35,6 +33,7 @@ namespace Test_GildedRose
         [Fact]
         public void GetAllItemsTest()
         {
+
             var result = _invController.GetAllItems();
             Assert.IsType<ActionResult<List<Item>>>(result.Result);
             var list = result.Result as ActionResult<List<Item>>;

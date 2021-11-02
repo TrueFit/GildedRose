@@ -1,0 +1,126 @@
+﻿@page "/"
+@using GildedRose_Blazor.Shared
+@inject HttpClient Http
+
+<h1>Inventory Manager</h1>
+<button class="btn btn-primary" @onclick="IncrementCount1">Increment 1 Day</button>
+<button class="btn btn-secondary" @onclick="IncrementCount5">Increment 5 Days</button>
+<button class="btn btn-warning" @onclick="RepopulateDefaultData">Re-populate Data</button>
+
+Search By Item Name: <input type="text" @bind="@searchValue" @oninput="@((ui) => { SearchItemName(searchValue = (string)ui.Value);})" />
+
+
+@if (items == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if(!items.Any())
+{
+    <p><em>ERROR LOADING DATA</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Quality</th>
+                <th>Sell In</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in items)
+            {
+                <tr>
+                    <td>@item.ItemId</td>
+                    <td>@item.ItemName</td>
+                    <td>@item.CategoryName</td>
+                    <td>@item.Quality</td>
+                    <td>@item.SellIn</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private int currentDay = 0;
+    private List<Item> items;
+    string searchValue;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            items = await Http.GetFromJsonAsync<List<Item>>("Inventory/GetAllItems");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
+
+    //advance 1 day and refil items
+    protected async void IncrementCount1()
+    {
+        items.Clear();
+        var dayAdv = await Http.GetAsync("Day/AdvanceDays?days=1");
+        if (dayAdv.IsSuccessStatusCode)
+        {
+            items = await Http.GetFromJsonAsync<List<Item>>("Inventory/GetAllItems");
+            currentDay++;
+            StateHasChanged();
+        }
+    }
+
+    //advance 5 days and refil items
+    protected async void IncrementCount5()
+    {
+        items.Clear();
+        var dayAdv = await Http.GetAsync("Day/AdvanceDays?days=5");
+        if (dayAdv.IsSuccessStatusCode)
+        {
+            items = await Http.GetFromJsonAsync<List<Item>>("Inventory/GetAllItems");
+            currentDay++;
+            StateHasChanged();
+        }
+    }
+
+    //repopulate the data
+    protected async void RepopulateDefaultData()
+    {
+        items.Clear();
+        var dayAdv = await Http.GetAsync("Inventory/RepopulateDataToDefault");
+        if (dayAdv.IsSuccessStatusCode)
+        {
+            items = await Http.GetFromJsonAsync<List<Item>>("Inventory/GetAllItems");
+            currentDay++;
+            StateHasChanged();
+        }
+    }
+
+    //Search for product by name
+    protected async void SearchItemName(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+        {
+            var allItems = await Http.GetFromJsonAsync<List<Item>>("Inventory/GetAllItems");
+            if (allItems.Any())
+            {
+                items.Clear();
+                items = allItems;
+                StateHasChanged();
+                return;
+            }
+        }
+        var searchResult = await Http.GetFromJsonAsync<List<Item>>("Inventory/GetMultipleItemsByPartialName?ItemName="+text);
+        if (searchResult.Any())
+        {
+            items.Clear();
+            items = searchResult;
+            StateHasChanged();
+        }
+    }
+}

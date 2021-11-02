@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>Test_GildedRose</RootNamespace>
 
     <IsPackable>false</IsPackable>
@@ -21,7 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GildedRose\GildedRose.csproj" />
+    <ProjectReference Include="..\Server\GildedRose-Blazor.Server.csproj" />
+    <ProjectReference Include="..\Shared\GildedRose-Blazor.Shared.csproj" />
   </ItemGroup>
 
 </Project>
