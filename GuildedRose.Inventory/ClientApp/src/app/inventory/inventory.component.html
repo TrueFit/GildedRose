@@ -1,0 +1,27 @@
+<h1>Inventory</h1>
+
+<button class="btn btn-primary" (click)="incrementDay()">Increment Day</button>
+
+<br />
+<br />
+
+<p *ngIf="!inventoryitems"><em>Loading...</em></p>
+
+<table class='table table-striped' *ngIf="inventoryitems">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Sell In (Days)</th>
+            <th>Quality</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of inventoryitems">
+            <td>{{ item.name }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.sellIn }}</td>
+            <td>{{ item.quality }}</td>
+        </tr>
+    </tbody>
+</table>
