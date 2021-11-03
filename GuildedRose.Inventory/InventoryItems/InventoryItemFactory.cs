@@ -41,5 +41,25 @@
                 return new InventoryItem(inventoryItem);
             }
         }
+
+        /// <summary>
+        /// Creates an <see cref="InventoryItem"/> from a string of comma separated values representing
+        /// the properties of the item.
+        /// </summary>
+        /// <param name="csvLine">A string of comma separated values representing the properties of the item.
+        /// Where the first value = Name, the second value = Category, the third value = SellIn, and the fourth value = Quality.
+        /// (e.g. "Sword,Weapon,30,50")</param>
+        /// <returns></returns>
+        public static InventoryItem FactoryFromCsv(string csvLine)
+        {
+            string[] values = csvLine.Split(',');
+
+            var inventoryItem = Factory(new InventoryItem(values[0],
+                                                          values[1],
+                                                          int.Parse(values[2]),
+                                                          int.Parse(values[3])));
+
+            return inventoryItem;
+        }
     }
 }

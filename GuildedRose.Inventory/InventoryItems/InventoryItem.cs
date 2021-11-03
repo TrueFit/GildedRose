@@ -8,6 +8,11 @@
     public class InventoryItem
     {
         /// <summary>
+        /// ID or primary key for database
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
         /// Name of the item
         /// </summary>
         public string Name { get; set; }
