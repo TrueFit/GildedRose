@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.810.11
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildedRose.Inventory", "GuildedRose.Inventory\GuildedRose.Inventory.csproj", "{3D93B46F-628E-4878-B963-85815ED17F00}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildedRose.Inventory.Test", "GuildedRose.Inventory.Test\GuildedRose.Inventory.Test.csproj", "{72420B9F-EAC6-4130-8D16-FD9289FF678B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3D93B46F-628E-4878-B963-85815ED17F00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D93B46F-628E-4878-B963-85815ED17F00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D93B46F-628E-4878-B963-85815ED17F00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72420B9F-EAC6-4130-8D16-FD9289FF678B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72420B9F-EAC6-4130-8D16-FD9289FF678B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72420B9F-EAC6-4130-8D16-FD9289FF678B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72420B9F-EAC6-4130-8D16-FD9289FF678B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
