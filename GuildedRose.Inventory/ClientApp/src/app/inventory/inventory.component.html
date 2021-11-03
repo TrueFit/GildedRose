@@ -5,6 +5,21 @@
 <br />
 <br />
 
+<input type="text"
+       [(ngModel)]="searchText"
+       class="form-control"
+       id="search"
+       placeholder="Search Item Name"
+       mdbInput />
+
+<br />
+
+<input type="checkbox"
+        [(ngModel)]="showTrash"
+        id="show_trash_checkbox"
+        style="margin-right: 10px" />
+<label for="show_trash_checkbox">Show Only Trash</label>
+
 <p *ngIf="!inventoryitems"><em>Loading...</em></p>
 
 <table class='table table-striped' *ngIf="inventoryitems">
@@ -17,7 +32,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let item of inventoryitems">
+        <tr *ngFor="let item of inventoryitems | tableFilter: searchText:showTrash">
             <td>{{ item.name }}</td>
             <td>{{ item.category }}</td>
             <td>{{ item.sellIn }}</td>

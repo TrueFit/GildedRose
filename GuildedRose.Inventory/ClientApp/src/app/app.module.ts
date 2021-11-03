@@ -7,12 +7,14 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { TableFilterPipe } from './inventory/table-filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    InventoryComponent
+    InventoryComponent,
+    TableFilterPipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
