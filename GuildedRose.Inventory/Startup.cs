@@ -1,4 +1,5 @@
 ﻿using GuildedRose.Inventory.Data;
+using GuildedRose.Inventory.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -30,6 +31,7 @@ namespace GuildedRose.Inventory
             services.AddDbContext<InventoryDbContext>(options =>
                 options.UseSqlite(
                     Configuration.GetConnectionString("InventoryConnection")));
+            services.AddScoped<InventoryIncrementDayService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
