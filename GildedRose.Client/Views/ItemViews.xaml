@@ -1,0 +1,98 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:viewModels="clr-namespace:GildedRose.Client.ViewModels"
+                    mc:Ignorable="d">
+
+    <!-- An item -->
+    <DataTemplate DataType="{x:Type viewModels:ItemViewModel}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="75" />
+                <ColumnDefinition Width="75" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0"
+                       Text="{Binding Model.Name}"
+                       Foreground="{StaticResource WindowForegroundColor}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Height="20" />
+
+            <TextBlock Grid.Column="1"
+                       Text="{Binding Model.SellIn}"
+                       Foreground="{StaticResource WindowForegroundColor}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Right"
+                       Height="20" />
+
+            <TextBlock Grid.Column="2"
+                       Text="{Binding Model.Quality}"
+                       Foreground="{StaticResource WindowForegroundColor}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Right"
+                       Height="20" />
+        </Grid>
+    </DataTemplate>
+
+    <!-- An item category -->
+    <DataTemplate DataType="{x:Type viewModels:ItemCategoryViewModel}">
+        <Border Margin="5"
+                BorderThickness="1"
+                Padding="5"
+                BorderBrush="{StaticResource CategoryBorderColor}"
+                Background="{StaticResource CategoryBackgroundColor}">
+            <DockPanel>
+                <!-- Header -->
+                <Grid DockPanel.Dock="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="75" />
+                        <ColumnDefinition Width="75" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBlock Grid.Column="0"
+                               Text="Name"
+                               Foreground="{StaticResource ButtonForegroundColor}"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               Height="20" />
+
+                    <TextBlock Grid.Column="1"
+                               Text="Sell in"
+                               Foreground="{StaticResource ButtonForegroundColor}"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Right"
+                               Height="20" />
+
+                    <TextBlock Grid.Column="2"
+                               Text="Quality"
+                               Foreground="{StaticResource ButtonForegroundColor}"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Right"
+                               Height="20" />
+
+                    <TextBlock Grid.Column="0"
+                               Grid.ColumnSpan="3"
+                               Text="{Binding Model.Name}"
+                               Foreground="{StaticResource ButtonForegroundColor}"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Height="20" />
+                </Grid>
+
+                <!-- The items in this category -->
+                <ItemsControl ItemsSource="{Binding Items}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </DockPanel>
+        </Border>
+    </DataTemplate>
+
+</ResourceDictionary>

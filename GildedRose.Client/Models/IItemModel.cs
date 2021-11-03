@@ -3,7 +3,7 @@
     /// <summary>
     /// An interface for an item that is available for purchase in the Gilded Rose.
     /// </summary>
-    public interface IItemModel
+    public interface IItemModel : IModel
     {
         /// <summary>
         /// An item's name.

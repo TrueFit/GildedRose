@@ -4,6 +4,14 @@
              xmlns:local="clr-namespace:GildedRose.Client"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <!-- Colors -->
+        <SolidColorBrush x:Key="WindowBackgroundColor" Color="#2D2D30" />
+        <SolidColorBrush x:Key="WindowForegroundColor" Color="#FFFFFF" />
+
+        <SolidColorBrush x:Key="CategoryBackgroundColor" Color="#252526" />
+        <SolidColorBrush x:Key="CategoryBorderColor" Color="#3F3F46" />
+
+        <SolidColorBrush x:Key="ButtonBackgroundColor" Color="#3E3E40" />
+        <SolidColorBrush x:Key="ButtonForegroundColor" Color="#C7C7C7" />
     </Application.Resources>
 </Application>

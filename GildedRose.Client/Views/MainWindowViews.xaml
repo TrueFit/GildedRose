@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:viewModels="clr-namespace:GildedRose.Client.ViewModels"
+                    mc:Ignorable="d">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ItemViews.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- Data template for the application's main window -->
+    <DataTemplate DataType="{x:Type viewModels:MainWindowViewModel}">
+        <DockPanel Margin="5">
+            <!-- Action panel -->
+            <StackPanel DockPanel.Dock="Right" 
+                    Width="150" 
+                    Margin="10 0 5 0" 
+                    Orientation="Vertical">
+            </StackPanel>
+
+            <!-- The shop's inventory -->
+            <ItemsControl ItemsSource="{Binding ItemCategories}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="2" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </DockPanel>
+    </DataTemplate>
+
+</ResourceDictionary>
