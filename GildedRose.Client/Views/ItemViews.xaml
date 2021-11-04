@@ -50,16 +50,19 @@
                     
                     <TextBlock Grid.Column="0"
                                Text="Name"
+                               Foreground="{StaticResource ButtonForegroundColor}"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Left" />
 
                     <TextBlock Grid.Column="1"
                                Text="Sell in"
+                               Foreground="{StaticResource ButtonForegroundColor}"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Right" />
 
                     <TextBlock Grid.Column="2"
                                Text="Quality"
+                               Foreground="{StaticResource ButtonForegroundColor}"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Right" />
 
