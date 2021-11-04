@@ -11,7 +11,50 @@
         <SolidColorBrush x:Key="CategoryBackgroundColor" Color="#252526" />
         <SolidColorBrush x:Key="CategoryBorderColor" Color="#3F3F46" />
 
+        <SolidColorBrush x:Key="TabItemMouseOverColor" Color="#1C97EA" />
+        <SolidColorBrush x:Key="TabItemSelectedColor" Color="#007ACC" />
+
         <SolidColorBrush x:Key="ButtonBackgroundColor" Color="#3E3E40" />
         <SolidColorBrush x:Key="ButtonForegroundColor" Color="#C7C7C7" />
+        <SolidColorBrush x:Key="ButtonDisabledBackgroundColor" Color="#2E2E30" />
+        <SolidColorBrush x:Key="ButtonDisabledForegroundColor" Color="#535355" />
+
+        <!-- TextBlock -->
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Height" Value="20" />
+            <Setter Property="Foreground" Value="{StaticResource ResourceKey=WindowForegroundColor}" />
+        </Style>
+
+        <!-- Buttons -->
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Height" Value="20" />
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" CornerRadius="0">
+                            <TextBlock Margin="0 2 0 0" Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" Background="{TemplateBinding Background}" 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource ResourceKey=TabItemMouseOverColor}" />
+                    <Setter Property="Foreground" Value="{StaticResource ResourceKey=WindowForegroundColor}" />
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="False">
+                    <Setter Property="Background" Value="{StaticResource ResourceKey=ButtonBackgroundColor}" />
+                    <Setter Property="Foreground" Value="{StaticResource ResourceKey=ButtonForegroundColor}" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{StaticResource ResourceKey=RpgButtonDisabledBackgroundColor}" />
+                    <Setter Property="Foreground" Value="{StaticResource ResourceKey=RpgButtonDisabledForegroundColor}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Application.Resources>
 </Application>

@@ -1,9 +1,11 @@
-﻿namespace GildedRose.Client.Models
+﻿using System.ComponentModel;
+
+namespace GildedRose.Client.Models
 {
     /// <summary>
     /// Basic interface for any model
     /// </summary>
-    public interface IModel
+    public interface IModel : INotifyPropertyChanged
     {
     }
 }

@@ -5,12 +5,26 @@ namespace GildedRose.Client.Models
     /// <summary>
     /// A category in Gilded Rose's inventory
     /// </summary>
-    public class ItemCategoryModel : IModel
+    public class ItemCategoryModel : AModel, IModel
     {
+        #region Name
+
         /// <summary>
-        /// The category's name
+        /// The inventory category
         /// </summary>
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                OnPropertyChanged(nameof(Name));
+            }
+        }
+
+        private string _name;
+
+        #endregion
 
         /// <summary>
         /// The items in this category

@@ -3,6 +3,7 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:viewModels="clr-namespace:GildedRose.Client.ViewModels"
+                    xmlns:views="clr-namespace:GildedRose.Client.Views"
                     mc:Ignorable="d">
 
     <!-- An item -->
@@ -15,25 +16,19 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0"
-                       Text="{Binding Model.Name}"
-                       Foreground="{StaticResource WindowForegroundColor}"
+                       Text="{Binding Name}"
                        VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
-                       Height="20" />
+                       HorizontalAlignment="Left" />
 
             <TextBlock Grid.Column="1"
-                       Text="{Binding Model.SellIn}"
-                       Foreground="{StaticResource WindowForegroundColor}"
+                       Text="{Binding SellIn, Converter={views:ExpirationDateConverter}}"
                        VerticalAlignment="Center"
-                       HorizontalAlignment="Right"
-                       Height="20" />
+                       HorizontalAlignment="Right" />
 
             <TextBlock Grid.Column="2"
-                       Text="{Binding Model.Quality}"
-                       Foreground="{StaticResource WindowForegroundColor}"
+                       Text="{Binding Quality}"
                        VerticalAlignment="Center"
-                       HorizontalAlignment="Right"
-                       Height="20" />
+                       HorizontalAlignment="Right" />
         </Grid>
     </DataTemplate>
 
@@ -55,32 +50,25 @@
                     
                     <TextBlock Grid.Column="0"
                                Text="Name"
-                               Foreground="{StaticResource ButtonForegroundColor}"
                                VerticalAlignment="Center"
-                               HorizontalAlignment="Left"
-                               Height="20" />
+                               HorizontalAlignment="Left" />
 
                     <TextBlock Grid.Column="1"
                                Text="Sell in"
-                               Foreground="{StaticResource ButtonForegroundColor}"
                                VerticalAlignment="Center"
-                               HorizontalAlignment="Right"
-                               Height="20" />
+                               HorizontalAlignment="Right" />
 
                     <TextBlock Grid.Column="2"
                                Text="Quality"
-                               Foreground="{StaticResource ButtonForegroundColor}"
                                VerticalAlignment="Center"
-                               HorizontalAlignment="Right"
-                               Height="20" />
+                               HorizontalAlignment="Right" />
 
                     <TextBlock Grid.Column="0"
                                Grid.ColumnSpan="3"
-                               Text="{Binding Model.Name}"
+                               Text="{Binding Name}"
                                Foreground="{StaticResource ButtonForegroundColor}"
                                VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
-                               Height="20" />
+                               HorizontalAlignment="Center" />
                 </Grid>
 
                 <!-- The items in this category -->

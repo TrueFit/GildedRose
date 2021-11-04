@@ -18,11 +18,11 @@
         /// <summary>
         /// The SellIn value denotes the number of days the store owners have to sell the item.
         /// </summary>
-        int SellIn { get; }
+        int SellIn { get; set; }
 
         /// <summary>
         /// The quality of an item states how valuable the item is.
         /// </summary>
-        int Quality { get; }
+        int Quality { get; set; }
     }
 }
