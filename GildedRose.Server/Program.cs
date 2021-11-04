@@ -1,3 +1,4 @@
+using GildedRose.Server.Logic;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
@@ -7,6 +8,8 @@ namespace GildedRose.Server
     {
         public static void Main(string[] args)
         {
+            InventoryLogic.Instance.Initialize();
+
             CreateHostBuilder(args).Build().Run();
         }
 

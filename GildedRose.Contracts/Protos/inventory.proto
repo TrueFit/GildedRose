@@ -4,18 +4,76 @@ option csharp_namespace = "GildedRose.Contracts";
 
 package inventory;
 
-// The greeting service definition.
 service Inventory {
-  // Sends a greeting
-  rpc SayHello (HelloRequest) returns (HelloReply);
+	// Get a list of all items from our inventory.
+	rpc GetAllItems (GetAllItemsRequest) returns (GetAllItemsResponse);
+
+	// Add an item to the inventory.
+	rpc AddItem (AddItemRequest) returns (AddItemResponse);
+
+	// Request information about an item by it's name.
+	rpc GetItemByName (GetItemByNameRequest) returns (GetItemByNameResponse);
+
+	// Progress to next day and update the shop's inventory.
+	rpc ProgressToNextDay (ProgressToNextDayRequest) returns (ProgressToNextDayResponse);
+
+	// Get information about all the trash in your inventory.
+	rpc GetTrash (GetTrashRequest) returns (GetTrashResponse);
+
+	// Remove all trash from the shop's inventory.
+	rpc RemoveTrash (RemoveTrashRequest) returns (RemoveTrashResponse);
 }
 
-// The request message containing the user's name.
-message HelloRequest {
-  string name = 1;
+message Item {
+	string name = 1;
+	string category = 2;
+	int32 sellIn = 3;
+	int32 quality = 4;
 }
 
-// The response message containing the greetings.
-message HelloReply {
-  string message = 1;
+// GetAllItems
+message GetAllItemsRequest{
+}
+
+message GetAllItemsResponse {
+	repeated Item items = 1;
+}
+
+// AddItem
+message AddItemRequest {
+	Item item = 1;
+}
+
+message AddItemResponse {
+}
+
+// GetItemByName
+message GetItemByNameRequest {
+	string name = 1;
+}
+
+message GetItemByNameResponse {
+	Item item = 1;
+}
+
+// ProgressToNextDay
+message ProgressToNextDayRequest {
+}
+
+message ProgressToNextDayResponse {
+}
+
+// GetTrash
+message GetTrashRequest {
+}
+
+message GetTrashResponse {
+	repeated Item items = 1;
+}
+
+// RemoveTrash
+message RemoveTrashRequest {
+}
+
+message RemoveTrashResponse {
 }

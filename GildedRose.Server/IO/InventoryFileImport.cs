@@ -1,10 +1,10 @@
-﻿using GildedRose.Client.Models;
+﻿using GildedRose.Contracts;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace GildedRose.Client.IO
+namespace GildedRose.Server.IO
 {
     /// <summary>
     /// Helper class for file operations regarding inventory items.
@@ -17,11 +17,11 @@ namespace GildedRose.Client.IO
         /// <param name="fileName">The full path to the inventory list.</param>
         /// <param name="errors">The errors that happened during the file import.</param>
         /// <returns>All imported items from the inventory list.</returns>
-        public static IList<IItemModel> ImportItems(string fileName, out IList<string> errors)
+        public static IList<Item> ImportItems(string fileName, out IList<string> errors)
         {
             errors = new List<string>();
 
-            var importedItems = new List<IItemModel>();
+            var importedItems = new List<Item>();
 
             // Make sure, the file does exist.
             if (!File.Exists(fileName))
@@ -44,7 +44,7 @@ namespace GildedRose.Client.IO
                     {
                         if (int.TryParse(parts[2], out var sellIn) && int.TryParse(parts[3], out var quality))
                         {
-                            importedItems.Add(new ItemModel()
+                            importedItems.Add(new Item()
                             {
                                 Name = parts[0],
                                 Category = parts[1],

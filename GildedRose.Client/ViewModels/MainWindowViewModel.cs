@@ -1,11 +1,9 @@
-﻿using GildedRose.Client.Logic;
+﻿using GildedRose.Client.InventorySystems;
 using GildedRose.Client.Models;
 using GildedRose.Client.Views;
-using GildedRose.Contracts;
-using Grpc.Net.Client;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Threading.Tasks;
+using System.Linq;
 using System.Windows.Input;
 
 namespace GildedRose.Client.ViewModels
@@ -15,9 +13,7 @@ namespace GildedRose.Client.ViewModels
     /// </summary>
     public class MainWindowViewModel : AViewModel
     {
-        private readonly ItemUpdateLogic _itemUpdateLogic;
-
-        private GrpcChannel _grpcChannel;
+        private readonly IInventorySystem _inventorySystem;
 
         /// <summary>
         /// The inventory categories
@@ -44,12 +40,21 @@ namespace GildedRose.Client.ViewModels
         /// </summary>
         public MainWindowViewModel()
         {
-            _itemUpdateLogic = new ItemUpdateLogic();
+            _inventorySystem = new GrpcInventorySystem();
 
             ItemCategories = new ObservableCollection<ItemCategoryViewModel>();
 
-            GoToSleepCommand = new SimpleCommand(() => _itemUpdateLogic.UpdateItems(ItemCategories));
-            ThrowAwayTrashCommand = new SimpleCommand(() => _itemUpdateLogic.RemoveTrash(ItemCategories));
+            GoToSleepCommand = new SimpleCommand(() =>
+            {
+                _inventorySystem.ProgressToNextDay();
+                RefreshInventory();
+            });
+
+            ThrowAwayTrashCommand = new SimpleCommand(() =>
+            {
+                _inventorySystem.RemoveTrash();
+                RefreshInventory();
+            });
 
             AddNewItemCommand = new SimpleCommand(() =>
             {
@@ -59,28 +64,56 @@ namespace GildedRose.Client.ViewModels
                 var result = dialog.ShowDialog();
                 if (result.HasValue && result.Value)
                 {
-                    _itemUpdateLogic.AddItem(ItemCategories, new ItemModel()
+                    _inventorySystem.AddItem(new ItemModel()
                     {
                         Name = viewModel.Name,
                         Category = viewModel.Category,
                         SellIn = viewModel.SellIn,
                         Quality = viewModel.Quality
                     });
+
+                    RefreshInventory();
                 }
             });
         }
 
-        public void Connect()
+        /// <summary>
+        /// Initialize the client by connecting it to the inventory system.
+        /// </summary>
+        public void Initialize()
         {
-            _grpcChannel = GrpcChannel.ForAddress("https://localhost:5001/");
+            _inventorySystem.Connect();
 
-            var client = new Inventory.InventoryClient(_grpcChannel);
+            RefreshInventory();
+        }
 
-            Task.Run(async () =>
+        private void RefreshInventory()
+        {
+            var allItems = _inventorySystem.GetAllItems();
+
+            // Clear view model.
+            ItemCategories.Clear();
+
+            // Sort items into categories.
+            var categories = new List<ItemCategoryModel>();
+            foreach (var item in allItems)
             {
-                var reply = await client.SayHelloAsync(new HelloRequest { Name = "GreeterClient" });
-                Debug.WriteLine("Greeting: " + reply.Message);
-            });
+                var category = categories.FirstOrDefault(x => !string.IsNullOrEmpty(x.Name) && x.Name.Equals(item.Category));
+                if (category == null)
+                {
+                    category = new ItemCategoryModel()
+                    {
+                        Name = item.Category
+                    };
+                    categories.Add(category);
+                }
+
+                category.Items.Add(item);
+            }
+
+            // Add categories to view model.
+            foreach (var category in categories)
+                ItemCategories.Add(new ItemCategoryViewModel(category));
         }
     }
 }
