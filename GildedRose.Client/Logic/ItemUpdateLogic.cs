@@ -1,7 +1,9 @@
-﻿using GildedRose.Client.ViewModels;
+﻿using GildedRose.Client.Models;
+using GildedRose.Client.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace GildedRose.Client.Logic
 {
@@ -29,6 +31,21 @@ namespace GildedRose.Client.Logic
             {
                 "Sulfuras"
             };
+        }
+
+        public void AddItem(ObservableCollection<ItemCategoryViewModel> categories, ItemModel itemModel)
+        {
+            var category = categories.FirstOrDefault(x => !string.IsNullOrEmpty(x.Name) && x.Name.Equals(itemModel.Category));
+            if (category == null)
+            {
+                category = new ItemCategoryViewModel(new ItemCategoryModel()
+                {
+                    Name = itemModel.Category
+                });
+                categories.Add(category);
+            }
+
+            category.Items.Add(new ItemViewModel(itemModel));
         }
 
         public void UpdateItems(ObservableCollection<ItemCategoryViewModel> categories)
@@ -96,6 +113,25 @@ namespace GildedRose.Client.Logic
                     item.Model.SellIn += deltaSellIn;
                     item.Model.Quality = Math.Max(0, Math.Min(maxQuality, item.Model.Quality + deltaQuality));
                 }
+            }
+        }
+
+        public void RemoveTrash(ObservableCollection<ItemCategoryViewModel> categories)
+        {
+            for (var j = categories.Count - 1; j >= 0; j--)
+            {
+                var category = categories[j];
+
+                for (var i = category.Items.Count - 1; i >= 0; i--)
+                {
+                    var item = category.Items[i];
+
+                    if (item.Quality == 0)
+                        category.Items.Remove(item);
+                }
+
+                if (category.Items.Count == 0)
+                    categories.Remove(category);
             }
         }
     }

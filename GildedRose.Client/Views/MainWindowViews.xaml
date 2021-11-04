@@ -5,7 +5,7 @@
                     xmlns:viewModels="clr-namespace:GildedRose.Client.ViewModels"
                     mc:Ignorable="d">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="ItemViews.xaml"/>
+        <ResourceDictionary Source="ItemViews.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!-- Data template for the application's main window -->
@@ -18,6 +18,14 @@
                     Orientation="Vertical">
                 <Button Content="Go to bed"
                         Command="{Binding GoToSleepCommand}" />
+
+                <Button Content="Add new item"
+                        Command="{Binding AddNewItemCommand}"
+                        Margin="0 20 0 0" />
+
+                <Button Content="Throw away trash"
+                        Command="{Binding ThrowAwayTrashCommand}"
+                        Margin="0 5 0 0" />
             </StackPanel>
 
             <!-- The shop's inventory -->

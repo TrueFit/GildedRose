@@ -26,7 +26,7 @@
                        HorizontalAlignment="Right" />
 
             <TextBlock Grid.Column="2"
-                       Text="{Binding Quality}"
+                       Text="{Binding Quality, Converter={views:QualityTextConverter}}"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Right" />
         </Grid>
