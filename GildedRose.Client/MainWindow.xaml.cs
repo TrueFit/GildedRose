@@ -12,6 +12,8 @@ namespace GildedRose.Client
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly MainWindowViewModel _mainWindowViewModel;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -38,15 +40,22 @@ namespace GildedRose.Client
             }
 
             // Create view model.
-            var mainWindowViewModel = new MainWindowViewModel();
+            _mainWindowViewModel = new MainWindowViewModel();
 
             foreach (var category in categories)
-                mainWindowViewModel.ItemCategories.Add(new ItemCategoryViewModel(category));
+                _mainWindowViewModel.ItemCategories.Add(new ItemCategoryViewModel(category));
 
             // Initialize view.
             InitializeComponent();
 
-            DataContext = mainWindowViewModel;
+            DataContext = _mainWindowViewModel;
+
+            Loaded += MainWindow_Loaded;
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            _mainWindowViewModel.Connect();
         }
     }
 }
