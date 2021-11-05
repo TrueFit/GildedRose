@@ -1,7 +1,9 @@
 ﻿using GildedRose.Contracts;
 using GildedRose.Server.IO;
+using GildedRose.Server.Utils;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace GildedRose.Server.Logic
@@ -53,7 +55,13 @@ namespace GildedRose.Server.Logic
         /// </summary>
         public void Initialize()
         {
-            _items = InventoryFileImport.ImportItems(@"C:\Projects\Gilded Rose\trunk\inventory.txt", out var errors);
+            // Load inventory list from data base if one exists. If there is no data base, load the inventory text file.
+            IDataSource dataSource = new InventoryListDataSource("inventory.txt");
+
+            if (File.Exists(FileUtils.GetDataBaseFileName()))
+                dataSource = new SQLiteDataSource();
+
+            _items = dataSource.GetAllItems(out var errors);
 
             // List import errors.
             if (errors.Any())
@@ -62,6 +70,15 @@ namespace GildedRose.Server.Logic
                 foreach (var error in errors)
                     Console.WriteLine($"\t{error}");
             }
+        }
+
+        /// <summary>
+        /// Save all items back to the data source.
+        /// </summary>
+        public void Save()
+        {
+            var dataSource = new SQLiteDataSource();
+            dataSource.CreateNew(_items);
         }
 
         /// <summary>

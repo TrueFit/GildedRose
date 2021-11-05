@@ -7,30 +7,46 @@ using System.Text;
 namespace GildedRose.Server.IO
 {
     /// <summary>
-    /// Helper class for file operations regarding inventory items.
+    /// A simple text file storing the inventory list.
     /// </summary>
-    public class InventoryFileImport
+    public class InventoryListDataSource : IDataSource
     {
+        private readonly string _fileName;
+
         /// <summary>
-        /// Import the current inventory list.
+        /// Constructor
         /// </summary>
-        /// <param name="fileName">The full path to the inventory list.</param>
-        /// <param name="errors">The errors that happened during the file import.</param>
-        /// <returns>All imported items from the inventory list.</returns>
-        public static IList<Item> ImportItems(string fileName, out IList<string> errors)
+        public InventoryListDataSource(string fileName)
+        {
+            _fileName = fileName;
+        }
+
+        /// <inheritdoc />
+        public void CreateNew(IList<Item> items)
+        {
+            var streamWriter = new StreamWriter(_fileName, false, Encoding.UTF8);
+
+            foreach (var item in items)
+                streamWriter.WriteLine($"{item.Name},{item.Category},{item.SellIn},{item.Quality}");
+
+            streamWriter.Close();
+        }
+
+        /// <inheritdoc />
+        public IList<Item> GetAllItems(out IList<string> errors)
         {
             errors = new List<string>();
 
             var importedItems = new List<Item>();
 
             // Make sure, the file does exist.
-            if (!File.Exists(fileName))
+            if (!File.Exists(_fileName))
             {
                 return importedItems;
             }
 
             // Import the inventory file.
-            var streamReader = new StreamReader(fileName, Encoding.Default);
+            var streamReader = new StreamReader(_fileName, Encoding.Default);
 
             var line = string.Empty;
             while ((line = streamReader.ReadLine()) != null)
