@@ -1,10 +1,15 @@
-﻿namespace GildedRose.Client.Models
+﻿using System;
+
+namespace GildedRose.Client.Models
 {
     /// <summary>
     /// An item that is available for purchase in the Gilded Rose.
     /// </summary>
     public class ItemModel : AModel, IItemModel
     {
+        /// <inheritdoc />
+        public Guid Id { get; set; }
+
         #region Name
 
         /// <inheritdoc />
@@ -76,7 +81,7 @@
         /// <inheritdoc />
         public override string ToString()
         {
-            return $"Name = \"{Name}\", Category = \"{Category}\", SellIn = {SellIn}, Quality = {Quality}";
+            return $"Id = {Id}, Name = \"{Name}\", Category = \"{Category}\", SellIn = {SellIn}, Quality = {Quality}";
         }
     }
 }

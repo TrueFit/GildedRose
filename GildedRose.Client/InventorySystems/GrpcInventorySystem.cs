@@ -1,6 +1,7 @@
 ﻿using GildedRose.Client.Models;
 using GildedRose.Contracts;
 using Grpc.Net.Client;
+using System;
 using System.Collections.Generic;
 using static GildedRose.Contracts.Inventory;
 
@@ -35,6 +36,7 @@ namespace GildedRose.Client.InventorySystems
             {
                 items.Add(new ItemModel()
                 {
+                    Id = Guid.Parse(item.Guid),
                     Name = item.Name,
                     Category = item.Category,
                     SellIn = item.SellIn,
@@ -52,6 +54,7 @@ namespace GildedRose.Client.InventorySystems
             {
                 Item = new Item()
                 {
+                    Guid = item.Id.ToString(),
                     Name = item.Name,
                     Category = item.Category,
                     SellIn = item.SellIn,
@@ -73,6 +76,7 @@ namespace GildedRose.Client.InventorySystems
 
             return new ItemModel()
             {
+                Id = Guid.Parse(getItemByNameResponse.Item.Guid),
                 Name = getItemByNameResponse.Item.Name,
                 Category = getItemByNameResponse.Item.Category,
                 SellIn = getItemByNameResponse.Item.SellIn,
@@ -81,9 +85,25 @@ namespace GildedRose.Client.InventorySystems
         }
 
         /// <inheritdoc />
-        public void ProgressToNextDay()
+        public IList<IItemModel> ProgressToNextDay()
         {
-            _inventoryClient.ProgressToNextDay(new ProgressToNextDayRequest());
+            var progressedItems = new List<IItemModel>();
+
+            var progressToNextDayResponse = _inventoryClient.ProgressToNextDay(new ProgressToNextDayRequest());
+            if (progressToNextDayResponse == null || progressToNextDayResponse.Items == null)
+                return progressedItems;
+
+            foreach (var item in progressToNextDayResponse.Items)
+            {
+                progressedItems.Add(new ItemModel()
+                {
+                    Id = Guid.Parse(item.Guid),
+                    SellIn = item.SellIn,
+                    Quality = item.Quality
+                });
+            }
+
+            return progressedItems;
         }
 
         /// <inheritdoc />
@@ -92,13 +112,14 @@ namespace GildedRose.Client.InventorySystems
             var items = new List<IItemModel>();
 
             var getTrashResponse = _inventoryClient.GetTrash(new GetTrashRequest());
-            if (getTrashResponse == null)
+            if (getTrashResponse == null || getTrashResponse.Items == null)
                 return items;
 
             foreach (var item in getTrashResponse.Items)
             {
                 items.Add(new ItemModel()
                 {
+                    Id = Guid.Parse(item.Guid),
                     Name = item.Name,
                     Category = item.Category,
                     SellIn = item.SellIn,
@@ -110,9 +131,18 @@ namespace GildedRose.Client.InventorySystems
         }
 
         /// <inheritdoc />
-        public void RemoveTrash()
+        public IList<Guid> RemoveTrash()
         {
-            _inventoryClient.RemoveTrash(new RemoveTrashRequest());
+            var removedItems = new List<Guid>();
+
+            var removeTrashResponse = _inventoryClient.RemoveTrash(new RemoveTrashRequest());
+            if (removeTrashResponse == null || removeTrashResponse.Guids == null)
+                return removedItems;
+
+            foreach (var removedItem in removeTrashResponse.Guids)
+                removedItems.Add(Guid.Parse(removedItem));
+
+            return removedItems;
         }
     }
 }

@@ -68,9 +68,12 @@ namespace GildedRose.Server
         /// </summary>
         public override Task<ProgressToNextDayResponse> ProgressToNextDay(ProgressToNextDayRequest request, ServerCallContext context)
         {
-            InventoryLogic.Instance.ProgressToNextDay();
+            var progressedItems = InventoryLogic.Instance.ProgressToNextDay();
 
-            return Task.FromResult(new ProgressToNextDayResponse());
+            var response = new ProgressToNextDayResponse();
+            response.Items.AddRange(progressedItems);
+
+            return Task.FromResult(response);
         }
 
         /// <summary>
@@ -89,9 +92,12 @@ namespace GildedRose.Server
         /// </summary>
         public override Task<RemoveTrashResponse> RemoveTrash(RemoveTrashRequest request, ServerCallContext context)
         {
-            InventoryLogic.Instance.RemoveTrash();
+            var removedItems = InventoryLogic.Instance.RemoveTrash();
 
-            return Task.FromResult(new RemoveTrashResponse());
+            var response = new RemoveTrashResponse();
+            response.Guids.AddRange(removedItems);
+
+            return Task.FromResult(response);
         }
     }
 }

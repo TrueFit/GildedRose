@@ -110,7 +110,7 @@ namespace GildedRose.Client.ViewModels
         /// <summary>
         /// Command to approve the changes and add the new item
         /// </summary>
-        public SimpleCommand OkayCommand { get; }
+        public ICommand OkayCommand { get; }
 
         /// <summary>
         /// Command to cancel this action

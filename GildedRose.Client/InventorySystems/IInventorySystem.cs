@@ -1,4 +1,5 @@
 ﻿using GildedRose.Client.Models;
+using System;
 using System.Collections.Generic;
 
 namespace GildedRose.Client.InventorySystems
@@ -29,9 +30,9 @@ namespace GildedRose.Client.InventorySystems
         IItemModel GetItemByName(string name);
 
         /// <summary>
-        /// Progress to the next working day and enjoy the rest of the day.
+        /// Progress to the next working day and enjoy the rest of the day. Returns the progressed item information.
         /// </summary>
-        void ProgressToNextDay();
+        IList<IItemModel> ProgressToNextDay();
 
         /// <summary>
         /// Get all items with such a low quality that they are considered trash.
@@ -39,8 +40,8 @@ namespace GildedRose.Client.InventorySystems
         IList<IItemModel> GetTrash();
 
         /// <summary>
-        /// Remove all trash from the inventory.
+        /// Remove all trash from the inventory and return the Ids from the deleted items.
         /// </summary>
-        void RemoveTrash();
+        IList<Guid> RemoveTrash();
     }
 }

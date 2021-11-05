@@ -24,11 +24,20 @@ service Inventory {
 	rpc RemoveTrash (RemoveTrashRequest) returns (RemoveTrashResponse);
 }
 
+// The contract representing an item in the shop
 message Item {
-	string name = 1;
-	string category = 2;
-	int32 sellIn = 3;
-	int32 quality = 4;
+	string guid = 1;
+	string name = 2;
+	string category = 3;
+	int32 sellIn = 4;
+	int32 quality = 5;
+}
+
+// The contract representing the status update of an item after time progressed
+message ProgressedItem {
+	string guid = 1;
+	int32 sellIn = 2;
+	int32 quality = 3;
 }
 
 // GetAllItems
@@ -61,6 +70,7 @@ message ProgressToNextDayRequest {
 }
 
 message ProgressToNextDayResponse {
+	repeated ProgressedItem items = 1;
 }
 
 // GetTrash
@@ -76,4 +86,5 @@ message RemoveTrashRequest {
 }
 
 message RemoveTrashResponse {
+	repeated string guids = 1;
 }

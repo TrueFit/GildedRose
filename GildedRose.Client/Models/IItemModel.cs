@@ -1,10 +1,17 @@
-﻿namespace GildedRose.Client.Models
+﻿using System;
+
+namespace GildedRose.Client.Models
 {
     /// <summary>
     /// An interface for an item that is available for purchase in the Gilded Rose.
     /// </summary>
     public interface IItemModel : IModel
     {
+        /// <summary>
+        /// A unique identifier to identify this item.
+        /// </summary>
+        Guid Id { get; set; }
+
         /// <summary>
         /// An item's name.
         /// </summary>

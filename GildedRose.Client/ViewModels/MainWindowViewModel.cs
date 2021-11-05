@@ -1,6 +1,7 @@
 ﻿using GildedRose.Client.InventorySystems;
 using GildedRose.Client.Models;
 using GildedRose.Client.Views;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -46,14 +47,43 @@ namespace GildedRose.Client.ViewModels
 
             GoToSleepCommand = new SimpleCommand(() =>
             {
-                _inventorySystem.ProgressToNextDay();
-                RefreshInventory();
+                var progressedItems = _inventorySystem.ProgressToNextDay();
+
+                // Update the quality and sell-in value for each item.
+                foreach (var progressedItem in progressedItems)
+                {
+                    var item = GetItem(progressedItem.Id);
+                    if (item != null)
+                    {
+                        item.SellIn = progressedItem.SellIn;
+                        item.Quality = progressedItem.Quality;
+                    }
+                }
             });
 
             ThrowAwayTrashCommand = new SimpleCommand(() =>
             {
-                _inventorySystem.RemoveTrash();
-                RefreshInventory();
+                var removedItems = _inventorySystem.RemoveTrash();
+
+                // Remove all the trashed items from the inventory.
+                foreach (var removedItem in removedItems)
+                {
+                    var category = GetCategory(removedItem);
+                    if (category != null)
+                    {
+                        var item = category.Model.Items.FirstOrDefault(x => x.Id == removedItem);
+                        if (item != null)
+                            category.Model.Items.Remove(item);
+
+                        // If the category does not contain any items any more, we will delete it.
+                        if (category.Model.Items.Count == 0)
+                        {
+                            ItemCategories.Remove(category);
+
+                            category.Dispose();
+                        }
+                    }
+                }
             });
 
             AddNewItemCommand = new SimpleCommand(() =>
@@ -64,15 +94,31 @@ namespace GildedRose.Client.ViewModels
                 var result = dialog.ShowDialog();
                 if (result.HasValue && result.Value)
                 {
-                    _inventorySystem.AddItem(new ItemModel()
+                    // Create new item ..
+                    var newItem = new ItemModel()
                     {
+                        Id = Guid.NewGuid(),
                         Name = viewModel.Name,
                         Category = viewModel.Category,
                         SellIn = viewModel.SellIn,
                         Quality = viewModel.Quality
-                    });
+                    };
 
-                    RefreshInventory();
+                    // .. and let the inventory system know about it.
+                    _inventorySystem.AddItem(newItem);
+
+                    // Update models and user interface.
+                    var category = ItemCategories.FirstOrDefault(x => !string.IsNullOrEmpty(x.Name) && x.Name.Equals(newItem.Category));
+                    if (category == null)
+                    {
+                        category = new ItemCategoryViewModel(new ItemCategoryModel()
+                        {
+                            Name = newItem.Category
+                        });
+                        ItemCategories.Add(category);
+                    }
+
+                    category.Items.Add(new ItemViewModel(newItem));
                 }
             });
         }
@@ -84,11 +130,7 @@ namespace GildedRose.Client.ViewModels
         {
             _inventorySystem.Connect();
 
-            RefreshInventory();
-        }
-
-        private void RefreshInventory()
-        {
+            // Get information about all our items.
             var allItems = _inventorySystem.GetAllItems();
 
             // Clear view model.
@@ -114,6 +156,22 @@ namespace GildedRose.Client.ViewModels
             // Add categories to view model.
             foreach (var category in categories)
                 ItemCategories.Add(new ItemCategoryViewModel(category));
+        }
+
+        private ItemCategoryViewModel GetCategory(Guid id)
+        {
+            return ItemCategories.FirstOrDefault(x => x.Items.Any(y => y.Model.Id == id));
+        }
+
+        private IItemModel GetItem(Guid id)
+        {
+            var category = GetCategory(id);
+            if (category != null)
+            {
+                return category.Items.FirstOrDefault(x => x.Model.Id == id).Model;
+            }
+
+            return null;
         }
     }
 }

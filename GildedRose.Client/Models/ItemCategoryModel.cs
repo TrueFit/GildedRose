@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 
 namespace GildedRose.Client.Models
 {
@@ -10,7 +10,7 @@ namespace GildedRose.Client.Models
         #region Name
 
         /// <summary>
-        /// The inventory category
+        /// The category's name
         /// </summary>
         public string Name
         {
@@ -29,14 +29,14 @@ namespace GildedRose.Client.Models
         /// <summary>
         /// The items in this category
         /// </summary>
-        public List<IItemModel> Items { get; }
+        public ObservableCollection<IItemModel> Items { get; }
 
         /// <summary>
         /// Constructor
         /// </summary>
         public ItemCategoryModel()
         {
-            Items = new List<IItemModel>();
+            Items = new ObservableCollection<IItemModel>();
         }
 
         /// <inheritdoc />

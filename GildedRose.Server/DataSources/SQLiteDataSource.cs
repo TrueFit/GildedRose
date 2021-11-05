@@ -22,12 +22,12 @@ namespace GildedRose.Server.IO
                     command.CommandText = "DROP TABLE IF EXISTS inventory";
                     command.ExecuteNonQuery();
 
-                    command.CommandText = "CREATE TABLE inventory (id INTEGER PRIMARY KEY, name VARCHAR(255), category VARCHAR(255), sellIn INT, quality INT)";
+                    command.CommandText = "CREATE TABLE inventory (id INTEGER PRIMARY KEY, guid TEXT, name TEXT, category TEXT, sellIn INT, quality INT)";
                     command.ExecuteNonQuery();
 
                     foreach (var item in items)
                     {
-                        command.CommandText = $"INSERT INTO inventory (name, category, sellIn, quality) VALUES ('{item.Name}', '{item.Category}', {item.SellIn}, {item.Quality})";
+                        command.CommandText = $"INSERT INTO inventory (guid, name, category, sellIn, quality) VALUES ('{item.Guid}', '{item.Name}', '{item.Category}', {item.SellIn}, {item.Quality})";
                         command.ExecuteNonQuery();
                     }
                 }
@@ -55,10 +55,11 @@ namespace GildedRose.Server.IO
                         {
                             importedItems.Add(new Item()
                             {
-                                Name = reader.GetString(1),
-                                Category = reader.GetString(2),
-                                SellIn = reader.GetInt32(3),
-                                Quality = reader.GetInt32(4)
+                                Guid = reader.GetString(1),
+                                Name = reader.GetString(2),
+                                Category = reader.GetString(3),
+                                SellIn = reader.GetInt32(4),
+                                Quality = reader.GetInt32(5)
                             });
                         }
                     }

@@ -62,6 +62,7 @@ namespace GildedRose.Server.IO
                         {
                             importedItems.Add(new Item()
                             {
+                                Guid = Guid.NewGuid().ToString(),
                                 Name = parts[0],
                                 Category = parts[1],
                                 SellIn = sellIn,

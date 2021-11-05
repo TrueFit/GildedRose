@@ -1,12 +1,15 @@
 ﻿using GildedRose.Client.Models;
+using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Linq;
 
 namespace GildedRose.Client.ViewModels
 {
     /// <summary>
-    /// View model for a category
+    /// View model for an item category
     /// </summary>
-    public class ItemCategoryViewModel : AViewModel<ItemCategoryModel>
+    public class ItemCategoryViewModel : AViewModel<ItemCategoryModel>, IDisposable
     {
         #region Name
 
@@ -39,6 +42,9 @@ namespace GildedRose.Client.ViewModels
         public ItemCategoryViewModel(ItemCategoryModel category)
             : base(category)
         {
+            if (category == null)
+                throw new ArgumentNullException(nameof(category));
+
             Name = category.Name;
             Items = new ObservableCollection<ItemViewModel>();
 
@@ -47,15 +53,62 @@ namespace GildedRose.Client.ViewModels
                 Items.Add(new ItemViewModel(item));
             }
 
-            Model.PropertyChanged += (sender, e) =>
+            // Make sure we got notified about model changes.
+            Model.Items.CollectionChanged += Items_CollectionChanged;
+
+            Model.PropertyChanged += Model_PropertyChanged;
+        }
+
+        /// <inheritdoc />
+        public void Dispose()
+        {
+            if (Model != null)
             {
-                switch (e.PropertyName)
+                if (Model.Items != null)
+                    Model.Items.CollectionChanged -= Items_CollectionChanged;
+
+                Model.PropertyChanged -= Model_PropertyChanged;
+            }
+        }
+
+        private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            // Add new items to the category.
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (var newObject in e.NewItems)
                 {
-                    case nameof(IItemModel.Name):
-                        Name = Model.Name;
-                        break;
+                    if (newObject is IItemModel newItem)
+                        Items.Add(new ItemViewModel(newItem));
                 }
-            };
+            }
+            // Remove items from the category.
+            else if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (var oldObject in e.OldItems)
+                {
+                    if (oldObject is IItemModel oldItem)
+                    {
+                        var item = Items.FirstOrDefault(x => x.Model.Id == oldItem.Id);
+                        if (item != null)
+                        {
+                            Items.Remove(item);
+
+                            item.Dispose();
+                        }
+                    }
+                }
+            }
+        }
+
+        private void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(IItemModel.Name):
+                    Name = Model.Name;
+                    break;
+            }
         }
     }
 }

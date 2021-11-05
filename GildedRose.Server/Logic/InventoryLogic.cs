@@ -117,8 +117,10 @@ namespace GildedRose.Server.Logic
         /// <summary>
         /// Progress to the next working day and enjoy the rest of the day.
         /// </summary>
-        public void ProgressToNextDay()
+        public IList<ProgressedItem> ProgressToNextDay()
         {
+            var progressedItems = new List<ProgressedItem>();
+
             lock (_itemsLock)
             {
                 foreach (var item in _items)
@@ -172,10 +174,25 @@ namespace GildedRose.Server.Logic
                     }
 
                     // Update quality and sell-in date.
+                    var newQuality = Math.Max(0, Math.Min(maxQuality, item.Quality + deltaQuality));
+
                     item.SellIn += deltaSellIn;
-                    item.Quality = Math.Max(0, Math.Min(maxQuality, item.Quality + deltaQuality));
+                    item.Quality = newQuality;
+
+                    // Store progress information.
+                    if (deltaSellIn != 0 || item.Quality != newQuality)
+                    {
+                        progressedItems.Add(new ProgressedItem()
+                        {
+                            Guid = item.Guid,
+                            SellIn = item.SellIn,
+                            Quality = item.Quality
+                        });
+                    }
                 }
             }
+
+            return progressedItems;
         }
 
         /// <summary>
@@ -189,8 +206,10 @@ namespace GildedRose.Server.Logic
         /// <summary>
         /// Remove all trash from the inventory.
         /// </summary>
-        public void RemoveTrash()
+        public IList<string> RemoveTrash()
         {
+            var guids = new List<string>();
+
             lock (_itemsLock)
             {
                 for (var i = _items.Count - 1; i >= 0; i--)
@@ -198,9 +217,15 @@ namespace GildedRose.Server.Logic
                     var item = _items[i];
 
                     if (item.Quality == 0)
+                    {
                         _items.Remove(item);
+
+                        guids.Add(item.Guid);
+                    }
                 }
             }
+
+            return guids;
         }
     }
 }
