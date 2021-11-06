@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
 
@@ -10,7 +11,7 @@ namespace GildedRose.Client.Views
     public class QualityTextConverter : MarkupExtension, IValueConverter
     {
         /// <inheritdoc />
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null)
                 return "unknown";
@@ -22,7 +23,7 @@ namespace GildedRose.Client.Views
         }
 
         /// <inheritdoc />
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

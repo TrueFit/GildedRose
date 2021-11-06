@@ -47,3 +47,28 @@ Here are a couple of thoughts about the domain that could influence your respons
 
 * The world is a magical place - you never know when the next "special requirement" might pop up - how can you make this painless?
 * Keep in mind that accurate inventory is a must for the shop, how might you ensure that the future programmer who takes over the code while you are off adventuring doesn't mistakenly mess things up?
+
+## Solution
+
+I have provided the source code and the executables. If you want to use the application before looking at the code, please start the GildedRose.Server.exe from the Executables\Server\ folder, before launching GildedRose.Client.exe in Executables\Client\.
+
+### Architecture
+
+I wanted to develop an application in C# .NET, because it's the programming environment I worked with most over the past ten years.
+
+I chose Windows Presentation Forms (WPF) for the user interface with a clean MVVM pattern meaning the view itself is only bound to view models which are connected to the actual data models. This enables adjustments in the user interface without changing data models and vice versa.
+
+The task could have been done in a fat client without data base or services, but I hope Allison has success in her shopkeeper career and will soon have enough gold coins to hire more employees and add new cash registers. Therefore, I added a basic backend system using gRPC with ADO.NET 5 and a SQLite data base. Any company I worked for already had some sort of abstract service infrastructure that was ready-to-use. I have never done this myself and I took this programming test as an opportunity to learn about gRPC which I always wanted to do. Data storage could have been done in plain text files, but I decided to use a SQLite data base. I wanted to make a system that can be used by you directly without starting any containers, creating data bases, etc. So, a file based data base seemed to be the best fit.
+
+Most software products will be improved and expanded over time. I therefore wanted to make it as flexible as possible. I already mentioned the MVVM pattern for WPF that I used. The client is connected to an inventory system interface that can be anything. In my pull request there is an implementation to connect the client to a gRPC service, but it could be anything including professional warehouse systems. The backend system has an interface to data sources which can be inventory lists like the provided text file or a SQLite data base. This interface can be implemented for MS SQL, Oracble, MongoDB, clouds or any other type of data storage.
+
+### Assumptions
+
+1. The requirements do not specify how fast items decay each day. It is assumed the decay for SellIn and Qualitz of an item is 1 per day.
+2. The item "Sulfuras, Hand of Ragnaros" is stored in a format in the inventory file that is valid with "Hand of Ragnaros" being the name and Sulfuras being the category. It is therefore being processed as such.
+3. It is not specified how items in different categories would behave. In my generalized approach, a conjured aged brie would get a high quality very quickly.
+4. I assumed the quality of backstage passes drops to zero, once the SellIn value is lower than zero meaning the tickets can be sold on the day of concert but not after.
+
+### Assumptions
+
+To answer the second question from "Things To Consider": Using unit tests, gated check-ins and a build server. Unit tests can assure that the written code works in expected parameters and behave as expected in corner cases. A gated check-in that checks the code before committing it to a repository ensures that no code ends up in the repository that does not compile or fails unit tests. A nightly build server can provide executables or setups that are ready to use - if given Unit Tests succeed.

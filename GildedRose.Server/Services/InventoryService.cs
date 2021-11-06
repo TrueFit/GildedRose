@@ -1,6 +1,6 @@
 using GildedRose.Contracts;
-using GildedRose.Server.IO;
-using GildedRose.Server.Utils;
+using GildedRose.DataSource;
+using GildedRose.DataSource.Utils;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,7 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GildedRose.Server
+namespace GildedRose.Server.Services
 {
     /// <summary>
     /// A service to manage a shop's inventory.
@@ -48,6 +48,16 @@ namespace GildedRose.Server
             GetDataSource().AddItem(request.Item);
 
             return Task.FromResult(new AddItemResponse());
+        }
+
+        public override Task<AddItemsResponse> AddItems(AddItemsRequest request, ServerCallContext context)
+        {
+            if (request == null || request.Items == null)
+                return Task.FromResult(new AddItemsResponse());
+
+            GetDataSource().AddItems(request.Items);
+
+            return Task.FromResult(new AddItemsResponse());
         }
 
         /// <summary>
@@ -128,7 +138,7 @@ namespace GildedRose.Server
                 // Backstage passes are special.
                 if (item.Category.Equals("Backstage Passes"))
                 {
-                    if (item.SellIn >= 0)
+                    if (item.SellIn > 0)
                     {
                         deltaQuality = 1;
 

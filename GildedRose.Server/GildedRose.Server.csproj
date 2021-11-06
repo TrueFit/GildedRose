@@ -6,11 +6,11 @@
 
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
-    <PackageReference Include="System.Data.SQLite" Version="1.0.115.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\GildedRose.Contracts\GildedRose.Contracts.csproj" />
+    <ProjectReference Include="..\GildedRose.DataSource\GildedRose.DataSource.csproj" />
   </ItemGroup>
 
   <ItemGroup>

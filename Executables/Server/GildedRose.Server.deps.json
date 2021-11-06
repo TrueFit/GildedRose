@@ -34,8 +34,8 @@
       "GildedRose.Server/1.0.0": {
         "dependencies": {
           "GildedRose.Contracts": "1.0.0",
+          "GildedRose.DataSource": "1.0.0",
           "Grpc.AspNetCore": "2.40.0",
-          "System.Data.SQLite": "1.0.115.5",
           "Microsoft.AspNetCore.Antiforgery": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "5.0.0.0",
@@ -713,6 +713,18 @@
         },
         "compile": {
           "GildedRose.Contracts.dll": {}
+        }
+      },
+      "GildedRose.DataSource/1.0.0": {
+        "dependencies": {
+          "GildedRose.Contracts": "1.0.0",
+          "System.Data.SQLite": "1.0.115.5"
+        },
+        "runtime": {
+          "GildedRose.DataSource.dll": {}
+        },
+        "compile": {
+          "GildedRose.DataSource.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/5.0.0.0": {
@@ -2723,6 +2735,11 @@
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
     },
     "GildedRose.Contracts/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GildedRose.DataSource/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

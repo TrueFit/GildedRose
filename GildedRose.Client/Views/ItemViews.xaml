@@ -8,7 +8,7 @@
 
     <!-- An item -->
     <DataTemplate DataType="{x:Type viewModels:ItemViewModel}">
-        <Grid>
+        <Grid x:Name="Grid" Margin="-5 0" Background="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="75" />
@@ -16,6 +16,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0"
+                       Margin="5 0 0 0"
                        Text="{Binding Name}"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Left" />
@@ -23,13 +24,30 @@
             <TextBlock Grid.Column="1"
                        Text="{Binding SellIn, Converter={views:ExpirationDateConverter}}"
                        VerticalAlignment="Center"
-                       HorizontalAlignment="Right" />
+                       HorizontalAlignment="Right">
+                <TextBlock.ToolTip>
+                    <TextBlock Text="{Binding SellIn, Converter={views:SellInToolTipConverter}}"
+                               Foreground="{StaticResource ButtonDisabledBackgroundColor}" />
+                </TextBlock.ToolTip>
+            </TextBlock>
 
             <TextBlock Grid.Column="2"
+                       Margin="0 0 5 0"
                        Text="{Binding Quality, Converter={views:QualityTextConverter}}"
                        VerticalAlignment="Center"
-                       HorizontalAlignment="Right" />
+                       HorizontalAlignment="Right">
+                <TextBlock.ToolTip>
+                    <TextBlock Text="{Binding Quality, Converter={views:QualityToolTipConverter}}"
+                               Foreground="{StaticResource ButtonDisabledBackgroundColor}" />
+                </TextBlock.ToolTip>
+            </TextBlock>
         </Grid>
+
+        <DataTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Grid" Property="Background" Value="{StaticResource WindowHoverBackgroundColor}"/>
+            </Trigger>
+        </DataTemplate.Triggers>
     </DataTemplate>
 
     <!-- An item category -->
@@ -47,7 +65,7 @@
                         <ColumnDefinition Width="75" />
                         <ColumnDefinition Width="75" />
                     </Grid.ColumnDefinitions>
-                    
+
                     <TextBlock Grid.Column="0"
                                Text="Name"
                                Foreground="{StaticResource ButtonForegroundColor}"

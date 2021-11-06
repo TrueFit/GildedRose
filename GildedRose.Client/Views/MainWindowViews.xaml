@@ -28,6 +28,10 @@
                         Command="{Binding AddNewItemCommand}"
                         Margin="0 20 0 0" />
 
+                <Button Content="Add inventory list"
+                        Command="{Binding AddInventoryListCommand}"
+                        Margin="0 5 0 0" />
+
                 <Button Content="Throw away trash"
                         Command="{Binding ThrowAwayTrashCommand}"
                         Margin="0 5 0 0" />

@@ -1,10 +1,14 @@
 ﻿using GildedRose.Client.InventorySystems;
 using GildedRose.Client.Models;
 using GildedRose.Client.Views;
+using GildedRose.DataSource;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace GildedRose.Client.ViewModels
@@ -30,6 +34,11 @@ namespace GildedRose.Client.ViewModels
         /// Command to add a new item
         /// </summary>
         public ICommand AddNewItemCommand { get; }
+
+        /// <summary>
+        /// Command to add an entire inventory list to the shop
+        /// </summary>
+        public ICommand AddInventoryListCommand { get; }
 
         /// <summary>
         /// Command to trow away any trash
@@ -149,6 +158,58 @@ namespace GildedRose.Client.ViewModels
                 // Update inventory's worth.
                 TotalWorth = _inventorySystem.GetTotalWorth();
             });
+
+            AddInventoryListCommand = new SimpleCommand(() =>
+            {
+                var openFileDialog = new OpenFileDialog()
+                {
+                    Filter = "txt files (*.txt)|*.txt"
+                };
+
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    if (File.Exists(openFileDialog.FileName))
+                    {
+                        // Load items from inventory list.
+                        var dataSource = new InventoryListDataSource(openFileDialog.FileName);
+                        var newItems = dataSource.GetAllItems(out var _);
+
+                        var items = new List<IItemModel>();
+                        foreach (var newItem in newItems)
+                        {
+                            items.Add(new ItemModel()
+                            {
+                                Id = Guid.NewGuid(),
+                                Name = newItem.Name,
+                                Category = newItem.Category,
+                                SellIn = newItem.SellIn,
+                                Quality = newItem.Quality
+                            });
+                        }
+
+                        _inventorySystem.AddItems(items);
+
+                        // Update models and user interface.
+                        foreach (var item in items)
+                        {
+                            var category = ItemCategories.FirstOrDefault(x => !string.IsNullOrEmpty(x.Name) && x.Name.Equals(item.Category));
+                            if (category == null)
+                            {
+                                category = new ItemCategoryViewModel(new ItemCategoryModel()
+                                {
+                                    Name = item.Category
+                                });
+                                ItemCategories.Add(category);
+                            }
+
+                            category.Items.Add(new ItemViewModel(item));
+                        }
+
+                        // Update inventory's worth.
+                        TotalWorth = _inventorySystem.GetTotalWorth();
+                    }
+                }
+            });
         }
 
         /// <summary>
@@ -159,34 +220,43 @@ namespace GildedRose.Client.ViewModels
             _inventorySystem.Connect();
 
             // Get information about all our items.
-            var allItems = _inventorySystem.GetAllItems();
-
-            // Clear view model.
-            ItemCategories.Clear();
-
-            // Sort items into categories.
-            var categories = new List<ItemCategoryModel>();
-            foreach (var item in allItems)
+            try
             {
-                var category = categories.FirstOrDefault(x => !string.IsNullOrEmpty(x.Name) && x.Name.Equals(item.Category));
-                if (category == null)
+                var allItems = _inventorySystem.GetAllItems();
+
+                // Clear view model.
+                ItemCategories.Clear();
+
+                // Sort items into categories.
+                var categories = new List<ItemCategoryModel>();
+                foreach (var item in allItems)
                 {
-                    category = new ItemCategoryModel()
+                    var category = categories.FirstOrDefault(x => !string.IsNullOrEmpty(x.Name) && x.Name.Equals(item.Category));
+                    if (category == null)
                     {
-                        Name = item.Category
-                    };
-                    categories.Add(category);
+                        category = new ItemCategoryModel()
+                        {
+                            Name = item.Category
+                        };
+                        categories.Add(category);
+                    }
+
+                    category.Items.Add(item);
                 }
 
-                category.Items.Add(item);
+                // Add categories to view model.
+                foreach (var category in categories)
+                    ItemCategories.Add(new ItemCategoryViewModel(category));
+
+                // Set inventory's worth.
+                TotalWorth = _inventorySystem.GetTotalWorth();
             }
+            catch
+            {
+                MessageBox.Show("Dear user,\n\nThe application was not able to connect to the inventory system. Please start the server first and restart this application afterwards.", "No connection to inventory system");
 
-            // Add categories to view model.
-            foreach (var category in categories)
-                ItemCategories.Add(new ItemCategoryViewModel(category));
-
-            // Set inventory's worth.
-            TotalWorth = _inventorySystem.GetTotalWorth();
+                Environment.Exit(-1);
+            }
         }
 
         private ItemCategoryViewModel GetCategory(Guid id)

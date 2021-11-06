@@ -5,6 +5,7 @@
     <Application.Resources>
         <!-- Colors -->
         <SolidColorBrush x:Key="WindowBackgroundColor" Color="#2D2D30" />
+        <SolidColorBrush x:Key="WindowHoverBackgroundColor" Color="#3C3C3E" />
         <SolidColorBrush x:Key="WindowForegroundColor" Color="#FFFFFF" />
 
         <SolidColorBrush x:Key="CategoryBackgroundColor" Color="#252526" />

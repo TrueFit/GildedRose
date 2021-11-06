@@ -25,6 +25,11 @@ namespace GildedRose.Client.InventorySystems
         void AddItem(IItemModel item);
 
         /// <summary>
+        /// Add a list of new items to the inventory.
+        /// </summary>
+        void AddItems(IList<IItemModel> items);
+
+        /// <summary>
         /// Get a single item by its name.
         /// </summary>
         IItemModel GetItemByName(string name);

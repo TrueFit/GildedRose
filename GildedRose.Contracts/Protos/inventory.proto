@@ -11,6 +11,9 @@ service Inventory {
 	// Add an item to the inventory.
 	rpc AddItem (AddItemRequest) returns (AddItemResponse);
 
+	// Add a list of new items to the inventory.
+	rpc AddItems (AddItemsRequest) returns (AddItemsResponse);
+
 	// Request information about an item by it's name.
 	rpc GetItemByName (GetItemByNameRequest) returns (GetItemByNameResponse);
 
@@ -57,6 +60,14 @@ message AddItemRequest {
 }
 
 message AddItemResponse {
+}
+
+// AddItems
+message AddItemsRequest {
+	repeated Item items = 1;
+}
+
+message AddItemsResponse {
 }
 
 // GetItemByName

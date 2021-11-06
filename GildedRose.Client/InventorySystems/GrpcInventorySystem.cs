@@ -3,6 +3,7 @@ using GildedRose.Contracts;
 using Grpc.Net.Client;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using static GildedRose.Contracts.Inventory;
 
 namespace GildedRose.Client.InventorySystems
@@ -61,6 +62,23 @@ namespace GildedRose.Client.InventorySystems
                     Quality = item.Quality
                 }
             });
+        }
+
+        /// <inheritdoc />
+        public void AddItems(IList<IItemModel> items)
+        {
+            var request = new AddItemsRequest();
+
+            request.Items.Add(items.Select(x => new Item()
+            {
+                Guid = x.Id.ToString(),
+                Name = x.Name,
+                Category = x.Category,
+                SellIn = x.SellIn,
+                Quality = x.Quality
+            }));
+
+            _inventoryClient.AddItems(request);
         }
 
         /// <inheritdoc />

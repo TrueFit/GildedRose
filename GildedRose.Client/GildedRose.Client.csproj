@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GildedRose.Contracts\GildedRose.Contracts.csproj" />
+    <ProjectReference Include="..\GildedRose.DataSource\GildedRose.DataSource.csproj" />
   </ItemGroup>
 
 </Project>
