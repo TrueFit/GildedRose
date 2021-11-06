@@ -70,5 +70,95 @@ namespace GildedRose.Server.IO
 
             return importedItems;
         }
+
+        /// <inheritdoc />
+        public void AddItem(Item item)
+        {
+            using (var connection = new SQLiteConnection($"URI=file:{FileUtils.GetDataBaseFileName()}"))
+            {
+                connection.Open();
+
+                using (var command = new SQLiteCommand(connection))
+                {
+                    command.CommandText = $"INSERT INTO inventory (guid, name, category, sellIn, quality) VALUES ('{item.Guid}', '{item.Name}', '{item.Category}', {item.SellIn}, {item.Quality})";
+                    command.ExecuteNonQuery();
+                }
+
+                connection.Close();
+            }
+        }
+
+        /// <inheritdoc />
+        public Item GetItemByName(string name)
+        {
+            Item item = null;
+
+            using (var connection = new SQLiteConnection($"URI=file:{FileUtils.GetDataBaseFileName()}"))
+            {
+                connection.Open();
+
+                using (var command = new SQLiteCommand($"SELECT * FROM inventory WHERE name='{name}'", connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            item = new Item()
+                            {
+                                Guid = reader.GetString(1),
+                                Name = reader.GetString(2),
+                                Category = reader.GetString(3),
+                                SellIn = reader.GetInt32(4),
+                                Quality = reader.GetInt32(5)
+                            };
+                        }
+                    }
+                }
+
+                connection.Close();
+            }
+
+            return item;
+        }
+
+        /// <inheritdoc />
+        public void UpdateConditions(IList<ProgressedItem> progressedItems)
+        {
+            using (var connection = new SQLiteConnection($"URI=file:{FileUtils.GetDataBaseFileName()}"))
+            {
+                connection.Open();
+
+                using (var command = new SQLiteCommand(connection))
+                {
+                    foreach (var progressedItem in progressedItems)
+                    {
+                        command.CommandText = $"UPDATE inventory SET sellIn = '{progressedItem.SellIn}', quality = '{progressedItem.Quality}' WHERE guid = '{progressedItem.Guid}'";
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+                connection.Close();
+            }
+        }
+
+        /// <inheritdoc />
+        public void RemoveItems(IList<string> guids)
+        {
+            using (var connection = new SQLiteConnection($"URI=file:{FileUtils.GetDataBaseFileName()}"))
+            {
+                connection.Open();
+
+                using (var command = new SQLiteCommand(connection))
+                {
+                    foreach (var guid in guids)
+                    {
+                        command.CommandText = $"DELETE FROM inventory WHERE guid = '{guid}'";
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+                connection.Close();
+            }
+        }
     }
 }

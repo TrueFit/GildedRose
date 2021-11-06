@@ -9,7 +9,6 @@ namespace GildedRose.Server
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<InventoryService>();
             services.AddGrpc();
         }
 
