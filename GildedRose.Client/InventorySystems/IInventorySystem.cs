@@ -43,5 +43,10 @@ namespace GildedRose.Client.InventorySystems
         /// Remove all trash from the inventory and return the Ids from the deleted items.
         /// </summary>
         IList<Guid> RemoveTrash();
+
+        /// <summary>
+        /// Get the total worth of the inventory.
+        /// </summary>
+        int GetTotalWorth();
     }
 }

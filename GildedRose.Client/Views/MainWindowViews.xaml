@@ -17,7 +17,12 @@
                     Margin="5 5 5 5" 
                     Orientation="Vertical">
                 <Button Content="Go to bed"
-                        Command="{Binding GoToSleepCommand}" />
+                        Command="{Binding GoToSleepCommand}">
+                    <Button.ToolTip>
+                        <TextBlock Text="Progress to the next working day."
+                                   Foreground="{StaticResource ButtonDisabledBackgroundColor}" />
+                    </Button.ToolTip>
+                </Button>
 
                 <Button Content="Add new item"
                         Command="{Binding AddNewItemCommand}"
@@ -26,6 +31,19 @@
                 <Button Content="Throw away trash"
                         Command="{Binding ThrowAwayTrashCommand}"
                         Margin="0 5 0 0" />
+
+                <TextBlock Text="Total inventory worth"
+                           Margin="0 20 0 0"
+                           Foreground="{StaticResource ButtonForegroundColor}"
+                           HorizontalAlignment="Center" />
+
+                <TextBlock Text="{Binding TotalWorth}"
+                           HorizontalAlignment="Center">
+                    <TextBlock.ToolTip>
+                        <TextBlock Text="The summed up quality of all items."
+                                   Foreground="{StaticResource ButtonDisabledBackgroundColor}" />
+                    </TextBlock.ToolTip>
+                </TextBlock>
             </StackPanel>
 
             <!-- The shop's inventory -->

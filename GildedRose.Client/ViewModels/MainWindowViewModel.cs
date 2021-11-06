@@ -36,6 +36,25 @@ namespace GildedRose.Client.ViewModels
         /// </summary>
         public ICommand ThrowAwayTrashCommand { get; }
 
+        #region TotalWorth
+
+        /// <summary>
+        /// The total worth of the inventory.
+        /// </summary>
+        public int TotalWorth
+        {
+            get { return _totalWorth; }
+            set
+            {
+                _totalWorth = value;
+                NotifyPropertyChanged(nameof(TotalWorth));
+            }
+        }
+
+        private int _totalWorth;
+
+        #endregion
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -59,6 +78,9 @@ namespace GildedRose.Client.ViewModels
                         item.Quality = progressedItem.Quality;
                     }
                 }
+
+                // Update inventory's worth.
+                TotalWorth = _inventorySystem.GetTotalWorth();
             });
 
             ThrowAwayTrashCommand = new SimpleCommand(() =>
@@ -84,6 +106,9 @@ namespace GildedRose.Client.ViewModels
                         }
                     }
                 }
+
+                // Update inventory's worth.
+                TotalWorth = _inventorySystem.GetTotalWorth();
             });
 
             AddNewItemCommand = new SimpleCommand(() =>
@@ -120,6 +145,9 @@ namespace GildedRose.Client.ViewModels
 
                     category.Items.Add(new ItemViewModel(newItem));
                 }
+
+                // Update inventory's worth.
+                TotalWorth = _inventorySystem.GetTotalWorth();
             });
         }
 
@@ -156,6 +184,9 @@ namespace GildedRose.Client.ViewModels
             // Add categories to view model.
             foreach (var category in categories)
                 ItemCategories.Add(new ItemCategoryViewModel(category));
+
+            // Set inventory's worth.
+            TotalWorth = _inventorySystem.GetTotalWorth();
         }
 
         private ItemCategoryViewModel GetCategory(Guid id)

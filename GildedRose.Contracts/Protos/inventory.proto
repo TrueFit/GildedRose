@@ -22,6 +22,9 @@ service Inventory {
 
 	// Remove all trash from the shop's inventory.
 	rpc RemoveTrash (RemoveTrashRequest) returns (RemoveTrashResponse);
+
+	// Get the total worth of the inventory.
+	rpc GetTotalWorth (GetTotalWorthRequest) returns (GetTotalWorthResponse);
 }
 
 // The contract representing an item in the shop
@@ -41,7 +44,7 @@ message ProgressedItem {
 }
 
 // GetAllItems
-message GetAllItemsRequest{
+message GetAllItemsRequest {
 }
 
 message GetAllItemsResponse {
@@ -87,4 +90,12 @@ message RemoveTrashRequest {
 
 message RemoveTrashResponse {
 	repeated string guids = 1;
+}
+
+// GetTotalWorth
+message GetTotalWorthRequest {
+}
+
+message GetTotalWorthResponse {
+	int32 worth = 1;
 }

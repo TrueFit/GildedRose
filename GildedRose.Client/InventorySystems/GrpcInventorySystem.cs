@@ -144,5 +144,15 @@ namespace GildedRose.Client.InventorySystems
 
             return removedItems;
         }
+
+        /// <inheritdoc />
+        public int GetTotalWorth()
+        {
+            var getTotalWorthResponse = _inventoryClient.GetTotalWorth(new GetTotalWorthRequest());
+            if (getTotalWorthResponse == null)
+                return 0;
+
+            return getTotalWorthResponse.Worth;
+        }
     }
 }
